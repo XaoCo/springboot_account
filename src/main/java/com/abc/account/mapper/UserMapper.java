@@ -16,10 +16,13 @@ import java.util.List;
 public interface UserMapper {
     //    用户登录
 
-    User login(@Param("name") String username, @Param("password") String password);
+    User login(User user);
 
     //     用户注册
     int addUser(User user);
+
+    //    用户修改密码
+    int updPassword(@Param("user") User user, @Param("passwordNew") String passwordNew);
 
     //    获取用户列表
     List<User> getAllUser();

@@ -22,13 +22,18 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-    public User login(String name, String password) {
-        return userMapper.login(name, password);
+    public User login(User user) {
+        return userMapper.login(user);
     }
 
     @Override
     public int addUser(User user) {
         return userMapper.addUser(user);
+    }
+
+    @Override
+    public int updPassword(User user, String passwordNew) {
+        return userMapper.updPassword(user, passwordNew);
     }
 
     @Override
@@ -40,7 +45,6 @@ public class UserServiceImpl implements UserService {
     public List<InOutAll> getAllCount() {
         return userMapper.getAllCount();
     }
-
 
 
 }
