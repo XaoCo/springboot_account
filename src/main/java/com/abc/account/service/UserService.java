@@ -13,10 +13,13 @@ import java.util.List;
  */
 public interface UserService {
     //    用户登录
-    User login(String name, String password);
+    User login(User user);
 
     //    用户注册
     int addUser(User user);
+
+    //    用户修改密码
+    int updPassword(User user, String passwordNew);
 
     //    获取用户列表
     List<User> getAllUser();

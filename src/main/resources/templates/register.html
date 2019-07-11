@@ -10,9 +10,27 @@
 
     工作:<input type="text" name="job"/></br>
     密码:<input type="password" name="password"/></br>
-    确认密码:<input type="password" name="password2"/></br>
+    确认密码:<input type="password" name="password2" onmouseleave="validate()"/></br>
     年龄:<input type="text" name="age"/></br>
+    身份证:<input type="password" name="identityCard"/></br>
     <input type="submit" value="注册">
 </form>
+
+<script>
+    function validate() {
+
+
+        var p1 = document.getElementsByName("password").values();
+        var p2 = document.getElementsByName("password2").values();
+
+        console.log("p1=" + p1)
+        console.log("p2=" + p2)
+
+        if (p1 != p2) {
+            alert("两次密码输入不一致，请检查重新输入！")
+            return false;
+        }
+    }
+</script>
 </body>
 </html>

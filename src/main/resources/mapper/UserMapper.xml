@@ -9,11 +9,13 @@
         <result column="U_AGE" property="age"/>
         <result column="U_JOB" property="job"/>
         <result column="U_PASSWORD" property="password"/>
+        <result column="U_IDENTITY_CARD" property="identityCard"/>
     </resultMap>
 
     <!--登录验证-->
     <select id="login" parameterType="com.abc.account.pojo.User" resultMap="userRestMap">
         SELECT * FROM A_USER WHERE U_NAME = #{name} AND U_PASSWORD = #{password}
+         AND U_IDENTITY_CARD = #{identityCard}
     </select>
 
     <!--注册用户-->
@@ -23,7 +25,15 @@
             #{name},
             #{age},
             #{job},
-            #{password}
+            #{password},
+            #{identityCard}
         )
     </insert>
+
+    <!--修改密码-->
+    <update id="updPassword" >
+        UPDATE A_USER  SET U_PASSWORD = #{passwordNew}
+         WHERE U_NAME = #{user.name} AND U_PASSWORD = #{user.password}
+         AND U_IDENTITY_CARD = #{user.identityCard}
+    </update>
 </mapper>

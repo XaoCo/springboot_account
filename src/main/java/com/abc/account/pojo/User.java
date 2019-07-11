@@ -14,9 +14,18 @@ public class User implements Serializable {
     private int age;
     private String job;
     private String password;
+    private String identityCard;
 
     public int getId() {
         return id;
+    }
+
+    public String getIdentityCard() {
+        return identityCard;
+    }
+
+    public void setIdentityCard(String identityCard) {
+        this.identityCard = identityCard;
     }
 
     public void setId(int id) {
@@ -55,6 +64,15 @@ public class User implements Serializable {
         this.password = password;
     }
 
+    public User(int id, String name, int age, String job, String password, String identityCard) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.job = job;
+        this.password = password;
+        this.identityCard = identityCard;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -63,15 +81,8 @@ public class User implements Serializable {
                 ", age=" + age +
                 ", job='" + job + '\'' +
                 ", password='" + password + '\'' +
+                ", identityCard='" + identityCard + '\'' +
                 '}';
-    }
-
-    public User(int id, String name, int age, String job, String password) {
-        this.id = id;
-        this.name = name;
-        this.age = age;
-        this.job = job;
-        this.password = password;
     }
 
     public User() {
