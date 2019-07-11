@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.abc.account.mapper.UserMapper">
+    <resultMap id="userRestMap" type="com.abc.account.pojo.User">
+        <id column="U_ID" property="id"/>
+        <result column="U_NAME" property="name"/>
+        <result column="U_AGE" property="age"/>
+        <result column="U_JOB" property="job"/>
+        <result column="U_PASSWORD" property="password"/>
+    </resultMap>
+
+    <!--登录验证-->
+    <select id="login" parameterType="com.abc.account.pojo.User" resultMap="userRestMap">
+        SELECT * FROM A_USER WHERE U_NAME = #{name} AND U_PASSWORD = #{password}
+    </select>
+
+    <!--注册用户-->
+    <insert id="addUser" parameterType="com.abc.account.pojo.User">
+        INSERT INTO A_USER VALUES (
+            USER_SEQ.nextval,
+            #{name},
+            #{age},
+            #{job},
+            #{password}
+        )
+    </insert>
+</mapper>
