@@ -31,9 +31,19 @@
     </insert>
 
     <!--修改密码-->
-    <update id="updPassword" >
+    <update id="updPassword">
         UPDATE A_USER  SET U_PASSWORD = #{passwordNew}
          WHERE U_NAME = #{user.name} AND U_PASSWORD = #{user.password}
          AND U_IDENTITY_CARD = #{user.identityCard}
     </update>
+
+    <!--删除用户-->
+    <delete id="delUser">
+        DELETE FROM A_USER WHERE U_ID = #{id}
+    </delete>
+
+    <!--获取所有用户-->
+    <select id="getAllUser">
+        SELECT * FROM A_USER
+    </select>
 </mapper>

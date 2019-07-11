@@ -21,6 +21,9 @@ public interface UserService {
     //    用户修改密码
     int updPassword(User user, String passwordNew);
 
+//    用户删除
+    int delUser(int id);
+
     //    获取用户列表
     List<User> getAllUser();
 

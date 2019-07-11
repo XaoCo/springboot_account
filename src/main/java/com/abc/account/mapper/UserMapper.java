@@ -24,6 +24,9 @@ public interface UserMapper {
     //    用户修改密码
     int updPassword(@Param("user") User user, @Param("passwordNew") String passwordNew);
 
+    //    删除用户
+    int delUser(@Param("id") int id);
+
     //    获取用户列表
     List<User> getAllUser();
 
