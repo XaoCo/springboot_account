@@ -8,11 +8,13 @@ import com.abc.account.service.UserService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 @RequestMapping("/user")
@@ -97,26 +99,28 @@ public class UserController {
         user.setIdentityCard(identityCard);
         User user1 = userService.login(user);
 
-        if(user1==null){
+        if (user1 == null) {
             int i = userService.addUser(user);
             if (i == 1) {
                 return "注册成功";
             }
             return "注册失败";
-        }else {
+        } else {
             return "该姓名和身份证已经注册，请核实信息再行注册！";
         }
 
 
     }
+
     //    用户修改密码页面
-    @RequestMapping("/userupdatepage")
-    public String updPasswordPage(){
-        return "userupdatepage";
+    @RequestMapping("/updpasswordpage")
+    public String updPasswordPage() {
+        return "updpasswordpage";
     }
+
     //    用户修改密码
     @ResponseBody
-    @RequestMapping("/userupdate")
+    @RequestMapping("/updpassword")
     public String updPassword(
             @RequestParam("username") String username,
             @RequestParam("identityCard") String identityCard,
@@ -134,18 +138,39 @@ public class UserController {
         if (user1 != null) {
             int i = userService.updPassword(user, passwordNew);
             System.out.println(i);
-            if(i<=0){
+            if (i <= 0) {
                 return "修改密码失败";
-            }else {
+            } else {
                 return "修改密码成功";
             }
-        }else {
+        } else {
             return "未查到符合该条件的人员信息，请核实后再行修改！";
         }
 
+    }
 
-//        User user_session = (User) request.getSession().getAttribute("user_session");
+    //    删除用户
+    @RequestMapping("/delUser")
+    public String delUser(
+            @RequestParam("id") int id,
+            HttpServletRequest request) {
 
+        User user_session = (User) request.getSession().getAttribute("user_session");
 
+        int i = userService.delUser(id);
+        if (i <= 0) {
+            return ("用户删除失败");
+        } else {
+            return "用户删除成功";
+        }
+
+    }
+
+    //    查询所有用户信息
+    @RequestMapping("/selAllUser")
+    public String selAllUser(Model model) {
+        List<User> allUser = userService.getAllUser();
+        model.addAttribute("list", allUser);
+        return "userlistpage";
     }
 }

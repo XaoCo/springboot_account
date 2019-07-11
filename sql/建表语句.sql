@@ -1,5 +1,4 @@
 -- Create table 用户表
--- Create table
 create table A_USER
 (
   U_ID            NUMBER not null,
@@ -33,6 +32,21 @@ comment on column A_USER.U_PASSWORD
   is '用户密码';
 comment on column A_USER.U_IDENTITY_CARD
   is '身份证';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table A_USER
+  add constraint PK_1 primary key (U_ID)
+  using index 
+  tablespace USERS
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
 -- Create/Recreate indexes 
 create unique index NO1 on A_USER (U_NAME, U_IDENTITY_CARD)
   tablespace USERS
@@ -46,6 +60,7 @@ create unique index NO1 on A_USER (U_NAME, U_IDENTITY_CARD)
     minextents 1
     maxextents unlimited
   );
+
 
 
 
