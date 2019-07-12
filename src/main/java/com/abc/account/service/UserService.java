@@ -23,7 +23,7 @@ public interface UserService {
     //    用户修改密码
     int updPassword(User user);
 
-//    用户删除
+    //    用户删除
     int delUser(int id);
 
     //    获取用户列表
