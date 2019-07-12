@@ -14,11 +14,14 @@ public interface UserService {
     //    用户登录
     User login(User user);
 
+    //    用户查询
+    User login1(User user);
+
     //    用户注册
     int addUser(User user);
 
     //    用户修改密码
-    int updPassword(User user, String passwordNew);
+    int updPassword(User user);
 
 //    用户删除
     int delUser(int id);
