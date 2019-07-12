@@ -1,6 +1,5 @@
 package com.abc.account.service;
 
-import com.abc.account.pojo.InOutAll;
 import com.abc.account.pojo.User;
 
 import java.util.List;
@@ -27,6 +26,5 @@ public interface UserService {
     //    获取用户列表
     List<User> getAllUser();
 
-    //    获取当前登录用户的收支状况
-    List<InOutAll> getAllCount();
+
 }

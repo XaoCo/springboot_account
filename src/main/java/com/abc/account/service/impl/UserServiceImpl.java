@@ -1,7 +1,6 @@
 package com.abc.account.service.impl;
 
 import com.abc.account.mapper.UserMapper;
-import com.abc.account.pojo.InOutAll;
 import com.abc.account.pojo.User;
 import com.abc.account.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,10 +45,6 @@ public class UserServiceImpl implements UserService {
         return userMapper.getAllUser();
     }
 
-    @Override
-    public List<InOutAll> getAllCount() {
-        return userMapper.getAllCount();
-    }
 
 
 }

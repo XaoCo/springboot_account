@@ -9,7 +9,7 @@ import java.math.BigDecimal;
  * date: 2019/7/9 23:24
  * introduce: TODO
  */
-public class InOutAll implements Serializable {
+public class InAndOut implements Serializable {
     private int id;
     private String u_name;
     private String k_name;
@@ -65,19 +65,10 @@ public class InOutAll implements Serializable {
         this.charge = charge;
     }
 
-    @Override
-    public String toString() {
-        return "InOutAll{" +
-                "id=" + id +
-                ", u_name='" + u_name + '\'' +
-                ", k_name='" + k_name + '\'' +
-                ", flag=" + flag +
-                ", desc='" + desc + '\'' +
-                ", charge=" + charge +
-                '}';
+    public InAndOut() {
     }
 
-    public InOutAll(int id, String u_name, String k_name, int flag, String desc, BigDecimal charge) {
+    public InAndOut(int id, String u_name, String k_name, int flag, String desc, BigDecimal charge) {
         this.id = id;
         this.u_name = u_name;
         this.k_name = k_name;
@@ -86,6 +77,15 @@ public class InOutAll implements Serializable {
         this.charge = charge;
     }
 
-    public InOutAll() {
+    @Override
+    public String toString() {
+        return "InAndOut{" +
+                "id=" + id +
+                ", u_name='" + u_name + '\'' +
+                ", k_name='" + k_name + '\'' +
+                ", flag=" + flag +
+                ", desc='" + desc + '\'' +
+                ", charge=" + charge +
+                '}';
     }
 }

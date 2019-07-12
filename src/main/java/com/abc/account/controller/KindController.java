@@ -56,11 +56,11 @@ public class KindController {
 
                 return "新增种类失败，请检查！";
             } else {
-                return "新增种类成功！";
+                return "kind/allkindpage";
             }
 
         } else {
-            return "kind/allkindpage";
+            return "该类别已经存在！";
         }
 
 
