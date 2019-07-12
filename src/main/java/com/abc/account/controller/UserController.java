@@ -25,7 +25,7 @@ public class UserController {
     //      进入登录页面
     @RequestMapping("/loginHtml")
     public String hello() {
-        return "userLogin";
+        return "user/userLogin";
     }
 
     //    登录验证
@@ -65,7 +65,7 @@ public class UserController {
     //  注册新用户页面
     @RequestMapping("/registerpage")
     public String userRegisterpage() {
-        return "register";
+        return "user/register";
     }
 
     //    新注册用户交易
@@ -115,7 +115,7 @@ public class UserController {
     //    用户修改密码页面
     @RequestMapping("/updpasswordpage")
     public String updPasswordPage() {
-        return "updpasswordpage";
+        return "user/updpasswordpage";
     }
 
     //    用户修改密码
@@ -171,6 +171,6 @@ public class UserController {
     public String selAllUser(Model model) {
         List<User> allUser = userService.getAllUser();
         model.addAttribute("list", allUser);
-        return "userlistpage";
+        return "user/userlistpage";
     }
 }
