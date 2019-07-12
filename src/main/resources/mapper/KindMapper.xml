@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.abc.account.mapper.UserMapper">
+    <resultMap id="kindRestMap" type="com.abc.account.pojo.Kind">
+        <id column="K_ID" property="id"/>
+        <result column="K_NAME" property="name"/>
+    </resultMap>
+
+    <!--查询所有类别-->
+    <select id="findAllKind">
+        SELECT * FROM A_KIND
+    </select>
+
+    <!--修改类别-->
+
+    <update id="updKind">
+        UPDATE A_KIND SET K_NAME = #{newName} WHERE K_ID = #{id}
+    </update>
+
+    <!--新增类别-->
+
+    <insert id="addKind">
+        INSERT INTO A_KIND VALUES (
+        KIND_SEQ.nextval,
+        #{name}
+        )
+    </insert>
+
+    <!--删除类别-->
+
+    <delete id="delKind">
+        DELETE FROM A_KIND WHERE K_ID = #{id}
+    </delete>
+
+
+</mapper>
