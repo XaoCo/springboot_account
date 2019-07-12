@@ -174,32 +174,32 @@ public class UserController {
         return "user/userlistpage";
     }
 
-//    忘记密码或者找回密码页面
+    //    忘记密码或者找回密码页面
     @RequestMapping("/findPwdPage")
-    public String findPwdPage(){
+    public String findPwdPage() {
         return "user/findpwdpage";
     }
 
-//    忘记密码或者找回密码
+    //    忘记密码或者找回密码
     @RequestMapping("/findPwd")
     public String findPwd(
             @RequestParam("userName") String userName,
             @RequestParam("identityCard") String identityCard,
             @RequestParam("password") String password,
-            HttpServletRequest request){
+            HttpServletRequest request) {
         User user = new User();
         user.setName(userName);
         user.setIdentityCard(identityCard);
         User user1 = userService.login1(user);
-        if(user1!=null){
+        if (user1 != null) {
             user1.setPassword(password);
             int i = userService.updPassword(user1);
-            if(i<=0){
+            if (i <= 0) {
                 return "重置密码失败";
-            }else {
+            } else {
                 return "user/userLogin";
             }
-        }else {
+        } else {
             return "该用户还未注册过，请先注册！";
         }
 
