@@ -137,3 +137,22 @@ increment by 1
 cache 20
 order;
 
+
+-- Create sequence 
+create sequence KIND_SEQ
+minvalue 1001
+maxvalue 9999
+start with 1001
+increment by 1
+cache 20
+order;
+
+-- Create sequence 
+create sequence RECORD_SEQ
+minvalue 1001
+maxvalue 9999
+start with 1001
+increment by 1
+cache 20
+order;
+

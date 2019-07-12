@@ -1,9 +1,7 @@
 package com.abc.account.mapper;
 
-import com.abc.account.pojo.InOutAll;
 import com.abc.account.pojo.User;
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -30,6 +28,4 @@ public interface UserMapper {
     //    获取用户列表
     List<User> getAllUser();
 
-    //    获取当前登录用户的收支状况
-    List<InOutAll> getAllCount();
 }

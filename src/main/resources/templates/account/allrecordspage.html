@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户列表</title>
+    <script src="../../static/js/jquery-1.12.3.min.js"></script>
+
+
+</head>
+<body>
+测试<input id="demo" name="demo" value="142723199003162919" />
+<!--测试<input id="demo" name="demo" value="17600201849" />-->
+<button onclick="handle()">Copy Text</button>
+
+</body>
+
+<script>
+
+    function handle(){
+        var param =$("#demo").val()
+        console.log("param="+param)
+        var strlen = param.length
+        console.log("strlen="+strlen)
+
+
+
+        var a = param.replace(/^(.{6})(?:\d+)(.{2})$/,"$1**********$2");
+        var b = param.replace(/^(.{2})(?:\d+)(.{2})$/,"$1**************$2");
+        console.log("加密后="+a)
+        console.log("加密后="+b)
+    }
+
+</script>
+</html>
