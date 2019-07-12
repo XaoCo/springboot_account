@@ -97,7 +97,7 @@ public class UserController {
         user.setName(username);
         user.setPassword(password);
         user.setIdentityCard(identityCard);
-        User user1 = userService.login(user);
+        User user1 = userService.login1(user);
 
         if (user1 == null) {
             int i = userService.addUser(user);
@@ -129,14 +129,14 @@ public class UserController {
             HttpServletRequest request) {
 
         User user = new User();
-        user.setPassword(password);
+        user.setPassword(passwordNew);
         user.setName(username);
         user.setIdentityCard(identityCard);
         //  判断该客户是否存在
         User user1 = userService.login(user);
 
         if (user1 != null) {
-            int i = userService.updPassword(user, passwordNew);
+            int i = userService.updPassword(user);
             System.out.println(i);
             if (i <= 0) {
                 return "修改密码失败";
@@ -172,5 +172,36 @@ public class UserController {
         List<User> allUser = userService.getAllUser();
         model.addAttribute("list", allUser);
         return "user/userlistpage";
+    }
+
+//    忘记密码或者找回密码页面
+    @RequestMapping("/findPwdPage")
+    public String findPwdPage(){
+        return "user/findpwdpage";
+    }
+
+//    忘记密码或者找回密码
+    @RequestMapping("/findPwd")
+    public String findPwd(
+            @RequestParam("userName") String userName,
+            @RequestParam("identityCard") String identityCard,
+            @RequestParam("password") String password,
+            HttpServletRequest request){
+        User user = new User();
+        user.setName(userName);
+        user.setIdentityCard(identityCard);
+        User user1 = userService.login1(user);
+        if(user1!=null){
+            user1.setPassword(password);
+            int i = userService.updPassword(user1);
+            if(i<=0){
+                return "重置密码失败";
+            }else {
+                return "user/userLogin";
+            }
+        }else {
+            return "该用户还未注册过，请先注册！";
+        }
+
     }
 }

@@ -16,11 +16,15 @@ public interface UserMapper {
 
     User login(User user);
 
+    //    用户查询
+
+    User login1(User user);
+
     //     用户注册
     int addUser(User user);
 
     //    用户修改密码
-    int updPassword(@Param("user") User user, @Param("passwordNew") String passwordNew);
+    int updPassword(User user);
 
     //    删除用户
     int delUser(@Param("id") int id);
