@@ -2,6 +2,7 @@ package com.abc.account.pojo;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * package: com.abc.account.pojo
@@ -16,6 +17,15 @@ public class InAndOut implements Serializable {
     private int flag;
     private String desc;
     private BigDecimal charge;
+    private Date date;
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
 
     public int getId() {
         return id;
@@ -68,13 +78,14 @@ public class InAndOut implements Serializable {
     public InAndOut() {
     }
 
-    public InAndOut(int id, String u_name, String k_name, int flag, String desc, BigDecimal charge) {
+    public InAndOut(int id, String u_name, String k_name, int flag, String desc, BigDecimal charge, Date date) {
         this.id = id;
         this.u_name = u_name;
         this.k_name = k_name;
         this.flag = flag;
         this.desc = desc;
         this.charge = charge;
+        this.date = date;
     }
 
     @Override
@@ -86,6 +97,7 @@ public class InAndOut implements Serializable {
                 ", flag=" + flag +
                 ", desc='" + desc + '\'' +
                 ", charge=" + charge +
+                ", date=" + date +
                 '}';
     }
 }

@@ -91,6 +91,7 @@ create unique index NO2 on A_KIND (K_ID, K_NAME)
   maxtrans 255;
   
 -- Create table  收支总表
+-- Create table
 create table A_INOUT_ALL
 (
   A_ID     NUMBER not null,
@@ -98,7 +99,8 @@ create table A_INOUT_ALL
   A_K_NAME VARCHAR2(20) not null,
   A_FLAG   NUMBER not null,
   A_DESC   VARCHAR2(200),
-  A_CHARGE NUMBER not null
+  A_CHARGE NUMBER not null,
+  A_DATE   DATE not null
 )
 tablespace USERS
   pctfree 10
@@ -117,6 +119,8 @@ comment on column A_INOUT_ALL.A_DESC
   is '用途描述';
 comment on column A_INOUT_ALL.A_CHARGE
   is '金额';
+comment on column A_INOUT_ALL.A_DATE
+  is '记录日期';
 -- Create/Recreate primary, unique and foreign key constraints 
 alter table A_INOUT_ALL
   add constraint PK primary key (A_ID)
@@ -125,6 +129,7 @@ alter table A_INOUT_ALL
   pctfree 10
   initrans 2
   maxtrans 255;
+
   
   
   
