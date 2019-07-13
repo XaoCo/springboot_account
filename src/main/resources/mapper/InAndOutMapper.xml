@@ -10,6 +10,7 @@
         <result column="A_FLAG" property="flag"/>
         <result column="A_DESC" property="desc"/>
         <result column="A_CHARGE" property="charge"/>
+        <result column="A_DATE" property="date"/>
     </resultMap>
 
     <!--查询所有记录-->
@@ -31,7 +32,8 @@
         A_K_NAME = #{k_name},
         A_FLAG = #{flag},
         A_DESC = #{desc},
-        A_CHARGE = #{charge}
+        A_CHARGE = #{charge},
+        A_DATE = #{date}
         WHERE A_ID = #{id}
     </update>
 
@@ -45,7 +47,8 @@
         #{k_name},
         #{flag},
         #{desc},
-        #{charge}
+        #{charge},
+        #{date}
         )
     </insert>
 

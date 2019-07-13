@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -60,6 +61,7 @@ public class InAndOutController {
             @RequestParam("kindName") String kindName,
             @RequestParam("flag") int flag,
             @RequestParam("charge") BigDecimal charge,
+            @RequestParam("date") Date date,
             String desc,
             HttpServletRequest request) {
 
@@ -76,6 +78,7 @@ public class InAndOutController {
         inAndOut.setFlag(flag);
         inAndOut.setDesc(desc);
         inAndOut.setCharge(charge);
+        inAndOut.setDate(date);
         int i = inAndOutService.addRecord(inAndOut);
         if (i <= 0) {
             return "新增记录失败";
@@ -97,6 +100,7 @@ public class InAndOutController {
             @RequestParam("kindName") String kindName,
             @RequestParam("flag") int flag,
             @RequestParam("charge") BigDecimal charge,
+            @RequestParam("date") Date date,
             String desc,
             HttpServletRequest request) {
 
@@ -113,6 +117,7 @@ public class InAndOutController {
         inAndOut.setFlag(flag);
         inAndOut.setDesc(desc);
         inAndOut.setCharge(charge);
+        inAndOut.setDate(date);
 
         int i = inAndOutService.updRecord(inAndOut);
         if (i <= 0) {
