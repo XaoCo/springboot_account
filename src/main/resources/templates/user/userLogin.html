@@ -1,29 +1,93 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.springframework.org/schema/data/jaxb">
+
 <head>
+    <!-- meta -->
+    <!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="renderer" content="webkit">
+    <meta property="qc:admins" content="23635710066417756375" />
+    <meta name="baidu-site-verification" content="QIQ6KC1oZ6" />
     <meta charset="UTF-8">
-    <title>用户登录</title>
+    <meta name="viewport" content="width=device-width"/>-->
+
+    <link rel="stylesheet" th:href="@{/css/dmaku2.css}" href="../../static/css/dmaku2.css">
+
+
+    <title>登录</title>
+    <script th:src="@{/js/jquery-1.12.3.min.js}" src="../../static/js/jquery-1.12.3.min.js"></script>
+    <script th:src="@{/js/pintuer.js}" src="../../static/js/pintuer.js"></script>
+    <link rel="stylesheet" th:href="@{/css/admin.css}" href="../../static/css/admin.css">
+    <link rel="stylesheet" th:href="@{/css/pintuer.css}" href="../../static/css/pintuer.css">
+
+
 </head>
-<body style="background: url(/images/ee649b6dffd0d1eb103f174721d4ddcf.jpg);width: 100%;height: 100%;background-repeat:no-repeat;">
-<div>
+
+<body>
 
 
-    <form action="/user/userLogin" method="post">
 
-        <div style="height: 428px; width: 400px; margin: 8px;  background: #fff;">
-            <div style="height: 100px;width: 400px;background: #3eb6e8;">
-                请输入用户名与密码登录<br>
-            </div>
+<!-- 页面主体START -->
+<section id="main">
+    <h1>登录</h1>
+    <form action="/user/userLogin" accept-charset="utf-8" data-view="loginView" id="loginForm" style="width: 280px">
 
-            用户名：<input type="text" name="username"/><br>
-            密&nbsp;&nbsp;&nbsp;码：<input type="password" name="password"/><br>
-            身份证：<input type="password" name="identityCard"/><br>
-            <input type="submit" value="登录"/>
-            <a href="/user/registerpage" target="_blank">注册</a>
-            <a href="/user/updpasswordpage" target="_blank">修改密码</a>
-            <img src="/images/testbackground.jpg">
+        <p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
+
+        <div class="clearfix" data-propertyname="username" data-controltype="Phone">
+            <input type="text" class="input input-big" placeholder="输入姓名" id="user_name" name="username" data-required="required" data-validate="required:请输入姓名" autocomplete="off" >
         </div>
+
+        <div class="clearfix" data-propertyname="password" data-controltype="Password">
+            <input type="password" class="input input-big" id="password" name="password" placeholder="输入密码" data-required="required" data-validate="required:请输入密码" autocomplete="off" >
+        </div>
+
+        <div class="clearfix" data-propertyname="password" data-controltype="Password">
+            <input type="password" class="input input-big" id="identityCard" name="identityCard" placeholder="输入身份证" data-required="required" data-validate="required:请输入身份证" autocomplete="off" >
+        </div>
+
+        <div class="form-group">
+            <div class="field">
+                <input type="text" class="input input-big" name="code" placeholder="填写右侧的验证码" data-validate="required:请填写右侧的验证码" />
+                <img src="/code" alt="验证码" width="100" height="32" class="passcode" style="height:43px;cursor:pointer;" onclick="this.src=this.src+'?'">
+            </div>
+        </div>
+        <p style="color: red" th:text="${msg1}" th:if="${not #strings.isEmpty(msg1)}"></p>
+
+        <div class="clearfix">
+            <!-- <label>
+                <input type="checkbox" class="autologin" />
+                自动登录
+            </label> -->
+            <a href="/user/findPwdPage" class="forgot_pwd">忘记密码？</a>
+        </div>
+
+        <div class="clearfix btn_login" data-propertyname="submit" data-controltype="Botton">
+            <input type="submit" value="登录" onclick="userLogin()">
+        </div>
+
+        <div class="clearfix goregister">
+            <span class="reg_now">没有帐号？</span>
+            <a href="/user/registerpage">注册</a>
+        </div>
+
+
     </form>
-</div>
+</section>
+<!-- 页面主体END -->
+<script>
+    function userLogin() {
+        $.ajax({
+            type:"post",
+            url:"/user/userLogin",
+            data:$("#loginForm").serialize(),
+            dataType:"json",
+            success:function (data) {
+                
+            }
+        })
+    }
+</script>
+
+
 </body>
 </html>

@@ -1,34 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.springframework.org/schema/data/jaxb">
 <head>
+    <!-- meta -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="renderer" content="webkit">
+    <meta property="qc:admins" content="23635710066417756375" />
+    <meta name="baidu-site-verification" content="QIQ6KC1oZ6" />
     <meta charset="UTF-8">
-    <title>用户列表</title>
-    <script src="../../static/js/jquery-1.12.3.min.js"></script>
 
+    <title>找回密码</title>
 
+    <link rel="stylesheet" th:href="@{/css/dmaku.css}" href="../../static/css/dmaku.css">
 </head>
-<body>
-测试<input id="demo" name="demo" value="142723199003162919" />
-<!--测试<input id="demo" name="demo" value="17600201849" />-->
-<button onclick="handle()">Copy Text</button>
+
+
+
+
+<!-- 页面主体START -->
+
+
+<section id="main">
+    <h1>找回密码</h1>
+    <form action="/user/findPwd" accept-charset="utf-8" data-view="phoneRegister">
+
+
+        <div class="clearfix" data-propertyname="password" data-controltype="Password">
+            <input type="text" id="userName" name="userName" placeholder="请输入姓名" data-required="required" autocomplete="off" >
+        </div>
+
+
+        <div class="clearfix" data-propertyname="password" data-controltype="Password">
+            <input type="password" id="identityCard" name="identityCard" placeholder="请输入身份证" data-required="required" autocomplete="off" >
+        </div>
+        <div class="clearfix" data-propertyname="password" data-controltype="Password">
+            <input type="password" id="password" name="password" placeholder="请输入密码" data-required="required" autocomplete="off" >
+        </div>
+        <div class="clearfix" data-propertyname="password" data-controltype="Password">
+            <input type="password" id="password1" name="password1" placeholder="请确认密码" data-required="required" autocomplete="off" >
+        </div>
+
+
+        <div class="clearfix btn_login" data-propertyname="submit" data-controltype="Botton">
+            <input type="submit" value="重置">
+        </div>
+
+
+
+    </form>
+</section>
+
+<!-- 页面主体END -->
+
 
 </body>
-
-<script>
-
-    function handle(){
-        var param =$("#demo").val()
-        console.log("param="+param)
-        var strlen = param.length
-        console.log("strlen="+strlen)
-
-
-
-        var a = param.replace(/^(.{6})(?:\d+)(.{2})$/,"$1**********$2");
-        var b = param.replace(/^(.{2})(?:\d+)(.{2})$/,"$1**************$2");
-        console.log("加密后="+a)
-        console.log("加密后="+b)
-    }
-
-</script>
 </html>
