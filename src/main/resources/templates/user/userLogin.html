@@ -25,7 +25,6 @@
 <body>
 
 
-
 <!-- 页面主体START -->
 <section id="main">
     <h1>登录</h1>
@@ -33,22 +32,34 @@
 
         <p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
 
-        <div class="clearfix" data-propertyname="username" data-controltype="Phone">
-            <input type="text" class="input input-big" placeholder="输入姓名" id="user_name" name="username" data-required="required" data-validate="required:请输入姓名" autocomplete="off" >
+        <div class="form-group" data-propertyname="username" data-controltype="Phone">
+            <!-- <input type="text" class="field" placeholder="输入姓名" id="user_name" name="username"  data-validate="required:请输入姓名" autocomplete="off" >-->
+            <div class="field">
+                <input type="text" class="input input-big" name="username" placeholder="输入姓名"
+                       data-validate="required:请填写姓名"/>
+            </div>
         </div>
 
-        <div class="clearfix" data-propertyname="password" data-controltype="Password">
-            <input type="password" class="input input-big" id="password" name="password" placeholder="输入密码" data-required="required" data-validate="required:请输入密码" autocomplete="off" >
+        <div class="form-group" data-propertyname="password" data-controltype="Password">
+            <div class="field">
+                <input type="password" class="input input-big" id="password" name="password" placeholder="输入密码"
+                       data-validate="required:请输入密码" >
+            </div>
         </div>
 
-        <div class="clearfix" data-propertyname="password" data-controltype="Password">
-            <input type="password" class="input input-big" id="identityCard" name="identityCard" placeholder="输入身份证" data-required="required" data-validate="required:请输入身份证" autocomplete="off" >
+        <div class="form-group" data-propertyname="password" data-controltype="Password">
+            <div class="field">
+                <input type="password" class="input input-big" id="identityCard" name="identityCard" placeholder="输入身份证"
+                       data-validate="required:请输入身份证" autocomplete="off">
+            </div>
         </div>
 
         <div class="form-group">
             <div class="field">
-                <input type="text" class="input input-big" name="code" placeholder="填写右侧的验证码" data-validate="required:请填写右侧的验证码" />
-                <img src="/code" alt="验证码" width="100" height="32" class="passcode" style="height:43px;cursor:pointer;" onclick="this.src=this.src+'?'">
+                <input type="text" class="input input-big" name="code" placeholder="填写右侧的验证码"
+                       data-validate="required:请填写右侧的验证码"/>
+                <img src="/code" alt="验证码" width="100" height="32" class="passcode" style="height:43px;cursor:pointer;"
+                     onclick="this.src=this.src+'?'">
             </div>
         </div>
         <p style="color: red" th:text="${msg1}" th:if="${not #strings.isEmpty(msg1)}"></p>
@@ -77,12 +88,12 @@
 <script>
     function userLogin() {
         $.ajax({
-            type:"post",
-            url:"/user/userLogin",
-            data:$("#loginForm").serialize(),
-            dataType:"json",
-            success:function (data) {
-                
+            type: "post",
+            url: "/user/userLogin",
+            data: $("#loginForm").serialize(),
+            dataType: "json",
+            success: function (data) {
+
             }
         })
     }
