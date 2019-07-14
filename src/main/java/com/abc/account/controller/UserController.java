@@ -29,12 +29,13 @@ public class UserController {
     }
 
     //    登录验证
-    @ResponseBody
     @RequestMapping("/userLogin")
     public String userLogin(
             @RequestParam("username") String username,
             @RequestParam("password") String password,
             @RequestParam("identityCard") String identityCard,
+            @RequestParam("code") String code,
+            Model model,
             HttpServletRequest request) {
         if (StringUtils.isBlank(username)) {
             return "用户名不能为空";
@@ -47,6 +48,14 @@ public class UserController {
             return "身份证不能为空";
         }
 
+        String code1 = (String) request.getSession().getAttribute("code");
+        if(!code.equalsIgnoreCase(code1)){
+
+            System.out.println("不相等");
+            model.addAttribute("msg1","验证码输入有误，请重新输入！");
+            return "forward:/user/loginHtml";
+
+        }
         User user1 = new User();
         user1.setIdentityCard(identityCard);
         user1.setName(username);
@@ -57,9 +66,15 @@ public class UserController {
         if (user != null) {
             System.out.println(user);
             request.getSession().setAttribute("user_session", user);
-            return "登录成功";
+//            return "user/userlistpage";
+            return "forward:/user/selAllUser";
+        }else {
+
+            model.addAttribute("msg","姓名，身份证或者密码出错");
+//            return "user/userLogin";
+            return "forward:/user/loginHtml";
         }
-        return "登陆失败";
+
     }
 
     //  注册新用户页面
@@ -170,6 +185,11 @@ public class UserController {
     @RequestMapping("/selAllUser")
     public String selAllUser(Model model) {
         List<User> allUser = userService.getAllUser();
+        for (User user:allUser ) {
+
+            System.out.println("list="+user);
+            
+        }
         model.addAttribute("list", allUser);
         return "user/userlistpage";
     }

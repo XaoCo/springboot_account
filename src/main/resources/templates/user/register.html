@@ -1,36 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.springframework.org/schema/data/jaxb">
 <head>
+    <!-- meta -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="renderer" content="webkit">
+    <meta property="qc:admins" content="23635710066417756375" />
+    <meta name="baidu-site-verification" content="QIQ6KC1oZ6" />
     <meta charset="UTF-8">
+
     <title>注册</title>
+
+    <link rel="stylesheet" th:href="@{/css/dmaku.css}" href="../../static/css/dmaku.css">
 </head>
-<body>
-<form action="/user/userRegister" method="post">
-    用户名:<input type="text" name="username"/></br>
-
-    工作:<input type="text" name="job"/></br>
-    密码:<input type="password" name="password"/></br>
-    确认密码:<input type="password" name="password2" onmouseleave="validate()"/></br>
-    年龄:<input type="text" name="age"/></br>
-    身份证:<input type="password" name="identityCard"/></br>
-    <input type="submit" value="注册">
-</form>
-
-<script>
-    function validate() {
 
 
-        var p1 = document.getElementsByName("password").values();
-        var p2 = document.getElementsByName("password2").values();
 
-        console.log("p1=" + p1)
-        console.log("p2=" + p2)
 
-        if (p1 != p2) {
-            alert("两次密码输入不一致，请检查重新输入！")
-            return false;
-        }
-    }
-</script>
+<!-- 页面主体START -->
+
+
+<section id="main">
+    <h1>注册帐号</h1>
+    <form action="/user/userRegister" accept-charset="utf-8" data-view="phoneRegister">
+
+
+        <div class="clearfix" data-propertyname="password" data-controltype="Password">
+            <input type="text" id="username" name="username" placeholder="请输入姓名" data-required="required" autocomplete="off" >
+        </div>
+
+        <div class="clearfix" data-propertyname="password" data-controltype="Password">
+            <input type="text" id="job" name="job" placeholder="请输入工作" data-required="required" autocomplete="off" >
+        </div>
+        <div class="clearfix" data-propertyname="password" data-controltype="Password">
+            <input type="text" id="age" name="age" placeholder="请输入年龄" data-required="required" autocomplete="off" >
+        </div>
+        <div class="clearfix" data-propertyname="password" data-controltype="Password">
+            <input type="password" id="identityCard" name="identityCard" placeholder="请输入身份证" data-required="required" autocomplete="off" >
+        </div>
+        <div class="clearfix" data-propertyname="password" data-controltype="Password">
+            <input type="password" id="password" name="password" placeholder="请输入密码" data-required="required" autocomplete="off" >
+        </div>
+        <div class="clearfix" data-propertyname="password" data-controltype="Password">
+            <input type="password" id="password1" name="password1" placeholder="请确认密码" data-required="required" autocomplete="off" >
+        </div>
+
+
+        <div class="clearfix btn_login" data-propertyname="submit" data-controltype="Botton">
+            <input type="submit" value="注册">
+        </div>
+
+
+
+    </form>
+</section>
+
+<!-- 页面主体END -->
+
+
 </body>
 </html>

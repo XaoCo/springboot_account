@@ -49,7 +49,7 @@
     </delete>
 
     <!--获取所有用户-->
-    <select id="getAllUser">
+    <select id="getAllUser" resultMap="userRestMap">
         SELECT * FROM A_USER
     </select>
 </mapper>
