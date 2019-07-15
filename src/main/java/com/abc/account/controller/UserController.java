@@ -14,7 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Controller
 @RequestMapping("/user")
@@ -49,10 +52,9 @@ public class UserController {
         }
 
         String code1 = (String) request.getSession().getAttribute("code");
-        if(!code.equalsIgnoreCase(code1)){
+        if (!code.equalsIgnoreCase(code1)) {
 
-            System.out.println("不相等");
-            model.addAttribute("msg1","验证码输入有误，请重新输入！");
+            model.addAttribute("msg1", "验证码输入有误，请重新输入！");
             return "forward:/user/loginHtml";
 
         }
@@ -61,6 +63,13 @@ public class UserController {
         user1.setName(username);
         user1.setPassword(password);
 
+        if (!checkStrIsNum02(identityCard)) {
+
+            model.addAttribute("msg2", "身份证输入有误");
+//            return "user/userLogin";
+            return "forward:/user/loginHtml";
+
+        }
         User user = userService.login(user1);
 
         if (user != null) {
@@ -68,9 +77,9 @@ public class UserController {
             request.getSession().setAttribute("user_session", user);
 //            return "user/userlistpage";
             return "forward:/user/selAllUser";
-        }else {
+        } else {
 
-            model.addAttribute("msg","姓名，身份证或者密码出错");
+            model.addAttribute("msg", "姓名,身份证或者密码出错,未查到相关信息！");
 //            return "user/userLogin";
             return "forward:/user/loginHtml";
         }
@@ -84,7 +93,6 @@ public class UserController {
     }
 
     //    新注册用户交易
-    @ResponseBody
     @RequestMapping("/userRegister")
     public String userRegister(
             @RequestParam("username") String username,
@@ -92,6 +100,7 @@ public class UserController {
             @RequestParam("job") String job,
             @RequestParam("password") String password,
             @RequestParam("identityCard") String identityCard,
+            Model model,
             HttpServletRequest request) {
 
         User user = new User();
@@ -117,11 +126,14 @@ public class UserController {
         if (user1 == null) {
             int i = userService.addUser(user);
             if (i == 1) {
-                return "注册成功";
+                model.addAttribute("msg4", "注册成功，请登录！");
+                return "forward:/user/loginHtml";
             }
-            return "注册失败";
+            model.addAttribute("msg6", "注册失败，请核实！");
+            return "forward:/user/registerpage";
         } else {
-            return "该姓名和身份证已经注册，请核实信息再行注册！";
+            model.addAttribute("msg5", "该姓名和身份证已经注册，请直接登录！");
+            return "forward:/user/loginHtml";
         }
 
 
@@ -185,10 +197,10 @@ public class UserController {
     @RequestMapping("/selAllUser")
     public String selAllUser(Model model) {
         List<User> allUser = userService.getAllUser();
-        for (User user:allUser ) {
+        for (User user : allUser) {
 
-            System.out.println("list="+user);
-            
+            System.out.println("list=" + user);
+
         }
         model.addAttribute("list", allUser);
         return "user/userlistpage";
@@ -203,9 +215,10 @@ public class UserController {
     //    忘记密码或者找回密码
     @RequestMapping("/findPwd")
     public String findPwd(
-            @RequestParam("userName") String userName,
+            @RequestParam("username") String userName,
             @RequestParam("identityCard") String identityCard,
             @RequestParam("password") String password,
+            Model model,
             HttpServletRequest request) {
         User user = new User();
         user.setName(userName);
@@ -215,13 +228,39 @@ public class UserController {
             user1.setPassword(password);
             int i = userService.updPassword(user1);
             if (i <= 0) {
-                return "重置密码失败";
+                model.addAttribute("msg4", "重置密码失败");
+                return "forward:/user/findPwdPage";
             } else {
-                return "user/userLogin";
+                model.addAttribute("msg3", "重置密码成功，请登录");
+                return "forward:/user/loginHtml";
             }
         } else {
-            return "该用户还未注册过，请先注册！";
+            model.addAttribute("msg5", "该姓名+身份证还未注册过，请先注册！");
+            return "forward:/user/registerpage";
         }
 
     }
+
+    private static Pattern NUMBER_PATTERN = Pattern.compile("-?[0-9]+(\\.[0-9]+)?");
+
+    /**
+     * 利用正则表达式来判断字符串是否为数字
+     */
+    public static boolean checkStrIsNum02(String str) {
+        String bigStr;
+        try {
+            /** 先将str转成BigDecimal，然后在转成String */
+            bigStr = new BigDecimal(str).toString();
+        } catch (Exception e) {
+            /** 如果转换数字失败，说明该str并非全部为数字 */
+
+            return false;
+        }
+        Matcher isNum = NUMBER_PATTERN.matcher(str);
+        if (!isNum.matches() || str.length() != 18) {
+            return false;
+        }
+        return true;
+    }
+
 }

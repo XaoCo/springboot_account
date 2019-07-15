@@ -22,14 +22,25 @@
 
 </head>
 
-<body>
-
-
+<body class="image1">
+<style>
+    .image1{
+        background-image:url(/images/bg_cb3e28c.jpg);
+    }
+    .image2{
+        width: 450px;
+    }
+</style>
 <!-- 页面主体START -->
-<section id="main">
+<section id="main" class="image2">
     <h1>登录</h1>
-    <form action="/user/userLogin" accept-charset="utf-8" data-view="loginView" id="loginForm" style="width: 280px">
+    <form action="/user/userLogin" accept-charset="utf-8" data-view="loginView" id="loginForm" style="width: 280px" >
 
+
+        <p style="color: red" th:text="${msg5}" th:if="${not #strings.isEmpty(msg5)}"></p>
+
+        <p style="color: green" th:text="${msg4}" th:if="${not #strings.isEmpty(msg4)}"></p>
+        <p style="color: green" th:text="${msg3}" th:if="${not #strings.isEmpty(msg3)}"></p>
         <p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
 
         <div class="form-group" data-propertyname="username" data-controltype="Phone">
@@ -43,17 +54,18 @@
         <div class="form-group" data-propertyname="password" data-controltype="Password">
             <div class="field">
                 <input type="password" class="input input-big" id="password" name="password" placeholder="输入密码"
-                       data-validate="required:请输入密码" >
+                       data-validate="required:请输入密码,length#>=6:密码不能小于6位" >
             </div>
         </div>
 
         <div class="form-group" data-propertyname="password" data-controltype="Password">
             <div class="field">
                 <input type="password" class="input input-big" id="identityCard" name="identityCard" placeholder="输入身份证"
-                       data-validate="required:请输入身份证" autocomplete="off">
+                       data-validate="required:请输入身份证,length#==18:身份证位数为18位" >
             </div>
         </div>
 
+        <p style="color: red" th:text="${msg2}" th:if="${not #strings.isEmpty(msg2)}"></p>
         <div class="form-group">
             <div class="field">
                 <input type="text" class="input input-big" name="code" placeholder="填写右侧的验证码"
@@ -86,17 +98,7 @@
 </section>
 <!-- 页面主体END -->
 <script>
-    function userLogin() {
-        $.ajax({
-            type: "post",
-            url: "/user/userLogin",
-            data: $("#loginForm").serialize(),
-            dataType: "json",
-            success: function (data) {
 
-            }
-        })
-    }
 </script>
 
 
