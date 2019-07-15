@@ -75,8 +75,8 @@ public class UserController {
         if (user != null) {
             System.out.println(user);
             request.getSession().setAttribute("user_session", user);
-//            return "user/userlistpage";
-            return "forward:/user/selAllUser";
+//            return "forward:/user/selAllUser";
+            return "main/index";
         } else {
 
             model.addAttribute("msg", "姓名,身份证或者密码出错,未查到相关信息！");
@@ -199,7 +199,7 @@ public class UserController {
         List<User> allUser = userService.getAllUser();
 
         model.addAttribute("list", allUser);
-        return "user/userlistpage";
+        return "index";
     }
 
     //    忘记密码或者找回密码页面
