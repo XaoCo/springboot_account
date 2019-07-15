@@ -197,11 +197,7 @@ public class UserController {
     @RequestMapping("/selAllUser")
     public String selAllUser(Model model) {
         List<User> allUser = userService.getAllUser();
-        for (User user : allUser) {
 
-            System.out.println("list=" + user);
-
-        }
         model.addAttribute("list", allUser);
         return "user/userlistpage";
     }
