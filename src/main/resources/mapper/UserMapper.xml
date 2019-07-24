@@ -9,19 +9,17 @@
         <result column="U_AGE" property="age"/>
         <result column="U_JOB" property="job"/>
         <result column="U_PASSWORD" property="password"/>
-        <result column="U_IDENTITY_CARD" property="identityCard"/>
+        <!--<result column="U_IDENTITY_CARD" property="identityCard"/>-->
     </resultMap>
 
     <!--登录验证-->
     <select id="login" parameterType="com.abc.account.pojo.User" resultMap="userRestMap">
         SELECT * FROM A_USER WHERE U_NAME = #{name} AND U_PASSWORD = #{password}
-         AND U_IDENTITY_CARD = #{identityCard}
     </select>
 
     <!--查询用户-->
     <select id="login1" parameterType="com.abc.account.pojo.User" resultMap="userRestMap">
         SELECT * FROM A_USER WHERE U_NAME = #{name}
-         AND U_IDENTITY_CARD = #{identityCard}
     </select>
 
     <!--注册用户-->
@@ -45,7 +43,7 @@
 
     <!--删除用户-->
     <delete id="delUser">
-        DELETE FROM A_USER WHERE U_ID = #{id}
+        DELETE FROM A_USER WHERE U_NAME = #{name}
     </delete>
 
     <!--获取所有用户-->

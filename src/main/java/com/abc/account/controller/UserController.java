@@ -36,8 +36,8 @@ public class UserController {
     public String userLogin(
             @RequestParam("username") String username,
             @RequestParam("password") String password,
-            @RequestParam("identityCard") String identityCard,
-            @RequestParam("code") String code,
+//            @RequestParam("identityCard") String identityCard,
+//            @RequestParam("code") String code,
             Model model,
             HttpServletRequest request) {
         if (StringUtils.isBlank(username)) {
@@ -47,29 +47,26 @@ public class UserController {
         if (StringUtils.isBlank(password)) {
             return "用户密码不能为空";
         }
-        if (StringUtils.isBlank(identityCard)) {
-            return "身份证不能为空";
-        }
 
-        String code1 = (String) request.getSession().getAttribute("code");
-        if (!code.equalsIgnoreCase(code1)) {
 
-            model.addAttribute("msg1", "验证码输入有误，请重新输入！");
-            return "forward:/user/loginHtml";
-
-        }
+//        String code1 = (String) request.getSession().getAttribute("code");
+//        if (!code.equalsIgnoreCase(code1)) {
+//
+//            model.addAttribute("msg1", "验证码输入有误，请重新输入！");
+//            return "forward:/user/loginHtml";
+//
+//        }
         User user1 = new User();
-        user1.setIdentityCard(identityCard);
         user1.setName(username);
         user1.setPassword(password);
 
-        if (!checkStrIsNum02(identityCard)) {
-
-            model.addAttribute("msg2", "身份证输入有误");
-//            return "user/userLogin";
-            return "forward:/user/loginHtml";
-
-        }
+//        if (!checkStrIsNum02(identityCard)) {
+//
+//            model.addAttribute("msg2", "身份证输入有误");
+////            return "user/userLogin";
+//            return "forward:/user/loginHtml";
+//
+//        }
         User user = userService.login(user1);
 
         if (user != null) {
@@ -79,7 +76,7 @@ public class UserController {
             return "main/index";
         } else {
 
-            model.addAttribute("msg", "姓名,身份证或者密码出错,未查到相关信息！");
+            model.addAttribute("msg", "姓名,或者密码出错,未查到相关信息！");
 //            return "user/userLogin";
             return "forward:/user/loginHtml";
         }
@@ -99,7 +96,6 @@ public class UserController {
             @RequestParam("age") int age,
             @RequestParam("job") String job,
             @RequestParam("password") String password,
-            @RequestParam("identityCard") String identityCard,
             Model model,
             HttpServletRequest request) {
 
@@ -120,7 +116,6 @@ public class UserController {
         user.setJob(job);
         user.setName(username);
         user.setPassword(password);
-        user.setIdentityCard(identityCard);
         User user1 = userService.login1(user);
 
         if (user1 == null) {
@@ -132,7 +127,7 @@ public class UserController {
             model.addAttribute("msg6", "注册失败，请核实！");
             return "forward:/user/registerpage";
         } else {
-            model.addAttribute("msg5", "该姓名和身份证已经注册，请直接登录！");
+            model.addAttribute("msg5", "该姓名已经注册，请直接登录！");
             return "forward:/user/loginHtml";
         }
 
@@ -146,11 +141,9 @@ public class UserController {
     }
 
     //    用户修改密码
-    @ResponseBody
     @RequestMapping("/updpassword")
     public String updPassword(
             @RequestParam("username") String username,
-            @RequestParam("identityCard") String identityCard,
             @RequestParam("password") String password,
             @RequestParam("passwordNew") String passwordNew,
             HttpServletRequest request) {
@@ -158,9 +151,8 @@ public class UserController {
         User user = new User();
         user.setPassword(passwordNew);
         user.setName(username);
-        user.setIdentityCard(identityCard);
         //  判断该客户是否存在
-        User user1 = userService.login(user);
+        User user1 = userService.login1(user);
 
         if (user1 != null) {
             int i = userService.updPassword(user);
@@ -179,12 +171,12 @@ public class UserController {
     //    删除用户
     @RequestMapping("/delUser")
     public String delUser(
-            @RequestParam("id") int id,
+            @RequestParam("name") String name,
             HttpServletRequest request) {
 
         User user_session = (User) request.getSession().getAttribute("user_session");
 
-        int i = userService.delUser(id);
+        int i = userService.delUser(name);
         if (i <= 0) {
             return ("用户删除失败");
         } else {
@@ -212,13 +204,11 @@ public class UserController {
     @RequestMapping("/findPwd")
     public String findPwd(
             @RequestParam("username") String userName,
-            @RequestParam("identityCard") String identityCard,
             @RequestParam("password") String password,
             Model model,
             HttpServletRequest request) {
         User user = new User();
         user.setName(userName);
-        user.setIdentityCard(identityCard);
         User user1 = userService.login1(user);
         if (user1 != null) {
             user1.setPassword(password);
@@ -231,7 +221,7 @@ public class UserController {
                 return "forward:/user/loginHtml";
             }
         } else {
-            model.addAttribute("msg5", "该姓名+身份证还未注册过，请先注册！");
+            model.addAttribute("msg5", "该姓名还未注册过，请先注册！");
             return "forward:/user/registerpage";
         }
 
