@@ -27,7 +27,7 @@ public interface UserMapper {
     int updPassword(User user);
 
     //    删除用户
-    int delUser(@Param("id") int id);
+    int delUser(@Param("name") String name);
 
     //    获取用户列表
     List<User> getAllUser();

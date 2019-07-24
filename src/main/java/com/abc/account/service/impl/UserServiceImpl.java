@@ -41,8 +41,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int delUser(int id) {
-        return userMapper.delUser(id);
+    public int delUser(String name) {
+        return userMapper.delUser(name);
     }
 
     @Override
