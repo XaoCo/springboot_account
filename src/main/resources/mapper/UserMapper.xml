@@ -29,8 +29,7 @@
             #{name},
             #{age},
             #{job},
-            #{password},
-            #{identityCard}
+            #{password}
         )
     </insert>
 
@@ -38,7 +37,6 @@
     <update id="updPassword">
         UPDATE A_USER  SET U_PASSWORD = #{password}
          WHERE U_NAME = #{name}
-         AND U_IDENTITY_CARD = #{identityCard}
     </update>
 
     <!--删除用户-->
