@@ -7,11 +7,12 @@
     <style>
         @charset "utf-8";
         /* track base Css */
-        .bg{
+        .bg {
             background-image: url("/images/bg5.jpg");
         }
+
         .container {
-            margin-top: 90px;
+            margin-top: 60px;
         }
 
         .red {
@@ -78,26 +79,28 @@
             cursor: pointer;
         }
     </style>
+
 </head>
 <body class="bg">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+<script src="../../js/bootbox.js"></script>
 <div class="container">
     <div class="col-md-4 col-md-offset-4">
 
         <div align="center">
             <img src="/images/login_afe3eb0.png" height="64" width="64"/>
         </div>
-        <form action="/user/userRegister" enctype="multipart/form-data" method="post">
+        <form enctype="multipart/form-data" method="post" id="registerForm">
             <p style="color: red" th:text="${msg6}" th:if="${not #strings.isEmpty(msg6)}"></p>
             <p style="color: red" th:text="${msg5}" th:if="${not #strings.isEmpty(msg5)}"></p>
             <div class="form-group has-feedback">
-                <label for="username">用户名</label>
+                <label for="username"></label>
                 <div class="input-group">
                     <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-                    <input id="username" name="username" class="form-control" placeholder="请输入用户名" maxlength="20" type="text">
+                    <input id="username" name="username" class="form-control" placeholder="请输入用户名" maxlength="20"
+                           type="text">
                 </div>
 
                 <span style="color:red;display: none;" class="tips"></span>
@@ -106,19 +109,19 @@
             </div>
 
             <div class="form-group has-feedback">
-            <label for="username">工作</label>
-            <div class="input-group">
-                <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-                <input id="job" name="job" class="form-control" placeholder="请输入工作" maxlength="20" type="text">
+                <label for="username"></label>
+                <div class="input-group">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                    <input id="job" name="job" class="form-control" placeholder="请输入工作" maxlength="20" type="text">
+                </div>
+
+                <span style="color:red;display: none;" class="tips"></span>
+                <span style="display: none;" class=" glyphicon glyphicon-remove form-control-feedback"></span>
+                <span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
             </div>
 
-            <span style="color:red;display: none;" class="tips"></span>
-            <span style="display: none;" class=" glyphicon glyphicon-remove form-control-feedback"></span>
-            <span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
-        </div>
-
             <div class="form-group has-feedback">
-                <label for="username">年龄</label>
+                <label for="username"></label>
                 <div class="input-group">
                     <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
                     <input id="age" name="age" class="form-control" placeholder="请输入年龄" maxlength="20" type="text">
@@ -130,10 +133,11 @@
             </div>
 
             <div class="form-group has-feedback">
-                <label for="password">密码</label>
+                <label for="password"></label>
                 <div class="input-group">
                     <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                    <input id="password" name="password" class="form-control" placeholder="请输入密码" maxlength="20" type="password">
+                    <input id="password" name="password" class="form-control" placeholder="请输入密码" maxlength="20"
+                           type="password">
                 </div>
 
                 <span style="color:red;display: none;" class="tips"></span>
@@ -142,10 +146,11 @@
             </div>
 
             <div class="form-group has-feedback">
-                <label for="passwordConfirm">确认密码</label>
+                <label for="passwordConfirm"></label>
                 <div class="input-group">
                     <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                    <input id="passwordConfirm" class="form-control" placeholder="请再次输入密码" maxlength="20" type="password">
+                    <input id="passwordConfirm" class="form-control" placeholder="请再次输入密码" maxlength="20"
+                           type="password">
                 </div>
                 <span style="color:red;display: none;" class="tips"></span>
                 <span style="display: none;" class="glyphicon glyphicon-remove form-control-feedback"></span>
@@ -153,12 +158,10 @@
             </div>
 
 
-
-
             <div class="row">
                 <div class="col-xs-6">
                     <div class="form-group has-feedback">
-                        <label for="idcode-btn">验证码</label>
+                        <label for="idcode-btn"></label>
                         <div class="input-group">
                             <span class="input-group-addon"><span class="glyphicon glyphicon-qrcode"></span></span>
                             <input id="idcode-btn" class="form-control" placeholder="验证码" maxlength="4" type="text">
@@ -174,9 +177,9 @@
             </div>
 
 
-
             <div class="form-group">
-                <input class="form-control btn btn-primary" id="submit" value="立&nbsp;&nbsp;即&nbsp;&nbsp;注&nbsp;&nbsp;册" type="submit">
+                <input class="form-control btn btn-primary" id="submit" value="立&nbsp;&nbsp;即&nbsp;&nbsp;注&nbsp;&nbsp;册"
+                       type="button" onclick="register()">
             </div>
 
             <div class="form-group">
@@ -203,16 +206,16 @@
         codeval: '#ehong-code'
     }
     $.idcode = {
-        getCode: function(option) {
+        getCode: function (option) {
             _commSetting(option);
             return _storeData(_set.storeLable, null);
         },
-        setCode: function(option) {
+        setCode: function (option) {
             _commSetting(option);
             _setCodeStyle("#" + settings.e, settings.codeType.name, settings.codeType.len);
 
         },
-        validateCode: function(option) {
+        validateCode: function (option) {
             _commSetting(option);
             var inputV;
             if (settings.inputID) {
@@ -308,6 +311,7 @@
         }
         return code;
     }
+
     var regUsername = /^[a-zA-Z_][a-zA-Z0-9_]{4,19}$/;
     var regPasswordSpecial = /[~!@#%&=;':",./<>_\}\]\-\$\(\)\*\+\.\[\?\\\^\{\|]/;
     var regPasswordAlpha = /[a-zA-Z]/;
@@ -337,7 +341,7 @@
     }
 
     // 用户名匹配
-    $('.container').find('input').eq(0).change(function() {
+    $('.container').find('input').eq(0).change(function () {
 
 
         if (regUsername.test($(this).val())) {
@@ -351,7 +355,7 @@
     });
 
     // 工作匹配
-    $('.container').find('input').eq(1).change(function() {
+    $('.container').find('input').eq(1).change(function () {
 
 
         if (regJob.test($(this).val())) {
@@ -365,19 +369,18 @@
     });
 
     // 年龄匹配
-    $('.container').find('input').eq(2).change(function() {
+    $('.container').find('input').eq(2).change(function () {
 
 
         if (regAgeNum.test($(this).val())) {
             success($(this), 2);
-        } else if (parseFloat($(this).val())>100 || parseFloat($(this).val())<18) {
+        } else if (parseFloat($(this).val()) > 100 || parseFloat($(this).val()) < 18) {
             fail($(this), 2, '未成年人不能注册！');
         } else {
             fail($(this), 2, '只能为数字，不可填入其他字符！');
         }
 
     });
-
 
 
     // 密码匹配
@@ -391,7 +394,7 @@
 
     }
 
-    $('.container').find('input').eq(3).change(function() {
+    $('.container').find('input').eq(3).change(function () {
 
         password = $(this).val();
 
@@ -410,7 +413,7 @@
 
 
     // 再次输入密码校验
-    $('.container').find('input').eq(4).change(function() {
+    $('.container').find('input').eq(4).change(function () {
 
         if ($(this).val() == password) {
             success($(this), 4);
@@ -425,7 +428,7 @@
     // 验证码
     $.idcode.setCode();
 
-    $('.container').find('input').eq(5).change(function() {
+    $('.container').find('input').eq(5).change(function () {
         var IsBy = $.idcode.validateCode();
         if (IsBy) {
             success($(this), 5);
@@ -491,8 +494,8 @@
     //
     // })
 
-    $('#submit').click(function(e) {
-        if (!check.every(function(value) {
+    $('#submit').click(function (e) {
+        if (!check.every(function (value) {
             return value == true
         })) {
             e.preventDefault();
@@ -504,116 +507,60 @@
         }
     });
 
-    $('#reset').click(function() {
+    $('#reset').click(function () {
         $('input').slice(0, 6).parent().parent().removeClass('has-error has-success');
         $('.tips').hide();
         $('.glyphicon-ok').hide();
         $('.glyphicon-remove').hide();
-        check = [false, false, false, false, false, false, ];
+        check = [false, false, false, false, false, false,];
     });
+
+    function register() {
+        debugger;
+        console.log("我进来了！");
+        $.ajax({
+            url: "/user/userRegister",
+            data: $("#registerForm").serialize(),
+            // dataType: "json",
+            success: function (data) {
+                // console.log("我又进来了！");
+                // alert(data);
+                console.log("data=" + data);
+                debugger;
+                if (data == 1) {
+                    bootbox.alert({
+                        message: '注册成功，请登录',
+                        size: 'small',
+                        callback: function () {
+                            window.location.href = '/user/loginHtml';
+                        },
+                    });
+                } else if (data == 0) {
+                    bootbox.alert({
+                        message: '注册失败，请检查！',
+                        size: 'small',
+                        callback: function () {
+                            window.location.href = '/user/registerpage';
+                        },
+                    });
+                } else {
+                    bootbox.alert({
+                        message: '该姓名已经注册，请直接登录！',
+                        size: 'small',
+                        callback: function () {
+                            window.location.href = '/user/loginHtml';
+                        },
+                    });
+
+                }
+
+
+            }
+        })
+    }
 </script>
 
 </body>
 </html>
 
 
-<!--<!DOCTYPE html>-->
-<!--<html xmlns:th="http://www.springframework.org/schema/data/jaxb">-->
-<!--<head>-->
-    <!--&lt;!&ndash; meta &ndash;&gt;-->
-    <!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>-->
-    <!--<meta name="renderer" content="webkit">-->
-    <!--<meta property="qc:admins" content="23635710066417756375"/>-->
-    <!--<meta name="baidu-site-verification" content="QIQ6KC1oZ6"/>-->
-    <!--<meta charset="UTF-8">-->
-
-    <!--<title>注册</title>-->
-
-    <!--<link rel="stylesheet" th:href="@{/css/dmaku2.css}" href="../../static/css/dmaku2.css">-->
-    <!--&lt;!&ndash;<link rel="stylesheet" th:href="@{/css/dmaku.css}" href="../../static/css/dmaku.css">&ndash;&gt;-->
-    <!--<script th:src="@{/js/jquery-1.12.3.min.js}" src="../../static/js/jquery-1.12.3.min.js"></script>-->
-    <!--<script th:src="@{/js/pintuer.js}" src="../../static/js/pintuer.js"></script>-->
-    <!--<link rel="stylesheet" th:href="@{/css/admin.css}" href="../../static/css/admin.css">-->
-    <!--<link rel="stylesheet" th:href="@{/css/pintuer.css}" href="../../static/css/pintuer.css">-->
-<!--</head>-->
-
-
-<!--&lt;!&ndash; 页面主体START &ndash;&gt;-->
-<!--<body class="image1">-->
-<!--<style>-->
-    <!--.image1 {-->
-        <!--background-image: url(/images/bg_cb3e28c.jpg);-->
-    <!--}-->
-
-    <!--.image2 {-->
-        <!--width: 450px;-->
-    <!--}-->
-<!--</style>-->
-
-<!--<section id="main" class="image2">-->
-    <!--<h1>注册帐号</h1>-->
-    <!--<form action="/user/userRegister" accept-charset="utf-8" data-view="phoneRegister">-->
-
-
-        <!--<p style="color: red" th:text="${msg6}" th:if="${not #strings.isEmpty(msg6)}"></p>-->
-        <!--<p style="color: red" th:text="${msg5}" th:if="${not #strings.isEmpty(msg5)}"></p>-->
-
-        <!--<div class="form-group" data-propertyname="username" data-controltype="Phone">-->
-            <!--&lt;!&ndash; <input type="text" class="field" placeholder="输入姓名" id="user_name" name="username"  data-validate="required:请输入姓名" autocomplete="off" >&ndash;&gt;-->
-            <!--<div class="field">-->
-                <!--<input type="text" class="input input-big" name="username" placeholder="输入姓名"-->
-                       <!--data-validate="required:请填写姓名"/>-->
-            <!--</div>-->
-        <!--</div>-->
-
-        <!--<div class="form-group" data-propertyname="job" data-controltype="Phone">-->
-            <!--&lt;!&ndash; <input type="text" class="field" placeholder="输入姓名" id="user_name" name="username"  data-validate="required:请输入姓名" autocomplete="off" >&ndash;&gt;-->
-            <!--<div class="field">-->
-                <!--<input type="text" class="input input-big" name="job" placeholder="输入工作"-->
-                       <!--data-validate="required:请输入工作"/>-->
-            <!--</div>-->
-        <!--</div>-->
-
-        <!--<div class="form-group" data-propertyname="age" data-controltype="Phone">-->
-            <!--&lt;!&ndash; <input type="text" class="field" placeholder="输入姓名" id="user_name" name="username"  data-validate="required:请输入姓名" autocomplete="off" >&ndash;&gt;-->
-            <!--<div class="field">-->
-                <!--<input type="text" class="input input-big" name="age" placeholder="输入年龄"-->
-                       <!--data-validate="required:请输入年龄"/>-->
-            <!--</div>-->
-        <!--</div>-->
-
-        <!--<div class="form-group" data-propertyname="password" data-controltype="Password">-->
-            <!--<div class="field">-->
-                <!--<input type="password" class="input input-big" id="identityCard" name="identityCard" placeholder="输入身份证"-->
-                       <!--data-validate="required:请输入身份证,length#==18:身份证位数为18位">-->
-            <!--</div>-->
-        <!--</div>-->
-
-        <!--<div class="form-group" data-propertyname="password" data-controltype="Password">-->
-            <!--<div class="field">-->
-                <!--<input type="password" class="input input-big" id="password" name="password" placeholder="输入密码"-->
-                       <!--data-validate="required:请输入密码,length#>=6:密码不能小于6位">-->
-            <!--</div>-->
-        <!--</div>-->
-
-        <!--<div class="form-group" data-propertyname="password" data-controltype="Password">-->
-            <!--<div class="field">-->
-                <!--<input type="password" class="input input-big" id="passwordnew" name="passwordnew" placeholder="确认密码"-->
-                       <!--data-validate="required:请确认密码,length#>=6:密码不能小于6位,repeat#password:两次输入的密码不一致">-->
-            <!--</div>-->
-        <!--</div>-->
-
-
-        <!--<div class="clearfix btn_login" data-propertyname="submit" data-controltype="Botton">-->
-            <!--<input type="submit" value="注册">-->
-        <!--</div>-->
-
-
-    <!--</form>-->
-<!--</section>-->
-
-<!--&lt;!&ndash; 页面主体END &ndash;&gt;-->
-
-
-<!--</body>-->
-<!--</html>-->

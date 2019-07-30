@@ -33,53 +33,48 @@ public class UserController {
 
     //    登录验证
     @RequestMapping("/userLogin")
-    public String userLogin(
+    @ResponseBody
+    public int userLogin(
             @RequestParam("username") String username,
             @RequestParam("password") String password,
-//            @RequestParam("identityCard") String identityCard,
-//            @RequestParam("code") String code,
             Model model,
             HttpServletRequest request) {
+        int flag = 0;
         if (StringUtils.isBlank(username)) {
-            return "用户名不能为空";
+            flag = -1;
+            return flag;
+
         }
 
         if (StringUtils.isBlank(password)) {
-            return "用户密码不能为空";
+            flag = -2;
+            return flag;
         }
 
 
-//        String code1 = (String) request.getSession().getAttribute("code");
-//        if (!code.equalsIgnoreCase(code1)) {
-//
-//            model.addAttribute("msg1", "验证码输入有误，请重新输入！");
-//            return "forward:/user/loginHtml";
-//
-//        }
         User user1 = new User();
         user1.setName(username);
         user1.setPassword(password);
 
-//        if (!checkStrIsNum02(identityCard)) {
-//
-//            model.addAttribute("msg2", "身份证输入有误");
-////            return "user/userLogin";
-//            return "forward:/user/loginHtml";
-//
-//        }
-        User user = userService.login(user1);
+        User user2 = userService.login1(user1);
+        if (user2 != null) {
+            User user = userService.login(user1);
 
-        if (user != null) {
-            System.out.println(user);
-            request.getSession().setAttribute("user_session", user);
-//            return "forward:/user/selAllUser";
-            return "main/index";
+            if (user != null) {
+                System.out.println(user);
+                request.getSession().setAttribute("user_session", user);
+                flag = 0;
+                return flag;
+            } else {
+
+                flag = 1;
+                return flag;
+            }
         } else {
-
-            model.addAttribute("msg", "姓名,或者密码出错,未查到相关信息！");
-//            return "user/userLogin";
-            return "forward:/user/loginHtml";
+            flag = 2;
+            return flag;
         }
+
 
     }
 
@@ -91,7 +86,8 @@ public class UserController {
 
     //    新注册用户交易
     @RequestMapping("/userRegister")
-    public String userRegister(
+    @ResponseBody
+    public int userRegister(
             @RequestParam("username") String username,
             @RequestParam("age") int age,
             @RequestParam("job") String job,
@@ -100,17 +96,7 @@ public class UserController {
             HttpServletRequest request) {
 
         User user = new User();
-        if (StringUtils.isBlank(username)) {
-            return "用户名不能为空";
-        }
-
-        if (StringUtils.isBlank(job)) {
-            return "工作简介不能为空";
-        }
-
-        if (StringUtils.isBlank(password)) {
-            return "用户密码不能为空";
-        }
+        int flag = 0;
 
         user.setAge(age);
         user.setJob(job);
@@ -122,15 +108,17 @@ public class UserController {
             int i = userService.addUser(user);
             if (i == 1) {
                 model.addAttribute("msg4", "注册成功，请登录！");
-                return "forward:/user/loginHtml";
+                flag = 1;
+            } else {
+                model.addAttribute("msg6", "注册失败，请核实！");
+                flag = 0;
             }
-            model.addAttribute("msg6", "注册失败，请核实！");
-            return "forward:/user/registerpage";
+
         } else {
             model.addAttribute("msg5", "该姓名已经注册，请直接登录！");
-            return "forward:/user/loginHtml";
+            flag = -1;
         }
-
+        return flag;
 
     }
 
