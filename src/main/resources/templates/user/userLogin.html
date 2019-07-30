@@ -83,6 +83,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="../../js/bootbox.js"></script>
 
 <div class="container">
     <div class="col-md-4 col-md-offset-4">
@@ -90,15 +91,15 @@
         <div align="center">
             <img src="/images/login_afe3eb0.png" height="64" width="64"/>
         </div>
-        <form action="/user/userLogin" enctype="multipart/form-data" method="post">
-            <p style="color: red" th:text="${msg5}" th:if="${not #strings.isEmpty(msg5)}"></p>
+        <form  enctype="multipart/form-data" method="post" id="loginForm">
+            <!--<p style="color: red" th:text="${msg5}" th:if="${not #strings.isEmpty(msg5)}"></p>-->
 
-            <p style="color: green" th:text="${msg4}" th:if="${not #strings.isEmpty(msg4)}"></p>
-            <p style="color: green" th:text="${msg3}" th:if="${not #strings.isEmpty(msg3)}"></p>
-            <p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
+            <!--<p style="color: green" th:text="${msg4}" th:if="${not #strings.isEmpty(msg4)}"></p>-->
+            <!--<p style="color: green" th:text="${msg3}" th:if="${not #strings.isEmpty(msg3)}"></p>-->
+            <!--<p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>-->
 
             <div class="form-group has-feedback">
-                <label for="username">用户名</label>
+                <label for="username"></label>
                 <div class="input-group">
                     <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
                     <input id="username" name="username" class="form-control" placeholder="用户名" maxlength="20"
@@ -111,7 +112,7 @@
             </div>
 
             <div class="form-group has-feedback">
-                <label for="password">密码</label>
+                <label for="password"></label>
                 <div class="input-group">
                     <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
                     <input id="password" name="password" class="form-control" placeholder="密码" maxlength="20"
@@ -138,7 +139,7 @@
             <div class="row">
                 <div class="col-xs-6">
                     <div class="form-group has-feedback">
-                        <label for="idcode-btn">验证码</label>
+                        <label for="idcode-btn"></label>
                         <div class="input-group">
                             <span class="input-group-addon"><span class="glyphicon glyphicon-qrcode"></span></span>
                             <input id="idcode-btn" class="form-control" placeholder="验证码" maxlength="4" type="text">
@@ -194,7 +195,7 @@
                     <input class="form-control btn btn-primary"
                            value="登&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录" id="tijiao"
 
-                           type="submit">
+                           type="button" onclick="login()">
                 </div>
             </div>
 
@@ -414,18 +415,6 @@
     });
 
 
-    // 再次输入密码校验
-    // $('.container').find('input').eq(2).change(function () {
-    //
-    //     if ($(this).val() == password) {
-    //         success($(this), 2);
-    //     } else {
-    //
-    //         fail($(this), 2, '两次输入的密码不一致');
-    //     }
-    //
-    // });
-
 
     // 验证码
     $.idcode.setCode();
@@ -503,16 +492,6 @@
 
 
                 }
-                // $.ajax({
-                //     url:"/user/userLogin",
-                //     data:{
-                //         "username":username,
-                //         "password":password
-                //     },
-                //     success:function (data) {
-                //
-                //     }
-                // })
             )) {
                 e.preventDefault();
                 for (key in check) {
@@ -532,114 +511,61 @@
         check = [false, false, false, false, false, false,];
 
     });
+
+    function login() {
+        debugger;
+        $.ajax({
+            url:"/user/userLogin",
+            data:$("#loginForm").serialize(),
+            success:function (data) {
+                debugger;
+                if(data==-1){
+                    bootbox.alert({
+                        message: '姓名为空，请重新输入',
+                        size:'small',
+                        callback: function() {
+                            window.location.href = '/user/loginHtml';
+                        },
+                    });
+                }else if(data==-2){
+                    bootbox.alert({
+                        message: '密码为空，请重新输入',
+                        size:'small',
+                        callback: function() {
+                            window.location.href = '/user/loginHtml';
+                        },
+                    });
+                }else if(data==0){
+                    bootbox.alert({
+                        message: '登录成功！',
+                        size:'small',
+                        callback: function() {
+                            window.location.href = 'www.baidu.com';
+                        },
+                    });
+                }else if(data==2){
+                    bootbox.alert({
+                        message: '该用户还未注册，请先进行注册！',
+                        size:'small',
+                        callback: function() {
+                            window.location.href = '/user/registerpage';
+                        },
+                    });
+                }else {
+                    bootbox.alert({
+                        message: '姓名或者密码错误，请检查后登录！',
+                        size:'small',
+                        callback: function() {
+                            window.location.href = '/user/loginHtml';
+                        },
+                    });
+                }
+            }
+        })
+    }
 </script>
 
 </body>
 </html>
 
-<!--<!DOCTYPE html>-->
-<!--<html xmlns:th="http://www.springframework.org/schema/data/jaxb">-->
 
-<!--<head>-->
-    <!--&lt;!&ndash; meta &ndash;&gt;-->
-    <!--&lt;!&ndash;<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />-->
-    <!--<meta name="renderer" content="webkit">-->
-    <!--<meta property="qc:admins" content="23635710066417756375" />-->
-    <!--<meta name="baidu-site-verification" content="QIQ6KC1oZ6" />-->
-    <!--<meta charset="UTF-8">-->
-    <!--<meta name="viewport" content="width=device-width"/>&ndash;&gt;-->
-
-    <!--<link rel="stylesheet" th:href="@{/css/dmaku2.css}" href="../../static/css/dmaku2.css">-->
-
-
-    <!--<title>登录</title>-->
-    <!--<script th:src="@{/js/jquery-1.12.3.min.js}" src="../../static/js/jquery-1.12.3.min.js"></script>-->
-    <!--<script th:src="@{/js/pintuer.js}" src="../../static/js/pintuer.js"></script>-->
-    <!--<link rel="stylesheet" th:href="@{/css/admin.css}" href="../../static/css/admin.css">-->
-    <!--<link rel="stylesheet" th:href="@{/css/pintuer.css}" href="../../static/css/pintuer.css">-->
-
-
-<!--</head>-->
-
-<!--<body class="image1">-->
-<!--<style>-->
-    <!--.image1{-->
-        <!--background-image:url(/images/bg_cb3e28c.jpg);-->
-    <!--}-->
-    <!--.image2{-->
-        <!--width: 450px;-->
-    <!--}-->
-<!--</style>-->
-<!--&lt;!&ndash; 页面主体START &ndash;&gt;-->
-<!--<section id="main" class="image2">-->
-    <!--<h1>登录</h1>-->
-    <!--<form action="/user/userLogin" accept-charset="utf-8" data-view="loginView" id="loginForm" style="width: 280px" >-->
-
-
-        <!--<p style="color: red" th:text="${msg5}" th:if="${not #strings.isEmpty(msg5)}"></p>-->
-
-        <!--<p style="color: green" th:text="${msg4}" th:if="${not #strings.isEmpty(msg4)}"></p>-->
-        <!--<p style="color: green" th:text="${msg3}" th:if="${not #strings.isEmpty(msg3)}"></p>-->
-        <!--<p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>-->
-
-        <!--<div class="form-group" data-propertyname="username" data-controltype="Phone">-->
-            <!--&lt;!&ndash; <input type="text" class="field" placeholder="输入姓名" id="user_name" name="username"  data-validate="required:请输入姓名" autocomplete="off" >&ndash;&gt;-->
-            <!--<div class="field">-->
-                <!--<input type="text" class="input input-big" name="username" placeholder="输入姓名"-->
-                       <!--data-validate="required:请填写姓名"/>-->
-            <!--</div>-->
-        <!--</div>-->
-
-        <!--<div class="form-group" data-propertyname="password" data-controltype="Password">-->
-            <!--<div class="field">-->
-                <!--<input type="password" class="input input-big" id="password" name="password" placeholder="输入密码"-->
-                       <!--data-validate="required:请输入密码,length#>=6:密码不能小于6位" >-->
-            <!--</div>-->
-        <!--</div>-->
-
-        <!--<div class="form-group" data-propertyname="password" data-controltype="Password">-->
-            <!--<div class="field">-->
-                <!--<input type="password" class="input input-big" id="identityCard" name="identityCard" placeholder="输入身份证"-->
-                       <!--data-validate="required:请输入身份证,length#==18:身份证位数为18位" >-->
-            <!--</div>-->
-        <!--</div>-->
-
-        <!--<p style="color: red" th:text="${msg2}" th:if="${not #strings.isEmpty(msg2)}"></p>-->
-        <!--<div class="form-group">-->
-            <!--<div class="field">-->
-                <!--<input type="text" class="input input-big" name="code" placeholder="填写右侧的验证码"-->
-                       <!--data-validate="required:请填写右侧的验证码"/>-->
-                <!--<img src="/code" alt="验证码" width="100" height="32" class="passcode" style="height:43px;cursor:pointer;"-->
-                     <!--onclick="this.src=this.src+'?'">-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<p style="color: red" th:text="${msg1}" th:if="${not #strings.isEmpty(msg1)}"></p>-->
-
-        <!--<div class="clearfix">-->
-            <!--&lt;!&ndash; <label>-->
-                <!--<input type="checkbox" class="autologin" />-->
-                <!--自动登录-->
-            <!--</label> &ndash;&gt;-->
-            <!--<a href="/user/findPwdPage" class="forgot_pwd">忘记密码？</a>-->
-        <!--</div>-->
-
-        <!--<div class="clearfix btn_login" data-propertyname="submit" data-controltype="Botton">-->
-            <!--<input type="submit" value="登录" onclick="userLogin()">-->
-        <!--</div>-->
-
-        <!--<div class="clearfix goregister">-->
-            <!--<span class="reg_now">没有帐号？</span>-->
-            <!--<a href="/user/registerpage">注册</a>-->
-        <!--</div>-->
-
-
-    <!--</form>-->
-<!--</section>-->
-<!--&lt;!&ndash; 页面主体END &ndash;&gt;-->
-<!--<script>-->
-
-<!--</script>-->
-
-
-<!--</body>-->
-<!--</html>-->
