@@ -37,7 +37,6 @@ public class UserController {
     public int userLogin(
             @RequestParam("username") String username,
             @RequestParam("password") String password,
-            Model model,
             HttpServletRequest request) {
         int flag = 0;
         if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
@@ -116,6 +115,7 @@ public class UserController {
     }
 
     //    用户修改密码
+    @ResponseBody
     @RequestMapping("/updpassword")
     public int updPassword(
             @RequestParam("username") String username,
@@ -148,18 +148,22 @@ public class UserController {
     }
 
     //    删除用户
+    @ResponseBody
     @RequestMapping("/delUser")
-    public String delUser(
+    public int delUser(
             @RequestParam("name") String name,
             HttpServletRequest request) {
 
-        User user_session = (User) request.getSession().getAttribute("user_session");
+//        User user_session = (User) request.getSession().getAttribute("user_session");
+        int flag;
 
         int i = userService.delUser(name);
         if (i <= 0) {
-            return ("用户删除失败");
+            flag = -1;
+            return flag;
         } else {
-            return "用户删除成功";
+            flag = 0;
+            return flag;
         }
 
     }
@@ -184,9 +188,7 @@ public class UserController {
     @ResponseBody
     public int findPwd(
             @RequestParam("username") String userName,
-            @RequestParam("password") String password,
-            Model model,
-            HttpServletRequest request) {
+            @RequestParam("password") String password) {
         int flag;
         User user = new User();
         if (StringUtils.isBlank(userName)) {
@@ -262,6 +264,14 @@ public class UserController {
             return false;
         }
         return true;
+    }
+
+    //    退出登录
+    @ResponseBody
+    @RequestMapping("/loginOut")
+    public String loginOut(HttpServletRequest request) {
+        request.getSession().setAttribute("user_session", null);
+        return null;
     }
 
 }

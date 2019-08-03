@@ -448,13 +448,10 @@
     });
 
     function checkName() {
-        debugger;
         $.ajax({
             url: "/user/findByName",
             data: $("#findPwdForm").serialize(),
             success: function (data) {
-                debugger;
-                console.log("我进来了470")
                 if (data == 0) {
                     bootbox.alert({
                         message: '该用户还未注册过，不能重置密码，请先进行注册！',
