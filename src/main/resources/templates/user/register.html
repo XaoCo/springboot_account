@@ -89,104 +89,107 @@
 <div class="container">
     <div class="col-md-4 col-md-offset-4">
         <div style="width: 420px;height: 620px;background-color: white;padding: 20px 40px 30px 40px ">
-        <div align="center">
-            <img src="/images/login_afe3eb0.png" height="64" width="64"/>
-        </div>
-        <form enctype="multipart/form-data" method="post" id="registerForm">
-            <p style="color: red" th:text="${msg6}" th:if="${not #strings.isEmpty(msg6)}"></p>
-            <p style="color: red" th:text="${msg5}" th:if="${not #strings.isEmpty(msg5)}"></p>
-            <div class="form-group has-feedback">
-                <label for="username"></label>
-                <div class="input-group">
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-                    <input id="username" name="username" class="form-control" placeholder="请输入用户名" maxlength="20"
-                           type="text" onkeyup="checkName()">
+            <div align="center">
+                <img src="/images/login_afe3eb0.png" height="64" width="64"/>
+            </div>
+            <form enctype="multipart/form-data" method="post" id="registerForm">
+                <p style="color: red" th:text="${msg6}" th:if="${not #strings.isEmpty(msg6)}"></p>
+                <p style="color: red" th:text="${msg5}" th:if="${not #strings.isEmpty(msg5)}"></p>
+                <div class="form-group has-feedback">
+                    <label for="username"></label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                        <input id="username" name="username" class="form-control" placeholder="请输入用户名" maxlength="20"
+                               type="text" onkeyup="checkName()">
+                    </div>
+
+                    <span style="color:red;display: none;" class="tips"></span>
+                    <span style="display: none;" class=" glyphicon glyphicon-remove form-control-feedback"></span>
+                    <span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
                 </div>
 
-                <span style="color:red;display: none;" class="tips"></span>
-                <span style="display: none;" class=" glyphicon glyphicon-remove form-control-feedback"></span>
-                <span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
-            </div>
+                <div class="form-group has-feedback">
+                    <label for="username"></label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                        <input id="job" name="job" class="form-control" placeholder="请输入工作" maxlength="20" type="text">
+                    </div>
 
-            <div class="form-group has-feedback">
-                <label for="username"></label>
-                <div class="input-group">
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-                    <input id="job" name="job" class="form-control" placeholder="请输入工作" maxlength="20" type="text">
+                    <span style="color:red;display: none;" class="tips"></span>
+                    <span style="display: none;" class=" glyphicon glyphicon-remove form-control-feedback"></span>
+                    <span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
                 </div>
 
-                <span style="color:red;display: none;" class="tips"></span>
-                <span style="display: none;" class=" glyphicon glyphicon-remove form-control-feedback"></span>
-                <span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
-            </div>
+                <div class="form-group has-feedback">
+                    <label for="username"></label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                        <input id="age" name="age" class="form-control" placeholder="请输入年龄" maxlength="20" type="text">
+                    </div>
 
-            <div class="form-group has-feedback">
-                <label for="username"></label>
-                <div class="input-group">
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-                    <input id="age" name="age" class="form-control" placeholder="请输入年龄" maxlength="20" type="text">
+                    <span style="color:red;display: none;" class="tips"></span>
+                    <span style="display: none;" class=" glyphicon glyphicon-remove form-control-feedback"></span>
+                    <span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
                 </div>
 
-                <span style="color:red;display: none;" class="tips"></span>
-                <span style="display: none;" class=" glyphicon glyphicon-remove form-control-feedback"></span>
-                <span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
-            </div>
+                <div class="form-group has-feedback">
+                    <label for="password"></label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                        <input id="password" name="password" class="form-control" placeholder="请输入密码" maxlength="20"
+                               type="password">
+                    </div>
 
-            <div class="form-group has-feedback">
-                <label for="password"></label>
-                <div class="input-group">
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                    <input id="password" name="password" class="form-control" placeholder="请输入密码" maxlength="20"
-                           type="password">
+                    <span style="color:red;display: none;" class="tips"></span>
+                    <span style="display: none;" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                    <span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
                 </div>
 
-                <span style="color:red;display: none;" class="tips"></span>
-                <span style="display: none;" class="glyphicon glyphicon-remove form-control-feedback"></span>
-                <span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
-            </div>
-
-            <div class="form-group has-feedback">
-                <label for="passwordConfirm"></label>
-                <div class="input-group">
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                    <input id="passwordConfirm" class="form-control" placeholder="请再次输入密码" maxlength="20"
-                           type="password">
+                <div class="form-group has-feedback">
+                    <label for="passwordConfirm"></label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                        <input id="passwordConfirm" class="form-control" placeholder="请再次输入密码" maxlength="20"
+                               type="password">
+                    </div>
+                    <span style="color:red;display: none;" class="tips"></span>
+                    <span style="display: none;" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                    <span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
                 </div>
-                <span style="color:red;display: none;" class="tips"></span>
-                <span style="display: none;" class="glyphicon glyphicon-remove form-control-feedback"></span>
-                <span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
-            </div>
 
 
-            <div class="row">
-                <div class="col-xs-6">
-                    <div class="form-group has-feedback">
-                        <label for="idcode-btn"></label>
-                        <div class="input-group">
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-qrcode"></span></span>
-                            <input id="idcode-btn" class="form-control" placeholder="验证码" maxlength="4" type="text">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group has-feedback">
+                            <label for="idcode-btn"></label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-qrcode"></span></span>
+                                <input id="idcode-btn" class="form-control" placeholder="验证码" maxlength="4" type="text">
+                            </div>
+                            <span style="color:red;display: none;" class="tips"></span>
+                            <span style="display: none;"
+                                  class="glyphicon glyphicon-remove form-control-feedback"></span>
+                            <span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
                         </div>
-                        <span style="color:red;display: none;" class="tips"></span>
-                        <span style="display: none;" class="glyphicon glyphicon-remove form-control-feedback"></span>
-                        <span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
+                    </div>
+                    <div class="col-xs-6" style="padding-top: 30px">
+                        <div id="idcode" style="background: transparent;"></div>
                     </div>
                 </div>
-                <div class="col-xs-6" style="padding-top: 30px">
-                    <div id="idcode" style="background: transparent;"></div>
+
+
+                <div class="form-group">
+                    <input class="form-control btn btn-primary" id="submit"
+                           value="立&nbsp;&nbsp;即&nbsp;&nbsp;注&nbsp;&nbsp;册"
+                           type="button" onclick="register()">
                 </div>
-            </div>
 
-
-            <div class="form-group">
-                <input class="form-control btn btn-primary" id="submit" value="立&nbsp;&nbsp;即&nbsp;&nbsp;注&nbsp;&nbsp;册"
-                       type="button" onclick="register()">
-            </div>
-
-            <div class="form-group">
-                <input value="重&nbsp;&nbsp;&nbsp;&nbsp;置" id="reset" class="form-control btn btn-danger" type="reset">
-            </div>
-        </form>
-    </div>
+                <div class="form-group">
+                    <input value="重&nbsp;&nbsp;&nbsp;&nbsp;置" id="reset" class="form-control btn btn-danger"
+                           type="reset">
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
@@ -459,13 +462,14 @@
         $('.glyphicon-remove').hide();
         check = [false, false, false, false, false, false,];
     });
+
     function checkName() {
         debugger
         console.log("我进来了464")
         $.ajax({
-            url:"/user/findByName",
-            data:$("#registerForm").serialize(),
-            success:function (data) {
+            url: "/user/findByName",
+            data: $("#registerForm").serialize(),
+            success: function (data) {
                 debugger;
                 console.log("我进来了470")
                 if (data == -1) {

@@ -50,18 +50,18 @@ public class UserController {
         user1.setName(username);
         user1.setPassword(password);
 
-            User user = userService.login(user1);
+        User user = userService.login(user1);
 
-            if (user != null) {
-                System.out.println(user);
-                request.getSession().setAttribute("user_session", user);
-                flag = 0;
-                return flag;
-            } else {
+        if (user != null) {
+            System.out.println(user);
+            request.getSession().setAttribute("user_session", user);
+            flag = 0;
+            return flag;
+        } else {
 
-                flag = 1;
-                return flag;
-            }
+            flag = 1;
+            return flag;
+        }
 
     }
 
@@ -226,15 +226,16 @@ public class UserController {
     public String indexPage() {
         return "/main/index.html";
     }
-//通过姓名查询
+
+    //通过姓名查询
     @RequestMapping("/findByName")
     @ResponseBody
-    public int findByName(@RequestParam("username") String username){
+    public int findByName(@RequestParam("username") String username) {
         int flag;
         User user = new User();
         user.setName(username);
         User user1 = userService.login1(user);
-        if(user1!=null) {
+        if (user1 != null) {
             flag = -1;
             return flag;
         }
