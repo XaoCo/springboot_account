@@ -464,14 +464,10 @@
     });
 
     function checkName() {
-        debugger
-        console.log("我进来了464")
         $.ajax({
             url: "/user/findByName",
             data: $("#registerForm").serialize(),
             success: function (data) {
-                debugger;
-                console.log("我进来了470")
                 if (data == -1) {
                     bootbox.alert({
                         message: '该用户已经注册，请直接登录或者更换新的姓名！',

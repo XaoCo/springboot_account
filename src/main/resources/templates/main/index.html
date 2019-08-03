@@ -8,16 +8,48 @@
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+    <style>
+        .container {
+            margin-top: 50px;
+        }
+
+        .font1 {
+            font-size: 20px;
+            color: black;
+        }
+    </style>
 </head>
 <body>
 <div class="container">
-    <div class="col-md-6 ">
+    <div class="col-md-8 ">
         <img src="/images/login_afe3eb0.png" height="64" width="64"/>
-        <h1>我们的小屋</h1>
+        <span class="font1">&nbsp;&nbsp;&nbsp;&nbsp;我们的小屋</span>
     </div>
-    <div class="col-md-6 ">
-        <h1>切换账号</h1>
-        <h1>退出</h1>
+    <div class="col-md-1 ">
+        <a style="cursor: pointer;text-decoration: none;font-size: 15px ;color: cornflowerblue"
+           href="/user/findPwdPage">备注</a>
+    </div>
+    <div class="col-md-2">
+
+        <div class="dropdown">
+            <button type="button" class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">切换用户
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                <li role="presentation">
+                    <a role="menuitem" tabindex="-1" href="#">注册</a>
+                </li>
+                <li role="presentation">
+                    <a role="menuitem" tabindex="-1" href="#">安全退出</a>
+                </li>
+
+            </ul>
+        </div>
+
+    </div>
+    <div class="col-md-1 ">
+        <a style="cursor: pointer;text-decoration: none;font-size: 15px ;color: cornflowerblue"
+           href="/user/findPwdPage">安全退出</a>
     </div>
 </div>
 </body>
