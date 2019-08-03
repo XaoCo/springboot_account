@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
@@ -107,6 +108,26 @@ public class CodeController {
         ImageIO.write(buffImg, "jpeg", sos);
         sos.close();
 
+    }
+
+    public static void main(String[] args) {
+        String a = "你好啊";
+        System.out.println(byteSub(a,8));
+    }
+    public static String  byteSub(String str, int length) {
+        try {
+            int length1;
+            length1 = str.getBytes("UTF-8").length;
+            if (length1 > length) {
+                byte[] s1 = new byte[length];
+                System.arraycopy(str.getBytes("UTF-8"), 0, s1, 0, length);
+                return new String(s1);
+            }
+            return str;
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }

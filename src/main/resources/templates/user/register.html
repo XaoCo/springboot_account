@@ -2,17 +2,17 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
-    <title>用户登陆</title>
+    <title>用户注册</title>
     <script src="https://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
     <style>
         @charset "utf-8";
         /* track base Css */
         .bg {
-            background-image: url("/images/bg5.jpg");
+            background-image: url("/images/bg2.jpg");
         }
 
         .container {
-            margin-top: 60px;
+            margin-top: 50px;
         }
 
         .red {
@@ -70,12 +70,12 @@
         }
 
         .ehong-code-val-tip {
-            font-size: 12px;
-            color: #1098EC;
+            font-size: 14px;
+            color: yellow;
             top: 0px;
             *top: -3px;
             position: relative;
-            margin: 0px 0px 0px 4px;
+            margin: 10px 0px 0px 4px;
             cursor: pointer;
         }
     </style>
@@ -88,7 +88,7 @@
 <script src="../../js/bootbox.js"></script>
 <div class="container">
     <div class="col-md-4 col-md-offset-4">
-
+        <div style="width: 420px;height: 620px;background-color: white;padding: 20px 40px 30px 40px ">
         <div align="center">
             <img src="/images/login_afe3eb0.png" height="64" width="64"/>
         </div>
@@ -100,7 +100,7 @@
                 <div class="input-group">
                     <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
                     <input id="username" name="username" class="form-control" placeholder="请输入用户名" maxlength="20"
-                           type="text">
+                           type="text" onkeyup="checkName()">
                 </div>
 
                 <span style="color:red;display: none;" class="tips"></span>
@@ -183,9 +183,10 @@
             </div>
 
             <div class="form-group">
-                <input value="重置" id="reset" class="form-control btn btn-danger" type="reset">
+                <input value="重&nbsp;&nbsp;&nbsp;&nbsp;置" id="reset" class="form-control btn btn-danger" type="reset">
             </div>
         </form>
+    </div>
     </div>
 </div>
 
@@ -437,62 +438,6 @@
         }
     });
 
-    // // 手机号码
-    // var regPhoneNum = /^[0-9]{11}$/
-    // $('.container').find('input').eq(4).change(function() {
-    //     if (regPhoneNum.test($(this).val())) {
-    //         success($(this), 4);
-    //     } else {
-    //         fail($(this), 4, '手机号码只能为11位数字');
-    //     }
-    // });
-    //
-    // //短信验证码
-    // var regMsg = /111111/;
-    // $('.container').find('input').eq(5).change(function() {
-    //     if (check[4]) {
-    //         if (regMsg.test($(this).val())) {
-    //             success($(this), 5);
-    //         } else {
-    //             fail($(this), 5, '短信验证码错误');
-    //         }
-    //     } else {
-    //         $('.container').find('input').eq(4).parent().parent().removeClass('has-success').addClass('has-error');
-    //     }
-    //
-    // });
-    //
-    //
-    // $('#loadingButton').click(function() {
-    //
-    //     if (check[4]) {
-    //         $(this).removeClass('btn-primary').addClass('disabled');
-    //
-    //         $(this).html('<span class="red">59</span> 秒后重新获取');
-    //         var secondObj = $('#loadingButton').find('span');
-    //         var secondObjVal = secondObj.text();
-    //
-    //         function secondCounter() {
-    //
-    //             var secondTimer = setTimeout(function() {
-    //                 secondObjVal--;
-    //                 secondObj.text(secondObjVal);
-    //                 secondCounter();
-    //             }, 1000);
-    //             if (secondObjVal == 0) {
-    //                 clearTimeout(secondTimer);
-    //                 $('#loadingButton').text('重新获取校验码');
-    //                 $('#loadingButton').removeClass('disabled').addClass('btn-primary');
-    //
-    //             }
-    //         }
-    //
-    //         secondCounter();
-    //     } else {
-    //         $('.container').find('input').eq(4).parent().parent().removeClass('has-success').addClass('has-error');
-    //     }
-    //
-    // })
 
     $('#submit').click(function (e) {
         if (!check.every(function (value) {
@@ -514,10 +459,31 @@
         $('.glyphicon-remove').hide();
         check = [false, false, false, false, false, false,];
     });
+    function checkName() {
+        debugger
+        console.log("我进来了464")
+        $.ajax({
+            url:"/user/findByName",
+            data:$("#registerForm").serialize(),
+            success:function (data) {
+                debugger;
+                console.log("我进来了470")
+                if (data == -1) {
+                    bootbox.alert({
+                        message: '该用户已经注册，请直接登录或者更换新的姓名！',
+                        size: 'small',
+                        callback: function () {
+                            window.location.href = '/user/registerpage';
+                        },
+                    });
+                }
+            }
+        })
+    }
 
     function register() {
-        debugger;
-        console.log("我进来了！");
+        // debugger;
+        // console.log("我进来了！");
         $.ajax({
             url: "/user/userRegister",
             data: $("#registerForm").serialize(),
