@@ -40,24 +40,16 @@ public class UserController {
             Model model,
             HttpServletRequest request) {
         int flag = 0;
-        if (StringUtils.isBlank(username)) {
+        if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
             flag = -1;
             return flag;
 
         }
 
-        if (StringUtils.isBlank(password)) {
-            flag = -2;
-            return flag;
-        }
-
-
         User user1 = new User();
         user1.setName(username);
         user1.setPassword(password);
 
-        User user2 = userService.login1(user1);
-        if (user2 != null) {
             User user = userService.login(user1);
 
             if (user != null) {
@@ -70,11 +62,6 @@ public class UserController {
                 flag = 1;
                 return flag;
             }
-        } else {
-            flag = 2;
-            return flag;
-        }
-
 
     }
 
@@ -130,7 +117,7 @@ public class UserController {
 
     //    用户修改密码
     @RequestMapping("/updpassword")
-    public String updPassword(
+    public int updPassword(
             @RequestParam("username") String username,
             @RequestParam("password") String password,
             @RequestParam("passwordNew") String passwordNew,
@@ -142,16 +129,20 @@ public class UserController {
         //  判断该客户是否存在
         User user1 = userService.login1(user);
 
+        int flag;
         if (user1 != null) {
             int i = userService.updPassword(user);
             System.out.println(i);
             if (i <= 0) {
-                return "修改密码失败";
+                flag = -1;
+                return flag;
             } else {
-                return "修改密码成功";
+                flag = 0;
+                return flag;
             }
         } else {
-            return "未查到符合该条件的人员信息，请核实后再行修改！";
+            flag = 1;
+            return flag;
         }
 
     }
@@ -190,29 +181,64 @@ public class UserController {
 
     //    忘记密码或者找回密码
     @RequestMapping("/findPwd")
-    public String findPwd(
+    @ResponseBody
+    public int findPwd(
             @RequestParam("username") String userName,
             @RequestParam("password") String password,
             Model model,
             HttpServletRequest request) {
+        int flag;
         User user = new User();
+        if (StringUtils.isBlank(userName)) {
+            flag = -2;
+            return flag;
+        }
+        if (StringUtils.isBlank(password)) {
+            flag = -2;
+            return flag;
+        }
         user.setName(userName);
         User user1 = userService.login1(user);
+
         if (user1 != null) {
             user1.setPassword(password);
             int i = userService.updPassword(user1);
             if (i <= 0) {
-                model.addAttribute("msg4", "重置密码失败");
-                return "forward:/user/findPwdPage";
+                flag = -1;
+                return flag;
             } else {
-                model.addAttribute("msg3", "重置密码成功，请登录");
-                return "forward:/user/loginHtml";
+//                model.addAttribute("msg3", "重置密码成功，请登录");
+//                return "forward:/user/loginHtml";
+                flag = 1;
+                return flag;
             }
         } else {
-            model.addAttribute("msg5", "该姓名还未注册过，请先注册！");
-            return "forward:/user/registerpage";
+//            model.addAttribute("msg5", "该姓名还未注册过，请先注册！");
+//            return "forward:/user/registerpage";
+            flag = 0;
+            return flag;
         }
 
+    }
+
+    //    展示首页
+    @RequestMapping("/indexPage")
+    public String indexPage() {
+        return "/main/index.html";
+    }
+//通过姓名查询
+    @RequestMapping("/findByName")
+    @ResponseBody
+    public int findByName(@RequestParam("username") String username){
+        int flag;
+        User user = new User();
+        user.setName(username);
+        User user1 = userService.login1(user);
+        if(user1!=null) {
+            flag = -1;
+            return flag;
+        }
+        return 0;
     }
 
     private static Pattern NUMBER_PATTERN = Pattern.compile("-?[0-9]+(\\.[0-9]+)?");
