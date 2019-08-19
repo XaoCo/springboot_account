@@ -6,6 +6,8 @@ package com.abc.account.controller;
 import com.abc.account.pojo.User;
 import com.abc.account.service.UserService;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +27,9 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+//    实例化日志
+    Logger logger = LoggerFactory.getLogger(this.getClass());
+
     //      进入登录页面
     @RequestMapping("/loginHtml")
     public String hello() {
@@ -41,6 +46,8 @@ public class UserController {
         int flag = 0;
         if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
             flag = -1;
+
+            logger.error(this.getClass()+"用户名或者密码为空，登录失败！");
             return flag;
 
         }
@@ -55,10 +62,12 @@ public class UserController {
             System.out.println(user);
             request.getSession().setAttribute("user_session", user);
             flag = 0;
+            logger.info(this.getClass()+"登录成功!");
             return flag;
         } else {
 
             flag = 1;
+            logger.error(this.getClass()+"登录失败！");
             return flag;
         }
 
@@ -95,14 +104,17 @@ public class UserController {
             if (i == 1) {
                 model.addAttribute("msg4", "注册成功，请登录！");
                 flag = 1;
+                logger.info(this.getClass()+"注册成功！");
             } else {
                 model.addAttribute("msg6", "注册失败，请核实！");
                 flag = 0;
+                logger.info(this.getClass()+"注册失败！");
             }
 
         } else {
             model.addAttribute("msg5", "该姓名已经注册，请直接登录！");
             flag = -1;
+            logger.info(this.getClass()+"该姓名已经注册");
         }
         return flag;
 
@@ -239,8 +251,10 @@ public class UserController {
         User user1 = userService.login1(user);
         if (user1 != null) {
             flag = -1;
+            logger.info(this.getClass()+"该用户存在"+user1.toString());
             return flag;
         }
+        logger.info(this.getClass()+"该用户不存在");
         return 0;
     }
 
