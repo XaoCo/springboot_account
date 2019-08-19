@@ -55,7 +55,7 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public User(int id, String name, int age, String job, String password, String identityCard) {
+    public User(int id, String name, int age, String job, String password) {
         this.id = id;
         this.name = name;
         this.age = age;
