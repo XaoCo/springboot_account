@@ -10,23 +10,28 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 public class DelLine {
-    private static String filename1;
-    private static String filename2;
+    private static String filenamePath1;
+    private static String filenamePath2;
 
-    public static void main(String[] args) {
-        filename1 = "E:\\ceshi\\hello.doc";
-        filename2 = "E:\\ceshi\\aa1.doc";
-        File file = new File(filename1);
-        File file2 = new File(filename2);
-        if (file2.exists()) {
-            file2.delete();
-            file2 = new File(filename2);
-        } else {
-            file2 = new File(filename2);
-        }
+    public static void main(String[] args) throws IOException {
+        Date date = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH.mm.ss");
+        String s = simpleDateFormat.format(date);
+        System.out.println("现在的时间为：" + s);
+        filenamePath1 = "E:\\ceshi\\hello.doc";
+        filenamePath2 = "E:\\ceshi\\"+s+"hello.doc";
+//        filenamePath2 = "E:\\abc\\hello.doc";
+        delLine(filenamePath1, filenamePath2);
+
+    }
+
+    public static void delLine(String filenamePath1, String filenamePath2) {
+        File file = new File(filenamePath1);
         InputStream is = null;
         BufferedReader br = null;
         String tmp;
@@ -35,13 +40,13 @@ public class DelLine {
         try {
             is = new BufferedInputStream(new FileInputStream(file));
             br = new BufferedReader(new InputStreamReader(is, "GBK"));
-            writer = new FileWriter(filename2, true);
+            writer = new FileWriter(filenamePath2, true);
             while ((tmp = br.readLine()) != null) {
                 if (StringUtils.isBlank(tmp)) ;
                 else {
                     writer.write(tmp + "\n");
                     i++;
-                    System.out.println(i);
+//                    System.out.println(i);
                 }
             }
             writer.close();
@@ -50,6 +55,5 @@ public class DelLine {
             e.printStackTrace();
         }
     }
-
 
 }
