@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
  * package: com.abc.account.interceptor
  * auther： abc
  * date: 2019/8/22 14:27
- * introduce: TODO
+ * introduce: TODO 拦截未登录就进行的一些操作，除了登录路径的其他路径都不可以访问
  */
 public class LoginInterceptor implements HandlerInterceptor {
 
@@ -31,7 +31,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             response.sendRedirect("/login/loginHtml");     //没有user信息的话进行路由重定向
             return false;
         } else {
-            logger.error("我是拦截器，放行！");
+            logger.error("我是拦截器，session存在，放行！");
             return true;        //有的话就继续操作
         }
     }
