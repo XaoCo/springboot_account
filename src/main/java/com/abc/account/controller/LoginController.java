@@ -178,10 +178,10 @@ public class LoginController {
         User user1 = userService.login1(user);
         if (user1 != null) {
             flag = -1;
-            logger.info(this.getClass() + "该用户存在" + user1.toString());
+            logger.info(this.getClass() + "该用户 [" + user1.getName()+"] 存在");
             return flag;
         }
-        logger.info(this.getClass() + "该用户不存在");
+        logger.info(this.getClass() + "该用户 ["+username+"] 不存在");
         return 0;
     }
 
