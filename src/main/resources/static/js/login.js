@@ -228,36 +228,36 @@ $('.container').find('input').eq(2).change(function () {
 // });
 
 
-$('#loadingButton').click(function () {
-
-    if (check[4]) {
-        $(this).removeClass('btn-primary').addClass('disabled');
-
-        $(this).html('<span class="red">59</span> 秒后重新获取');
-        var secondObj = $('#loadingButton').find('span');
-        var secondObjVal = secondObj.text();
-
-        function secondCounter() {
-
-            var secondTimer = setTimeout(function () {
-                secondObjVal--;
-                secondObj.text(secondObjVal);
-                secondCounter();
-            }, 1000);
-            if (secondObjVal == 0) {
-                clearTimeout(secondTimer);
-                $('#loadingButton').text('重新获取校验码');
-                $('#loadingButton').removeClass('disabled').addClass('btn-primary');
-
-            }
-        }
-
-        secondCounter();
-    } else {
-        $('.container').find('input').eq(4).parent().parent().removeClass('has-success').addClass('has-error');
-    }
-
-})
+// $('#loadingButton').click(function () {
+//
+//     if (check[4]) {
+//         $(this).removeClass('btn-primary').addClass('disabled');
+//
+//         $(this).html('<span class="red">59</span> 秒后重新获取');
+//         var secondObj = $('#loadingButton').find('span');
+//         var secondObjVal = secondObj.text();
+//
+//         function secondCounter() {
+//
+//             var secondTimer = setTimeout(function () {
+//                 secondObjVal--;
+//                 secondObj.text(secondObjVal);
+//                 secondCounter();
+//             }, 1000);
+//             if (secondObjVal == 0) {
+//                 clearTimeout(secondTimer);
+//                 $('#loadingButton').text('重新获取校验码');
+//                 $('#loadingButton').removeClass('disabled').addClass('btn-primary');
+//
+//             }
+//         }
+//
+//         secondCounter();
+//     } else {
+//         $('.container').find('input').eq(4).parent().parent().removeClass('has-success').addClass('has-error');
+//     }
+//
+// })
 
 
 $('#tijiao').click(function (e) {
