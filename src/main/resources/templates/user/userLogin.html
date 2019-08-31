@@ -18,9 +18,9 @@
 <div class="container">
 
     <div class="col-md-4 col-md-offset-4">
-        <div style="width: 420px;height: 400px;background-color: white;padding: 20px 40px 30px 40px">
+        <div style="width: 420px;height: 400px;background-color: white;padding: 20px 40px 30px 40px;border-radius: 10px">
             <div align="center">
-                <img src="/images/y.jpg" class="img-responsive" height="64" width="64"/>
+                <img src="/images/y.jpg" class="img-responsive" height="64" width="64" style="border-radius: 50%"/>
             </div>
             <form enctype="multipart/form-data" method="post" id="loginForm">
 
@@ -29,7 +29,7 @@
                     <div class="input-group">
                         <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
                         <input id="username" name="username" class="form-control" placeholder="用户名" maxlength="20"
-                               type="text" onkeyup="checkName1()">
+                               type="text" onchange="checkName1()">
                     </div>
 
                     <span style="color:red;display: none;" class="tips"></span>
@@ -78,14 +78,14 @@
                     </div>
 
                     <div class="col-xs-6">
-                        <a class="form-control btn btn-primary" href="/login/registerpage">注&nbsp;&nbsp;册</a>
+                        <a class="form-control btn btn-primary" href="/login/registerpage" target="_blank">注&nbsp;&nbsp;册</a>
                     </div>
                 </div>
 
                 <div class="row form-group">
                     <div class="col-md-offset-9">
                         <a style="cursor: pointer;text-decoration: none;font-size: 15px ;color: cornflowerblue"
-                           href="/login/findPwdPage">忘记密码？</a>
+                           href="/login/findPwdPage" target="_blank">忘记密码？</a>
                     </div>
                 </div>
 

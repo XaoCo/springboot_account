@@ -266,6 +266,9 @@ var settings = {
         $('.glyphicon-remove').hide();
         check = [false, false, false, false, false, false,];
     });
+    // $("#reback").click(function () {
+    //
+    // })
 
     function checkName2() {
         $.ajax({
