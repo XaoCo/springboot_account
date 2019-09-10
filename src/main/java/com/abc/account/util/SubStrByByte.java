@@ -12,7 +12,8 @@ public class SubStrByByte {
     public static void main(String[] args) {
 
         String ss = "中华人民共和国";
-        subByByte(ss, 10);
+//        subByByte(ss, 10);
+        subByByte1(ss,10);
     }
 
     public static String subByByte(String str, int length) {
@@ -32,5 +33,29 @@ public class SubStrByByte {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static String subByByte1(String str,int length){
+
+        int length1 = str.length();
+        System.out.println("length1="+length1);
+       int sum = 0;
+        StringBuilder sb = new StringBuilder(length);
+        for (int i = 0; i <length1 ; i++) {
+            String s = String.valueOf(str.charAt(i));
+            System.out.println("str.charAt(i)="+str.charAt(i));
+            System.out.println("s="+s);
+            try {
+                int length2 = s.getBytes("utf-8").length;
+                sum+=length2;
+                if (sum>length){
+                    break;
+                }
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return sb.toString();
     }
 }
