@@ -5,6 +5,8 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!--<meta http-equiv="refresh" content="3 url=https://www.sina.com.cn/ " >-->
+    <meta name="desc" content="">
     <style>
 
         .cell {
@@ -17,46 +19,47 @@
 <body>
 <h2 align="center">测试表格</h2>
 <center>
+    <form action="#">
     <table border="1" width="450px" height="500px" cellspacing="2px">
         <tr>
             <td colspan="3" align="center" class="cell"><b>邮箱会员注册</b></td>
         </tr>
         <tr>
             <td width="150px" class="cell">用户名:</td>
-            <td colspan="2"><input style="border: none;text" type="text" ></td>
+            <td colspan="2"><input style="border: none;" type="text" required></td>
         </tr>
         <tr>
             <td width="150px" class="cell">密码:</td>
-            <td><input style="border: none"type="password"></td>
+            <td><input style="border: none"type="password" required ></td>
         </tr>
         <tr>
             <td width="150px" class="cell">确认密码:</td>
-            <td><input style="border: none"type="password"></td>
+            <td><input style="border: none"type="password" required></td>
         </tr>
         <tr>
             <td class="cell">性别:</td>
-            <td><input style="border: none"type="radio" name="sex">男<input style="border: none"type="radio" name="sex">女</td>
+            <td><input style="border: none"type="radio" name="sex" checked>男<input style="border: none"type="radio" name="sex">女</td>
 
 
         </tr>
         <tr>
             <td width="150px" class="cell">email:</td>
-            <td><input style="border: none"type="text"></td>
+            <td><input style="border: none"type="email" required></td>
         </tr>
         <tr>
             <td width="150px" class="cell">phone:</td>
-            <td><input style="border: none"type="text"></td>
+            <td><input style="border: none"type="number" required></td>
         </tr>
         <tr>
             <td width="150px" class="cell">年龄:</td>
-            <td><input style="border: none"type="text"></td>
+            <td><input style="border: none"type="number" min="18" max="100" required></td>
         </tr>
         <tr>
             <td width="150px" class="cell">专业:</td>
             <td>
                 <select name="professional">
                     <option>Computer</option>
-                    <option >Chinese</option>
+                    <option selected>Chinese</option>
                     <option>English</option>
                 </select>
             </td>
@@ -80,13 +83,16 @@
         </tr>
         <tr>
             <td colspan="3" class="cell" align="center">
-                <a href="https://www.baidu.com/" style="cursor: pointer;text-decoration: none" target="_blank">提交</a>
-                &nbsp;&nbsp;&nbsp;&nbsp;<a href="https://www.sina.com.cn/" target="_blank"
-                                           style="cursor: pointer;text-decoration: none">重置</a></td>
+                <input type="submit" >&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="重置">
+            </td>
+                <!--<a href="https://www.baidu.com/" style="cursor: pointer;text-decoration: none" target="_blank">提交</a>-->
+                <!--&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://www.sina.com.cn/" target="_blank"-->
+                                           <!--style="cursor: pointer;text-decoration: none">重置</a></td>-->
         </tr>
 
 
     </table>
+    </form>
 </center>
 </body>
 </html>
