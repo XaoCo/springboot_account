@@ -1,0 +1,287 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>首页</title>
+    <script src="https://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="echarts.js"></script>
+
+    <!--<script src="../../js/jquery-3.4.1.min.js"></script>-->
+    <!--&lt;!&ndash;<script src="http://code.jquery.com/jquery-latest.js"></script>&ndash;&gt;-->
+    <!--<script src="../../js/bootstrap.min.js"></script>-->
+    <!--<link rel="stylesheet" href="../../css/login.css">-->
+    <!--&lt;!&ndash;<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">&ndash;&gt;-->
+    <!--<link rel="stylesheet" href="../../css/bootstrap.min.css">-->
+    <style>
+        body {
+            background: #f5f5f5;
+            margin: 0vw;
+        }
+
+        .logo {
+            font-weight: bold;
+            font-size: 2vw;
+            padding: 0.5vw 0px;
+            margin: 0.8vw 0px;
+        }
+
+        .logo1 {
+            font-weight: bold;
+            font-size: 1.2vw;
+            padding: 0.5vw 0px;
+            margin: 0.8vw 0px;
+
+        }
+
+        .logo2 {
+            /*font-weight: bold;*/
+            /*font-size: 1vw;*/
+            padding: 0.5vw 2px;
+            margin: 0px 0.5vw 1vw 0.5vw;
+            /*background-color: #FFFFFF;*/
+
+        }
+
+        .logo4 {
+            font-weight: bold;
+            font-size: 1vw;
+            margin: 1.5vw 0px;
+            padding: 0.8vw 0px;
+            text-align: center;
+
+        }
+
+        .logo5 {
+            /*font-weight: bold;*/
+            /*font-size: 1vw;*/
+            margin: 1.5vw 0px;
+            padding: 0.8vw 0px;
+            text-align: center;
+
+        }
+
+        .logo6 {
+            width: 100%;
+            height: 10vw;
+        }
+
+        .logo7 {
+            text-align: center;
+            padding: 0px;
+        }
+
+        .style1 {
+            height: 60vh;
+        }
+
+        .style2 {
+            /*margin-left: 2vw;*/
+            /*margin-right: 2vw;*/
+            width: 100%;
+            display: block;
+            /*padding-top: 0.5vw;*/
+        }
+
+        /*.imagestyle{*/
+        /*margin: 0px 0px 0px 2px;*/
+
+        /*}*/
+    </style>
+</head>
+<body>
+<div class="container style2">
+    <!--标题-->
+    <div style="padding: 0.5vw 0px">
+        <div class="row" style="background-color: #fff;">
+            <!--<div style="background-color: #fff;height: 70px;padding: 0.3vw 0px;width: 100%">-->
+            <div class="col-md-1 ">
+                <img src="y1.jpg" class="img-circle" align="right" style="padding: 0.5vw 0px 0px 0px">
+            </div>
+            <div class="col-md-2">
+                <p class="logo">我们的小屋</p>
+            </div>
+            <div class="col-md-5">
+
+            </div>
+            <div class="col-md-1">
+                <p class="logo1 text-primary" style="padding: 0.8vw 0px 0px 0px">备注</p>
+            </div>
+            <div class="col-md-1">
+                <p class="logo1 text-primary" style="padding: 0.8vw 0px 0px 0px">设置</p>
+            </div>
+            <div class="col-md-1">
+                <p class="logo1 text-primary" style="padding: 0.8vw 0px 0px 0px">切换账号</p>
+            </div>
+            <div class="col-md-1">
+                <p class="logo1 text-primary" style="padding: 0.8vw 0px 0px 0px">退出</p>
+            </div>
+            <!--</div>-->
+        </div>
+    </div>
+    <!--主体-->
+    <div class="col-md-8">
+        <div style="background-color: #FFFFFF;padding: 0.8vw 0px 0px 0px;margin-top: 1vw">
+            <div class="col-md-3 logo7">
+
+                <button type="button" class="btn btn-info logo2">
+                    <span><img class="img-rounded" src="jiahao.jpg"></span><span>&nbsp</span>设定目标
+                </button>
+                <button type="button" class="btn btn-info logo2">
+                    <span><img class="img-rounded" src="chaxun.png"></span><span>&nbsp</span>历史目标
+                </button>
+            </div>
+            <div class="col-md-3 logo7">
+                <button type="button" class="btn btn-info logo2">
+                    <span><img class="img-rounded" src="jiahao.jpg"></span><span>&nbsp</span>新增支出
+                </button>
+                <button type="button" class="btn btn-info logo2">
+                    <span><img class="img-rounded" src="chaxun.png"></span><span>&nbsp</span>历史支出
+                </button>
+            </div>
+            <div class="col-md-3 logo7">
+                <button type="button" class="btn btn-info logo2">
+                    <span><img class="img-rounded" src="jiahao.jpg"></span><span>&nbsp</span>预留支出
+                </button>
+                <button type="button" class="btn btn-info logo2">
+                    <span><img class="img-rounded" src="chaxun.png"></span><span>&nbsp</span>历史预留
+                </button>
+            </div>
+            <div class="col-md-3 logo7">
+                <button type="button" class="btn btn-info logo2">
+                    <span><img class="img-rounded" src="jiahao.jpg"></span><span>&nbsp</span>新增收入
+                </button>
+                <button type="button" class="btn btn-info logo2">
+                    <span><img class="img-rounded" src="chaxun.png"></span><span>&nbsp</span>历史收入
+                </button>
+            </div>
+            <!--表格-->
+            <div style="padding: 0px 0.5vw 0.3px 0.5vw">
+                <table class="table table-bordered  table-hover">
+
+                    <thead >
+                    <tr>
+                        <td class="col-md-2">目标名称</td>
+                        <td class="col-md-2">当前存款</td>
+                        <td class="col-md-2">目标存款</td>
+                        <td class="col-md-2">截止日期</td>
+                        <td class="col-md-3">进度</td>
+                        <td class="col-md-1">状态</td>
+                    </tr>
+                    </thead>
+                    <tbody class="tab-body-bordered">
+
+                    <td>买房</td>
+                    <td>5w</td>
+                    <td>30w</td>
+                    <td>2022-10-01</td>
+                    <td>15%</td>
+                    <td>正常</td>
+
+                    <tr>
+                        <td>买房</td>
+                        <td>5w</td>
+                        <td>30w</td>
+                        <td>2022-10-01</td>
+                        <td>15%</td>
+                        <td>正常</td>
+                    </tr>
+                    <tr>
+                        <td>买房</td>
+                        <td>5w</td>
+                        <td>30w</td>
+                        <td>2022-10-01</td>
+                        <td>15%</td>
+                        <td>正常</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div style="padding: 0.3vw 0.5vw 0.1vw 0.3vw;margin-top: 1vw;background-color: #FFFFFF;margin-left: 0px">
+            <table class="table">
+                <thead>
+                <td class="logo4" colspan="2">OKR Board</td>
+                </thead>
+                <tbody>
+                <tr class="logo5">
+                    <td>本月关注的任务</td>
+                    <td>目标和关键的结果</td>
+                </tr>
+                <tr rowspan="4">
+                    <td><textarea class="text-area logo6">asas</textarea></td>
+                    <td><textarea class="text-area logo6">sasa</textarea></td>
+                </tr>
+                <tr class="logo5">
+                    <td>未来两个月计划</td>
+                    <td>状态指标</td>
+                </tr>
+
+                <tr rowspan="4">
+                    <td><textarea class="text-area logo6">asas</textarea></td>
+                    <td><textarea class="text-area logo6">sasa</textarea></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div style="padding: 0.3vw 0.5vw 0.1vw 0.3vw;margin-top: 1vw;background-color: #FFFFFF;margin-left: 0px">
+                <!--自己定义的收容轮播的区域-->
+                <div id="myShuffArea">
+                    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                        <!--轮播指标-->
+                        <ol class="carousel-indicators">
+                            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#myCarousel" data-slide-to="1" ></li>
+                            <li data-target="#myCarousel" data-slide-to="2" ></li>
+                        </ol>
+                        <!--轮播项目-->
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <img src="1.1.jpg" alt="图1"/>
+                            </div>
+                            <div class="item">
+                                <img src="3.3.jpg" alt="图2"/>
+                            </div>
+                            <div class="item">
+                                <img src="2.2.jpg" />
+                            </div>
+                        </div>
+                        <!-- 轮播（Carousel）导航 -->
+                        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+            <!--修改延迟事件：变快-->
+            <script>
+                $(function(){
+                    $('#myCarousel').carousel({interval:2000});
+                })
+            </script>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div style="background-color: #FFFFFF;padding: 0.8vw 0px 0px 0px;margin-top: 1vw" class="style1">
+            <div class="col-md-12 style1" id="demo1"></div>
+        </div>
+        <div class="col-md-12 style1" id="demo2" style="display: none"></div>
+        <div class="col-md-12 style1" id="demo3" style="display: none"></div>
+        <div class="col-md-12 style1" id="demo4" style="display: none"></div>
+        <div class="col-md-12 style1" id="demo5" style="display: none"></div>
+        <div style="background-color: #FFFFFF;padding: 0.8vw 0px 0px 0px;margin-top: 1vw" class="style1">
+        <div class="col-md-12 style1" id="demo6"></div>
+        </div>
+    </div>
+
+</div>
+<script src="index.js"></script>
+</body>
+</html>

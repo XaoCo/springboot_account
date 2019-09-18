@@ -8,48 +8,146 @@
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+    <!--<script src="../../js/jquery-3.4.1.min.js"></script>-->
+    <!--&lt;!&ndash;<script src="http://code.jquery.com/jquery-latest.js"></script>&ndash;&gt;-->
+    <!--<script src="../../js/bootstrap.min.js"></script>-->
+    <!--<link rel="stylesheet" href="../../css/login.css">-->
+    <!--&lt;!&ndash;<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">&ndash;&gt;-->
+    <!--<link rel="stylesheet" href="../../css/bootstrap.min.css">-->
     <style>
-        .container {
-            margin-top: 50px;
+        body {
+            background: #f5f5f5;
+            margin: 2vw;
         }
 
-        .font1 {
-            font-size: 20px;
-            color: black;
+        .logo {
+            font-weight: bold;
+            font-size: 2vw;
+            padding: 0.5vw 0px;
+            margin: 0.8vw 0px;
         }
+
+        .logo1 {
+            font-weight: bold;
+            font-size: 1.2vw;
+            padding: 0.5vw 0px;
+            margin: 0.8vw 0px;
+
+        }
+
+        .logo2 {
+            /*font-weight: bold;*/
+            /*font-size: 1vw;*/
+            padding: 0.5vw;
+            /*margin: 0.8vw 0px;*/
+            /*background-color: #FFFFFF;*/
+
+        }
+        .logo3 {
+            /*font-weight: bold;*/
+            /*font-size: 1vw;*/
+            margin: 1.5vw 0px;
+            padding: 0.8vw 0px;
+            /*margin: 0.8vw 0px;*/
+            /*background-color: #FFFFFF;*/
+
+        }
+
     </style>
 </head>
 <body>
 <div class="container">
-    <div class="col-md-8 ">
-        <img src="/images/login_afe3eb0.png" height="64" width="64"/>
-        <span class="font1">&nbsp;&nbsp;&nbsp;&nbsp;我们的小屋</span>
-    </div>
-    <div class="col-md-1 ">
-        <a style="cursor: pointer;text-decoration: none;font-size: 15px ;color: cornflowerblue"
-           href="/user/findPwdPage">备注</a>
-    </div>
-    <div class="col-md-2">
+    <!--标题-->
+    <div class="row">
+        <div class="col-sm-1">
+            <img src="/images/y1.jpg" class="img-circle ">
+        </div>
+        <div class="col-sm-2">
+            <p class="logo">我们的小屋</p>
+        </div>
+        <div class="col-sm-5">
 
-        <div class="dropdown">
-            <button type="button" class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">切换用户
-                <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                <li role="presentation">
-                    <a role="menuitem" tabindex="-1" href="/login/registerpage">注册</a>
-                </li>
-                <li role="presentation">
-                    <a role="menuitem" tabindex="-1" href="/login/loginOut">安全退出</a>
-                </li>
+        </div>
+        <div class="col-sm-1">
+            <p class="logo1 text-primary">备注</p>
+        </div>
+        <div class="col-sm-1">
+            <p class="logo1 text-primary">设置</p>
+        </div>
+        <div class="col-sm-1">
+            <p class="logo1 text-primary">切换账号</p>
+        </div>
+        <div class="col-sm-1">
+            <p class="logo1 text-primary">退出</p>
+        </div>
+    </div>
+    <!--主体-->
+    <div class="row">
+        <div class="col-sm-8">
 
-            </ul>
+            <div class="col-sm-3">
+
+                <button type="button" class="btn btn-info logo2">设定目标</button>
+                <button type="button" class="btn btn-info logo2">历史目标</button>
+            </div>
+            <div class="col-sm-3">
+                <button type="button" class="btn btn-info logo2">新增支出</button>
+                <button type="button" class="btn btn-info logo2">历史支出</button>
+            </div>
+            <div class="col-sm-3">
+                <button type="button" class="btn btn-info logo2">预留支出</button>
+                <button type="button" class="btn btn-info logo2">历史预留</button>
+            </div>
+            <div class="col-sm-3">
+                <button type="button" class="btn btn-info logo2">新增收入</button>
+                <button type="button" class="btn btn-info logo2">历史收入</button>
+            </div>
+
+            <!--表格-->
+            <table class="table table-hover table-bordered logo3">
+
+                <thead >
+                <tr>
+                    <td class="col-sm-2">目标名称</td>
+                    <td class="col-sm-2">当前存款</td>
+                    <td class="col-sm-2">目标存款</td>
+                    <td class="col-sm-2">截止日期</td>
+                    <td class="col-sm-3">进度</td>
+                    <td class="col-sm-1">状态</td>
+                </tr>
+                </thead>
+                <tbody class="tab-body-bordered">
+                <tr>
+                    <td>买房</td>
+                    <td>5w</td>
+                    <td>30w</td>
+                    <td>2022-10-01</td>
+                    <td>15%</td>
+                    <td>正常</td>
+                </tr>
+                <tr>
+                    <td>买房</td>
+                    <td>5w</td>
+                    <td>30w</td>
+                    <td>2022-10-01</td>
+                    <td>15%</td>
+                    <td>正常</td>
+                </tr>
+                <tr>
+                    <td>买房</td>
+                    <td>5w</td>
+                    <td>30w</td>
+                    <td>2022-10-01</td>
+                    <td>15%</td>
+                    <td>正常</td>
+                </tr>
+                </tbody>
+            </table>
         </div>
 
-    </div>
-    <div class="col-md-1 ">
-        <a style="cursor: pointer;text-decoration: none;font-size: 15px ;color: cornflowerblue"
-           href="/login/loginOut">安全退出</a>
+        <div class="col-sm-4">
+
+        </div>
     </div>
 </div>
 </body>

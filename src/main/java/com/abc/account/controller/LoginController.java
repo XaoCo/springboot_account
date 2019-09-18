@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -173,16 +174,25 @@ public class LoginController {
     @ResponseBody
     public int findByName(@RequestParam("username") String username) {
         int flag;
-        User user = new User();
-        user.setName(username);
-        User user1 = userService.login1(user);
-        if (user1 != null) {
-            flag = -1;
-            logger.info(this.getClass() + "该用户 [" + user1.getName()+"] 存在");
-            return flag;
+        try {
+            User user = new User();
+            user.setName(username);
+            User user1 = userService.login1(user);
+            if (user1 != null) {
+                flag = -1;
+                logger.info(this.getClass() + "该用户 [" + user1.getName() + "] 存在");
+                return flag;
+            }
+            logger.info(this.getClass() + "该用户 [" + username + "] 不存在");
+            return 0;
+        } catch (Exception e) {
+//            logger.error("sqlState"+e.getSQLState());
+//            logger.error("错误码"+e.getErrorCode());
+            logger.error("错误原因" + e.getCause());
+            logger.error("错误信息" + e.getMessage());
+            return 999;
         }
-        logger.info(this.getClass() + "该用户 ["+username+"] 不存在");
-        return 0;
+
     }
 
     private static Pattern NUMBER_PATTERN = Pattern.compile("-?[0-9]+(\\.[0-9]+)?");
@@ -190,22 +200,22 @@ public class LoginController {
     /**
      * 利用正则表达式来判断字符串是否为数字
      */
-    public static boolean checkStrIsNum02(String str) {
-        String bigStr;
-        try {
-            /** 先将str转成BigDecimal，然后在转成String */
-            bigStr = new BigDecimal(str).toString();
-        } catch (Exception e) {
-            /** 如果转换数字失败，说明该str并非全部为数字 */
-
-            return false;
-        }
-        Matcher isNum = NUMBER_PATTERN.matcher(str);
-        if (!isNum.matches() || str.length() != 18) {
-            return false;
-        }
-        return true;
-    }
+//    public static boolean checkStrIsNum02(String str) {
+//        String bigStr;
+//        try {
+//            /** 先将str转成BigDecimal，然后在转成String */
+//            bigStr = new BigDecimal(str).toString();
+//        } catch (Exception e) {
+//            /** 如果转换数字失败，说明该str并非全部为数字 */
+//
+//            return false;
+//        }
+//        Matcher isNum = NUMBER_PATTERN.matcher(str);
+//        if (!isNum.matches() || str.length() != 18) {
+//            return false;
+//        }
+//        return true;
+//    }
 
     //    退出登录
 //    @ResponseBody
