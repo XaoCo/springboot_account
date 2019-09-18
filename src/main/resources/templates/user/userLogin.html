@@ -8,7 +8,8 @@
     <!--<script src="http://code.jquery.com/jquery-latest.js"></script>-->
     <script src="../../js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="../../css/login.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="../../css/bootstrap.min.css">
 
 </head>
 <body class="bg">
@@ -22,14 +23,15 @@
             <div align="center">
                 <img src="/images/y.jpg" class="img-responsive" height="64" width="64" style="border-radius: 50%"/>
             </div>
-            <form enctype="multipart/form-data" method="post" id="loginForm">
+            <form enctype="multipart/form-data" method="post" id="loginForm"
+                  οnkeydοwn="if(event.keyCode==13) return login();">
 
                 <div class="form-group has-feedback">
                     <label for="username"></label>
                     <div class="input-group">
                         <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
                         <input id="username" name="username" class="form-control" placeholder="用户名" maxlength="20"
-                               type="text" onchange="checkName1()">
+                               type="text" onchange="checkName1()" autofocus>
                     </div>
 
                     <span style="color:red;display: none;" class="tips"></span>

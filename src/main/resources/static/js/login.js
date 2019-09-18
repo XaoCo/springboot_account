@@ -287,12 +287,13 @@ $('#reset').click(function () {
 });
 
 function checkName1() {
-    debugger;
+    // debugger;
     console.log("我进来了！！！");
     $.ajax({
         url: "/login/findByName",
         data: $("#loginForm").serialize(),
         success: function (data) {
+            debugger;
             if (data == 0) {
                 bootbox.alert({
                     message: '该用户还未注册，请先进行注册或者更换用户登录！',
@@ -301,9 +302,17 @@ function checkName1() {
                         window.location.href = '/login/loginHtml';
                     },
                 });
+            } else if (data == 999) {
+                bootbox.alert({
+                    message: '数据库连接或者操作失败,请检查！',
+                    size: 'small',
+                    callback: function () {
+                        window.location.href = '/login/loginHtml';
+                    },
+                });
             }
         }
-    })
+        })
 }
 
 function login() {

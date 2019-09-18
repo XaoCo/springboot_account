@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -16,9 +17,11 @@
 
         /*}*/
         [title^="a"] {
-        color: red;
+            color: red;
         }
-        a:link, a:visited {
+
+        a:link,
+        a:visited {
             color: #999999;
             text-decoration: none;
         }
@@ -32,12 +35,15 @@
             font-size: 4vw;
             font-weight: bold;
         }
+
         body {
             color: #111111;
         }
+
         p:first-letter {
             color: green;
         }
+
         p#a {
             width: 300px;
             height: 100px;
@@ -53,6 +59,7 @@
             margin: 30px;
 
         }
+
         p#b {
             width: 30vw;
             height: 20vh;
@@ -60,9 +67,25 @@
             overflow: auto;
             padding: 10px;
         }
+
+        .ulStyle {
+            list-style-type: georgian;
+            /* display: none */
+            /* visibility: hidden; */
+            /* list-style-image: url(y.jpg) */
+        }
+
+        ul li {
+            float: left;
+            padding: 5px;
+            width: 3.5vw;
+            text-indent: -10px;
+
+        }
     </style>
     <title>选择器</title>
 </head>
+
 <body>
 
 <h1>This is a demo</h1>
@@ -90,6 +113,18 @@
     HTML5 仍处于完善之中。然而，大部分现代浏览器已经具备了某些 HTML5 支持。
 </p>
 
+<ul class="ulStyle">
+    <li>aa</li>
+    <li>bb</li>
+    <li>cc</li>
+</ul>
+
+<!-- <ol class="olStyle">
+    <li>aa</li>
+    <li>bb</li>
+    <li>acc</li>
+</ol> -->
 <!--</div>-->
 </body>
+
 </html>

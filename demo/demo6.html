@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        @media screen and (max-width: 960px){
+            body {
+                background-color: blue;
+            }
+        }
+        @media screen and (max-width: 768px){
+            body {
+                background-color: red;
+            }
+        }
+        @media screen and (max-width: 550px){
+            body {
+                background-color: green;
+            }
+        }
+
+        div {
+            white-space: nowrap;
+            width: 20vw;
+            border: 3px;
+            border-color: red;
+            border-style: solid;
+            border-radius: 1vw;
+            padding: 1vw;
+            margin: 1vw;
+            overflow: hidden;
+            text-shadow: 5px 5px 5px #777;
+        }
+
+        .test1 {
+
+            text-overflow: ellipsis;
+            cursor: pointer;
+
+        }
+
+        .test2 {
+            text-overflow: clip;
+        }
+
+        .test3 {
+            text-overflow: revert;
+        }
+    </style>
+    <title>文本溢出处理</title>
+</head>
+<body>
+<h3>测试文本溢出问题</h3>
+
+<div class="test1"
+     title="HTML5 是下一代 HTML 标准。 HTML , HTML 4.01的上一个版本诞生于 1999 年。自从那以后，Web 世界已经经历了巨变。 HTML5 仍处于完善之中。然而，大部分现代浏览器已经具备了某些 HTML5 支持。">
+    HTML5 是下一代 HTML 标准。 HTML , HTML 4.01的上一个版本诞生于 1999 年。自从那以后，Web 世界已经经历了巨变。 HTML5 仍处于完善之中。然而，大部分现代浏览器已经具备了某些 HTML5 支持。
+</div>
+<div class="test2">
+    HTML5 是下一代 HTML 标准。 HTML , HTML 4.01的上一个版本诞生于 1999 年。自从那以后，Web 世界已经经历了巨变。 HTML5 仍处于完善之中。然而，大部分现代浏览器已经具备了某些 HTML5 支持。
+</div>
+<div class="test3">
+    HTML5 是下一代 HTML 标准。 HTML , HTML 4.01的上一个版本诞生于 1999 年。自从那以后，Web 世界已经经历了巨变。 HTML5 仍处于完善之中。然而，大部分现代浏览器已经具备了某些 HTML5 支持。
+</div>
+
+</body>
+</html>
