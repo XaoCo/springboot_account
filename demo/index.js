@@ -529,5 +529,58 @@ var option6 = {
 };
 myChart6.setOption(option6);
 
+//okr编辑
+function okrmodify() {
+    debugger;
+    $("#okr1").removeAttr("readonly")
+    $("#okr2").removeAttr("readonly")
+    $("#okr3").removeAttr("readonly")
+    $("#okr4").removeAttr("readonly")
+};
+
+//okr确认
+function okrconfirm() {
+    debugger;
+    $("#okr1").attr("readonly","readonly");
+    $("#okr2").attr("readonly","readonly");
+    $("#okr3").attr("readonly","readonly");
+    $("#okr4").attr("readonly","readonly");
+};
+
+//okr取消
+
+function okrcancel() {
+    debugger;
+    var str1 = $("#okr1").val();
+    console.log("str1="+str1)
+    var str2 = $("#okr2").val();
+    console.log("str2="+str2)
+    var str3 = $("#okr3").val();
+    console.log("str3="+str3)
+    var str4 = $("#okr4").val();
+    console.log("str4="+str4)
+
+    $("#okr1").attr("readonly","readonly");
+    $("#okr2").attr("readonly","readonly");
+    $("#okr3").attr("readonly","readonly");
+    $("#okr4").attr("readonly","readonly");
+}
+//新目标事件
+function newgoal() {
+    document.getElementById("newgoalform").reset();
+}
+
+$(function () {
+    $('#datetimepicker1').datetimepicker({
+        format: 'YYYY-MM-DD',
+        locale: moment.locale('zh-cn')
+    });
+    // $('#datetimepicker2').datetimepicker({
+    //     format: 'YYYY-MM-DD hh:mm',
+    //     locale: moment.locale('zh-cn')
+    // });
+});
+
+
 
 
