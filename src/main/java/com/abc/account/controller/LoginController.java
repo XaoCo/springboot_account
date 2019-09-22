@@ -103,17 +103,14 @@ public class LoginController {
         if (user1 == null) {
             int i = userService.addUser(user);
             if (i == 1) {
-                model.addAttribute("msg4", "注册成功，请登录！");
                 flag = 1;
                 logger.info(this.getClass() + "注册成功！");
             } else {
-                model.addAttribute("msg6", "注册失败，请核实！");
                 flag = 0;
                 logger.info(this.getClass() + "注册失败！");
             }
 
         } else {
-            model.addAttribute("msg5", "该姓名已经注册，请直接登录！");
             flag = -1;
             logger.info(this.getClass() + "该姓名已经注册");
         }
@@ -154,14 +151,10 @@ public class LoginController {
                 flag = -1;
                 return flag;
             } else {
-//                model.addAttribute("msg3", "重置密码成功，请登录");
-//                return "forward:/user/loginHtml";
                 flag = 1;
                 return flag;
             }
         } else {
-//            model.addAttribute("msg5", "该姓名还未注册过，请先注册！");
-//            return "forward:/user/registerpage";
             flag = 0;
             return flag;
         }
@@ -186,8 +179,6 @@ public class LoginController {
             logger.info(this.getClass() + "该用户 [" + username + "] 不存在");
             return 0;
         } catch (Exception e) {
-//            logger.error("sqlState"+e.getSQLState());
-//            logger.error("错误码"+e.getErrorCode());
             logger.error("错误原因" + e.getCause());
             logger.error("错误信息" + e.getMessage());
             return 999;

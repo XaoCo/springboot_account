@@ -49,15 +49,24 @@ alter table A_USER
   
   
 -- Create table  类别表
+-- Create table
 create table A_KIND
 (
   K_ID   NUMBER not null,
-  K_NAME VARCHAR2(20) not null
+  K_NAME VARCHAR2(20) not null,
+  K_FLAG VARCHAR2(1) not null
 )
 tablespace USERS
   pctfree 10
   initrans 1
-  maxtrans 255;
+  maxtrans 255
+  storage
+  (
+    initial 64
+    next 1
+    minextents 1
+    maxextents unlimited
+  );
 -- Add comments to the columns 
 comment on column A_KIND.K_ID
   is '花销或者入账的类别编号';
@@ -68,7 +77,15 @@ create unique index NO2 on A_KIND (K_ID, K_NAME)
   tablespace USERS
   pctfree 10
   initrans 2
-  maxtrans 255;
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+
   
 -- Create table  收支总表
 -- Create table
@@ -110,7 +127,47 @@ alter table A_INOUT_ALL
   initrans 2
   maxtrans 255;
 
-  
+ 
+ 
+-- Create table目标
+-- Create table
+create table A_GOAL
+(
+  GOALID      NUMBER not null,
+  GOALNAME    VARCHAR2(50) not null,
+  GOALDESC    VARCHAR2(60) not null,
+  GOALTOTAL   VARCHAR2(60) not null,
+  GOALPERCENT VARCHAR2(60),
+  ENDDATE     VARCHAR2(10) not null,
+  PROCESS     VARCHAR2(10)
+)
+tablespace USERS
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 64
+    next 8
+    minextents 1
+    maxextents unlimited
+  );
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table A_GOAL
+  add constraint GOAL_PK primary key (GOALID)
+  using index 
+  tablespace USERS
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+
   
   
 -- Create sequence 
@@ -140,4 +197,7 @@ start with 1001
 increment by 1
 cache 20
 order;
+
+
+
 

@@ -597,6 +597,33 @@ $(function () {
     // });
 });
 
+function addgoal() {
+    $.ajax({
+        url: "/goal/addGoal",
+        data: $("#newgoalform").serialize(),
+        success: function (data) {
+            debugger;
+            // $("#newgoalpage").attr("data-dismiss","model");
+            // $("#newgoalpage").attr("aria-hidden","true");
+            if (data == 1) {
+                bootbox.alert({
+                    message: '新增目标成功,继续加油!',
+                    size: 'small'
+                });
+            } else  {
+                bootbox.alert({
+                    message: '新增目标失败,请检查!',
+                    size: 'small',
+                    callback: function () {
+                        window.location.href = '/user/indexPage';
+                    },
+                });
+            }
+
+        }
+    })
+}
+
 
 
 

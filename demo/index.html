@@ -113,39 +113,41 @@
             <div class="col-md-6">
 
             </div>
-            <!--<div class="col-md-1">-->
-            <!--&lt;!&ndash;<p class="logo1 text-primary" style="padding: 0.8vw 0px 0px 0px">备注</p>&ndash;&gt;-->
-            <!--<button type="button" class="btn btn-info logo1">备注</button>-->
-            <!--</div>-->
             <div class="col-md-1">
-                <!--<p class="logo1 text-primary" style="padding: 0.8vw 0px 0px 0px">设置</p>-->
                 <button type="button" class="btn btn-info logo1">
                     <span class="glyphicon glyphicon-cog" style="padding-right: 0.3vw"></span>设置
                 </button>
             </div>
 
             <div class="col-md-1">
-                <!--<p class="logo1 text-primary" style="padding: 0.8vw 0px 0px 0px">切换账号</p>-->
-                <!--<div class="btn-group logo1 " style="padding: 0.8vw 0px 0px 0px;border: 0px">-->
                 <button type="button" class="btn btn-info dropdown-toggle logo1 "
                         data-toggle="dropdown">
                     个人中心 <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" role="menu">
-                    <li><a href="#">个人资料</a></li>
-                    <li><a href="#">修改密码</a></li>
-                    <li><a href="#">切换用户</a></li>
-                    <li><a href="#">退出登录</a></li>
+                    <li>
+                        <a href="#" data-target="#personalmsgpage" data-toggle="modal">
+                        <span class="glyphicon glyphicon-heart-empty" style="padding-right: 0.3vw">
+                        </span>个人资料</a>
+                    </li>
+                    <li><a href="#" data-target="#mdfpwdpage" data-toggle="modal">
+                        <span class="glyphicon glyphicon-heart-empty" style="padding-right: 0.3vw">
+
+                        </span>修改密码</a>
+                    </li>
+                    <li><a href="#">
+                        <span class="glyphicon glyphicon-heart-empty" style="padding-right: 0.3vw">
+
+                        </span>切换用户</a>
+                    </li>
+
                 </ul>
-                <!--</div>-->
             </div>
             <div class="col-md-1">
-                <!--<p class="logo1 text-primary" style="padding: 0.8vw 0px 0px 0px">退出</p>-->
                 <button type="button" class="btn btn-info logo1">
                     <span class="glyphicon glyphicon-log-out" style="padding-right: 0.3vw"></span>退出
                 </button>
             </div>
-            <!--</div>-->
         </div>
     </div>
     <!--主体-->
@@ -155,7 +157,6 @@
 
                 <button type="button" class="btn btn-info logo2 " id="newgoal" data-target="#newgoalpage"
                         data-toggle="modal" onclick="newgoal()">
-                    <!--<span><img class="img-rounded" src="jiahao.jpg"></span><span>&nbsp</span>设定目标-->
                     <span class="glyphicon glyphicon-plus" style="padding-right: 0.3vw"></span>设定目标
                 </button>
                 <button type="button" class="btn btn-info logo2" id="hisgoal" data-target="#hisgoalpage"
@@ -165,7 +166,7 @@
             </div>
             <div class="col-md-3 logo7">
                 <button type="button" class="btn btn-info logo2" id="newout" data-target="#newoutpage"
-                        data-toggle="modal">
+                        data-toggle="modal" onclick="newout()">
                     <span class="glyphicon glyphicon-plus" style="padding-right: 0.3vw"></span>新增支出
                 </button>
                 <button type="button" class="btn btn-info logo2" id="hisout" data-target="#hisoutpage"
@@ -175,7 +176,7 @@
             </div>
             <div class="col-md-3 logo7">
                 <button type="button" class="btn btn-info logo2" id="resout" data-target="#resoutpage"
-                        data-toggle="modal">
+                        data-toggle="modal" onclick="preout()">
                     <span class="glyphicon glyphicon-plus" style="padding-right: 0.3vw"></span>预留支出
                 </button>
                 <button type="button" class="btn btn-info logo2" id="hisresout" data-target="#hisresoutpage"
@@ -185,7 +186,7 @@
             </div>
             <div class="col-md-3 logo7">
                 <button type="button" class="btn btn-info logo2" id="newin" data-target="#newinpage"
-                        data-toggle="modal">
+                        data-toggle="modal" onclick="newin()">
                     <span class="glyphicon glyphicon-plus" style="padding-right: 0.3vw"></span>新增收入
                 </button>
                 <button type="button" class="btn btn-info logo2" id="hisin" data-target="#hisinpage"
@@ -291,11 +292,11 @@
                         &times;
                     </button>
                     <h4 class="modal-title" id="newgoaltitle" align="center">
-                        New Goal
+                        小目标
                     </h4>
                 </div>
                 <div class="modal-body">
-                    <form id="newgoalform">
+                    <form id="newgoalform" action="">
 
                         <div class="form-group has-feedback" align="center">
                             <label for="goalName"></label>
@@ -303,81 +304,51 @@
                                 <span class="input-group-addon"><span
                                         class="glyphicon glyphicon-hand-right"></span></span>
                                 <input id="goalName" name="goalName" class="form-control" placeholder="目标名称"
-                                       maxlength="20" type="text" autofocus>
+                                       maxlength="20" type="text" required minlength="5" aria-valuemax="20">
                             </div>
 
 
                         </div>
                         <div class="form-group has-feedback" align="center">
-                            <!--<label for="goalDesc"></label>-->
                             <div class="input-group" style="width: 50%">
                                 <span class="input-group-addon"><span
                                         class="glyphicon glyphicon-hand-right"></span></span>
                                 <input id="goalDesc" name="goalDesc" class="form-control" placeholder="目标简述"
-                                       maxlength="20" type="text" autofocus>
+                                       maxlength="20" type="text" required minlength="5" aria-valuemax="20">
                             </div>
 
 
                         </div>
                         <div class="form-group has-feedback" align="center">
-                            <!--<label for="goalTotal"></label>-->
                             <div class="input-group" style="width: 50%">
                                 <span class="input-group-addon"><span
                                         class="glyphicon glyphicon-hand-right"></span></span>
                                 <input id="goalTotal" name="goalTotal" class="form-control" placeholder="目标总量"
-                                       maxlength="20" type="text" autofocus>
+                                       maxlength="20" type="text" required >
                             </div>
 
 
                         </div>
-                        <!--<div class="form-group has-feedback" align="center">-->
-                            <!--&lt;!&ndash;<label for="goalPercent"></label>&ndash;&gt;-->
-                            <!--<div class="input-group" style="width: 50%">-->
-                                <!--<span class="input-group-addon"><span-->
-                                        <!--class="glyphicon glyphicon-hand-right"></span></span>-->
-                                <!--<input id="goalPercent" name="goalPercent" class="form-control" placeholder="目标现完成"-->
-                                       <!--maxlength="20" type="text" autofocus>-->
-                            <!--</div>-->
-
-
-                        <!--</div>-->
                         <div class="form-group has-feedback" align="center">
-                            <!--<label for="endDate"></label>-->
-                            <div class="input-group" style="width: 50%" id='datetimepicker1'>
+                            <div class="input-group" style="width: 50%" id='datetimepickergoal'>
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
-                                <input type='text' class="form-control" placeholder="目标截止日期"/>
+                                <input type='text' class="form-control" placeholder="目标截止日期" required/>
 
-                                <!--<span class="input-group-addon"><span-->
-                                <!--class="glyphicon glyphicon-hand-right"></span></span>-->
-                                <!--<input id="endDate" name="endDate" class="form-control" placeholder="目标截止日期"-->
-                                <!--maxlength="20" type="text" autofocus>-->
                             </div>
-
-
                         </div>
-                        <!--<div class="form-group has-feedback" align="center">-->
-                            <!--&lt;!&ndash;<label for="process"></label>&ndash;&gt;-->
-                            <!--<div class="input-group" style="width: 50%">-->
-                                <!--<span class="input-group-addon"><span-->
-                                        <!--class="glyphicon glyphicon-hand-right"></span></span>-->
-                                <!--<input id="process" name="process" class="form-control" placeholder="目标完成进度"-->
-                                       <!--maxlength="20" type="text" autofocus>-->
-                            <!--</div>-->
-
-
-                        <!--</div>-->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                            </button>
+                            <button type="submit" class="btn btn-primary">
+                                提交
+                            </button>
+                        </div>
 
                     </form>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
-                    </button>
-                    <button type="button" class="btn btn-primary">
-                        提交
-                    </button>
-                </div>
+
             </div>
             <!-- /.modal-content -->
         </div>
@@ -395,36 +366,60 @@
                         &times;
                     </button>
                     <h4 class="modal-title" id="newouttitle" align="center">
-                        New Out
+                        记录一小笔
                     </h4>
                 </div>
                 <div class="modal-body">
-                    <table class="table table-bordered  table-hover">
+                    <form id="newOutform">
 
-                        <thead>
-                        <tr>
-                            <td class="col-md-2">目标名称</td>
-                            <td class="col-md-2">当前存款</td>
-                            <td class="col-md-2">目标存款</td>
-                            <td class="col-md-2">截止日期</td>
-                            <td class="col-md-3">进度</td>
-                            <td class="col-md-1">状态</td>
-                        </tr>
-                        </thead>
-                        <tbody class="tab-body-bordered">
+                        <div class="form-group has-feedback" align="center">
+                            <label for="outName"></label>
+                            <div class="input-group" style="width: 50%">
+                                <span class="input-group-addon"><span
+                                        class="glyphicon glyphicon-hand-right"></span></span>
+                                <select class="form-control" id="outName" name="outName">
+                                    <option>==请选择支出用途==</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div>
 
 
-                        <tr>
-                            <td>买房</td>
-                            <td>5w</td>
-                            <td>30w</td>
-                            <td>2022-10-01</td>
-                            <td>15%</td>
-                            <td>正常</td>
-                        </tr>
+                        </div>
+                        <div class="form-group has-feedback" align="center">
+                            <div class="input-group" style="width: 50%">
+                                <span class="input-group-addon"><span
+                                        class="glyphicon glyphicon-hand-right"></span></span>
+                                <input id="outDesc" name="outDesc" class="form-control" placeholder="支出简述"
+                                       maxlength="20" type="text">
+                            </div>
 
-                        </tbody>
-                    </table>
+
+                        </div>
+                        <div class="form-group has-feedback" align="center">
+                            <div class="input-group" style="width: 50%">
+                                <span class="input-group-addon"><span
+                                        class="glyphicon glyphicon-hand-right"></span></span>
+                                <input id="outAccount" name="outAccount" class="form-control" placeholder="支出金额"
+                                       maxlength="20" type="text">
+                            </div>
+
+
+                        </div>
+                        <div class="form-group has-feedback" align="center">
+                            <div class="input-group" style="width: 50%" id='datetimepickerout'>
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                                <input type='text' class="form-control" placeholder="日期"/>
+
+                            </div>
+                        </div>
+
+
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭
@@ -434,14 +429,12 @@
                     </button>
                 </div>
             </div>
-            <!-- /.modal-content -->
         </div>
-        <!-- /.modal -->
     </div>
 
 
     <!--x新增预留支出页面-->
-    <div class="modal fade" id="newinpage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    <div class="modal fade" id="resoutpage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
          aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -449,37 +442,61 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                         &times;
                     </button>
-                    <h4 class="modal-title" id="newintitle" align="center">
-                        New In
+                    <h4 class="modal-title" id="preOuttitle" align="center">
+                        预留支出
                     </h4>
                 </div>
                 <div class="modal-body">
-                    <table class="table table-bordered  table-hover">
+                    <form id="preOutform">
 
-                        <thead>
-                        <tr>
-                            <td class="col-md-2">目标名称</td>
-                            <td class="col-md-2">当前存款</td>
-                            <td class="col-md-2">目标存款</td>
-                            <td class="col-md-2">截止日期</td>
-                            <td class="col-md-3">进度</td>
-                            <td class="col-md-1">状态</td>
-                        </tr>
-                        </thead>
-                        <tbody class="tab-body-bordered">
+                        <div class="form-group has-feedback" align="center">
+                            <label for="preOutName"></label>
+                            <div class="input-group" style="width: 50%">
+                                <span class="input-group-addon"><span
+                                        class="glyphicon glyphicon-hand-right"></span></span>
+                                <select class="form-control" id="preOutName" name="preOutName">
+                                    <option>==请选择预留支出用途==</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div>
 
 
-                        <tr>
-                            <td>买房</td>
-                            <td>5w</td>
-                            <td>30w</td>
-                            <td>2022-10-01</td>
-                            <td>15%</td>
-                            <td>正常</td>
-                        </tr>
+                        </div>
+                        <div class="form-group has-feedback" align="center">
+                            <div class="input-group" style="width: 50%">
+                                <span class="input-group-addon"><span
+                                        class="glyphicon glyphicon-hand-right"></span></span>
+                                <input id="preoutDesc" name="preoutDesc" class="form-control" placeholder="预留支出简述"
+                                       maxlength="20" type="text">
+                            </div>
 
-                        </tbody>
-                    </table>
+
+                        </div>
+                        <div class="form-group has-feedback" align="center">
+                            <div class="input-group" style="width: 50%">
+                                <span class="input-group-addon"><span
+                                        class="glyphicon glyphicon-hand-right"></span></span>
+                                <input id="preoutAccount" name="preoutAccount" class="form-control" placeholder="预留支出金额"
+                                       maxlength="20" type="text">
+                            </div>
+
+
+                        </div>
+                        <div class="form-group has-feedback" align="center">
+                            <div class="input-group" style="width: 50%" id='datetimepickerpreout'>
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                                <input type='text' class="form-control" placeholder="日期"/>
+
+                            </div>
+                        </div>
+
+
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭
@@ -495,7 +512,7 @@
     </div>
 
     <!--x新增收入页面-->
-    <div class="modal fade" id="resoutpage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    <div class="modal fade" id="newinpage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
          aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -503,37 +520,193 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                         &times;
                     </button>
-                    <h4 class="modal-title" id="resouttitle" align="center">
-                        New ResOut
+                    <h4 class="modal-title" id="newintitle" align="center">
+                        记录一点点
                     </h4>
                 </div>
                 <div class="modal-body">
-                    <table class="table table-bordered  table-hover">
+                    <form id="newinform">
 
-                        <thead>
-                        <tr>
-                            <td class="col-md-2">目标名称</td>
-                            <td class="col-md-2">当前存款</td>
-                            <td class="col-md-2">目标存款</td>
-                            <td class="col-md-2">截止日期</td>
-                            <td class="col-md-3">进度</td>
-                            <td class="col-md-1">状态</td>
-                        </tr>
-                        </thead>
-                        <tbody class="tab-body-bordered">
+                        <div class="form-group has-feedback" align="center">
+                            <label for="inName"></label>
+                            <div class="input-group" style="width: 50%">
+                                <span class="input-group-addon"><span
+                                        class="glyphicon glyphicon-hand-right"></span></span>
+                                <select class="form-control" id="inName" name="inName">
+                                    <option>==请选择进账渠道==</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div>
 
 
-                        <tr>
-                            <td>买房</td>
-                            <td>5w</td>
-                            <td>30w</td>
-                            <td>2022-10-01</td>
-                            <td>15%</td>
-                            <td>正常</td>
-                        </tr>
+                        </div>
+                        <div class="form-group has-feedback" align="center">
+                            <div class="input-group" style="width: 50%">
+                                <span class="input-group-addon"><span
+                                        class="glyphicon glyphicon-hand-right"></span></span>
+                                <input id="inDesc" name="inDesc" class="form-control" placeholder="收入简述"
+                                       maxlength="20" type="text">
+                            </div>
 
-                        </tbody>
-                    </table>
+
+                        </div>
+                        <div class="form-group has-feedback" align="center">
+                            <div class="input-group" style="width: 50%">
+                                <span class="input-group-addon"><span
+                                        class="glyphicon glyphicon-hand-right"></span></span>
+                                <input id="inAccount" name="inAccount" class="form-control" placeholder="收入金额"
+                                       maxlength="20" type="text">
+                            </div>
+
+
+                        </div>
+                        <div class="form-group has-feedback" align="center">
+                            <div class="input-group" style="width: 50%" id='datetimepickerin'>
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                                <input type='text' class="form-control" placeholder="日期"/>
+
+                            </div>
+                        </div>
+
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                    </button>
+                    <button type="button" class="btn btn-primary">
+                        提交更改
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--个人详情页面-->
+    <div class="modal fade" id="personalmsgpage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="personalmsgtitle" align="center">
+                        个人信息
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form id="personalmsgform">
+
+                        <div class="form-group has-feedback" align="center">
+                            <div class="input-group" style="width: 50%">
+                                <span class="input-group-addon"><span>姓名</span></span>
+                                <input id="username" name="username" class="form-control"
+                                       maxlength="20" type="text" value="张三" disabled>
+
+                            </div>
+
+
+                        </div>
+                        <div class="form-group has-feedback" align="center">
+                            <div class="input-group" style="width: 50%">
+                                <span class="input-group-addon"><span>职务</span></span>
+                                <input id="userjob" name="userjob" class="form-control"
+                                       maxlength="20" type="text" value="UI">
+                            </div>
+
+
+                        </div>
+                        <div class="form-group has-feedback" align="center">
+                            <!--<label for="goalTotal"></label>-->
+                            <div class="input-group" style="width: 50%">
+                                <span class="input-group-addon"><span>地位</span></span>
+                                <select class="form-control" id="userposition" name="userposition" disabled>
+                                    <option>说一不二的大大</option>
+                                    <option>任劳任怨的伙计</option>
+                                </select>
+                            </div>
+
+
+                        </div>
+
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                    </button>
+                    <button type="button" class="btn btn-primary">
+                        提交更改
+                    </button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal -->
+    </div>
+
+    <!--修改密码页面-->
+    <div class="modal fade" id="mdfpwdpage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="mdfpwdtitle" align="center">
+                        修改密码
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form id="mdfpwdform">
+
+                        <div class="form-group has-feedback" align="center">
+                            <div class="input-group" style="width: 50%">
+                                <span class="input-group-addon"><span>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名</span></span>
+                                <input id="mdfpwdsername" name="mdfpwdsername" class="form-control"
+                                       maxlength="20" type="text" value="张三" disabled>
+
+                            </div>
+
+
+                        </div>
+                        <div class="form-group has-feedback" align="center">
+                            <div class="input-group" style="width: 50%">
+                                <span class="input-group-addon"><span>原&nbsp;&nbsp;密&nbsp;&nbsp;码</span></span>
+                                <input id="prepwd" name="prepwd" class="form-control"
+                                       maxlength="20" type="password" value="123456">
+                            </div>
+
+
+                        </div>
+                        <div class="form-group has-feedback" align="center">
+                            <div class="input-group" style="width: 50%">
+                                <span class="input-group-addon"><span>新&nbsp;&nbsp;密&nbsp;&nbsp;码</span></span>
+                                <input id="newpwd" name="newpwd" class="form-control"
+                                       maxlength="20" type="password" value="123456">
+                            </div>
+
+
+                        </div>
+                        <div class="form-group has-feedback" align="center">
+                            <div class="input-group" style="width: 50%">
+                                <span class="input-group-addon"><span>确认密码</span></span>
+                                <input id="newpwdconfirm" name="newpwdconfirm" class="form-control"
+                                       maxlength="20" type="password" value="123456">
+                            </div>
+
+
+                        </div>
+
+
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭
