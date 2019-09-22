@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.abc.account.mapper.GoalMapper">
+    <resultMap id="goalRestMap" type="com.abc.account.pojo.Goal">
+        <id column="GOALID" property="goalId"/>
+        <result column="GOALNAME" property="goalName"/>
+        <result column="GOALDESC" property="goalDesc"/>
+        <result column="GOALTOTAL" property="goalTotal"/>
+        <result column="GOALPERCENT" property="goalPercent"/>
+        <result column="ENDDATE" property="endDate"/>
+        <result column="PROCESS" property="process"/>
+        <!--<result column="U_IDENTITY_CARD" property="identityCard"/>-->
+    </resultMap>
+
+    <!--注册用户-->
+    <insert id="addGoal" parameterType="com.abc.account.pojo.Goal">
+        INSERT INTO A_GOAL VALUES (
+            GOAL_SEQ.nextval,
+            #{goalName},
+            #{goalDesc},
+            #{goalTotal},
+            #{goalPercent},
+            #{endDate},
+            #{process}
+        )
+    </insert>
+    <!--&lt;!&ndash;登录验证&ndash;&gt;-->
+    <!--<select id="login" parameterType="com.abc.account.pojo.User" resultMap="userRestMap">-->
+        <!--SELECT * FROM A_USER WHERE U_NAME = #{name} AND U_PASSWORD = #{password}-->
+    <!--</select>-->
+
+    <!--&lt;!&ndash;查询用户&ndash;&gt;-->
+    <!--<select id="login1" parameterType="com.abc.account.pojo.User" resultMap="userRestMap">-->
+        <!--SELECT * FROM A_USER WHERE U_NAME = #{name}-->
+    <!--</select>-->
+
+
+
+    <!--&lt;!&ndash;修改密码&ndash;&gt;-->
+    <!--<update id="updPassword">-->
+        <!--UPDATE A_USER  SET U_PASSWORD = #{password}-->
+         <!--WHERE U_NAME = #{name}-->
+    <!--</update>-->
+
+    <!--&lt;!&ndash;删除用户&ndash;&gt;-->
+    <!--<delete id="delUser">-->
+        <!--DELETE FROM A_USER WHERE U_NAME = #{name}-->
+    <!--</delete>-->
+
+    <!--&lt;!&ndash;获取所有用户&ndash;&gt;-->
+    <!--<select id="getAllUser" resultMap="userRestMap">-->
+        <!--SELECT * FROM A_USER-->
+    <!--</select>-->
+</mapper>

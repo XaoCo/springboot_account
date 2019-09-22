@@ -9,20 +9,30 @@ import java.util.Date;
  * introduce: TODO
  */
 public class Goal {
+    private int goalId;
+//    目标名称
     private String goalName;
+//    目标简述
     private String goalDesc;
+//    目标总任务
     private String goalTotal;
+//    目标现完成
     private String goalPercent;
-    private Date endDate;
+//    最终完成期限
+    private String  endDate;
+//    现在进度
     private String process;
 
-    public Goal(String goalName, String goalDesc, String goalTotal, String goalPercent, Date endDate, String process) {
+    public Goal(String goalName, String goalDesc, String goalTotal, String goalPercent, String endDate, String process) {
         this.goalName = goalName;
         this.goalDesc = goalDesc;
         this.goalTotal = goalTotal;
         this.goalPercent = goalPercent;
         this.endDate = endDate;
         this.process = process;
+    }
+
+    public Goal() {
     }
 
     public String getGoalName() {
@@ -57,11 +67,11 @@ public class Goal {
         this.goalPercent = goalPercent;
     }
 
-    public Date getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 

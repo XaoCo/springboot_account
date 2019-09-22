@@ -1,10 +1,8 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>添加管理员</title>
     <script src="https://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="http://code.jquery.com/jquery-latest.js"></script>
@@ -14,48 +12,45 @@
           rel="stylesheet">
     <script src="https://cdn.bootcss.com/moment.js/2.24.0/moment-with-locales.min.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
-    <title>Document</title>
+    <style type="text/css">
+        .modal-header{padding: 0;}
+        /*.modal-content{border-radius: 0;}*/
+        .modal-dialog .close{position: absolute;top: 10px;right: 15px;}
+        .modal-dialog h3{font-size: 14px;height:42px;line-height: 42px;margin: 0;padding: 0 80px 0 20px;}
+        .modal-dialog label{font-weight: 400;}
+        .tips{line-height: 34px;font-size: 13px;}
+        .tips span{color: red;}
+        @media (min-width: 1080px){
+            /*模态框-距顶部距离*/
+            .modal-dialog {
+                margin-top: 100px;
+            }
+            .col-sm-6{padding-left: 0;padding-right: 0;}
+
+        }
+    </style>
 </head>
 <body>
+<!--模态框-->
 
-<div class="row">
-    <div class='col-sm-6'>
-        <div class="form-group">
-            <label>选择日期：</label>
-            <!--date标记-->
-            <div class='input-group date' id='datetimepicker1'>
-                <input type='text' class="form-control" />
-                <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-calendar"></span>
-                </span>
-            </div>
-        </div>
-    </div>
-    <div class='col-sm-6'>
-        <div class="form-group">
-            <label>选择日期+时间：</label>
-            <!--date标记-->
-            <div class='input-group date' id='datetimepicker2'>
-                <input type='text' class="form-control" />
-                <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-calendar"></span>
-                </span>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script>
-    $(function () {
-        $('#datetimepicker1').datetimepicker({
-            format: 'YYYY-MM-DD',
-            locale: moment.locale('zh-cn')
-        });
-        $('#datetimepicker2').datetimepicker({
-            format: 'YYYY-MM-DD hh:mm',
-            locale: moment.locale('zh-cn')
-        });
-    });
+<select id ="queryDevice"class="selectpicker" data-live-search="true">
+    <option data-tokens="ketchup mustard">查询设备</option>
+</select>
+<script type="text/javascript">
+    function shows1(a) {
+        if (a=="Full AccessRead"){
+            $("#dropdownMenu2").removeClass();
+            $("#dropdownMenu2").addClass("fa fa-pencil");
+        }else if(a=="Read Only"){
+            $("#dropdownMenu2").removeClass();
+            $("#dropdownMenu2").addClass("fa fa-eye");
+        }else if(a=="Deny Access"){
+            $("#dropdownMenu2").removeClass();
+            $("#dropdownMenu2").addClass("fa fa-eye-slash");
+        }
+        // $('.buttonText').text(a)
+    }
 </script>
 </body>
 </html>
+
