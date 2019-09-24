@@ -5,8 +5,10 @@
     <title>首页</title>
     <script src="https://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://cdn.bootcss.com/bootstrap-validator/0.5.3/css/bootstrapValidator.css" rel="stylesheet">
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-validator/0.5.3/js/bootstrapValidator.js"></script>
     <script src="echarts.js"></script>
     <link href="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css"
           rel="stylesheet">
@@ -296,55 +298,28 @@
                     </h4>
                 </div>
                 <div class="modal-body">
-                    <form id="newgoalform" action="">
+                    <form action="" method="POST" role="form" id="form-test">
 
-                        <div class="form-group has-feedback" align="center">
-                            <label for="goalName"></label>
-                            <div class="input-group" style="width: 50%">
-                                <span class="input-group-addon"><span
-                                        class="glyphicon glyphicon-hand-right"></span></span>
-                                <input id="goalName" name="goalName" class="form-control" placeholder="目标名称"
-                                       maxlength="20" type="text" required minlength="5" aria-valuemax="20">
-                            </div>
+                        <legend>Form title</legend>
 
 
-                        </div>
-                        <div class="form-group has-feedback" align="center">
-                            <div class="input-group" style="width: 50%">
-                                <span class="input-group-addon"><span
-                                        class="glyphicon glyphicon-hand-right"></span></span>
-                                <input id="goalDesc" name="goalDesc" class="form-control" placeholder="目标简述"
-                                       maxlength="20" type="text" required minlength="5" aria-valuemax="20">
-                            </div>
 
+                        <div class="form-group">
+
+                            <label for="">label</label>
+
+                            <input type="text" class="form-control" id="id" name="id" placeholder="id">
+                            <input type="text" class="form-control" id="name" name="name" placeholder="name">
 
                         </div>
-                        <div class="form-group has-feedback" align="center">
-                            <div class="input-group" style="width: 50%">
-                                <span class="input-group-addon"><span
-                                        class="glyphicon glyphicon-hand-right"></span></span>
-                                <input id="goalTotal" name="goalTotal" class="form-control" placeholder="目标总量"
-                                       maxlength="20" type="text" required >
-                            </div>
 
 
-                        </div>
-                        <div class="form-group has-feedback" align="center">
-                            <div class="input-group" style="width: 50%" id='datetimepickergoal'>
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                </span>
-                                <input type='text' class="form-control" placeholder="目标截止日期" required/>
 
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭
-                            </button>
-                            <button type="submit" class="btn btn-primary">
-                                提交
-                            </button>
-                        </div>
+
+
+
+
+                        <button id="btn-test" class="btn btn-primary">Submit</button>
 
                     </form>
                 </div>

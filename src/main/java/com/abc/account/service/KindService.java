@@ -12,8 +12,14 @@ import java.util.List;
  */
 public interface KindService {
 
-    //    查询所有种类
-    List<Kind> findAllKind();
+    //    查询种类
+    List<Kind> findAllKind(String str);
+//
+//    //    查询所有收入种类
+//    List<Kind> findAllinKind(String str);
+//
+//    //    查询所有收入种类
+//    List<Kind> findAllPreKind(String str);
 
     // 根据名称查询种类信息
     Kind findByName(String name);

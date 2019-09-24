@@ -14,6 +14,16 @@ public class User implements Serializable {
     private int age;
     private String job;
     private String password;
+    private String position;
+
+    public User(int id, String name, int age, String job, String password, String position) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.job = job;
+        this.password = password;
+        this.position = position;
+    }
 
     public int getId() {
         return id;
@@ -55,12 +65,12 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public User(int id, String name, int age, String job, String password) {
-        this.id = id;
-        this.name = name;
-        this.age = age;
-        this.job = job;
-        this.password = password;
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
     }
 
     @Override
@@ -71,6 +81,7 @@ public class User implements Serializable {
                 ", age=" + age +
                 ", job='" + job + '\'' +
                 ", password='" + password + '\'' +
+                ", position='" + position + '\'' +
                 '}';
     }
 

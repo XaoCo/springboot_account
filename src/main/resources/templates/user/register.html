@@ -18,7 +18,7 @@
 <!--<script src="../../js/bootbox.js"></script>-->
 <div class="container">
     <div class="col-md-4 col-md-offset-4">
-        <div style="width: 420px;height: 670px;background-color: white;padding: 20px 40px 30px 40px;border-radius: 10px ">
+        <div style="width: 420px;height: 750px;background-color: white;padding: 20px 40px 30px 40px;border-radius: 10px ">
             <div align="center">
                 <img src="/images/y.jpg" class="img-responsive" height="64" width="64" style="border-radius: 50%"/>
             </div>
@@ -31,9 +31,9 @@
                                type="text" onchange="checkName2()">
                     </div>
 
-                    <span style="color:red;display: none;" class="tips"></span>
-                    <span style="display: none;" class=" glyphicon glyphicon-remove form-control-feedback"></span>
-                    <span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
+                    <!--<span style="color:red;display: none;" class="tips"></span>-->
+                    <!--<span style="display: none;" class=" glyphicon glyphicon-remove form-control-feedback"></span>-->
+                    <!--<span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>-->
                 </div>
 
                 <div class="form-group has-feedback">
@@ -43,9 +43,9 @@
                         <input id="job" name="job" class="form-control" placeholder="请输入工作" maxlength="20" type="text">
                     </div>
 
-                    <span style="color:red;display: none;" class="tips"></span>
-                    <span style="display: none;" class=" glyphicon glyphicon-remove form-control-feedback"></span>
-                    <span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
+                    <!--<span style="color:red;display: none;" class="tips"></span>-->
+                    <!--<span style="display: none;" class=" glyphicon glyphicon-remove form-control-feedback"></span>-->
+                    <!--<span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>-->
                 </div>
 
                 <div class="form-group has-feedback">
@@ -55,9 +55,22 @@
                         <input id="age" name="age" class="form-control" placeholder="请输入年龄" maxlength="20" type="text">
                     </div>
 
-                    <span style="color:red;display: none;" class="tips"></span>
-                    <span style="display: none;" class=" glyphicon glyphicon-remove form-control-feedback"></span>
-                    <span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
+                    <!--<span style="color:red;display: none;" class="tips"></span>-->
+                    <!--<span style="display: none;" class=" glyphicon glyphicon-remove form-control-feedback"></span>-->
+                    <!--<span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>-->
+                </div>
+                <div class="form-group has-feedback">
+                    <label for="position"></label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><span
+                                >地位</span></span>
+                        <select class="form-control" id="position" name="position">
+                        </select>
+                    </div>
+
+                    <!--<span style="color:red;display: none;" class="tips"></span>-->
+                    <!--<span style="display: none;" class=" glyphicon glyphicon-remove form-control-feedback"></span>-->
+                    <!--<span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>-->
                 </div>
 
                 <div class="form-group has-feedback">
@@ -119,7 +132,7 @@
 
                 <div class="form-group">
                     <input value="返&nbsp;&nbsp;&nbsp;&nbsp;回" id="reback" class="form-control btn btn-danger"
-                           type="button" onclick="window.location.href='/login/loginHtml'" >
+                           type="button" onclick="window.location.href='/login/loginHtml'">
                 </div>
             </form>
         </div>

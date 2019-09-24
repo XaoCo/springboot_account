@@ -1,5 +1,6 @@
 package com.abc.account.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -8,7 +9,7 @@ import java.util.Date;
  * date: 2019/9/19 22:49
  * introduce: TODO
  */
-public class Goal {
+public class Goal implements Serializable {
     private int goalId;
 //    目标名称
     private String goalName;
@@ -22,17 +23,45 @@ public class Goal {
     private String  endDate;
 //    现在进度
     private String process;
+//    定目标人
+    private String userName;
 
-    public Goal(String goalName, String goalDesc, String goalTotal, String goalPercent, String endDate, String process) {
+    public Goal(int goalId, String goalName, String goalDesc, String goalTotal, String goalPercent, String endDate, String process, String userName) {
+        this.goalId = goalId;
         this.goalName = goalName;
         this.goalDesc = goalDesc;
         this.goalTotal = goalTotal;
         this.goalPercent = goalPercent;
         this.endDate = endDate;
         this.process = process;
+        this.userName = userName;
     }
 
+    @Override
+    public String toString() {
+        return "Goal{" +
+                "goalId=" + goalId +
+                ", goalName='" + goalName + '\'' +
+                ", goalDesc='" + goalDesc + '\'' +
+                ", goalTotal='" + goalTotal + '\'' +
+                ", goalPercent='" + goalPercent + '\'' +
+                ", endDate='" + endDate + '\'' +
+                ", process='" + process + '\'' +
+                ", userName='" + userName + '\'' +
+                '}';
+    }
+
+
+
     public Goal() {
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getGoalName() {
@@ -83,15 +112,4 @@ public class Goal {
         this.process = process;
     }
 
-    @Override
-    public String toString() {
-        return "Goal{" +
-                "goalName='" + goalName + '\'' +
-                ", goalDesc='" + goalDesc + '\'' +
-                ", goalTotal='" + goalTotal + '\'' +
-                ", goalPercent='" + goalPercent + '\'' +
-                ", endDate=" + endDate +
-                ", process='" + process + '\'' +
-                '}';
-    }
 }

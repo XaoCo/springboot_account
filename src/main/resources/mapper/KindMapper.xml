@@ -6,12 +6,21 @@
     <resultMap id="kindRestMap" type="com.abc.account.pojo.Kind">
         <id column="K_ID" property="id"/>
         <result column="K_NAME" property="name"/>
+        <result column="K_FLAG" property="flag"/>
     </resultMap>
 
-    <!--查询所有类别-->
-    <select id="findAllKind">
-        SELECT * FROM A_KIND
+    <!--查询类别-->
+    <select id="findAllKind" resultMap="kindRestMap">
+        SELECT * FROM A_KIND where K_FLAG = #{flag}
     </select>
+    <!--&lt;!&ndash;查询所有收入类别&ndash;&gt;-->
+    <!--<select id="findAllinKind" resultMap="kindRestMap">-->
+        <!--SELECT * FROM A_KIND where K_FLAG = #{flag}-->
+    <!--</select>-->
+ <!--&lt;!&ndash;查询所有预留开支类别&ndash;&gt;-->
+    <!--<select id="findAllPreKind" resultMap="kindRestMap">-->
+        <!--SELECT * FROM A_KIND where K_FLAG = #{flag}-->
+    <!--</select>-->
 
     <!--修改类别-->
 

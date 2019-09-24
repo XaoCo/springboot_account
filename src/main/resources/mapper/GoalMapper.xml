@@ -11,10 +11,11 @@
         <result column="GOALPERCENT" property="goalPercent"/>
         <result column="ENDDATE" property="endDate"/>
         <result column="PROCESS" property="process"/>
+        <result column="USERNAME" property="userName"/>
         <!--<result column="U_IDENTITY_CARD" property="identityCard"/>-->
     </resultMap>
 
-    <!--注册用户-->
+    <!--新增目标-->
     <insert id="addGoal" parameterType="com.abc.account.pojo.Goal">
         INSERT INTO A_GOAL VALUES (
             GOAL_SEQ.nextval,
@@ -23,7 +24,8 @@
             #{goalTotal},
             #{goalPercent},
             #{endDate},
-            #{process}
+            #{process},
+            #{userName}
         )
     </insert>
     <!--&lt;!&ndash;登录验证&ndash;&gt;-->

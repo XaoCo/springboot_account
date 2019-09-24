@@ -8,6 +8,8 @@
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="../../js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="../../css/login.css">
+    <link href="https://cdn.bootcss.com/bootstrap-validator/0.5.3/css/bootstrapValidator.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/bootstrap-validator/0.5.3/js/bootstrapValidator.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <!--<link rel="stylesheet" href="../../css/bootstrap.min.css">-->
 
@@ -34,9 +36,9 @@
                                type="text" onchange="checkName1()" autofocus>
                     </div>
 
-                    <span style="color:red;display: none;" class="tips"></span>
-                    <span style="display: none;" class=" glyphicon glyphicon-remove form-control-feedback"></span>
-                    <span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
+                    <!--<span style="color:red;display: none;" class="tips"></span>-->
+                    <!--<span style="display: none;" class=" glyphicon glyphicon-remove form-control-feedback"></span>-->
+                    <!--<span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>-->
                 </div>
 
                 <div class="form-group has-feedback">
@@ -47,9 +49,9 @@
                                type="password">
                     </div>
 
-                    <span style="color:red;display: none;" class="tips"></span>
-                    <span style="display: none;" class="glyphicon glyphicon-remove form-control-feedback"></span>
-                    <span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
+                    <!--<span style="color:red;display: none;" class="tips"></span>-->
+                    <!--<span style="display: none;" class="glyphicon glyphicon-remove form-control-feedback"></span>-->
+                    <!--<span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>-->
                 </div>
 
                 <div class="row">
@@ -58,16 +60,17 @@
                             <label for="idcode-btn"></label>
                             <div class="input-group">
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-qrcode"></span></span>
-                                <input id="idcode-btn" class="form-control" placeholder="验证码" maxlength="4" type="text">
+                                <input id="idcode-btn" class="form-control" placeholder="验证码" maxlength="4"
+                                       type="text" name="idcode" >
                             </div>
-                            <span style="color:red;display: none;" class="tips"></span>
-                            <span style="display: none;"
-                                  class="glyphicon glyphicon-remove form-control-feedback"></span>
-                            <span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
+                            <!--<span style="color:red;display: none;" class="tips"></span>-->
+                            <!--<span style="display: none;"-->
+                                  <!--class="glyphicon glyphicon-remove form-control-feedback"></span>-->
+                            <!--<span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>-->
                         </div>
                     </div>
                     <div class="col-xs-6" style="padding-top: 30px">
-                        <div id="idcode" style="background: transparent;"></div>
+                        <div id="idcode" name = "idcode1" style="background: transparent;" ></div>
                     </div>
                 </div>
 

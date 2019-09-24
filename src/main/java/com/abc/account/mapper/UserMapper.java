@@ -1,5 +1,6 @@
 package com.abc.account.mapper;
 
+import com.abc.account.pojo.FamilyPosition;
 import com.abc.account.pojo.User;
 import org.apache.ibatis.annotations.Param;
 
@@ -31,5 +32,11 @@ public interface UserMapper {
 
     //    获取用户列表
     List<User> getAllUser();
+
+    //    获取家庭地位
+    List<FamilyPosition> findAllPosition();
+
+    //    修改信息
+    int modifyInformation(User user);
 
 }

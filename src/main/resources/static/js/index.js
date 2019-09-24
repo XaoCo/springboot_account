@@ -5,39 +5,9 @@ var option1 = {
     // ----  标题 -----
     title: {
         text: '收支概览',
-        // textStyle: {
-        //     color: 'red'
-        // },
-        //位置
-        // padding: [0, 0, 10, 150]
         x: 'center'
     },
 
-    // legend: {
-    //     type: 'plain',  // 图列类型，默认为 'plain'
-    //     top: '5%',  // 图列相对容器的位置 top\bottom\left\right
-    //     selected: {
-    //         // '销量': true  // 图列选择，图形加载出来会显示选择的图列，默认为true
-    //     },
-    //     textStyle: {  // 图列内容样式
-    //         color: '#fff',  // 字体颜色
-    //         backgroundColor: 'black'  // 字体背景色
-    //     },
-    //     tooltip: {  // 图列提示框，默认不显示
-    //         show: true,
-    //         color: 'red'
-    //     },
-    //     data: [   // 图列内容
-    //         {
-    //             name: '销量',
-    //             icon: 'circle',
-    //             textStyle: {
-    //                 color: 'red',  // 单独设置某一个图列的颜色
-    //                 backgroundColor: '#fff' // 单独设置某一个图列的字体背景色
-    //             }
-    //         }
-    //     ]
-    // },
     tooltip: {
         show: true,   // 是否显示提示框，默认为true
         trigger: 'item', // 数据项图形触发
@@ -184,39 +154,9 @@ var option4 = {
     // ----  标题 -----
     title: {
         text: '收支概览',
-        // textStyle: {
-        //     color: 'red'
-        // },
-        //位置
-        // padding: [0, 0, 10, 100]
         x: 'center'
     },
 
-    // legend: {
-    //     type: 'plain',  // 图列类型，默认为 'plain'
-    //     top: '5%',  // 图列相对容器的位置 top\bottom\left\right
-    //     selected: {
-    //         // '销量': true  // 图列选择，图形加载出来会显示选择的图列，默认为true
-    //     },
-    //     textStyle: {  // 图列内容样式
-    //         color: '#fff',  // 字体颜色
-    //         backgroundColor: 'black'  // 字体背景色
-    //     },
-    //     tooltip: {  // 图列提示框，默认不显示
-    //         show: true,
-    //         color: 'red'
-    //     },
-    //     data: [   // 图列内容
-    //         {
-    //             name: '销量',
-    //             icon: 'circle',
-    //             textStyle: {
-    //                 color: 'red',  // 单独设置某一个图列的颜色
-    //                 backgroundColor: '#fff' // 单独设置某一个图列的字体背景色
-    //             }
-    //         }
-    //     ]
-    // },
     tooltip: {
         show: true,   // 是否显示提示框，默认为true
         trigger: 'item', // 数据项图形触发
@@ -537,6 +477,11 @@ function okrmodify() {
     $("#okr3").removeAttr("readonly")
     $("#okr4").removeAttr("readonly")
 };
+//个人信息编辑
+function informationmodify() {
+    debugger;
+    $("#userjob").removeAttr("readonly")
+};
 
 //okr确认
 function okrconfirm() {
@@ -545,6 +490,29 @@ function okrconfirm() {
     $("#okr2").attr("readonly", "readonly");
     $("#okr3").attr("readonly", "readonly");
     $("#okr4").attr("readonly", "readonly");
+};
+//个人信息确认
+function informationconfirm() {
+    debugger;
+    $("#userjob").attr("readonly", "readonly");
+    $.ajax({
+        url: "/user/confirmInformation",
+        data: $("#personalmsgform").serialize(),
+        success: function (data) {
+            debugger;
+            if (data== 1) {
+                bootbox.alert({
+                    message: '个人信息更新成功！',
+                    size: 'small'
+                    // callback: function () {
+                    //     window.location.href = '#mdfpwdpage';
+                    // },
+                });
+            }
+        }
+    })
+    $("#personalmsgpage").modal("hide");
+
 };
 
 //okr取消
@@ -566,28 +534,92 @@ function okrcancel() {
     $("#okr4").attr("readonly", "readonly");
 }
 
+window.onload = function () {
+    goalformValidator();
+    outformValidator();
+    preformValidator();
+    newinformValidator();
+    changepwdformValidator();
+    // getAllOutKind();
+    // getAllInKind();
+    // getAllPreKind();
+    // findInformation();
+
+}
+
 //新目标表单清空
 function newgoal() {
+
     document.getElementById("newgoalform").reset();
+    $('#newgoalpage').on('hidden.bs.modal', function () {
+        $("#newgoalform").data('bootstrapValidator').destroy();
+        $('#newgoalform').data('bootstrapValidator', null);
+        goalformValidator();
+    });
 }
 
 //新支出表单清空
 function newout() {
+    $.ajax({
+        url: "/kind/findAlloutKind",
+        success: function (data) {
+            debugger;
+            console.log("AllOutKind=" + data);
+            for (var i = 0; i < data.length; i++) {
+                $("#outName").append($("<option value=\"" + data[i] + "\">" + data[i] + "</option>"));
+            }
+        }
+    })
     document.getElementById("newOutform").reset();
+    $('#newoutpage').on('hidden.bs.modal', function () {
+        $("#newOutform").data('bootstrapValidator').destroy();
+        $('#newOutform').data('bootstrapValidator', null);
+        outformValidator()
+    });
 };
 
 //新预留支出表单清空
 function preout() {
+    $.ajax({
+        url: "/kind/findAllpreKind",
+        success: function (data) {
+            debugger;
+            console.log("AllpreKind=" + data);
+            for (var i = 0; i < data.length; i++) {
+                $("#preOutName").append($("<option value=\"" + data[i] + "\">" + data[i] + "</option>"));
+            }
+        }
+    })
     document.getElementById("preOutform").reset();
+    $('#resoutpage').on('hidden.bs.modal', function () {
+        $("#preOutform").data('bootstrapValidator').destroy();
+        $('#preOutform').data('bootstrapValidator', null);
+        preformValidator();
+    });
 }
 
-//新预留支出表单清空
+//新收入表单清空
 function newin() {
+    $.ajax({
+        url: "/kind/findAllinKind",
+        success: function (data) {
+            debugger;
+            console.log("AllinKind=" + data);
+            for (var i = 0; i < data.length; i++) {
+                $("#inName").append($("<option value=\"" + data[i] + "\">" + data[i] + "</option>"));
+            }
+        }
+    })
     document.getElementById("newinform").reset();
+    $('#newinpage').on('hidden.bs.modal', function () {
+        $("#newinform").data('bootstrapValidator').destroy();
+        $('#newinform').data('bootstrapValidator', null);
+        newinformValidator();
+    });
 }
 
 $(function () {
-    $('#datetimepickergoal,#datetimepickerout,#datetimepickerpreout,#datetimepickerprein').datetimepicker({
+    $('#endDate,#datetimepickerout,#datetimepickerpreout,#datetimepickerin').datetimepicker({
         format: 'YYYY-MM-DD',
         locale: moment.locale('zh-cn')
     });
@@ -597,33 +629,741 @@ $(function () {
     // });
 });
 
+//新增目标提交按钮
 function addgoal() {
+    $("#newgoalform").bootstrapValidator('validate');//提交验证
+    if ($("#newgoalform").data('bootstrapValidator').isValid()) {//获取验证结果，如果成功，执行下面代码
+        $.ajax({
+            url: "/goal/addGoal",
+            data: $("#newgoalform").serialize(),
+            success: function (data) {
+                debugger;
+                // $("#newgoalpage").attr("data-dismiss","model");
+                // $("#newgoalpage").attr("aria-hidden","true");
+                if (data == 1) {
+                    bootbox.alert({
+                        message: '新增目标成功,继续加油!',
+                        size: 'small'
+                    });
+                } else {
+                    bootbox.alert({
+                        message: '新增目标失败,请检查!',
+                        size: 'small',
+                        callback: function () {
+                            window.location.href = '/user/indexPage';
+                        },
+                    });
+                }
+                $("#newgoalpage").modal("hide");
+
+            }
+        })
+    }
+};
+
+// 新增支出提交按钮addnewout
+function addnewout() {
+    $("#newOutform").bootstrapValidator('validate');//提交验证
+    if ($("#newOutform").data('bootstrapValidator').isValid()) {//获取验证结果，如果成功，执行下面代码
+        $.ajax({
+            url: "/record/addoutRecord",
+            data: $("#newOutform").serialize(),
+            success: function (data) {
+                debugger;
+                if (data == 1) {
+                    bootbox.alert({
+                        message: '新增开支成功!',
+                        size: 'small'
+                    });
+                } else {
+                    bootbox.alert({
+                        message: '新增开支失败,请检查!',
+                        size: 'small',
+                        callback: function () {
+                            window.location.href = '/user/indexPage';
+                        },
+                    });
+                }
+                $("#newoutpage").modal("hide");
+
+            }
+        })
+    }
+};
+
+// 新增预留支出提交按钮
+function addpreout() {
+    $("#preOutform").bootstrapValidator('validate');//提交验证
+    if ($("#preOutform").data('bootstrapValidator').isValid()) {//获取验证结果，如果成功，执行下面代码
+        $.ajax({
+            url: "/record/addpreoutRecord",
+            data: $("#preOutform").serialize(),
+            success: function (data) {
+                debugger;
+                if (data == 1) {
+                    bootbox.alert({
+                        message: '新增预留开支成功!',
+                        size: 'small'
+                    });
+                } else {
+                    bootbox.alert({
+                        message: '新增预留开支失败,请检查!',
+                        size: 'small',
+                        callback: function () {
+                            window.location.href = '/user/indexPage';
+                        },
+                    });
+                }
+                $("#resoutpage").modal("hide");
+
+            }
+        })
+    }
+};
+
+// 新增收入提交按钮
+function addnewin() {
+    $("#newinform").bootstrapValidator('validate');//提交验证
+    if ($("#newinform").data('bootstrapValidator').isValid()) {//获取验证结果，如果成功，执行下面代码
+        $.ajax({
+            url: "/record/addinRecord",
+            data: $("#newinform").serialize(),
+            success: function (data) {
+                debugger;
+                if (data == 1) {
+                    bootbox.alert({
+                        message: '新增收入成功!',
+                        size: 'small'
+                    });
+                } else {
+                    bootbox.alert({
+                        message: '新增收入失败,请检查!',
+                        size: 'small',
+                        callback: function () {
+                            window.location.href = '/user/indexPage';
+                        },
+                    });
+                }
+                $("#newinpage").modal("hide");
+
+            }
+        })
+    }
+};
+
+// 修改密码提交按钮
+function modifyPassword() {
+    $("#mdfpwdform").bootstrapValidator('validate');//提交验证
+    if ($("#mdfpwdform").data('bootstrapValidator').isValid()) {//获取验证结果，如果成功，执行下面代码
+        $.ajax({
+            url: "/user/updpassword",
+            data: $("#mdfpwdform").serialize(),
+            success: function (data) {
+                debugger;
+                if (data == 1) {
+                    bootbox.alert({
+                        message: '修改密码成功!',
+                        size: 'small'
+                    });
+                } else {
+                    bootbox.alert({
+                        message: '修改密码失败,请检查!',
+                        size: 'small',
+                        callback: function () {
+                            window.location.href = '/user/indexPage';
+                        },
+                    });
+                }
+                $("#mdfpwdpage").modal("hide");
+
+            }
+        })
+    }
+};
+
+
+function goalformValidator() {
+//新增goal表单验证
+    $("#newgoalform").bootstrapValidator({
+        live: 'enabled',//验证时机，enabled是内容有变化就验证（默认），disabled和submitted是提交再验证
+
+        excluded: [':disabled', ':hidden', ':not(:visible)'],//排除无需验证的控件，比如被禁用的或者被隐藏的
+
+        // submitButtons: '#btn-test',//指定提交按钮，如果验证失败则变成disabled，但我没试成功，反而加了这句话非submit按钮也会提交到action指定页面
+
+        message: '通用的验证失败消息',//好像从来没出现过
+
+        feedbackIcons: {//根据验证结果显示的各种图标
+
+            valid: 'glyphicon glyphicon-ok',
+
+            invalid: 'glyphicon glyphicon-remove',
+
+            validating: 'glyphicon glyphicon-refresh'
+
+        },
+        fields: {
+
+            goalName: {
+
+                validators: {
+
+                    notEmpty: {//检测非空,radio也可用
+
+                        message: 'goalName必须输入'
+
+                    },
+                    stringLength: {//检测长度
+
+                        min: 2,
+
+                        max: 20,
+
+                        message: 'goalName长度必须在2-20之间'
+
+                    },
+                }
+
+            },
+            goalDesc: {
+
+                validators: {
+
+                    notEmpty: {//检测非空,radio也可用
+
+                        message: 'goalDesc必须输入'
+
+                    },
+                    stringLength: {//检测长度
+
+                        min: 2,
+
+                        max: 20,
+
+                        message: 'goalDesc长度必须在2-20之间'
+
+                    },
+                }
+
+            },
+            goalTotal: {
+
+                validators: {
+
+                    notEmpty: {//检测非空,radio也可用
+
+                        message: '目标总计划必须输入'
+
+                    },
+                    stringLength: {//检测长度
+
+                        min: 2,
+
+                        max: 20,
+
+                        message: 'goalTotal长度必须在2-20之间'
+
+                    },
+                }
+
+            },
+
+            endDate: {
+
+                validators: {
+
+                    notEmpty: {//检测非空,radio也可用
+
+                        message: '目标最终期限必须输入'
+
+                    }
+
+                }
+
+            },
+        }
+
+    });
+}
+
+function outformValidator() {
+//新增支出表单验证
+    $("#newOutform").bootstrapValidator({
+        live: 'enabled',//验证时机，enabled是内容有变化就验证（默认），disabled和submitted是提交再验证
+
+        excluded: [':disabled', ':hidden', ':not(:visible)'],//排除无需验证的控件，比如被禁用的或者被隐藏的
+
+        // submitButtons: '#btn-test',//指定提交按钮，如果验证失败则变成disabled，但我没试成功，反而加了这句话非submit按钮也会提交到action指定页面
+
+        message: '通用的验证失败消息',//好像从来没出现过
+
+        feedbackIcons: {//根据验证结果显示的各种图标
+
+            valid: 'glyphicon glyphicon-ok',
+
+            invalid: 'glyphicon glyphicon-remove',
+
+            validating: 'glyphicon glyphicon-refresh'
+
+        },
+        fields: {
+
+            outName: {
+
+                validators: {
+
+                    notEmpty: {//检测非空,radio也可用
+
+                        message: 'outName必须选择'
+
+                    },
+
+                }
+
+            },
+            outDesc: {
+
+                validators: {
+
+                    notEmpty: {//检测非空,radio也可用
+
+                        message: '支出简述必须输入'
+
+                    },
+                    stringLength: {//检测长度
+
+                        min: 2,
+
+                        max: 20,
+
+                        message: '支出简述长度必须在2-20之间'
+
+                    },
+                }
+
+            },
+            outAccount: {
+
+                validators: {
+
+                    notEmpty: {//检测非空,radio也可用
+
+                        message: '支出金额必须输入'
+
+                    },
+                    regexp: {//正则验证
+
+                        regexp: /^[0-9_\.]+$/,
+
+                        message: '所输入的金额不符要求'
+
+                    },
+                }
+
+            },
+
+            newoutdate: {
+
+                validators: {
+
+                    notEmpty: {//检测非空,radio也可用
+
+                        message: '开支日期必须输入'
+
+                    }
+
+                }
+
+            },
+        }
+
+    });
+
+
+};
+
+function preformValidator() {
+//新增预留支出表单验证
+    $("#preOutform").bootstrapValidator({
+        live: 'enabled',//验证时机，enabled是内容有变化就验证（默认），disabled和submitted是提交再验证
+
+        excluded: [':disabled', ':hidden', ':not(:visible)'],//排除无需验证的控件，比如被禁用的或者被隐藏的
+
+        // submitButtons: '#btn-test',//指定提交按钮，如果验证失败则变成disabled，但我没试成功，反而加了这句话非submit按钮也会提交到action指定页面
+
+        message: '通用的验证失败消息',//好像从来没出现过
+
+        feedbackIcons: {//根据验证结果显示的各种图标
+
+            valid: 'glyphicon glyphicon-ok',
+
+            invalid: 'glyphicon glyphicon-remove',
+
+            validating: 'glyphicon glyphicon-refresh'
+
+        },
+        fields: {
+
+            preOutName: {
+
+                validators: {
+
+                    notEmpty: {//检测非空,radio也可用
+
+                        message: 'outName必须选择'
+
+                    },
+
+                }
+
+            },
+            preoutDesc: {
+
+                validators: {
+
+                    notEmpty: {//检测非空,radio也可用
+
+                        message: '预留支出简述必须输入'
+
+                    },
+                    stringLength: {//检测长度
+
+                        min: 2,
+
+                        max: 20,
+
+                        message: '支出简述长度必须在2-20之间'
+
+                    },
+                }
+
+            },
+            preoutAccount: {
+
+                validators: {
+
+                    notEmpty: {//检测非空,radio也可用
+
+                        message: '预留支出金额必须输入'
+
+                    },
+                    regexp: {//正则验证
+
+                        regexp: /^[0-9_\.]+$/,
+
+                        message: '所输入的金额不符要求'
+
+                    },
+                }
+
+            },
+
+            preoutdate: {
+
+                validators: {
+
+                    notEmpty: {//检测非空,radio也可用
+
+                        message: '预留开支日期必须输入'
+
+                    }
+
+                }
+
+            },
+        }
+
+    });
+
+
+}
+
+function newinformValidator() {
+//新增预留支出表单验证
+    $("#newinform").bootstrapValidator({
+        live: 'enabled',//验证时机，enabled是内容有变化就验证（默认），disabled和submitted是提交再验证
+
+        excluded: [':disabled', ':hidden', ':not(:visible)'],//排除无需验证的控件，比如被禁用的或者被隐藏的
+
+        // submitButtons: '#btn-test',//指定提交按钮，如果验证失败则变成disabled，但我没试成功，反而加了这句话非submit按钮也会提交到action指定页面
+
+        message: '通用的验证失败消息',//好像从来没出现过
+
+        feedbackIcons: {//根据验证结果显示的各种图标
+
+            valid: 'glyphicon glyphicon-ok',
+
+            invalid: 'glyphicon glyphicon-remove',
+
+            validating: 'glyphicon glyphicon-refresh'
+
+        },
+        fields: {
+
+            inName: {
+
+                validators: {
+
+                    notEmpty: {//检测非空,radio也可用
+
+                        message: '收入类型必须选择'
+
+                    },
+
+                }
+
+            },
+            inDesc: {
+
+                validators: {
+
+                    notEmpty: {//检测非空,radio也可用
+
+                        message: '收入简述必须输入'
+
+                    },
+                    stringLength: {//检测长度
+
+                        min: 2,
+
+                        max: 20,
+
+                        message: '支出简述长度必须在2-20之间'
+
+                    },
+                }
+
+            },
+            inAccount: {
+
+                validators: {
+
+                    notEmpty: {//检测非空,radio也可用
+
+                        message: '收入金额必须输入'
+
+                    },
+                    regexp: {//正则验证
+
+                        regexp: /^[0-9_\.]+$/,
+
+                        message: '所输入的金额不符要求'
+
+                    },
+                }
+
+            },
+
+            newindate: {
+
+                validators: {
+
+                    notEmpty: {//检测非空,radio也可用
+
+                        message: '收入日期必须输入'
+
+                    }
+
+                }
+
+            },
+        }
+
+    });
+
+
+}
+
+function changepwdformValidator() {
+//修改密码表单验证
+    $("#mdfpwdform").bootstrapValidator({
+        live: 'disabled',//验证时机，enabled是内容有变化就验证（默认），disabled和submitted是提交再验证
+
+        excluded: [':disabled', ':hidden', ':not(:visible)'],//排除无需验证的控件，比如被禁用的或者被隐藏的
+
+        // submitButtons: '#btn-test',//指定提交按钮，如果验证失败则变成disabled，但我没试成功，反而加了这句话非submit按钮也会提交到action指定页面
+
+        message: '通用的验证失败消息',//好像从来没出现过
+
+        feedbackIcons: {//根据验证结果显示的各种图标
+
+            valid: 'glyphicon glyphicon-ok',
+
+            invalid: 'glyphicon glyphicon-remove',
+
+            validating: 'glyphicon glyphicon-refresh'
+
+        },
+        fields: {
+
+            prepwd: {
+
+                validators: {
+
+                    notEmpty: {//检测非空,radio也可用
+
+                        message: '原密码不能为空'
+
+                    }
+
+                }
+
+            },
+            newpwd: {
+
+                validators: {
+
+                    notEmpty: {//检测非空,radio也可用
+
+                        message: '新密码不能为空'
+
+                    }
+                }
+
+            },
+            newpwdconfirm: {
+
+                validators: {
+
+                    notEmpty: {//检测非空,radio也可用
+
+                        message: '请确认新密码'
+
+                    },
+                    // different: {//与指定文本框比较内容相同
+                    //
+                    //     field: newpwd,
+                    //
+                    //     message: '两次密码输入的不一样'
+                    //
+                    // }
+                    identical: {//与指定控件内容比较是否相同，比如两次密码不一致
+
+                            field: 'newpwd',//指定控件name
+
+                            message: '两次密码输入的不一样'
+
+                        }
+                }
+
+            }
+
+
+        }
+
+    });
+}
+
+//获取开支种类
+// function getAllOutKind() {
+//     $.ajax({
+//         url:"/kind/findAlloutKind",
+//         success:function (data) {
+//             debugger;
+//             console.log("AllOutKind=" + data);
+//             for (var i = 0; i < data.length; i++) {
+//                 $("#outName").append($("<option value=\"" + data[i] + "\">" + data[i] + "</option>"));
+//             }
+//         }
+//     })
+// }
+// //获取收入种类
+// function getAllInKind() {
+//     $.ajax({
+//         url:"/kind/findAllinKind",
+//         success:function (data) {
+//             debugger;
+//             console.log("AllinKind="+data);
+//             for (var i = 0; i < data.length; i++) {
+//                 $("#inName").append($("<option value=\"" + data[i] + "\">" + data[i] + "</option>"));
+//             }
+//         }
+//     })
+// }
+//获取预留种类
+// function getAllPreKind() {
+//     $.ajax({
+//         url:"/kind/findAllpreKind",
+//         success:function (data) {
+//             debugger;
+//             console.log("AllpreKind="+data);
+//             for (var i = 0; i < data.length; i++) {
+//                 $("#preOutName").append($("<option value=\"" + data[i] + "\">" + data[i] + "</option>"));
+//             }
+//         }
+//     })
+// }
+//获取预留种类
+// function getAllPreKind() {
+//     $.ajax({
+//         url:"/kind/findAllpreKind",
+//         success:function (data) {
+//             debugger;
+//             console.log("AllpreKind="+data);
+//             for (var i = 0; i < data.length; i++) {
+//                 $("#preOutName").append($("<option value=\"" + data[i] + "\">" + data[i] + "</option>"));
+//             }
+//         }
+//     })
+// }
+
+//获取个人信息
+function findInformation() {
+    // $("#userjob").attr("readonly", "readonly");
+    $("#userjob").removeAttr("readonly");
+    document.getElementById("personalmsgform").reset();
     $.ajax({
-        url: "/goal/addGoal",
-        data: $("#newgoalform").serialize(),
+        url: "/user/findInformation",
         success: function (data) {
             debugger;
-            // $("#newgoalpage").attr("data-dismiss","model");
-            // $("#newgoalpage").attr("aria-hidden","true");
-            if (data == 1) {
-                bootbox.alert({
-                    message: '新增目标成功,继续加油!',
-                    size: 'small'
-                });
-            } else  {
-                bootbox.alert({
-                    message: '新增目标失败,请检查!',
-                    size: 'small',
-                    callback: function () {
-                        window.location.href = '/user/indexPage';
-                    },
-                });
-            }
+            console.log("基本信息=" + data);
+            $("#username").attr("value", data.name);
+            $("#mdfpwdsername").attr("value", data.name);
+            $("#userjob").attr("value", data.job);
+            $("#userjob").attr("readonly", "readonly");
+            $("#userposition").append($("<option value=\"" + data.position + "\">" + data.position + "</option>"));
 
         }
     })
 }
 
+//修改密码原密码输入正确与否反馈
+function checkPrePwd() {
+    $.ajax({
+        url: "/user/findInformation",
+        success: function (data) {
+            debugger;
+            console.log("基本信息=" + data);
+            // $("#mdfpwdsername").attr("value",data.name);
+            var pwd = $("#prepwd").val();
+            if (data.password != pwd) {
+                bootbox.alert({
+                    message: '原始密码输入错误！',
+                    size: 'small',
+                    callback: function () {
+                        window.location.href = '#mdfpwdpage';
+                    },
+                });
+            }
+        }
+    })
+}
+//回显用户名
+function showInformation() {
+    document.getElementById("mdfpwdform").reset();
+    $('#mdfpwdpage').on('hidden.bs.modal', function () {
+        $("#mdfpwdform").data('bootstrapValidator').destroy();
+        $('#mdfpwdform').data('bootstrapValidator', null);
+        changepwdformValidator();
+    });
+    $.ajax({
+        url: "/user/findInformation",
+        success: function (data) {
+            debugger;
+            console.log("基本信息=" + data);
+            $("#mdfpwdsername").attr("value",data.name);
 
+        }
 
-
+    })
+}

@@ -1,6 +1,7 @@
 package com.abc.account.service.impl;
 
 import com.abc.account.mapper.UserMapper;
+import com.abc.account.pojo.FamilyPosition;
 import com.abc.account.pojo.User;
 import com.abc.account.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> getAllUser() {
         return userMapper.getAllUser();
+    }
+
+    @Override
+    public List<FamilyPosition> findAllPosition() {
+        return userMapper.findAllPosition();
+    }
+
+    @Override
+    public int modifyInformation(User user) {
+        return userMapper.modifyInformation(user);
     }
 
 
