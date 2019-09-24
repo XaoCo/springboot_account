@@ -21,15 +21,15 @@ public class InAndOut implements Serializable {
 //    收支简述
     private String desc;
 //    收支金额
-    private BigDecimal charge;
+    private String charge;
 //    收支时间
-    private Date date;
+    private String date;
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -73,18 +73,18 @@ public class InAndOut implements Serializable {
         this.desc = desc;
     }
 
-    public BigDecimal getCharge() {
+    public String getCharge() {
         return charge;
     }
 
-    public void setCharge(BigDecimal charge) {
+    public void setCharge(String charge) {
         this.charge = charge;
     }
 
     public InAndOut() {
     }
 
-    public InAndOut(int id, String u_name, String k_name, int flag, String desc, BigDecimal charge, Date date) {
+    public InAndOut(int id, String u_name, String k_name, int flag, String desc, String charge, String date) {
         this.id = id;
         this.u_name = u_name;
         this.k_name = k_name;

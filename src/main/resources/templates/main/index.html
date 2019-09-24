@@ -5,8 +5,10 @@
     <title>首页</title>
     <script src="https://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://cdn.bootcss.com/bootstrap-validator/0.5.3/css/bootstrapValidator.css" rel="stylesheet">
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-validator/0.5.3/js/bootstrapValidator.js"></script>
     <script src="../../js/bootbox.js"></script>
     <link href="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css"
           rel="stylesheet">
@@ -128,16 +130,16 @@
                 </button>
                 <ul class="dropdown-menu" role="menu">
                     <li>
-                        <a href="#" data-target="#personalmsgpage" data-toggle="modal">
+                        <a href="#" data-target="#personalmsgpage" data-toggle="modal" onclick="findInformation()">
                         <span class="glyphicon glyphicon-heart-empty" style="padding-right: 0.3vw">
                         </span>个人资料</a>
                     </li>
-                    <li><a href="#" data-target="#mdfpwdpage" data-toggle="modal">
+                    <li><a href="#" data-target="#mdfpwdpage" data-toggle="modal" onclick="showInformation()">
                         <span class="glyphicon glyphicon-heart-empty" style="padding-right: 0.3vw">
 
                         </span>修改密码</a>
                     </li>
-                    <li><a href="#">
+                    <li><a href="/login/loginOut">
                         <span class="glyphicon glyphicon-heart-empty" style="padding-right: 0.3vw">
 
                         </span>切换用户</a>
@@ -146,7 +148,7 @@
                 </ul>
             </div>
             <div class="col-md-1">
-                <button type="button" class="btn btn-info logo1">
+                <button type="button" class="btn btn-info logo1" onclick="window.location.href='/login/loginOut'">
                     <span class="glyphicon glyphicon-log-out" style="padding-right: 0.3vw"></span>退出
                 </button>
             </div>
@@ -274,7 +276,7 @@
                         <button type="button" class="btn btn-info" id="okrconfirm" onclick="okrconfirm()">
                             <span class="glyphicon glyphicon-saved" style="padding-right: 0.3vw"></span>确认
                         </button>&nbsp;&nbsp;
-                        <button type="button" class="btn btn-info" id="okrcancel" onclick="okrcancel()">
+                        <button type="button" class="btn btn-danger" id="okrcancel" onclick="okrcancel()">
                             <span class="glyphicon glyphicon-remove" style="padding-right: 0.3vw"></span>取消
                         </button>&nbsp;&nbsp;
                     </td>
@@ -306,7 +308,7 @@
                                 <span class="input-group-addon"><span
                                         class="glyphicon glyphicon-hand-right"></span></span>
                                 <input id="goalName" name="goalName" class="form-control" placeholder="目标名称"
-                                       maxlength="20" type="text" required minlength="5" aria-valuemax="20">
+                                       maxlength="20" type="text">
                             </div>
 
 
@@ -316,7 +318,7 @@
                                 <span class="input-group-addon"><span
                                         class="glyphicon glyphicon-hand-right"></span></span>
                                 <input id="goalDesc" name="goalDesc" class="form-control" placeholder="目标简述"
-                                       maxlength="20" type="text" required minlength="5" aria-valuemax="20">
+                                       maxlength="20" type="text">
                             </div>
 
 
@@ -326,7 +328,7 @@
                                 <span class="input-group-addon"><span
                                         class="glyphicon glyphicon-hand-right"></span></span>
                                 <input id="goalTotal" name="goalTotal" class="form-control" placeholder="目标总量"
-                                       maxlength="20" type="text" required minlength="5" aria-valuemax="20">
+                                       maxlength="20" type="text" aria-valuemax="20">
                             </div>
 
 
@@ -342,16 +344,18 @@
                             </div>
                         </div>
 
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-info" onclick="addgoal()" id="goaladdid">
+                                <span class="glyphicon glyphicon-saved" style="padding-right: 0.3vw"></span>提交
+                            </button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">
+                                <span class="glyphicon glyphicon-remove" style="padding-right: 0.3vw"></span>关闭
+                            </button>
 
+                        </div>
                     </form>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
-                    </button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="addgoal()">
-                        提交
-                    </button>
-                </div>
+
             </div>
             <!-- /.modal-content -->
         </div>
@@ -381,11 +385,6 @@
                                 <span class="input-group-addon"><span
                                         class="glyphicon glyphicon-hand-right"></span></span>
                                 <select class="form-control" id="outName" name="outName">
-                                    <option>==请选择支出用途==</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
                                 </select>
                             </div>
 
@@ -396,7 +395,7 @@
                                 <span class="input-group-addon"><span
                                         class="glyphicon glyphicon-hand-right"></span></span>
                                 <input id="outDesc" name="outDesc" class="form-control" placeholder="支出简述"
-                                       maxlength="20" type="text">
+                                       maxlength="20" type="text" required>
                             </div>
 
 
@@ -406,7 +405,7 @@
                                 <span class="input-group-addon"><span
                                         class="glyphicon glyphicon-hand-right"></span></span>
                                 <input id="outAccount" name="outAccount" class="form-control" placeholder="支出金额"
-                                       maxlength="20" type="text">
+                                       maxlength="20" type="text" required>
                             </div>
 
 
@@ -416,21 +415,24 @@
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
-                                <input type='text' class="form-control" placeholder="日期"/>
+                                <input type='text' class="form-control" placeholder="日期"
+                                       id="newoutdate" name="newoutdate" required/>
 
                             </div>
                         </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-info" onclick="addnewout()">
+                                <span class="glyphicon glyphicon-saved" style="padding-right: 0.3vw"></span>提交
+                            </button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">
+                                <span class="glyphicon glyphicon-remove" style="padding-right: 0.3vw"></span>关闭
+                            </button>
 
+                        </div>
 
                     </form>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
-                    </button>
-                    <button type="button" class="btn btn-primary">
-                        提交更改
-                    </button>
-                </div>
+
             </div>
         </div>
     </div>
@@ -458,11 +460,6 @@
                                 <span class="input-group-addon"><span
                                         class="glyphicon glyphicon-hand-right"></span></span>
                                 <select class="form-control" id="preOutName" name="preOutName">
-                                    <option>==请选择预留支出用途==</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
                                 </select>
                             </div>
 
@@ -493,21 +490,24 @@
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
-                                <input type='text' class="form-control" placeholder="日期"/>
+                                <input type='text' class="form-control" placeholder="日期" id="preoutdate"
+                                       name="preoutdate" required/>
 
                             </div>
                         </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-info" onclick="addpreout()">
+                                <span class="glyphicon glyphicon-saved" style="padding-right: 0.3vw"></span>提交
+                            </button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">
+                                <span class="glyphicon glyphicon-remove" style="padding-right: 0.3vw"></span>关闭
+                            </button>
 
+                        </div>
 
                     </form>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
-                    </button>
-                    <button type="button" class="btn btn-primary">
-                        提交更改
-                    </button>
-                </div>
+
             </div>
             <!-- /.modal-content -->
         </div>
@@ -536,11 +536,6 @@
                                 <span class="input-group-addon"><span
                                         class="glyphicon glyphicon-hand-right"></span></span>
                                 <select class="form-control" id="inName" name="inName">
-                                    <option>==请选择进账渠道==</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
                                 </select>
                             </div>
 
@@ -571,21 +566,24 @@
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
-                                <input type='text' class="form-control" placeholder="日期"/>
+                                <input type='text' class="form-control" placeholder="日期" name="newindate"
+                                       id="newindate" required/>
 
                             </div>
                         </div>
 
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-info" onclick="addnewin()">
+                                <span class="glyphicon glyphicon-saved" style="padding-right: 0.3vw"></span>提交
+                            </button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">
+                                <span class="glyphicon glyphicon-remove" style="padding-right: 0.3vw"></span>关闭
+                            </button>
 
+                        </div>
                     </form>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
-                    </button>
-                    <button type="button" class="btn btn-primary">
-                        提交更改
-                    </button>
-                </div>
+
             </div>
         </div>
     </div>
@@ -618,9 +616,9 @@
                         </div>
                         <div class="form-group has-feedback" align="center">
                             <div class="input-group" style="width: 50%">
-                                <span class="input-group-addon"><span>职务</span></span>
+                                <span class="input-group-addon"><span>工作</span></span>
                                 <input id="userjob" name="userjob" class="form-control"
-                                       maxlength="20" type="text" value="UI">
+                                       maxlength="20" type="text" value="UI" >
                             </div>
 
 
@@ -630,24 +628,28 @@
                             <div class="input-group" style="width: 50%">
                                 <span class="input-group-addon"><span>地位</span></span>
                                 <select class="form-control" id="userposition" name="userposition" disabled>
-                                    <option>说一不二的大大</option>
-                                    <option>任劳任怨的伙计</option>
+
                                 </select>
                             </div>
 
 
                         </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-warning" onclick="informationmodify()">
+                                <span class="glyphicon glyphicon-edit" style="padding-right: 0.3vw"></span>修改
+                            </button>
+                            <button type="button" class="btn btn-info" onclick="informationconfirm()">
+                                <span class="glyphicon glyphicon-saved" style="padding-right: 0.3vw"></span>确定
+                            </button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">
+                                <span class="glyphicon glyphicon-remove" style="padding-right: 0.3vw"></span>关闭
+                            </button>
 
+                        </div>
 
                     </form>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
-                    </button>
-                    <button type="button" class="btn btn-primary">
-                        提交更改
-                    </button>
-                </div>
+
             </div>
             <!-- /.modal-content -->
         </div>
@@ -684,7 +686,7 @@
                             <div class="input-group" style="width: 50%">
                                 <span class="input-group-addon"><span>原&nbsp;&nbsp;密&nbsp;&nbsp;码</span></span>
                                 <input id="prepwd" name="prepwd" class="form-control"
-                                       maxlength="20" type="password" value="123456">
+                                       maxlength="20" type="password" onchange="checkPrePwd()">
                             </div>
 
 
@@ -693,7 +695,7 @@
                             <div class="input-group" style="width: 50%">
                                 <span class="input-group-addon"><span>新&nbsp;&nbsp;密&nbsp;&nbsp;码</span></span>
                                 <input id="newpwd" name="newpwd" class="form-control"
-                                       maxlength="20" type="password" value="123456">
+                                       maxlength="20" type="password">
                             </div>
 
 
@@ -702,22 +704,24 @@
                             <div class="input-group" style="width: 50%">
                                 <span class="input-group-addon"><span>确认密码</span></span>
                                 <input id="newpwdconfirm" name="newpwdconfirm" class="form-control"
-                                       maxlength="20" type="password" value="123456">
+                                       maxlength="20" type="password">
                             </div>
 
 
                         </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-info" onclick="modifyPassword()">
+                                <span class="glyphicon glyphicon-saved" style="padding-right: 0.3vw"></span>确定
+                            </button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">
+                                <span class="glyphicon glyphicon-remove" style="padding-right: 0.3vw"></span>关闭
+                            </button>
 
+                        </div>
 
                     </form>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
-                    </button>
-                    <button type="button" class="btn btn-primary">
-                        提交更改
-                    </button>
-                </div>
+
             </div>
             <!-- /.modal-content -->
         </div>

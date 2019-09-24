@@ -3,13 +3,17 @@ package com.abc.account.controller;
 import com.abc.account.pojo.Kind;
 import com.abc.account.service.KindService;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,13 +28,53 @@ public class KindController {
 
     @Autowired
     private KindService kindService;
+    Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    //    查询所有种类
-    @RequestMapping("/findAllKind")
-    public void findAllKind(Model model) {
-        List<Kind> allKind = kindService.findAllKind();
+    //    查询所有消费种类
+    @RequestMapping("/findAlloutKind")
+    @ResponseBody
+    public List<String> findAlloutKind() {
+        String flag = "0";
+        List<Kind> allKind = kindService.findAllKind(flag);
+        List<String> list = new ArrayList<>();
+        for (Kind kind : allKind) {
 
-        model.addAttribute("allKind", allKind);
+            list.add(kind.getName());
+            logger.info("name=" + kind.getName());
+        }
+        return list;
+    }
+
+    //    查询所有收入种类
+    @RequestMapping("/findAllinKind")
+    @ResponseBody
+    public List<String> findAllinKind() {
+        String flag = "1";
+        List<Kind> allKind = kindService.findAllKind(flag);
+
+        List<String> list = new ArrayList<>();
+        for (Kind kind : allKind) {
+
+            list.add(kind.getName());
+            logger.info("name=" + kind.getName());
+        }
+        return list;
+    }
+
+    //    查询所有预留开支种类
+    @RequestMapping("/findAllpreKind")
+    @ResponseBody
+    public List<String> findAllPreKind() {
+        String flag = "3";
+        List<Kind> allKind = kindService.findAllKind(flag);
+
+        List<String> list = new ArrayList<>();
+        for (Kind kind : allKind) {
+
+            list.add(kind.getName());
+            logger.info("name=" + kind.getName());
+        }
+        return list;
     }
 
     //    新增种类页面
@@ -65,11 +109,13 @@ public class KindController {
 
 
     }
-//修改种类页面
+
+    //修改种类页面
     @RequestMapping("/updKindPage")
-    public String updKindPage(){
+    public String updKindPage() {
         return "kind/updkindpage";
     }
+
     //    修改某一种类的名称
     @RequestMapping("/updKind")
     public String updKind(@RequestParam("id") int id,

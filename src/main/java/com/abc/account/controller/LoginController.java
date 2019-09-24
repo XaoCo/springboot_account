@@ -3,6 +3,8 @@ package com.abc.account.controller;
  * 登录controller
  */
 
+import com.abc.account.pojo.FamilyPosition;
+import com.abc.account.pojo.Kind;
 import com.abc.account.pojo.User;
 import com.abc.account.service.UserService;
 import org.apache.commons.lang.StringUtils;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -88,7 +91,7 @@ public class LoginController {
             @RequestParam("age") int age,
             @RequestParam("job") String job,
             @RequestParam("password") String password,
-            Model model,
+            @RequestParam("position") String position,
             HttpServletRequest request) {
 
         User user = new User();
@@ -98,6 +101,7 @@ public class LoginController {
         user.setJob(job);
         user.setName(username);
         user.setPassword(password);
+        user.setPosition(position);
         User user1 = userService.login1(user);
 
         if (user1 == null) {
@@ -118,6 +122,20 @@ public class LoginController {
 
     }
 
+    //    查询所有家庭地位
+    @RequestMapping("/findAllPosition")
+    @ResponseBody
+    public List<String> findAllPosition() {
+        List<FamilyPosition> position = userService.findAllPosition();
+
+        List<String> list = new ArrayList<>();
+        for (FamilyPosition familyPosition : position) {
+
+            list.add(familyPosition.getName());
+            logger.info("name=" + familyPosition.getName());
+        }
+        return list;
+    }
 
     //    忘记密码或者找回密码页面
     @RequestMapping("/findPwdPage")
@@ -160,6 +178,7 @@ public class LoginController {
         }
 
     }
+
 
 
     //通过姓名查询

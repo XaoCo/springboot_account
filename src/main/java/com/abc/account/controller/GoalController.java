@@ -39,18 +39,19 @@ public class GoalController {
             @RequestParam("goalDesc") String goalDesc,
             @RequestParam("goalTotal") String goalTotal,
             @RequestParam("endDate") String endDate,
-            Model model,
             HttpServletRequest request) {
 
         Goal goal = new Goal();
         int flag = 0;
-
+//获取用户
+        User user_session = (User) request.getSession().getAttribute("user_session");
         goal.setGoalName(goalName);
         goal.setGoalDesc(goalDesc);
         goal.setGoalTotal(goalTotal);
         goal.setEndDate(endDate);
         goal.setGoalPercent("");
         goal.setProcess("");
+        goal.setUserName(user_session.getName());
         int i = goalService.addGoal(goal);
 
         if(i==1){

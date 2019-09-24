@@ -3,6 +3,8 @@ package com.abc.account.controller;
  * 登录controller
  */
 
+import com.abc.account.pojo.FamilyPosition;
+import com.abc.account.pojo.Kind;
 import com.abc.account.pojo.User;
 import com.abc.account.service.UserService;
 import org.slf4j.Logger;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -37,36 +40,36 @@ public class UserController {
     }
 
     //    用户修改密码
-    @ResponseBody
-    @RequestMapping("/updpassword")
-    public int updPassword(
-            @RequestParam("username") String username,
-            @RequestParam("password") String password,
-            @RequestParam("passwordNew") String passwordNew,
-            HttpServletRequest request) {
 
+    @RequestMapping("/updpassword")
+    @ResponseBody
+    public int updPassword(
+//            @RequestParam("mdfpwdsername") String username,
+            @RequestParam("prepwd") String password,
+            @RequestParam("newpwd") String passwordNew,
+            HttpServletRequest request) {
+        User user_session = (User) request.getSession().getAttribute("user_session");
         User user = new User();
         user.setPassword(passwordNew);
-        user.setName(username);
+        user.setName(user_session.getName());
         //  判断该客户是否存在
         User user1 = userService.login1(user);
 
-        int flag;
+        int flag = -1;
         if (user1 != null) {
             int i = userService.updPassword(user);
-            System.out.println(i);
+//            System.out.println(i);
             if (i <= 0) {
-                flag = -1;
-                return flag;
-            } else {
                 flag = 0;
-                return flag;
+
+            } else {
+                flag = 1;
+
             }
         } else {
             flag = 1;
-            return flag;
         }
-
+        return flag;
     }
 
     //    删除用户
@@ -106,6 +109,7 @@ public class UserController {
         return "/main/index.html";
     }
 
+
     //通过姓名查询
     @RequestMapping("/findByName")
     @ResponseBody
@@ -121,6 +125,38 @@ public class UserController {
         }
         logger.info(this.getClass() + "该用户不存在");
         return 0;
+    }
+
+    //更新个人信息
+    @RequestMapping("/confirmInformation")
+    @ResponseBody
+    public int confirmInformation(
+            @RequestParam("userjob") String userjob,
+            HttpServletRequest request) {
+        int flag = -1;
+        User user_session = (User) request.getSession().getAttribute("user_session");
+        User user = new User();
+        user.setName(user_session.getName());
+        user.setJob(userjob);
+        int i = userService.modifyInformation(user);
+        if (i <= 0) {
+            flag = 0;
+        } else {
+            flag = 1;
+        }
+        return flag;
+    }
+
+    //查询个人信息
+    @RequestMapping("/findInformation")
+    @ResponseBody
+    public User findInformation(HttpServletRequest request) {
+        User user = new User();
+        User user_session = (User) request.getSession().getAttribute("user_session");
+        user.setName(user_session.getName());
+        User user1 = userService.login1(user);
+//        logger.info("基本信息:" + user1.toString());
+        return user1;
     }
 
     private static Pattern NUMBER_PATTERN = Pattern.compile("-?[0-9]+(\\.[0-9]+)?");

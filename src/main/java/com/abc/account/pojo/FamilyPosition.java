@@ -5,21 +5,19 @@ import java.io.Serializable;
 /**
  * package: com.abc.account.pojo
  * auther： abc
- * date: 2019/7/9 23:20
- * introduce: 类别实体类
+ * date: 2019/9/24 14:22
+ * introduce: TODO
  */
-public class Kind implements Serializable {
+public class FamilyPosition implements Serializable {
     private int id;
     private String name;
-    private String flag;
 
-    public Kind() {
-    }
-
-    public Kind(int id, String name, String flag) {
+    public FamilyPosition(int id, String name) {
         this.id = id;
         this.name = name;
-        this.flag = flag;
+    }
+
+    public FamilyPosition() {
     }
 
     public int getId() {
@@ -38,20 +36,12 @@ public class Kind implements Serializable {
         this.name = name;
     }
 
-    public String getFlag() {
-        return flag;
-    }
-
-    public void setFlag(String flag) {
-        this.flag = flag;
-    }
-
     @Override
     public String toString() {
-        return "Kind{" +
+        return "FamilyPosition{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", flag='" + flag + '\'' +
                 '}';
     }
 }
+

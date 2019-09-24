@@ -170,10 +170,10 @@ public class ReadLine {
 
 //         模拟数据
         List<User> list = new ArrayList<User>();
-        list.add(new User(11, "zs", 12, "it", "1234"));
-        list.add(new User(12, "zs1", 12, "it", "1234"));
-        list.add(new User(13, "zs2", 12, "it", "1234"));
-        list.add(new User(14, "zs3", 12, "it", "1234"));
+        list.add(new User(11, "zs", 12, "it", "1234","qqq"));
+        list.add(new User(12, "zs1", 12, "it", "1234","qqq"));
+        list.add(new User(13, "zs2", 12, "it", "1234","qqq"));
+        list.add(new User(14, "zs3", 12, "it", "1234","qqq"));
 
 
         for (int i = 0; i < list.size(); i++) {

@@ -12,8 +12,14 @@ import java.util.List;
  * introduce: TODO
  */
 public interface KindMapper {
-    //    查询所有种类
-    List<Kind> findAllKind();
+    //    查询种类
+    List<Kind> findAllKind(@Param("flag") String string);
+
+//    //    查询所有收入种类
+//    List<Kind> findAllinKind(@Param("flag") String string);
+//
+//    //    查询所有预留开支种类
+//    List<Kind> findAllPreKind(@Param("flag") String string);
 
     // 根据名称查询种类信息
     Kind findByName(@Param("name") String name);

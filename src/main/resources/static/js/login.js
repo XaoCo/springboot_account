@@ -317,44 +317,146 @@ function checkName1() {
 
 function login() {
     debugger;
-    $.ajax({
-        url: "/login/userLogin",
-        data: $("#loginForm").serialize(),
-        success: function (data) {
-            debugger;
-            if (data == -1) {
-                bootbox.alert({
-                    message: '姓名或密码为空，请重新输入',
-                    size: 'small',
-                    callback: function () {
-                        window.location.href = '/login/loginHtml';
-                    },
-                });
-            } else if (data == 0) {
-                bootbox.alert({
-                    message: '登录成功！',
-                    size: 'small',
-                    callback: function () {
-                        window.location.href = '/user/indexPage';
-                    },
-                });
-            } else if (data == 2) {
-                bootbox.alert({
-                    message: '该用户还未注册，请先进行注册！',
-                    size: 'small',
-                    callback: function () {
-                        window.location.href = '/login/registerpage';
-                    },
-                });
-            } else {
-                bootbox.alert({
-                    message: '姓名或者密码错误，请检查后登录！',
-                    size: 'small',
-                    callback: function () {
-                        window.location.href = '/login/loginHtml';
-                    },
-                });
+    $("#loginForm").bootstrapValidator('validate');//提交验证
+    if ($("#loginForm").data('bootstrapValidator').isValid()) {//获取验证结果，如果成功，执行下面代码
+        $.ajax({
+            url: "/login/userLogin",
+            data: $("#loginForm").serialize(),
+            success: function (data) {
+                debugger;
+                if (data == -1) {
+                    bootbox.alert({
+                        message: '姓名或密码为空，请重新输入',
+                        size: 'small',
+                        callback: function () {
+                            window.location.href = '/login/loginHtml';
+                        },
+                    });
+                } else if (data == 0) {
+                    bootbox.alert({
+                        message: '登录成功！',
+                        size: 'small',
+                        callback: function () {
+                            window.location.href = '/user/indexPage';
+                        },
+                    });
+                } else if (data == 2) {
+                    bootbox.alert({
+                        message: '该用户还未注册，请先进行注册！',
+                        size: 'small',
+                        callback: function () {
+                            window.location.href = '/login/registerpage';
+                        },
+                    });
+                } else {
+                    bootbox.alert({
+                        message: '姓名或者密码错误，请检查后登录！',
+                        size: 'small',
+                        callback: function () {
+                            window.location.href = '/login/loginHtml';
+                        },
+                    });
+                }
             }
+        })
+    }
+};
+
+window.onload = function () {
+    loginformValidator()
+}
+
+//登录验证
+function loginformValidator() {
+
+    $("#loginForm").bootstrapValidator({
+        live: 'disabled',//验证时机，enabled是内容有变化就验证（默认），disabled和submitted是提交再验证
+
+        excluded: [':disabled', ':hidden', ':not(:visible)'],//排除无需验证的控件，比如被禁用的或者被隐藏的
+
+        // submitButtons: '#btn-test',//指定提交按钮，如果验证失败则变成disabled，但我没试成功，反而加了这句话非submit按钮也会提交到action指定页面
+
+        message: '通用的验证失败消息',//好像从来没出现过
+
+        feedbackIcons: {//根据验证结果显示的各种图标
+
+            valid: 'glyphicon glyphicon-ok',
+
+            invalid: 'glyphicon glyphicon-remove',
+
+            validating: 'glyphicon glyphicon-refresh'
+
+        },
+        fields: {
+
+            username: {
+
+                validators: {
+
+                    notEmpty: {//检测非空,radio也可用
+
+                        message: '用户名必须输入'
+
+                    },
+                    stringLength: {//检测长度
+
+                        min: 5,
+
+                        max: 20,
+
+                        message: 'username长度必须在6-20之间'
+
+                    },
+                }
+
+            },
+            password: {
+
+                validators: {
+
+                    notEmpty: {//检测非空,radio也可用
+
+                        message: 'password必须输入'
+
+                    },
+
+                }
+
+            },
+            idcode: {
+
+                validators: {
+
+                    notEmpty: {//检测非空,radio也可用
+
+                        message: '验证码必须输入'
+
+                    },
+                    different: {//与指定文本框比较内容相同
+
+                            field: 'idcode1',
+
+                            message: '验证码输入有误'
+
+                        },
+                }
+
+            },
+
+            endDate: {
+
+                validators: {
+
+                    notEmpty: {//检测非空,radio也可用
+
+                        message: '目标最终期限必须输入'
+
+                    }
+
+                }
+
+            },
         }
-    })
+
+    });
 }

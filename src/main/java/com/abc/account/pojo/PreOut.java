@@ -1,5 +1,6 @@
 package com.abc.account.pojo;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -9,7 +10,7 @@ import java.util.Date;
  * date: 2019/9/20 9:07
  * introduce: 预留支出
  */
-public class PreOut {
+public class PreOut implements Serializable {
 //    预留支出名称
     private String preOutName;
 //    预留支出简述

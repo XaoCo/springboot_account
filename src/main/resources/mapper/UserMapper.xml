@@ -9,12 +9,22 @@
         <result column="U_AGE" property="age"/>
         <result column="U_JOB" property="job"/>
         <result column="U_PASSWORD" property="password"/>
+        <result column="U_POSITION" property="position"/>
         <!--<result column="U_IDENTITY_CARD" property="identityCard"/>-->
+    </resultMap>
+    <resultMap id="familyPosition" type="com.abc.account.pojo.FamilyPosition">
+        <id column="POSITION_ID" property="id"/>
+        <result column="POSITION_NAME" property="name"/>
     </resultMap>
 
     <!--登录验证-->
     <select id="login" parameterType="com.abc.account.pojo.User" resultMap="userRestMap">
         SELECT * FROM A_USER WHERE U_NAME = #{name} AND U_PASSWORD = #{password}
+    </select>
+
+ <!--获取所有position-->
+    <select id="findAllPosition"  resultMap="familyPosition">
+        select * from A_POSITION
     </select>
 
     <!--查询用户-->
@@ -29,13 +39,19 @@
             #{name},
             #{age},
             #{job},
-            #{password}
+            #{password},
+            #{position}
         )
     </insert>
 
     <!--修改密码-->
     <update id="updPassword">
         UPDATE A_USER  SET U_PASSWORD = #{password}
+         WHERE U_NAME = #{name}
+    </update>
+ <!--修改个人信息-->
+    <update id="modifyInformation">
+        UPDATE A_USER  SET U_JOB = #{job}
          WHERE U_NAME = #{name}
     </update>
 
