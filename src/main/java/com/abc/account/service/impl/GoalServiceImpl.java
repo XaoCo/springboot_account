@@ -34,7 +34,7 @@ public class GoalServiceImpl implements GoalService {
     }
 
     @Override
-    public List<Goal> getAllGoal() {
-        return goalMapper.getAllGoal();
+    public List<Goal> getAllGoal(String name) {
+        return goalMapper.getAllGoal(name);
     }
 }

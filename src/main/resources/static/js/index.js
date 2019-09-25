@@ -471,36 +471,33 @@ myChart6.setOption(option6);
 
 //okr编辑
 function okrmodify() {
-    debugger;
     $("#okr1").removeAttr("readonly")
     $("#okr2").removeAttr("readonly")
     $("#okr3").removeAttr("readonly")
     $("#okr4").removeAttr("readonly")
 };
+
 //个人信息编辑
 function informationmodify() {
-    debugger;
     $("#userjob").removeAttr("readonly")
 };
 
 //okr确认
 function okrconfirm() {
-    debugger;
     $("#okr1").attr("readonly", "readonly");
     $("#okr2").attr("readonly", "readonly");
     $("#okr3").attr("readonly", "readonly");
     $("#okr4").attr("readonly", "readonly");
 };
+
 //个人信息确认
 function informationconfirm() {
-    debugger;
     $("#userjob").attr("readonly", "readonly");
     $.ajax({
         url: "/user/confirmInformation",
         data: $("#personalmsgform").serialize(),
         success: function (data) {
-            debugger;
-            if (data== 1) {
+            if (data == 1) {
                 bootbox.alert({
                     message: '个人信息更新成功！',
                     size: 'small'
@@ -518,7 +515,6 @@ function informationconfirm() {
 //okr取消
 
 function okrcancel() {
-    debugger;
     var str1 = $("#okr1").val();
     console.log("str1=" + str1)
     var str2 = $("#okr2").val();
@@ -540,6 +536,7 @@ window.onload = function () {
     preformValidator();
     newinformValidator();
     changepwdformValidator();
+    historygoal();
     // getAllOutKind();
     // getAllInKind();
     // getAllPreKind();
@@ -560,62 +557,69 @@ function newgoal() {
 
 //新支出表单清空
 function newout() {
+    document.getElementById("newOutform").reset();
+    document.getElementById("outName").options.length = 0;
+    // $("#outName").options.length=0;
+    $('#newoutpage').on('hidden.bs.modal', function () {
+        $("#newOutform").data('bootstrapValidator').destroy();
+        $('#newOutform').data('bootstrapValidator', null);
+        outformValidator()
+    });
     $.ajax({
         url: "/kind/findAlloutKind",
         success: function (data) {
-            debugger;
             console.log("AllOutKind=" + data);
             for (var i = 0; i < data.length; i++) {
                 $("#outName").append($("<option value=\"" + data[i] + "\">" + data[i] + "</option>"));
             }
         }
     })
-    document.getElementById("newOutform").reset();
-    $('#newoutpage').on('hidden.bs.modal', function () {
-        $("#newOutform").data('bootstrapValidator').destroy();
-        $('#newOutform').data('bootstrapValidator', null);
-        outformValidator()
-    });
 };
 
 //新预留支出表单清空
 function preout() {
+
+    document.getElementById("preOutform").reset();
+    document.getElementById("preOutName").options.length = 0;
+    // $("#preOutName").options.length = 0;
+    $('#resoutpage').on('hidden.bs.modal', function () {
+        $("#preOutform").data('bootstrapValidator').destroy();
+        $('#preOutform').data('bootstrapValidator', null);
+        preformValidator();
+    });
     $.ajax({
         url: "/kind/findAllpreKind",
         success: function (data) {
-            debugger;
+
             console.log("AllpreKind=" + data);
             for (var i = 0; i < data.length; i++) {
                 $("#preOutName").append($("<option value=\"" + data[i] + "\">" + data[i] + "</option>"));
             }
         }
     })
-    document.getElementById("preOutform").reset();
-    $('#resoutpage').on('hidden.bs.modal', function () {
-        $("#preOutform").data('bootstrapValidator').destroy();
-        $('#preOutform').data('bootstrapValidator', null);
-        preformValidator();
-    });
 }
 
 //新收入表单清空
 function newin() {
+
+    document.getElementById("newinform").reset();
+    document.getElementById("inName").options.length = 0;
+    // $("#inName").options.length = 0;
+    $('#newinpage').on('hidden.bs.modal', function () {
+        $("#newinform").data('bootstrapValidator').destroy();
+        $('#newinform').data('bootstrapValidator', null);
+        newinformValidator();
+    });
     $.ajax({
         url: "/kind/findAllinKind",
         success: function (data) {
-            debugger;
+
             console.log("AllinKind=" + data);
             for (var i = 0; i < data.length; i++) {
                 $("#inName").append($("<option value=\"" + data[i] + "\">" + data[i] + "</option>"));
             }
         }
     })
-    document.getElementById("newinform").reset();
-    $('#newinpage').on('hidden.bs.modal', function () {
-        $("#newinform").data('bootstrapValidator').destroy();
-        $('#newinform').data('bootstrapValidator', null);
-        newinformValidator();
-    });
 }
 
 $(function () {
@@ -637,13 +641,16 @@ function addgoal() {
             url: "/goal/addGoal",
             data: $("#newgoalform").serialize(),
             success: function (data) {
-                debugger;
+
                 // $("#newgoalpage").attr("data-dismiss","model");
                 // $("#newgoalpage").attr("aria-hidden","true");
                 if (data == 1) {
                     bootbox.alert({
                         message: '新增目标成功,继续加油!',
-                        size: 'small'
+                        size: 'small',
+                        callback: function () {
+                            historygoal()
+                        }
                     });
                 } else {
                     bootbox.alert({
@@ -669,11 +676,14 @@ function addnewout() {
             url: "/record/addoutRecord",
             data: $("#newOutform").serialize(),
             success: function (data) {
-                debugger;
+
                 if (data == 1) {
                     bootbox.alert({
                         message: '新增开支成功!',
-                        size: 'small'
+                        size: 'small',
+                        callback: function () {
+                            historyout();
+                        }
                     });
                 } else {
                     bootbox.alert({
@@ -699,11 +709,14 @@ function addpreout() {
             url: "/record/addpreoutRecord",
             data: $("#preOutform").serialize(),
             success: function (data) {
-                debugger;
+
                 if (data == 1) {
                     bootbox.alert({
                         message: '新增预留开支成功!',
-                        size: 'small'
+                        size: 'small',
+                        callback: function () {
+                            hispreout();
+                        }
                     });
                 } else {
                     bootbox.alert({
@@ -729,11 +742,14 @@ function addnewin() {
             url: "/record/addinRecord",
             data: $("#newinform").serialize(),
             success: function (data) {
-                debugger;
+
                 if (data == 1) {
                     bootbox.alert({
                         message: '新增收入成功!',
-                        size: 'small'
+                        size: 'small',
+                        callback: function () {
+                            historyin();
+                        }
                     });
                 } else {
                     bootbox.alert({
@@ -759,7 +775,7 @@ function modifyPassword() {
             url: "/user/updpassword",
             data: $("#mdfpwdform").serialize(),
             success: function (data) {
-                debugger;
+
                 if (data == 1) {
                     bootbox.alert({
                         message: '修改密码成功!',
@@ -810,7 +826,7 @@ function goalformValidator() {
 
                     notEmpty: {//检测非空,radio也可用
 
-                        message: 'goalName必须输入'
+                        message: '目标名称必须输入'
 
                     },
                     stringLength: {//检测长度
@@ -819,7 +835,7 @@ function goalformValidator() {
 
                         max: 20,
 
-                        message: 'goalName长度必须在2-20之间'
+                        message: '目标名称长度必须在2-20之间'
 
                     },
                 }
@@ -831,7 +847,7 @@ function goalformValidator() {
 
                     notEmpty: {//检测非空,radio也可用
 
-                        message: 'goalDesc必须输入'
+                        message: '目标描述必须输入'
 
                     },
                     stringLength: {//检测长度
@@ -840,7 +856,7 @@ function goalformValidator() {
 
                         max: 20,
 
-                        message: 'goalDesc长度必须在2-20之间'
+                        message: '目标描述长度必须在2-20之间'
 
                     },
                 }
@@ -861,7 +877,7 @@ function goalformValidator() {
 
                         max: 20,
 
-                        message: 'goalTotal长度必须在2-20之间'
+                        message: '目标总计划长度必须在2-20之间'
 
                     },
                 }
@@ -1239,11 +1255,11 @@ function changepwdformValidator() {
                     // }
                     identical: {//与指定控件内容比较是否相同，比如两次密码不一致
 
-                            field: 'newpwd',//指定控件name
+                        field: 'newpwd',//指定控件name
 
-                            message: '两次密码输入的不一样'
+                        message: '两次密码输入的不一样'
 
-                        }
+                    }
                 }
 
             }
@@ -1259,7 +1275,7 @@ function changepwdformValidator() {
 //     $.ajax({
 //         url:"/kind/findAlloutKind",
 //         success:function (data) {
-//             debugger;
+//
 //             console.log("AllOutKind=" + data);
 //             for (var i = 0; i < data.length; i++) {
 //                 $("#outName").append($("<option value=\"" + data[i] + "\">" + data[i] + "</option>"));
@@ -1272,7 +1288,7 @@ function changepwdformValidator() {
 //     $.ajax({
 //         url:"/kind/findAllinKind",
 //         success:function (data) {
-//             debugger;
+//
 //             console.log("AllinKind="+data);
 //             for (var i = 0; i < data.length; i++) {
 //                 $("#inName").append($("<option value=\"" + data[i] + "\">" + data[i] + "</option>"));
@@ -1285,7 +1301,7 @@ function changepwdformValidator() {
 //     $.ajax({
 //         url:"/kind/findAllpreKind",
 //         success:function (data) {
-//             debugger;
+//
 //             console.log("AllpreKind="+data);
 //             for (var i = 0; i < data.length; i++) {
 //                 $("#preOutName").append($("<option value=\"" + data[i] + "\">" + data[i] + "</option>"));
@@ -1298,7 +1314,7 @@ function changepwdformValidator() {
 //     $.ajax({
 //         url:"/kind/findAllpreKind",
 //         success:function (data) {
-//             debugger;
+//
 //             console.log("AllpreKind="+data);
 //             for (var i = 0; i < data.length; i++) {
 //                 $("#preOutName").append($("<option value=\"" + data[i] + "\">" + data[i] + "</option>"));
@@ -1315,7 +1331,7 @@ function findInformation() {
     $.ajax({
         url: "/user/findInformation",
         success: function (data) {
-            debugger;
+
             console.log("基本信息=" + data);
             $("#username").attr("value", data.name);
             $("#mdfpwdsername").attr("value", data.name);
@@ -1332,7 +1348,7 @@ function checkPrePwd() {
     $.ajax({
         url: "/user/findInformation",
         success: function (data) {
-            debugger;
+
             console.log("基本信息=" + data);
             // $("#mdfpwdsername").attr("value",data.name);
             var pwd = $("#prepwd").val();
@@ -1348,6 +1364,7 @@ function checkPrePwd() {
         }
     })
 }
+
 //回显用户名
 function showInformation() {
     document.getElementById("mdfpwdform").reset();
@@ -1359,11 +1376,152 @@ function showInformation() {
     $.ajax({
         url: "/user/findInformation",
         success: function (data) {
-            debugger;
+
             console.log("基本信息=" + data);
-            $("#mdfpwdsername").attr("value",data.name);
+            $("#mdfpwdsername").attr("value", data.name);
 
         }
 
+    })
+}
+
+//历史目标查询
+function historygoal() {
+    $("#outhisdiv").attr("style", "display:none;");//隐藏div
+    $("#preouthisdiv").attr("style", "display:none;");//隐藏div
+    $("#inhisdiv").attr("style", "display:none;");//隐藏div
+    $("#goalhisdiv").attr("style", "display:block;");//显示div
+    debugger;
+    $.ajax({
+        url: "/goal/findAllGoals",
+        success: function (data) {
+            debugger;
+            console.log(data);
+            $("#goalhistbody").find("tr").remove();
+            for (var i = 0; i < data.length; i++) {
+
+                var tr = $("<tr></tr>");
+                tr.html("<td><textarea class=\"text-area width: 100% \"  readonly>" + data[i].goalName + "</textarea></td>" +
+                    "<td>" + data[i].goalPercent + "</td>" +
+                    "<td>" + data[i].goalTotal + "</td>" +
+                    "<td>" + data[i].process + "</td>" +
+                    "<td>" + data[i].endDate + "</td>" +
+                    "<td><button type=\"button\" class=\"btn \" id=\"okrmodify\" onclick=\"okrmodify()\">\n" +
+                    "                            <span class=\"glyphicon glyphicon-edit\" " +
+                    "style=\"padding-right: 0.3vw\"></span>修改\n" +
+                    "                        </button>&nbsp;&nbsp;<button type=\"button\" class=\"btn \" id=\"okrcancel\" onclick=\"okrcancel()\">\n" +
+                    "                            <span class=\"glyphicon glyphicon-remove\" style=\"padding-right: 0.3vw\"></span>删除\n" +
+                    "                        </button>&nbsp;&nbsp;" +
+                    "</td>");
+
+                $("#goalhistbody").append(tr);
+            }
+
+        }
+    })
+}
+
+//历史开支查询
+function historyout() {
+    $("#goalhisdiv").attr("style", "display:none;");//隐藏div
+    $("#preouthisdiv").attr("style", "display:none;");//隐藏div
+    $("#inhisdiv").attr("style", "display:none;");//隐藏div
+    $("#outhisdiv").attr("style", "display:block;");//显示div
+    debugger;
+    $.ajax({
+        url: "/record/selRecord?flag=0",
+        success: function (data) {
+            debugger;
+            console.log(data);
+            $("#outhistbody").find("tr").remove();
+            for (var i = 0; i < data.length; i++) {
+
+                var tr = $("<tr></tr>");
+                tr.html("<td>" + data[i].k_name + "</td>" +
+                    "<td>" + data[i].charge + "</td>" +
+                    "<td>" + data[i].desc + "</td>" +
+                    "<td>" + data[i].date + "</td>" +
+                    "<td><button type=\"button\" class=\"btn \" id=\"okrmodify\" onclick=\"#\">\n" +
+                    "                            <span class=\"glyphicon glyphicon-edit\" " +
+                    "style=\"padding-right: 0.3vw\"></span>修改\n" +
+                    "                        </button>&nbsp;&nbsp;<button type=\"button\" class=\"btn \" id=\"okrcancel\" onclick=\"#\">\n" +
+                    "                            <span class=\"glyphicon glyphicon-remove\" style=\"padding-right: 0.3vw\"></span>删除\n" +
+                    "                        </button>&nbsp;&nbsp;" +
+                    "</td>");
+
+                $("#outhistbody").append(tr);
+            }
+
+        }
+    })
+}
+
+//历史预留开支查询
+function hispreout() {
+    $("#goalhisdiv").attr("style", "display:none;");//隐藏div
+    $("#outhisdiv").attr("style", "display:none;");//隐藏div
+    $("#inhisdiv").attr("style", "display:none;");//隐藏div
+    $("#preouthisdiv").attr("style", "display:block;");//显示div
+    debugger;
+    $.ajax({
+        url: "/record/selRecord?flag=3",
+        success: function (data) {
+            debugger;
+            console.log(data);
+            $("#preouthistbody").find("tr").remove();
+            for (var i = 0; i < data.length; i++) {
+
+                var tr = $("<tr></tr>");
+                tr.html("<td>" + data[i].k_name + "</td>" +
+                    "<td>" + data[i].charge + "</td>" +
+                    "<td>" + data[i].desc + "</td>" +
+                    "<td>" + data[i].date + "</td>" +
+                    "<td><button type=\"button\" class=\"btn \" id=\"okrmodify\" onclick=\"#\">\n" +
+                    "                            <span class=\"glyphicon glyphicon-edit\" " +
+                    "style=\"padding-right: 0.3vw\"></span>修改\n" +
+                    "                        </button>&nbsp;&nbsp;<button type=\"button\" class=\"btn \" id=\"okrcancel\" onclick=\"#\">\n" +
+                    "                            <span class=\"glyphicon glyphicon-remove\" style=\"padding-right: 0.3vw\"></span>删除\n" +
+                    "                        </button>&nbsp;&nbsp;" +
+                    "</td>");
+
+                $("#preouthistbody").append(tr);
+            }
+
+        }
+    })
+}
+
+//历史收入查询
+function historyin() {
+    $("#goalhisdiv").attr("style", "display:none;");//隐藏div
+    $("#outhisdiv").attr("style", "display:none;");//隐藏div
+    $("#preouthisdiv").attr("style", "display:none;");//隐藏div
+    $("#inhisdiv").attr("style", "display:block;");//显示div
+    debugger;
+    $.ajax({
+        url: "/record/selRecord?flag=1",
+        success: function (data) {
+            debugger;
+            console.log(data);
+            $("#inhistbody").find("tr").remove();
+            for (var i = 0; i < data.length; i++) {
+
+                var tr = $("<tr></tr>");
+                tr.html("<td>" + data[i].k_name + "</td>" +
+                    "<td>" + data[i].charge + "</td>" +
+                    "<td>" + data[i].desc + "</td>" +
+                    "<td>" + data[i].date + "</td>" +
+                    "<td><button type=\"button\" class=\"btn \" id=\"okrmodify\" onclick=\"#\">\n" +
+                    "                            <span class=\"glyphicon glyphicon-edit\" " +
+                    "style=\"padding-right: 0.3vw\"></span>修改\n" +
+                    "                        </button>&nbsp;&nbsp;<button type=\"button\" class=\"btn \" id=\"okrcancel\" onclick=\"#\">\n" +
+                    "                            <span class=\"glyphicon glyphicon-remove\" style=\"padding-right: 0.3vw\"></span>删除\n" +
+                    "                        </button>&nbsp;&nbsp;" +
+                    "</td>");
+
+                $("#inhistbody").append(tr);
+            }
+
+        }
     })
 }

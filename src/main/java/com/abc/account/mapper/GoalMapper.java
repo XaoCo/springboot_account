@@ -1,6 +1,7 @@
 package com.abc.account.mapper;
 
 import com.abc.account.pojo.Goal;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -18,6 +19,6 @@ public interface GoalMapper {
 //    修改目标
     int updateGoal(Goal goal);
 //    查询目标
-    List<Goal> getAllGoal();
+    List<Goal> getAllGoal(@Param("name") String name);
 
 }

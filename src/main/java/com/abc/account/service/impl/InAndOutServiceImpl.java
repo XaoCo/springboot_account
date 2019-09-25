@@ -21,8 +21,8 @@ public class InAndOutServiceImpl implements InAndOutService {
     private InAndOutMapper inAndOutMapper;
 
     @Override
-    public List<InAndOut> selRecord(String userName) {
-        return inAndOutMapper.selRecord(userName);
+    public List<InAndOut> selRecord(InAndOut inAndOut) {
+        return inAndOutMapper.selRecord(inAndOut);
     }
 
     @Override

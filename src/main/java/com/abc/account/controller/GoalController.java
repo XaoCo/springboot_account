@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * package: com.abc.account.controller
@@ -54,16 +56,33 @@ public class GoalController {
         goal.setUserName(user_session.getName());
         int i = goalService.addGoal(goal);
 
-        if(i==1){
+        if (i == 1) {
             logger.info(this.getClass() + "新增目标成功！");
             flag = 1;
-        }else {
+        } else {
             flag = -1;
             logger.info(this.getClass() + "新增目标失败！");
         }
 
 
         return flag;
+    }
+
+    @RequestMapping("/findAllGoals")
+    @ResponseBody
+    public List<Goal> findAllGoals(
+            HttpServletRequest request
+    ) {
+
+        User user_session = (User) request.getSession().getAttribute("user_session");
+        List<Goal> allGoals = new ArrayList<>();
+        List<Goal> allGoal = goalService.getAllGoal(user_session.getName());
+
+        for (Goal goal:allGoal) {
+
+        }
+
+        return allGoal;
     }
 
 

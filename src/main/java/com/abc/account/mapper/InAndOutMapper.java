@@ -13,7 +13,7 @@ import java.util.List;
  */
 public interface InAndOutMapper {
     //    查询当前用户的收支记录
-    List<InAndOut> selRecord(@Param("userName") String userName);
+    List<InAndOut> selRecord(InAndOut inAndOut);
 
     //    查询所有的收支记录
     List<InAndOut> selAllRecord();
