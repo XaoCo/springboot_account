@@ -20,8 +20,8 @@
     </select>
 
     <!--查询当前用户记录-->
-    <select id="selRecord" parameterType="java.lang.String">
-        SELECT * FROM A_INOUT_ALL WHERE A_U_NAME = #{userName}
+    <select id="selRecord"  resultMap="InAndOutRestMap">
+        SELECT * FROM A_INOUT_ALL WHERE A_U_NAME = #{u_name} AND A_FLAG = #{flag}
     </select>
 
     <!--修改记录-->

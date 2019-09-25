@@ -28,6 +28,11 @@
             #{userName}
         )
     </insert>
+
+    <!--查询目标-->
+    <select id="getAllGoal" resultMap="goalRestMap">
+        SELECT * FROM A_GOAL WHERE USERNAME = #{name} OR USERNAME = 'admin'
+    </select>
     <!--&lt;!&ndash;登录验证&ndash;&gt;-->
     <!--<select id="login" parameterType="com.abc.account.pojo.User" resultMap="userRestMap">-->
         <!--SELECT * FROM A_USER WHERE U_NAME = #{name} AND U_PASSWORD = #{password}-->

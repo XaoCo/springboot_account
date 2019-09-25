@@ -3,6 +3,8 @@ package com.abc.account.controller;
 import com.abc.account.pojo.InAndOut;
 import com.abc.account.pojo.User;
 import com.abc.account.service.InAndOutService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+
 /**
  * package: com.abc.account.controller
  * auther： abc
@@ -23,25 +27,34 @@ public class InAndOutController {
     @Autowired
     private InAndOutService inAndOutService;
 
-//    //    查询当前用户的收支记录
-//    @RequestMapping("/selRecord")
-//    public void selRecord(
-//            Model model,
+    //    实例化日志
+    Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    //    查询当前用户的收支记录
+    @RequestMapping("/selRecord")
+    @ResponseBody
+    public List<InAndOut> selRecord(
+            int flag,
+            HttpServletRequest request) {
+        InAndOut inAndOut = new InAndOut();
+        User user_session = (User) request.getSession().getAttribute("user_session");
+//        int flag = 0;
+        logger.info("flag="+flag);
+        inAndOut.setFlag(flag);
+        inAndOut.setU_name(user_session.getName());
+
+        List<InAndOut> inAndOuts = inAndOutService.selRecord(inAndOut);
+        return inAndOuts;
+    }
+//
+    //    查询所有用户的收支记录
+//    @RequestMapping("/findAllout")
+//    public void selAllRecord(
 //            HttpServletRequest request) {
 //        User user_session = (User) request.getSession().getAttribute("user_session");
-//        List<InAndOut> inAndOuts = inAndOutService.selRecord(user_session.getName());
-//        model.addAttribute("inAndOuts", inAndOuts);
-//    }
 //
-//    //    查询所有用户的收支记录
-//    @RequestMapping("/selAllRecord")
-//    public void selAllRecord(
-//            Model model,
-//            HttpServletRequest request) {
-////        User user_session = (User) request.getSession().getAttribute("user_session");
-//
+//        int flag = 0;
 //        List<InAndOut> inAndOuts = inAndOutService.selAllRecord();
-//        model.addAttribute("inAndOuts", inAndOuts);
 //    }
 
 

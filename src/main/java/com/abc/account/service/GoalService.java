@@ -18,5 +18,5 @@ public interface GoalService {
     //    修改目标
     int updateGoal(Goal goal);
     //    查询目标
-    List<Goal> getAllGoal();
+    List<Goal> getAllGoal(String name);
 }

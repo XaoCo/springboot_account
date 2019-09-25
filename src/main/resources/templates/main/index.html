@@ -155,8 +155,8 @@
         </div>
     </div>
     <!--主体-->
-    <div class="col-md-8">
-        <div style="background-color: #FFFFFF;padding: 0.8vw 0px 0px 0px;margin-top: 1vw">
+    <div class="col-md-8" >
+        <div style="background-color: #FFFFFF;padding: 0.8vw 0.3vw 0.3vw 0.3vw;margin-top: 0.5vw">
             <div class="col-md-3 logo7">
 
                 <button type="button" class="btn btn-info logo2 " id="newgoal" data-target="#newgoalpage"
@@ -164,7 +164,7 @@
                     <span class="glyphicon glyphicon-plus" style="padding-right: 0.3vw"></span>设定目标
                 </button>
                 <button type="button" class="btn btn-info logo2" id="hisgoal" data-target="#hisgoalpage"
-                        data-toggle="modal">
+                        data-toggle="modal" onclick="historygoal()">
                     <span class="glyphicon glyphicon-search" style="padding-right: 0.3vw"></span>历史目标
                 </button>
             </div>
@@ -174,7 +174,7 @@
                     <span class="glyphicon glyphicon-plus" style="padding-right: 0.3vw"></span>新增支出
                 </button>
                 <button type="button" class="btn btn-info logo2" id="hisout" data-target="#hisoutpage"
-                        data-toggle="modal">
+                        data-toggle="modal" onclick="historyout()">
                     <span class="glyphicon glyphicon-search" style="padding-right: 0.3vw"></span>历史支出
                 </button>
             </div>
@@ -184,7 +184,7 @@
                     <span class="glyphicon glyphicon-plus" style="padding-right: 0.3vw"></span>预留支出
                 </button>
                 <button type="button" class="btn btn-info logo2" id="hisresout" data-target="#hisresoutpage"
-                        data-toggle="modal">
+                        data-toggle="modal" onclick="hispreout()">
                     <span class="glyphicon glyphicon-search" style="padding-right: 0.3vw"></span>历史预留
                 </button>
             </div>
@@ -194,15 +194,15 @@
                     <span class="glyphicon glyphicon-plus" style="padding-right: 0.3vw"></span>新增收入
                 </button>
                 <button type="button" class="btn btn-info logo2" id="hisin" data-target="#hisinpage"
-                        data-toggle="modal">
+                        data-toggle="modal" onclick="historyin()">
                     <span class="glyphicon glyphicon-search" style="padding-right: 0.3vw"></span>历史收入
                 </button>
             </div>
-            <!--表格-->
-            <div style="padding: 0px 0.5vw 0.3px 0.5vw">
-                <table class="table table-bordered  table-hover">
+            <!--历史目标div-->
+            <div style="padding: 0px 0.5vw 0.3vw 0.5vw" id="goalhisdiv">
+                <table class="table table-bordered  table-hover" id="goalhistab">
 
-                    <thead>
+                    <thead align="center">
                     <tr>
                         <td colspan="6" class="logo7">历史目标</td>
                     </tr>
@@ -210,41 +210,82 @@
                         <td class="col-md-2">名称</td>
                         <td class="col-md-2">当前完成量</td>
                         <td class="col-md-2">总量</td>
-                        <td class="col-md-2">截止日期</td>
                         <td class="col-md-1">进度</td>
-                        <td class="col-md-3">简述</td>
+                        <td class="col-md-2">截止日期</td>
+                        <td class="col-md-3">操作</td>
                     </tr>
                     </thead>
-                    <tbody class="tab-body-bordered">
+                    <tbody class="tab-body-bordered" id="goalhistbody" align="center">
+                    </tbody>
+                </table>
+            </div>
 
-                    <td>买房</td>
-                    <td>5w</td>
-                    <td>30w</td>
-                    <td>2022-10-01</td>
-                    <td>15%</td>
-                    <td>正常</td>
+            <!--历史支出div-->
+            <div style="padding: 0px 0.5vw 0.3vw 0.5vw;display: none" id="outhisdiv">
+                <table class="table table-bordered  table-hover" id="outhistab">
 
+                    <thead align="center">
                     <tr>
-                        <td>买房</td>
-                        <td>5w</td>
-                        <td>30w</td>
-                        <td>2022-10-01</td>
-                        <td>15%</td>
-                        <td>正常</td>
+                        <td colspan="6" class="logo7">历史支出</td>
                     </tr>
                     <tr>
-                        <td>买房</td>
-                        <td>5w</td>
-                        <td>30w</td>
-                        <td>2022-10-01</td>
-                        <td>15%</td>
-                        <td>正常</td>
+                        <td class="col-md-2">开支种类</td>
+                        <td class="col-md-2">开支金额</td>
+                        <td class="col-md-3">开支描述</td>
+                        <td class="col-md-2">开支日期</td>
+                        <td class="col-md-3">操作</td>
                     </tr>
+                    </thead>
+                    <tbody class="tab-body-bordered" id="outhistbody" align="center">
+                    </tbody>
+                </table>
+            </div>
+
+            <!--历史预留支出div-->
+            <div style="padding: 0px 0.5vw 0.3vw 0.5vw;display: none" id="preouthisdiv">
+                <table class="table table-bordered  table-hover" id="preouthistab">
+
+                    <thead align="center">
+                    <tr>
+                        <td colspan="6" class="logo7">历史预留</td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-2">预留开支种类</td>
+                        <td class="col-md-2">预留开支金额</td>
+                        <td class="col-md-3">预留开支描述</td>
+                        <td class="col-md-2">预留开支日期</td>
+                        <td class="col-md-3">操作</td>
+                    </tr>
+                    </thead>
+                    <tbody class="tab-body-bordered" id="preouthistbody" align="center">
+                    </tbody>
+                </table>
+            </div>
+
+
+            <!--历史收入div-->
+            <div style="padding: 0px 0.5vw 0.3vw 0.5vw;display: none" id="inhisdiv">
+                <table class="table table-bordered  table-hover" id="inhistab">
+
+                    <thead align="center">
+                    <tr>
+                        <td colspan="6" class="logo7">历史目标</td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-2">收入来源</td>
+                        <td class="col-md-2">收入金额</td>
+                        <td class="col-md-3">收入描述</td>
+                        <td class="col-md-2">收入日期</td>
+                        <td class="col-md-3">操作</td>
+                    </tr>
+                    </thead>
+                    <tbody class="tab-body-bordered" id="inhistbody" align="center">
                     </tbody>
                 </table>
             </div>
         </div>
-        <div style="padding: 0.3vw 0.5vw 0.1vw 0.3vw;margin-top: 1vw;background-color: #FFFFFF;margin-left: 0px">
+
+        <div style="padding: 0.8vw 0.3vw 0px 0.3vw;margin-top: 0.5vw;background-color: #FFFFFF;margin-left: 0px">
             <table class="table">
                 <thead>
                 <td class="logo4" colspan="2">OKR Board</td>
@@ -284,8 +325,8 @@
                 </tbody>
             </table>
         </div>
-
     </div>
+
     <!--x新增目标页面-->
     <div class="modal fade" id="newgoalpage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
          aria-hidden="true">
@@ -385,6 +426,7 @@
                                 <span class="input-group-addon"><span
                                         class="glyphicon glyphicon-hand-right"></span></span>
                                 <select class="form-control" id="outName" name="outName">
+                                    <option value="11">11</option>
                                 </select>
                             </div>
 
@@ -479,7 +521,8 @@
                             <div class="input-group" style="width: 50%">
                                 <span class="input-group-addon"><span
                                         class="glyphicon glyphicon-hand-right"></span></span>
-                                <input id="preoutAccount" name="preoutAccount" class="form-control" placeholder="预留支出金额"
+                                <input id="preoutAccount" name="preoutAccount" class="form-control"
+                                       placeholder="预留支出金额"
                                        maxlength="20" type="text">
                             </div>
 
@@ -618,7 +661,7 @@
                             <div class="input-group" style="width: 50%">
                                 <span class="input-group-addon"><span>工作</span></span>
                                 <input id="userjob" name="userjob" class="form-control"
-                                       maxlength="20" type="text" value="UI" >
+                                       maxlength="20" type="text" value="UI">
                             </div>
 
 
@@ -727,19 +770,19 @@
         </div>
         <!-- /.modal -->
     </div>
-    <!--右边echarts-->
-    <div class="col-md-4">
-        <div style="background-color: #FFFFFF;padding: 0.8vw 0px 0px 0px;margin-top: 1vw" class="style1">
-            <div class="col-md-12 style1" id="demo1"></div>
-        </div>
-        <div class="col-md-12 style1" id="demo2" style="display: none"></div>
-        <div class="col-md-12 style1" id="demo3" style="display: none"></div>
-        <div class="col-md-12 style1" id="demo4" style="display: none"></div>
-        <div class="col-md-12 style1" id="demo5" style="display: none"></div>
-        <div style="background-color: #FFFFFF;padding: 0.8vw 0px 0px 0px;margin-top: 1vw" class="style1">
-            <div class="col-md-12 style1" id="demo6"></div>
-        </div>
+<!--右边echarts-->
+<div class="col-md-4">
+    <div style="background-color: #FFFFFF;padding: 0.8vw 0.3vw 0.5vw 0.3vw;margin-top: 0.5vw" class="style1">
+        <div class="col-md-12 style1" id="demo1"></div>
     </div>
+    <div class="col-md-12 style1" id="demo2" style="display: none"></div>
+    <div class="col-md-12 style1" id="demo3" style="display: none"></div>
+    <div class="col-md-12 style1" id="demo4" style="display: none"></div>
+    <div class="col-md-12 style1" id="demo5" style="display: none"></div>
+    <div style="background-color: #FFFFFF;padding: 0.8vw 0.3vw 0.5vw 0.3vw;margin-top: 0.5vw" class="style1">
+        <div class="col-md-12 style1" id="demo6"></div>
+    </div>
+</div>
 
 </div>
 <script src="../../js/index.js"></script>

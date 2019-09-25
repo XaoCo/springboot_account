@@ -12,7 +12,7 @@ import java.util.List;
  */
 public interface InAndOutService {
     //    查询当前用户的收支记录
-    List<InAndOut> selRecord(String userName);
+    List<InAndOut> selRecord(InAndOut inAndOut);
 
     //    查询所有的收支记录
     List<InAndOut> selAllRecord();
