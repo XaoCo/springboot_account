@@ -19,7 +19,10 @@ public interface UserMapper {
 
     //    用户查询
 
-    User login1(User user);
+    User selectByName(User user);
+ //    用户查询
+
+    User selectByEmail(User user);
 
     //     用户注册
     int addUser(User user);

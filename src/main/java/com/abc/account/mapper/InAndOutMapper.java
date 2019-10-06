@@ -27,4 +27,15 @@ public interface InAndOutMapper {
     //    删除一条记录
     int delRecord(@Param("id") int id);
 
+    //    总收入
+    String findAllIn(@Param("userName") String username);
+
+    //    总开支
+    String findAllOut(@Param("userName") String username);
+
+    //    开支明细
+    List<InAndOut> getAllOut(@Param("userName") String username);
+
+    //    收入明细
+    List<InAndOut> getAllIn(@Param("userName") String username);
 }

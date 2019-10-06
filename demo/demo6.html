@@ -1,70 +1,155 @@
 <!doctype html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="utf-8">
+    <title>首页</title>
+    <script src="https://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://cdn.bootcss.com/bootstrap-validator/0.5.3/css/bootstrapValidator.css" rel="stylesheet">
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-validator/0.5.3/js/bootstrapValidator.js"></script>
+    <script src="../../js/bootbox.js"></script>
+    <link href="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css"
+          rel="stylesheet">
+
+
+    <!--<script src="../../js/jquery-3.4.1.min.js"></script>-->
+    <!--<script src="http://code.jquery.com/jquery-latest.js"></script>-->
+    <!--<script src="../../js/bootstrap.min.js"></script>-->
+    <!--<link rel="stylesheet" href="../../css/login.css">-->
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+    <!--<link rel="stylesheet" href="../../css/bootstrap.min.css">-->
+    <script src="https://cdn.bootcss.com/moment.js/2.24.0/moment-with-locales.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="../../js/echarts.js"></script>
     <style>
-        @media screen and (max-width: 960px){
-            body {
-                background-color: blue;
-            }
-        }
-        @media screen and (max-width: 768px){
-            body {
-                background-color: red;
-            }
-        }
-        @media screen and (max-width: 550px){
-            body {
-                background-color: green;
-            }
+        body {
+            background: #f5f5f5;
+            margin: 0vw;
         }
 
-        div {
-            white-space: nowrap;
-            width: 20vw;
-            border: 3px;
-            border-color: red;
-            border-style: solid;
-            border-radius: 1vw;
-            padding: 1vw;
-            margin: 1vw;
-            overflow: hidden;
-            text-shadow: 5px 5px 5px #777;
+        .logo {
+            font-weight: bold;
+            font-size: 2vw;
+            padding: 0.5vw 0px;
+            margin: 0.8vw 0px;
         }
 
-        .test1 {
-
-            text-overflow: ellipsis;
-            cursor: pointer;
-
+        .logo1 {
+            /*font-weight: bold;*/
+            font-size: 1.1vw;
+            padding: 0.1vw 0.5vw;
+            margin: 1.5vw 0.5vw 0.5vw 0.5vw;
         }
 
-        .test2 {
-            text-overflow: clip;
+        .logo2 {
+            /*font-weight: bold;*/
+            /*font-size: 1vw;*/
+            padding: 0.5vw 2px;
+            margin: 0px 0.5vw 1vw 0.5vw;
+            /*background-color: #FFFFFF;*/
         }
 
-        .test3 {
-            text-overflow: revert;
+        .logo4 {
+            font-weight: bold;
+            font-size: 1.5vw;
+            margin: 1.5vw 0px;
+            padding: 0.8vw 0px;
+            text-align: center;
         }
+
+        .logo5 {
+            /*font-weight: bold;*/
+            /*font-size: 1vw;*/
+            margin: 1.5vw 0px;
+            padding: 0.8vw 0px;
+            text-align: center;
+        }
+
+        .logo6 {
+            width: 100%;
+            height: 11vw;
+        }
+
+        .logo7 {
+            text-align: center;
+            padding: 0px;
+            font-weight: bold;
+            /*font-style: italic;*/
+        }
+
+        .style1 {
+            height: 60vh;
+        }
+
+        .style2 {
+            /*margin-left: 2vw;*/
+            /*margin-right: 2vw;*/
+            width: 100%;
+            display: block;
+            /*padding-top: 0.5vw;*/
+        }
+
+        /*.imagestyle{*/
+        /*margin: 0px 0px 0px 2px;*/
+        /*}*/
     </style>
-    <title>文本溢出处理</title>
 </head>
 <body>
-<h3>测试文本溢出问题</h3>
+<table>
 
-<div class="test1"
-     title="HTML5 是下一代 HTML 标准。 HTML , HTML 4.01的上一个版本诞生于 1999 年。自从那以后，Web 世界已经经历了巨变。 HTML5 仍处于完善之中。然而，大部分现代浏览器已经具备了某些 HTML5 支持。">
-    HTML5 是下一代 HTML 标准。 HTML , HTML 4.01的上一个版本诞生于 1999 年。自从那以后，Web 世界已经经历了巨变。 HTML5 仍处于完善之中。然而，大部分现代浏览器已经具备了某些 HTML5 支持。
-</div>
-<div class="test2">
-    HTML5 是下一代 HTML 标准。 HTML , HTML 4.01的上一个版本诞生于 1999 年。自从那以后，Web 世界已经经历了巨变。 HTML5 仍处于完善之中。然而，大部分现代浏览器已经具备了某些 HTML5 支持。
-</div>
-<div class="test3">
-    HTML5 是下一代 HTML 标准。 HTML , HTML 4.01的上一个版本诞生于 1999 年。自从那以后，Web 世界已经经历了巨变。 HTML5 仍处于完善之中。然而，大部分现代浏览器已经具备了某些 HTML5 支持。
-</div>
+    <tr>
+        <td>1</td>
+        <td>2</td>
+        <td><input type="button" value="编辑"></td>
+    </tr>
 
+    <tr>
+        <td>2</td>
+        <td>5</td>
+        <td><input type="button" value="编辑"></td>
+    </tr>
+
+    <tr>
+        <td>3</td>
+        <td>8</td>
+        <td><input type="button" value="编辑"></td>
+    </tr>
+
+    <tr>
+        <td>4</td>
+        <td>2</td>
+        <td><input type="button" value="编辑"></td>
+    </tr>
+
+</table>
+<script>
+    $(function(){
+
+        $("input:button").click(function() {
+
+            str = $(this).val()=="编辑"?"确定":"编辑";
+
+            $(this).val(str);   // 按钮被点击后，在“编辑”和“确定”之间切换
+
+            $(this).parent().siblings("td").each(function() {  // 获取当前行的其他单元格
+
+                obj_text = $(this).find("input:text");    // 判断单元格下是否有文本框
+
+                if(!obj_text.length)   // 如果没有文本框，则添加文本框使之可以编辑
+
+                    $(this).html("<input type='text' value='"+$(this).text()+"'>");
+
+                else   // 如果已经存在文本框，则将其显示为文本框修改的值
+
+                    $(this).html(obj_text.val());
+
+            });
+
+        });
+
+    });
+</script>
 </body>
 </html>

@@ -11,16 +11,15 @@ import java.io.Serializable;
 public class User implements Serializable {
     private int id;
     private String name;
-    private int age;
-    private String job;
+    //    private int age;
+    private String mails;
     private String password;
     private String position;
 
-    public User(int id, String name, int age, String job, String password, String position) {
+    public User(int id, String name, String mails, String password, String position) {
         this.id = id;
         this.name = name;
-        this.age = age;
-        this.job = job;
+        this.mails = mails;
         this.password = password;
         this.position = position;
     }
@@ -41,20 +40,12 @@ public class User implements Serializable {
         this.name = name;
     }
 
-    public int getAge() {
-        return age;
+    public String getMails() {
+        return mails;
     }
 
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public String getJob() {
-        return job;
-    }
-
-    public void setJob(String job) {
-        this.job = job;
+    public void setMails(String mails) {
+        this.mails = mails;
     }
 
     public String getPassword() {
@@ -71,18 +62,6 @@ public class User implements Serializable {
 
     public void setPosition(String position) {
         this.position = position;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", age=" + age +
-                ", job='" + job + '\'' +
-                ", password='" + password + '\'' +
-                ", position='" + position + '\'' +
-                '}';
     }
 
     public User() {

@@ -7,7 +7,9 @@ import com.abc.account.pojo.FamilyPosition;
 import com.abc.account.pojo.Kind;
 import com.abc.account.pojo.User;
 import com.abc.account.service.UserService;
+import com.abc.account.util.MailUtil;
 import org.apache.commons.lang.StringUtils;
+import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,42 +84,37 @@ public class LoginController {
     public String userRegisterpage() {
         return "user/register";
     }
+  //  完善用户信息页面
+    @RequestMapping("/fullinformationpage")
+    public String fullinformationpage() {
+        return "user/information";
+    }
 
     //    新注册用户交易
     @RequestMapping("/userRegister")
     @ResponseBody
     public int userRegister(
-            @RequestParam("username") String username,
-            @RequestParam("age") int age,
-            @RequestParam("job") String job,
-            @RequestParam("password") String password,
-            @RequestParam("position") String position,
+            @RequestParam("mails") String mails,
             HttpServletRequest request) {
 
         User user = new User();
         int flag = 0;
+        user.setMails(mails);
+//        user.setName("");
+//        user.setPosition("");
+//        user.setPassword("");
+//        User user1 = userService.login1(user);
 
-        user.setAge(age);
-        user.setJob(job);
-        user.setName(username);
-        user.setPassword(password);
-        user.setPosition(position);
-        User user1 = userService.login1(user);
-
-        if (user1 == null) {
-            int i = userService.addUser(user);
-            if (i == 1) {
-                flag = 1;
-                logger.info(this.getClass() + "注册成功！");
-            } else {
-                flag = 0;
-                logger.info(this.getClass() + "注册失败！");
-            }
-
+        int i = userService.addUser(user);
+        if (i == 1) {
+            flag = 1;
+            logger.info(this.getClass() + "注册成功！");
         } else {
-            flag = -1;
-            logger.info(this.getClass() + "该姓名已经注册");
+            flag = 0;
+            logger.info(this.getClass() + "注册失败！");
         }
+
+
         return flag;
 
     }
@@ -160,7 +157,7 @@ public class LoginController {
             return flag;
         }
         user.setName(userName);
-        User user1 = userService.login1(user);
+        User user1 = userService.selectByName(user);
 
         if (user1 != null) {
             user1.setPassword(password);
@@ -180,7 +177,6 @@ public class LoginController {
     }
 
 
-
     //通过姓名查询
     @RequestMapping("/findByName")
     @ResponseBody
@@ -189,13 +185,36 @@ public class LoginController {
         try {
             User user = new User();
             user.setName(username);
-            User user1 = userService.login1(user);
+            User user1 = userService.selectByName(user);
             if (user1 != null) {
                 flag = -1;
                 logger.info(this.getClass() + "该用户 [" + user1.getName() + "] 存在");
                 return flag;
             }
             logger.info(this.getClass() + "该用户 [" + username + "] 不存在");
+            return 0;
+        } catch (Exception e) {
+            logger.error("错误原因" + e.getCause());
+            logger.error("错误信息" + e.getMessage());
+            return 999;
+        }
+
+    }
+ //通过邮箱查询
+    @RequestMapping("/findByEmail")
+    @ResponseBody
+    public int findByEmail(@RequestParam("mails") String mails) {
+        int flag;
+        try {
+            User user = new User();
+            user.setMails(mails);
+            User user1 = userService.selectByEmail(user);
+            if (user1 != null) {
+                flag = -1;
+                logger.info(this.getClass() + "该邮箱 [" + user1.getMails() + "] 已注册");
+                return flag;
+            }
+            logger.info(this.getClass() + "该邮箱 [" + mails + "] 可用");
             return 0;
         } catch (Exception e) {
             logger.error("错误原因" + e.getCause());
@@ -233,6 +252,20 @@ public class LoginController {
     public String loginOut(HttpServletRequest request) {
         request.getSession().setAttribute("user_session", null);
         return "forward:/user/loginHtml";
+    }
+
+    //    获取邮箱验证码
+    @ResponseBody
+    @RequestMapping("/getIcode")
+    public String getIcode(
+            HttpServletRequest request,
+            @Param("mails") String mails) {
+
+        String random = (int) ((Math.random() * 9 + 1) * 100000) + "";
+        logger.info("生成的验证码=" + random);
+        MailUtil.sendMail(mails, random);
+        request.getSession().setAttribute("icode", random);
+        return random;
     }
 
 }

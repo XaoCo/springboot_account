@@ -170,10 +170,10 @@ public class ReadLine {
 
 //         模拟数据
         List<User> list = new ArrayList<User>();
-        list.add(new User(11, "zs", 12, "it", "1234","qqq"));
-        list.add(new User(12, "zs1", 12, "it", "1234","qqq"));
-        list.add(new User(13, "zs2", 12, "it", "1234","qqq"));
-        list.add(new User(14, "zs3", 12, "it", "1234","qqq"));
+//        list.add(new User(11, "zs",  "1234","qqq"));
+//        list.add(new User(12, "zs1",  "1234","qqq"));
+//        list.add(new User(13, "zs2", "1234","qqq"));
+//        list.add(new User(14, "zs3", "1234","qqq"));
 
 
         for (int i = 0; i < list.size(); i++) {
@@ -191,11 +191,7 @@ public class ReadLine {
                     cell1.setCellValue(user.getId());
                 } else if (j == 1) {
                     cell1.setCellValue(user.getName());
-                } else if (j == 2) {
-                    cell1.setCellValue(user.getAge());
-                } else if (j == 3) {
-                    cell1.setCellValue(user.getJob());
-                } else if (j == 4) {
+                }else if (j == 4) {
                     cell1.setCellValue(user.getPassword());
                 }
             }

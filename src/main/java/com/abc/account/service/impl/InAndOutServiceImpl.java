@@ -44,4 +44,24 @@ public class InAndOutServiceImpl implements InAndOutService {
     public int delRecord(int id) {
         return inAndOutMapper.delRecord(id);
     }
+
+    @Override
+    public String findAllIn(String username) {
+        return inAndOutMapper.findAllIn(username);
+    }
+
+    @Override
+    public String findAllOut(String username) {
+        return inAndOutMapper.findAllOut(username);
+    }
+
+    @Override
+    public List<InAndOut> getAllOut(String username) {
+        return inAndOutMapper.getAllOut(username);
+    }
+
+    @Override
+    public List<InAndOut> getAllIn(String username) {
+        return inAndOutMapper.getAllIn(username);
+    }
 }
