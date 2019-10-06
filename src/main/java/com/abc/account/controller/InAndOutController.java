@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * package: com.abc.account.controller
@@ -46,16 +48,35 @@ public class InAndOutController {
         List<InAndOut> inAndOuts = inAndOutService.selRecord(inAndOut);
         return inAndOuts;
     }
+
+//        查询所有用户的收支记录(饼图)
+    @RequestMapping("/findAllCount")
+    @ResponseBody
+    public Map<String,String> findAllCount(
+            HttpServletRequest request,
+            int flag) {
+        User user_session = (User) request.getSession().getAttribute("user_session");
+        Map<String,String> map = new HashMap<String, String>() ;
+
+        if(flag==0){//0 代表查询柱状图,1代表支出饼状图,2代表收入饼图
+//            查询该用户的收入
+            String  allIn = inAndOutService.findAllIn(user_session.getName());
+//        查询该用户的开支
+            String allOut = inAndOutService.findAllOut(user_session.getName());
+            map.put("收入",allIn);
+            map.put("开支",allOut);
+
+        }else if (flag==1){
+            List<InAndOut> allOut = inAndOutService.getAllOut(user_session.getName());
+            for (InAndOut inAndOut:allOut) {
+                map.put(inAndOut.getK_name(),inAndOut.getCharge());
+            }
+        }else {
+            List<InAndOut> allIn = inAndOutService.getAllIn(user_session.getName());
+        }
 //
-    //    查询所有用户的收支记录
-//    @RequestMapping("/findAllout")
-//    public void selAllRecord(
-//            HttpServletRequest request) {
-//        User user_session = (User) request.getSession().getAttribute("user_session");
-//
-//        int flag = 0;
-//        List<InAndOut> inAndOuts = inAndOutService.selAllRecord();
-//    }
+        return map;
+    }
 
 
     //     增添一条支出记录

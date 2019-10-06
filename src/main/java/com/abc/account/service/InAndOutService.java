@@ -25,4 +25,16 @@ public interface InAndOutService {
 
     //    删除一条记录
     int delRecord(int id);
+
+    //    总收入
+    String findAllIn(String username);
+
+    //    总开支
+    String findAllOut(String username);
+
+    //    开支明细
+    List<InAndOut> getAllOut(String username);
+
+    //    收入明细
+    List<InAndOut> getAllIn(String username);
 }

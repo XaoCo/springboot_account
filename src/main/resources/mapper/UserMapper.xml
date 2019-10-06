@@ -6,11 +6,10 @@
     <resultMap id="userRestMap" type="com.abc.account.pojo.User">
         <id column="U_ID" property="id"/>
         <result column="U_NAME" property="name"/>
-        <result column="U_AGE" property="age"/>
-        <result column="U_JOB" property="job"/>
+        <result column="U_EMAIL" property="mails"/>
+        <!--<result column="U_JOB" property="job"/>-->
         <result column="U_PASSWORD" property="password"/>
         <result column="U_POSITION" property="position"/>
-        <!--<result column="U_IDENTITY_CARD" property="identityCard"/>-->
     </resultMap>
     <resultMap id="familyPosition" type="com.abc.account.pojo.FamilyPosition">
         <id column="POSITION_ID" property="id"/>
@@ -22,25 +21,28 @@
         SELECT * FROM A_USER WHERE U_NAME = #{name} AND U_PASSWORD = #{password}
     </select>
 
- <!--获取所有position-->
-    <select id="findAllPosition"  resultMap="familyPosition">
+    <!--获取所有position-->
+    <select id="findAllPosition" resultMap="familyPosition">
         select * from A_POSITION
     </select>
 
     <!--查询用户-->
-    <select id="login1" parameterType="com.abc.account.pojo.User" resultMap="userRestMap">
+    <select id="selectByName" parameterType="com.abc.account.pojo.User" resultMap="userRestMap">
         SELECT * FROM A_USER WHERE U_NAME = #{name}
+    </select>
+    <!--查询用户-->
+    <select id="selectByEmail" parameterType="com.abc.account.pojo.User" resultMap="userRestMap">
+        SELECT * FROM A_USER WHERE U_EMAIL = #{mails}
     </select>
 
     <!--注册用户-->
     <insert id="addUser" parameterType="com.abc.account.pojo.User">
         INSERT INTO A_USER VALUES (
             USER_SEQ.nextval,
-            #{name},
-            #{age},
-            #{job},
-            #{password},
-            #{position}
+            #{name,jdbcType=VARCHAR},
+            #{password,jdbcType=VARCHAR},
+            #{position,jdbcType=VARCHAR},
+            #{mails,jdbcType=VARCHAR}
         )
     </insert>
 
@@ -49,7 +51,7 @@
         UPDATE A_USER  SET U_PASSWORD = #{password}
          WHERE U_NAME = #{name}
     </update>
- <!--修改个人信息-->
+    <!--修改个人信息-->
     <update id="modifyInformation">
         UPDATE A_USER  SET U_JOB = #{job}
          WHERE U_NAME = #{name}

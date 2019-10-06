@@ -15,8 +15,10 @@ public interface UserService {
     //    用户登录
     User login(User user);
 
-    //    用户查询
-    User login1(User user);
+    //    用户通过name查询
+    User selectByName(User user);
+//    用户通过email查询
+    User selectByEmail(User user);
 
     //    用户注册
     int addUser(User user);

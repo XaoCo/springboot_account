@@ -68,14 +68,16 @@ var option1 = {
             color: 'black', // 默认取轴线的颜色
 
         },
-        data: ['收入', '支出']
+        data: []
     },
     yAxis: {
         show: true,  // 是否显示
         position: 'left', // y轴位置
         offset: 0, // y轴相对于默认位置的偏移
         type: 'value',  // 轴类型，默认为 ‘category’
-        name: '金额',   // 轴名称
+        name: '金额 单位(元)',   // 轴名称
+        max:'14000',
+        splitNumber : 7,
         nameLocation: 'end', // 轴名称相对位置value
         nameTextStyle: {    // 坐标轴名称样式
             color: 'black',
@@ -127,9 +129,12 @@ var option1 = {
             show: false   // 是否显示，默认为false
         }
     },
+    grid:{
+      left:60
+    },
     series: [{
-        data: [120, 200],
-        name: '销量',      // 序列名称
+        data: [],
+        name: '',      // 序列名称
         type: 'bar',      // 类型
         legendHoverLink: true,  // 是否启用图列 hover 时的联动高亮
         label: {   // 图形上的文本标签
@@ -147,6 +152,8 @@ var option1 = {
     }]
 };
 myChart1.setOption(option1);
+
+
 //together收支柱状图
 var myChart4 = echarts.init(document.getElementById('demo4'));
 
@@ -537,6 +544,8 @@ window.onload = function () {
     newinformValidator();
     changepwdformValidator();
     historygoal();
+    findAllCount();
+    getAllOut();
     // getAllOutKind();
     // getAllInKind();
     // getAllPreKind();
@@ -1391,22 +1400,20 @@ function historygoal() {
     $("#preouthisdiv").attr("style", "display:none;");//隐藏div
     $("#inhisdiv").attr("style", "display:none;");//隐藏div
     $("#goalhisdiv").attr("style", "display:block;");//显示div
-    debugger;
     $.ajax({
         url: "/goal/findAllGoals",
         success: function (data) {
-            debugger;
             console.log(data);
             $("#goalhistbody").find("tr").remove();
             for (var i = 0; i < data.length; i++) {
 
                 var tr = $("<tr></tr>");
-                tr.html("<td><textarea class=\"text-area width: 100% \"  readonly>" + data[i].goalName + "</textarea></td>" +
+                tr.html("<td>" + data[i].goalName + "</td>" +
                     "<td>" + data[i].goalPercent + "</td>" +
                     "<td>" + data[i].goalTotal + "</td>" +
                     "<td>" + data[i].process + "</td>" +
                     "<td>" + data[i].endDate + "</td>" +
-                    "<td><button type=\"button\" class=\"btn \" id=\"okrmodify\" onclick=\"okrmodify()\">\n" +
+                    "<td><button type=\"button\" class=\"btn \" id=\"hisgoalmof\" onclick=\"hisgoalmof()\">\n" +
                     "                            <span class=\"glyphicon glyphicon-edit\" " +
                     "style=\"padding-right: 0.3vw\"></span>修改\n" +
                     "                        </button>&nbsp;&nbsp;<button type=\"button\" class=\"btn \" id=\"okrcancel\" onclick=\"okrcancel()\">\n" +
@@ -1427,11 +1434,9 @@ function historyout() {
     $("#preouthisdiv").attr("style", "display:none;");//隐藏div
     $("#inhisdiv").attr("style", "display:none;");//隐藏div
     $("#outhisdiv").attr("style", "display:block;");//显示div
-    debugger;
     $.ajax({
         url: "/record/selRecord?flag=0",
         success: function (data) {
-            debugger;
             console.log(data);
             $("#outhistbody").find("tr").remove();
             for (var i = 0; i < data.length; i++) {
@@ -1462,11 +1467,9 @@ function hispreout() {
     $("#outhisdiv").attr("style", "display:none;");//隐藏div
     $("#inhisdiv").attr("style", "display:none;");//隐藏div
     $("#preouthisdiv").attr("style", "display:block;");//显示div
-    debugger;
     $.ajax({
         url: "/record/selRecord?flag=3",
         success: function (data) {
-            debugger;
             console.log(data);
             $("#preouthistbody").find("tr").remove();
             for (var i = 0; i < data.length; i++) {
@@ -1497,11 +1500,9 @@ function historyin() {
     $("#outhisdiv").attr("style", "display:none;");//隐藏div
     $("#preouthisdiv").attr("style", "display:none;");//隐藏div
     $("#inhisdiv").attr("style", "display:block;");//显示div
-    debugger;
     $.ajax({
         url: "/record/selRecord?flag=1",
         success: function (data) {
-            debugger;
             console.log(data);
             $("#inhistbody").find("tr").remove();
             for (var i = 0; i < data.length; i++) {
@@ -1524,4 +1525,73 @@ function historyin() {
 
         }
     })
+}
+
+function findAllCount() {
+
+       $.ajax({
+          url:"/record/findAllCount?flag=0",
+           success:function (data) {
+               console.log("data:"+data);
+               var names=[];    //（实际用来盛放X轴坐标值）
+               var nums=[];    //（实际用来盛放Y坐标值）
+                   for(var key in data){
+                       console.log("key="+key)
+                       console.log("value="+data[key]);
+                       names.push(key);
+                       nums.push(data[key]);
+                   }
+               myChart1.setOption({        //加载数据图表
+                   xAxis: {
+                       data: names
+                   },
+                   series: [{
+                       // 根据名字对应到相应的系列
+                       // name: '金钱数',
+                       data: nums
+                   }]
+               });
+
+           }
+       })
+
+}
+function getAllOut() {
+
+       $.ajax({
+          url:"/record/findAllCount?flag=1",
+           success:function (data) {
+               console.log("data:"+data);
+               var names=[];    //（实际用来盛放X轴坐标值）
+               var nums=[];    //（实际用来盛放Y坐标值）
+                   for(var key in data){
+                       console.log("key="+key)
+                       var obj = new Object();
+                       console.log("value="+data[key]);
+                       names.push(key);
+                       obj.name=key;
+                       obj.value = data[key]
+                       nums.push(obj);
+                   }
+               myChart6.setOption({        //加载数据图表
+                   legend: {
+                       orient: 'vertical',
+                       left: 'left',
+                       data: names
+                   },
+
+                   series:
+                       {
+                           name: '开支明细',
+                           type: 'pie',
+                           radius: '55%',
+                           center: ['50%', '60%'],
+                           data: nums
+
+                       }
+               });
+
+           }
+       })
+
 }

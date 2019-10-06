@@ -53,7 +53,7 @@ public class UserController {
         user.setPassword(passwordNew);
         user.setName(user_session.getName());
         //  判断该客户是否存在
-        User user1 = userService.login1(user);
+        User user1 = userService.selectByName(user);
 
         int flag = -1;
         if (user1 != null) {
@@ -117,7 +117,7 @@ public class UserController {
         int flag;
         User user = new User();
         user.setName(username);
-        User user1 = userService.login1(user);
+        User user1 = userService.selectByName(user);
         if (user1 != null) {
             flag = -1;
             logger.info(this.getClass() + "该用户存在" + user1.toString());
@@ -131,13 +131,13 @@ public class UserController {
     @RequestMapping("/confirmInformation")
     @ResponseBody
     public int confirmInformation(
-            @RequestParam("userjob") String userjob,
+//            @RequestParam("userjob") String userjob,
             HttpServletRequest request) {
         int flag = -1;
         User user_session = (User) request.getSession().getAttribute("user_session");
         User user = new User();
         user.setName(user_session.getName());
-        user.setJob(userjob);
+//        user.setJob(userjob);
         int i = userService.modifyInformation(user);
         if (i <= 0) {
             flag = 0;
@@ -154,7 +154,7 @@ public class UserController {
         User user = new User();
         User user_session = (User) request.getSession().getAttribute("user_session");
         user.setName(user_session.getName());
-        User user1 = userService.login1(user);
+        User user1 = userService.selectByName(user);
 //        logger.info("基本信息:" + user1.toString());
         return user1;
     }
