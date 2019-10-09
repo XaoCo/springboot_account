@@ -76,8 +76,8 @@ var option1 = {
         offset: 0, // y轴相对于默认位置的偏移
         type: 'value',  // 轴类型，默认为 ‘category’
         name: '金额 单位(元)',   // 轴名称
-        max:'14000',
-        splitNumber : 7,
+        max: '14000',
+        splitNumber: 7,
         nameLocation: 'end', // 轴名称相对位置value
         nameTextStyle: {    // 坐标轴名称样式
             color: 'black',
@@ -129,8 +129,8 @@ var option1 = {
             show: false   // 是否显示，默认为false
         }
     },
-    grid:{
-      left:60
+    grid: {
+        left: 60
     },
     series: [{
         data: [],
@@ -486,7 +486,17 @@ function okrmodify() {
 
 //个人信息编辑
 function informationmodify() {
-    $("#userjob").removeAttr("readonly")
+    $("#username").removeAttr("readonly");
+    $("#userposition").removeAttr("readonly")
+    $.ajax({
+        url: "/login/findAllPosition",
+        success: function (data) {
+            console.log("AllPosition=" + data);
+            for (var i = 0; i < data.length; i++) {
+                $("#userposition").append($("<option value=\"" + data[i] + "\">" + data[i] + "</option>"));
+            }
+        }
+    })
 };
 
 //okr确认
@@ -499,7 +509,7 @@ function okrconfirm() {
 
 //个人信息确认
 function informationconfirm() {
-    $("#userjob").attr("readonly", "readonly");
+    $("#username").attr("readonly", "readonly");
     $.ajax({
         url: "/user/confirmInformation",
         data: $("#personalmsgform").serialize(),
@@ -507,10 +517,18 @@ function informationconfirm() {
             if (data == 1) {
                 bootbox.alert({
                     message: '个人信息更新成功！',
-                    size: 'small'
-                    // callback: function () {
-                    //     window.location.href = '#mdfpwdpage';
-                    // },
+                    size: 'small',
+                    callback: function () {
+                        window.location.href = '/user/indexPage';
+                    },
+                });
+            }else {
+                bootbox.alert({
+                    message: '个人信息更新失败！',
+                    size: 'small',
+                    callback: function () {
+                        window.location.href = '/user/indexPage';
+                    },
                 });
             }
         }
@@ -1334,20 +1352,26 @@ function changepwdformValidator() {
 
 //获取个人信息
 function findInformation() {
-    // $("#userjob").attr("readonly", "readonly");
-    $("#userjob").removeAttr("readonly");
     document.getElementById("personalmsgform").reset();
+    // $("#userjob").attr("readonly", "readonly");
+    $("#username").removeAttr("readonly");
+    // document.getElementById("personalmsgform").reset();
     $.ajax({
         url: "/user/findInformation",
         success: function (data) {
+            debugger;
 
             console.log("基本信息=" + data);
-            $("#username").attr("value", data.name);
+            $("#email").attr("value", data.mails);
             $("#mdfpwdsername").attr("value", data.name);
-            $("#userjob").attr("value", data.job);
-            $("#userjob").attr("readonly", "readonly");
+            $("#username").attr("value", data.name);
+
+            $("#username").attr("readonly", "readonly");
+            // $("#userposition").attr("value", data.position);
+
             $("#userposition").append($("<option value=\"" + data.position + "\">" + data.position + "</option>"));
 
+            $("#userposition").attr("readonly", "readonly");
         }
     })
 }
@@ -1529,69 +1553,70 @@ function historyin() {
 
 function findAllCount() {
 
-       $.ajax({
-          url:"/record/findAllCount?flag=0",
-           success:function (data) {
-               console.log("data:"+data);
-               var names=[];    //（实际用来盛放X轴坐标值）
-               var nums=[];    //（实际用来盛放Y坐标值）
-                   for(var key in data){
-                       console.log("key="+key)
-                       console.log("value="+data[key]);
-                       names.push(key);
-                       nums.push(data[key]);
-                   }
-               myChart1.setOption({        //加载数据图表
-                   xAxis: {
-                       data: names
-                   },
-                   series: [{
-                       // 根据名字对应到相应的系列
-                       // name: '金钱数',
-                       data: nums
-                   }]
-               });
+    $.ajax({
+        url: "/record/findAllCount?flag=0",
+        success: function (data) {
+            console.log("data:" + data);
+            var names = [];    //（实际用来盛放X轴坐标值）
+            var nums = [];    //（实际用来盛放Y坐标值）
+            for (var key in data) {
+                console.log("key=" + key)
+                console.log("value=" + data[key]);
+                names.push(key);
+                nums.push(data[key]);
+            }
+            myChart1.setOption({        //加载数据图表
+                xAxis: {
+                    data: names
+                },
+                series: [{
+                    // 根据名字对应到相应的系列
+                    // name: '金钱数',
+                    data: nums
+                }]
+            });
 
-           }
-       })
+        }
+    })
 
 }
+
 function getAllOut() {
 
-       $.ajax({
-          url:"/record/findAllCount?flag=1",
-           success:function (data) {
-               console.log("data:"+data);
-               var names=[];    //（实际用来盛放X轴坐标值）
-               var nums=[];    //（实际用来盛放Y坐标值）
-                   for(var key in data){
-                       console.log("key="+key)
-                       var obj = new Object();
-                       console.log("value="+data[key]);
-                       names.push(key);
-                       obj.name=key;
-                       obj.value = data[key]
-                       nums.push(obj);
-                   }
-               myChart6.setOption({        //加载数据图表
-                   legend: {
-                       orient: 'vertical',
-                       left: 'left',
-                       data: names
-                   },
+    $.ajax({
+        url: "/record/findAllCount?flag=1",
+        success: function (data) {
+            console.log("data:" + data);
+            var names = [];    //（实际用来盛放X轴坐标值）
+            var nums = [];    //（实际用来盛放Y坐标值）
+            for (var key in data) {
+                console.log("key=" + key)
+                var obj = new Object();
+                console.log("value=" + data[key]);
+                names.push(key);
+                obj.name = key;
+                obj.value = data[key]
+                nums.push(obj);
+            }
+            myChart6.setOption({        //加载数据图表
+                legend: {
+                    orient: 'vertical',
+                    left: 'left',
+                    data: names
+                },
 
-                   series:
-                       {
-                           name: '开支明细',
-                           type: 'pie',
-                           radius: '55%',
-                           center: ['50%', '60%'],
-                           data: nums
+                series:
+                    {
+                        name: '开支明细',
+                        type: 'pie',
+                        radius: '55%',
+                        center: ['50%', '60%'],
+                        data: nums
 
-                       }
-               });
+                    }
+            });
 
-           }
-       })
+        }
+    })
 
 }

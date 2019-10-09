@@ -131,13 +131,16 @@ public class UserController {
     @RequestMapping("/confirmInformation")
     @ResponseBody
     public int confirmInformation(
-//            @RequestParam("userjob") String userjob,
+            @RequestParam("email") String email,
+            @RequestParam("username") String username,
+            @RequestParam("userposition") String userposition,
             HttpServletRequest request) {
         int flag = -1;
-        User user_session = (User) request.getSession().getAttribute("user_session");
+//        User user_session = (User) request.getSession().getAttribute("user_session");
         User user = new User();
-        user.setName(user_session.getName());
-//        user.setJob(userjob);
+        user.setMails(email);
+        user.setName(username);
+        user.setPosition(userposition);
         int i = userService.modifyInformation(user);
         if (i <= 0) {
             flag = 0;
@@ -153,8 +156,8 @@ public class UserController {
     public User findInformation(HttpServletRequest request) {
         User user = new User();
         User user_session = (User) request.getSession().getAttribute("user_session");
-        user.setName(user_session.getName());
-        User user1 = userService.selectByName(user);
+        user.setMails(user_session.getMails());
+        User user1 = userService.selectByEmail(user);
 //        logger.info("基本信息:" + user1.toString());
         return user1;
     }

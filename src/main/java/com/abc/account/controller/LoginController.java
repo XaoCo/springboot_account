@@ -60,6 +60,7 @@ public class LoginController {
 
         User user1 = new User();
         user1.setName(username);
+        user1.setMails(username);
         user1.setPassword(password);
 
         User user = userService.login(user1);
@@ -84,7 +85,9 @@ public class LoginController {
     public String userRegisterpage() {
         return "user/register";
     }
-  //  完善用户信息页面
+
+
+    //  完善用户信息页面
     @RequestMapping("/fullinformationpage")
     public String fullinformationpage() {
         return "user/information";
@@ -95,11 +98,13 @@ public class LoginController {
     @ResponseBody
     public int userRegister(
             @RequestParam("mails") String mails,
+            @RequestParam("password") String password,
             HttpServletRequest request) {
 
         User user = new User();
         int flag = 0;
         user.setMails(mails);
+        user.setPassword(password);
 //        user.setName("");
 //        user.setPosition("");
 //        user.setPassword("");
@@ -108,10 +113,91 @@ public class LoginController {
         int i = userService.addUser(user);
         if (i == 1) {
             flag = 1;
+            request.getSession().setAttribute("email_session", mails);
             logger.info(this.getClass() + "注册成功！");
         } else {
             flag = 0;
             logger.info(this.getClass() + "注册失败！");
+        }
+        return flag;
+
+    }
+
+    //    完善信息交易
+    @RequestMapping("/allinformation")
+    @ResponseBody
+    public int allinformation(
+            @RequestParam("username") String username,
+            @RequestParam("userstatus") String userstatus,
+
+            HttpServletRequest request) {
+
+        User user = new User();
+        int flag = 0;
+        String email_session = (String) request.getSession().getAttribute("email_session");
+        if (StringUtils.isBlank(email_session)) {
+            flag = -1;
+        } else {
+            user.setMails(email_session);
+            user.setPosition(userstatus);
+            user.setName(username);
+//        user.setName("");
+//        user.setPosition("");
+//        user.setPassword("");
+//        User user1 = userService.login1(user);
+
+            int i = userService.modifyInformation(user);
+            if (i == 1) {
+                flag = 1;
+                logger.info(this.getClass() + "完善信息成功！");
+            } else {
+                flag = 0;
+                logger.info(this.getClass() + "完善信息失败！");
+            }
+        }
+
+
+        return flag;
+
+    }
+
+    //   获取session
+    @RequestMapping("/getemail_session")
+    @ResponseBody
+    public int getemail_session(
+            HttpServletRequest request) {
+
+        int flag = 0;
+        String email_session = (String) request.getSession().getAttribute("email_session");
+        if (StringUtils.isBlank(email_session)) {
+            flag = -1;
+        }
+
+
+        return flag;
+
+    }
+
+    //   找回用户名
+    @RequestMapping("/findUserName")
+    @ResponseBody
+    public int findUserName(
+            @Param("email") String email,
+            HttpServletRequest request) {
+
+        int flag = 0;
+        User user = new User();
+        user.setMails(email);
+        User user1 = userService.findUserName(user);
+        if (null == user1) {
+            flag = -2;
+        } else {
+            if (StringUtils.isBlank(user1.getName())) {
+                flag = -1;
+            } else {
+                logger.info(user1.getName());
+                MailUtil.sendMail(email, user1.getName());
+            }
         }
 
 
@@ -144,35 +230,26 @@ public class LoginController {
     @RequestMapping("/findPwd")
     @ResponseBody
     public int findPwd(
-            @RequestParam("username") String userName,
-            @RequestParam("password") String password) {
+            @RequestParam("email1") String email1,
+            @RequestParam("password1") String password1) {
         int flag;
         User user = new User();
-        if (StringUtils.isBlank(userName)) {
-            flag = -2;
-            return flag;
-        }
-        if (StringUtils.isBlank(password)) {
-            flag = -2;
-            return flag;
-        }
-        user.setName(userName);
-        User user1 = userService.selectByName(user);
+        user.setName(email1);
+        user.setMails(email1);
 
-        if (user1 != null) {
-            user1.setPassword(password);
-            int i = userService.updPassword(user1);
+        User user1 = userService.selectByNameOrEmail(user);
+        if (null == user1) {
+            flag = -2;
+        } else {
+            user.setPassword(password1);
+            int i = userService.updPassword(user);
             if (i <= 0) {
                 flag = -1;
-                return flag;
             } else {
                 flag = 1;
-                return flag;
             }
-        } else {
-            flag = 0;
-            return flag;
         }
+        return flag;
 
     }
 
@@ -200,7 +277,8 @@ public class LoginController {
         }
 
     }
- //通过邮箱查询
+
+    //通过邮箱查询
     @RequestMapping("/findByEmail")
     @ResponseBody
     public int findByEmail(@RequestParam("mails") String mails) {
@@ -223,6 +301,32 @@ public class LoginController {
         }
 
     }
+
+    //通过姓名或者邮箱查询
+    @RequestMapping("/findByNameOrEmail")
+    @ResponseBody
+    public int findByNameOrEmail(@RequestParam("username") String username) {
+        int flag;
+        try {
+            User user = new User();
+            user.setName(username);
+            user.setMails(username);
+            User user1 = userService.selectByNameOrEmail(user);
+            if (user1 != null) {
+                flag = -1;
+                logger.info(this.getClass() + "该用户存在");
+                return flag;
+            }
+            logger.info(this.getClass() + "该用户不存在");
+            return 0;
+        } catch (Exception e) {
+            logger.error("错误原因" + e.getCause());
+            logger.error("错误信息" + e.getMessage());
+            return 999;
+        }
+
+    }
+
 
     private static Pattern NUMBER_PATTERN = Pattern.compile("-?[0-9]+(\\.[0-9]+)?");
 

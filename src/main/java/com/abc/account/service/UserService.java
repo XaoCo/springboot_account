@@ -19,6 +19,8 @@ public interface UserService {
     User selectByName(User user);
 //    用户通过email查询
     User selectByEmail(User user);
+//    用户通过email查询
+    User selectByNameOrEmail(User user);
 
     //    用户注册
     int addUser(User user);
@@ -37,6 +39,9 @@ public interface UserService {
 
 //    修改信息
     int modifyInformation(User user);
+
+//    找回用户名
+    User findUserName(User user);
 
 
 }

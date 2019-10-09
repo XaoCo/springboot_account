@@ -1,14 +1,14 @@
-function checkName2() {
+function checkName() {
     $.ajax({
         url: "/login/findByName",
-        data: $("#registerForm").serialize(),
+        data: $("#informationForm").serialize(),
         success: function (data) {
             if (data == -1) {
                 bootbox.alert({
-                    message: '该用户已经注册，请直接登录或者更换新的姓名！',
+                    message: '该昵称已经注册，请更换新的昵称！',
                     size: 'small',
                     callback: function () {
-                        window.location.href = '/login/registerpage';
+                        window.location.href = '/login/fullinformationpage';
                     },
                 });
             }
@@ -16,14 +16,20 @@ function checkName2() {
     })
 }
 
-function register() {
-    $("#registerForm").bootstrapValidator('validate');//提交验证
+function confirmok() {
+    $('#informationForm').on('hidden.bs.modal', function () {
+        $("#informationForm").data('bootstrapValidator').destroy();
+        $('#informationForm').data('bootstrapValidator', null);
+        informationFormValidator();
+    });
+
+    $("#informationForm").bootstrapValidator('validate');//提交验证
     // $('#registerForm').data('bootstrapValidator').validate();
-    if ($("#registerForm").data('bootstrapValidator').isValid()) {//获取验证结果，如果成功，执行下面代码
+    if ($("#informationForm").data('bootstrapValidator').isValid()) {//获取验证结果，如果成功，执行下面代码
         // console.log("我进来了！");
         $.ajax({
-            url: "/login/userRegister",
-            data: $("#registerForm").serialize(),
+            url: "/login/allinformation",
+            data: $("#informationForm").serialize(),
             // dataType: "json",
             success: function (data) {
                 // console.log("我又进来了！");
@@ -31,59 +37,84 @@ function register() {
                 console.log("data=" + data);
                 if (data == 1) {
                     bootbox.alert({
-                        message: '注册成功，请完善信息',
-                        size: 'small',
-                        callback: function () {
-                            window.location.href = '/login/fullinformationpage';
-                        },
-                    });
-                } else if (data == 0) {
-                    bootbox.alert({
-                        message: '注册失败，请检查！',
-                        size: 'small',
-                        callback: function () {
-                            window.location.href = '/login/registerpage';
-                        },
-                    });
-                } else {
-                    bootbox.alert({
-                        message: '该姓名已经注册，请直接登录！',
+                        message: '完善信息成功,请登录',
                         size: 'small',
                         callback: function () {
                             window.location.href = '/login/loginHtml';
                         },
                     });
+                } else if (data == -1) {
+                    bootbox.alert({
+                        message: '该网页已过期,请重新注册！',
+                        size: 'small',
+                        callback: function () {
+                            window.location.href = '/login/registerpage';
+                        },
+                    });
 
+                } else {
+                    bootbox.alert({
+                        message: '完善信息失败,请检查！',
+                        size: 'small',
+                        callback: function () {
+                            window.location.href = '/login/fullinformationpage';
+                        },
+                    });
                 }
 
 
             }
         })
     } else {
+        // document.getElementById("informationForm").reset();
+        // window.location.href = '/login/fullinformationpage';
     }
 }
 
 window.onload = function () {
-    // getposition();
-    // registerformValidator();
+    getposition();
+    informationFormValidator();
+    getemail_session();
 }
 
-//获取家庭地位
+//获取position
 function getposition() {
     $.ajax({
         url: "/login/findAllPosition",
         success: function (data) {
             console.log("AllPosition=" + data);
             for (var i = 0; i < data.length; i++) {
-                $("#position").append($("<option value=\"" + data[i] + "\">" + data[i] + "</option>"));
+                $("#userstatus").append($("<option value=\"" + data[i] + "\">" + data[i] + "</option>"));
             }
         }
     })
 }
 
-// function registerformValidator() {
+//获取session
+function getemail_session() {
+    $.ajax({
+        url: "/login/getemail_session",
+        success: function (data) {
+            debugger;
+            console.log("AllPosition=" + data);
+            if (data == -1) {
+                bootbox.alert({
+                    message: '该网页已过期,请重新加载！',
+                    size: 'small',
+                    callback: function () {
+                        window.location.href = '/login/registerpage';
+                    },
+                });
 
-    $("#registerForm").bootstrapValidator({
+            }
+
+        }
+    })
+}
+
+function informationFormValidator() {
+
+    $("#informationForm").bootstrapValidator({
 
         live: 'enabled',//验证时机，enabled是内容有变化就验证（默认），disabled和submitted是提交再验证
 
@@ -97,55 +128,34 @@ function getposition() {
 
             valid: 'glyphicon glyphicon-ok',
 
-            // invalid: 'glyphicon glyphicon-remove',
+            invalid: 'glyphicon glyphicon-remove',
 
             validating: 'glyphicon glyphicon-refresh'
 
         },
         fields: {
 
-            mails: {
+            username: {
 
                 validators: {
 
                     notEmpty: {//检测非空,radio也可用
 
-                        message: '邮箱地址必须输入'
+                        message: '昵称必须输入'
 
                     },
-                    regexp: {
-                        regexp: /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/,
-                        message: '请输入正确的邮箱地址'
+                    stringLength: {//检测长度
+
+                        min: 2,
+
+                        max: 10,
+
+                        message: '昵称长度必须在2-10之间'
+
                     },
                 }
 
             },
-            code1: {},
-
-            code: {
-
-                validators: {
-
-                    notEmpty: {//检测非空,radio也可用
-
-                        message: '验证码不能为空'
-
-                    },
-                    identical: {//与指定文本框比较内容相同
-
-                        field: 'code1',
-
-                        message: '验证码输入有误'
-
-                    },
-                    // identical: {
-                    //     field: 'code1',
-                    //     message: 'The password and its confirm are not the same'
-                    // },
-                }
-
-            },
-
             password: {
                 validators: {
 
@@ -200,49 +210,47 @@ function getposition() {
                 }
 
             },
-
-
         }
 
     });
+}
+
+// function getIcode() {
+//     $.ajax({
+//         url: "/login/getIcode",
+//         data: $("#registerForm").serialize(),
+//         success: function (data) {
+//             console.log("验证码:" + data);
+//             $("#code1").val(data);
+//
+//             console.log("code1=" + $("#code1").val())
+//         }
+//     })
 // }
-
-function getIcode() {
-    $.ajax({
-        url: "/login/getIcode",
-        data: $("#registerForm").serialize(),
-        success: function (data) {
-            console.log("验证码:" + data);
-            $("#code1").val(data);
-
-            console.log("code1=" + $("#code1").val())
-        }
-    })
-}
-
-function checkEmailAddress() {
-    console.log("我进来了！！！");
-    $.ajax({
-        url: "/login/findByEmail",
-        data: $("#registerForm").serialize(),
-        success: function (data) {
-            if (data == -1) {
-                bootbox.alert({
-                    message: '该邮箱已经注册，请直接登录或者更换邮箱注册！',
-                    size: 'small',
-                    callback: function () {
-                        document.getElementById("registerForm").reset();
-                    },
-                });
-            } else if (data == 999) {
-                bootbox.alert({
-                    message: '数据库连接或者操作失败,请检查！',
-                    size: 'small',
-                    callback: function () {
-                        window.location.href = '/login/registerpage';
-                    },
-                });
-            }
-        }
-    })
-}
+//
+// function checkEmailAddress() {
+//     console.log("我进来了！！！");
+//     $.ajax({
+//         url: "/login/findByEmail",
+//         data: $("#registerForm").serialize(),
+//         success: function (data) {
+//             if (data == -1) {
+//                 bootbox.alert({
+//                     message: '该邮箱已经注册，请直接登录或者更换邮箱注册！',
+//                     size: 'small',
+//                     // callback: function () {
+//                     //     window.location.href = '/login/loginHtml';
+//                     // },
+//                 });
+//             } else if (data == 999) {
+//                 bootbox.alert({
+//                     message: '数据库连接或者操作失败,请检查！',
+//                     size: 'small',
+//                     callback: function () {
+//                         window.location.href = '/login/registerpage';
+//                     },
+//                 });
+//             }
+//         }
+//     })
+// }

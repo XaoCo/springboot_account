@@ -1,6 +1,3 @@
-
-
-
 // 验证码
 // $.idcode.setCode();
 //
@@ -100,12 +97,12 @@ $('#reset').click(function () {
 function checkName1() {
     console.log("我进来了！！！");
     $.ajax({
-        url: "/login/findByName",
+        url: "/login/findByNameOrEmail",
         data: $("#loginForm").serialize(),
         success: function (data) {
             if (data == 0) {
                 bootbox.alert({
-                    message: '该用户还未注册，请先进行注册或者更换用户登录！',
+                    message: '该用户/邮箱还未注册，请先进行注册或者更换用户登录！',
                     size: 'small',
                     callback: function () {
                         window.location.href = '/login/loginHtml';
@@ -121,7 +118,75 @@ function checkName1() {
                 });
             }
         }
+    })
+};
+
+function findUserName() {
+    $.ajax({
+        url: "/login/findUserName",
+        data: $("#findUserNameform").serialize(),
+        success: function (data) {
+            debugger;
+            if (data == -2) {
+                bootbox.alert({
+                    message: '该邮箱还未注册，请先进行注册或者更换用户登录！',
+                    size: 'small',
+                    callback: function () {
+                        window.location.href = '/login/loginHtml';
+                    },
+                });
+            } else if (data == -1) {
+                bootbox.alert({
+                    message: '该邮箱暂未设置用户名,请直接用邮箱登陆!',
+                    size: 'small',
+                    callback: function () {
+                        window.location.href = '/login/loginHtml';
+                    },
+                });
+            }
+        }
+    })
+}
+
+//找回密码
+function findPassword() {
+    debugger;
+    $("#findPwdform").bootstrapValidator('validate');//提交验证
+    if ($("#findPwdform").data('bootstrapValidator').isValid()) {//获取验证结果，如果成功，执行下面代码
+
+        $.ajax({
+            url: "/login/findPwd",
+            data: $("#findPwdform").serialize(),
+            success: function (data) {
+                debugger;
+                if (data == -1) {
+                    bootbox.alert({
+                        message: '密码更新失败!',
+                        size: 'small',
+                        callback: function () {
+                            window.location.href = '/login/loginHtml';
+                        },
+                    });
+                } else if (data == -2) {
+                    bootbox.alert({
+                        message: '该邮箱或者用户名还未注册过,请先进行注册!',
+                        size: 'small',
+                        callback: function () {
+                            window.location.href = '/login/registerpage';
+                        },
+                    });
+                } else {
+                    bootbox.alert({
+                        message: '密码重置成功,请登录!',
+                        size: 'small',
+                        callback: function () {
+                            window.location.href = '/login/loginHtml';
+                        },
+                    });
+                }
+            }
         })
+    }
 }
 
 function login() {
@@ -167,7 +232,7 @@ function login() {
                 }
             }
         })
-    } else{
+    } else {
         // $("#tijiao").attr("readonly", true);
         $("#drag").empty();
         $('#drag').drag();
@@ -175,12 +240,12 @@ function login() {
 };
 
 window.onload = function () {
-    loginformValidator();
+    // loginformValidator();
 
 }
 
 //登录验证
-function loginformValidator() {
+// function loginformValidator() {
 
     $("#loginForm").bootstrapValidator({
         live: 'enabled',//验证时机，enabled是内容有变化就验证（默认），disabled和submitted是提交再验证
@@ -213,11 +278,11 @@ function loginformValidator() {
                     },
                     stringLength: {//检测长度
 
-                        min: 5,
+                        min: 2,
 
                         max: 20,
 
-                        message: '用户名长度必须在5-20之间'
+                        message: '用户名长度必须在2-20之间'
 
                     },
                 }
@@ -234,14 +299,120 @@ function loginformValidator() {
                     },
                     stringLength: {//检测长度
 
-                        min: 8,
+                        min: 6,
 
-                        max: 16,
+                        max: 10,
 
-                        message: '密码长度必须在8-16之间'
+                        message: '密码长度必须在6-10之间'
 
                     },
 
+                }
+
+            },
+
+        }
+
+    });
+// }
+
+
+//找回密码弹出框验证
+// function findPwdformValidator() {
+
+    $("#findPwdform").bootstrapValidator({
+        live: 'enabled',//验证时机，enabled是内容有变化就验证（默认），disabled和submitted是提交再验证
+
+        excluded: [':disabled', ':hidden', ':not(:visible)'],//排除无需验证的控件，比如被禁用的或者被隐藏的
+
+        // submitButtons: '#btn-test',//指定提交按钮，如果验证失败则变成disabled，但我没试成功，反而加了这句话非submit按钮也会提交到action指定页面
+
+        message: '通用的验证失败消息',//好像从来没出现过
+
+        feedbackIcons: {//根据验证结果显示的各种图标
+
+            valid: 'glyphicon glyphicon-ok',
+
+            invalid: 'glyphicon glyphicon-remove',
+
+            validating: 'glyphicon glyphicon-refresh'
+
+        },
+        fields: {
+
+            email1: {
+
+                validators: {
+
+                    notEmpty: {//检测非空,radio也可用
+
+                        message: '邮箱/用户名必须输入'
+
+                    },
+                    // stringLength: {//检测长度
+                    //
+                    //     min: 2,
+                    //
+                    //     max: 10,
+                    //
+                    //     message: '用户名长度必须在2-10之间'
+                    //
+                    // },
+                }
+
+            },
+            password1: {
+
+                validators: {
+
+                    notEmpty: {//检测非空,radio也可用
+
+                        message: '密码必须输入'
+
+                    },
+                    stringLength: {//检测长度
+
+                        min: 6,
+
+                        max: 10,
+
+                        message: '密码长度必须在6-10之间'
+
+                    },
+
+                }
+
+            },
+
+            passwordconfirm: {
+
+                validators: {
+
+                    notEmpty: {//检测非空,radio也可用
+
+                        message: '确认密码不能为空'
+
+                    },
+                    identical: {//与指定文本框比较内容相同
+
+                        field: 'password1',
+
+                        message: '两次密码输入不一样'
+
+                    },
+                    stringLength: {//检测长度
+
+                        min: 6,
+
+                        max: 10,
+
+                        message: '密码长度必须在6-10之间'
+
+                    },
+                    // identical: {
+                    //     field: 'code1',
+                    //     message: 'The password and its confirm are not the same'
+                    // },
                 }
 
             },
@@ -281,4 +452,4 @@ function loginformValidator() {
         }
 
     });
-}
+// }

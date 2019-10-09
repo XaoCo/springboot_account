@@ -53,7 +53,7 @@ public class GoalController {
         goal.setEndDate(endDate);
         goal.setGoalPercent("");
         goal.setProcess("");
-        goal.setUserName(user_session.getName());
+        goal.setUserName(user_session.getMails());
         int i = goalService.addGoal(goal);
 
         if (i == 1) {
@@ -76,7 +76,7 @@ public class GoalController {
 
         User user_session = (User) request.getSession().getAttribute("user_session");
         List<Goal> allGoals = new ArrayList<>();
-        List<Goal> allGoal = goalService.getAllGoal(user_session.getName());
+        List<Goal> allGoal = goalService.getAllGoal(user_session.getMails());
 
         for (Goal goal:allGoal) {
 

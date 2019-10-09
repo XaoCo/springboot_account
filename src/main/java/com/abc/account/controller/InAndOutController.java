@@ -43,7 +43,7 @@ public class InAndOutController {
 //        int flag = 0;
         logger.info("flag="+flag);
         inAndOut.setFlag(flag);
-        inAndOut.setU_name(user_session.getName());
+        inAndOut.setU_name(user_session.getMails());
 
         List<InAndOut> inAndOuts = inAndOutService.selRecord(inAndOut);
         return inAndOuts;
@@ -60,19 +60,19 @@ public class InAndOutController {
 
         if(flag==0){//0 代表查询柱状图,1代表支出饼状图,2代表收入饼图
 //            查询该用户的收入
-            String  allIn = inAndOutService.findAllIn(user_session.getName());
+            String  allIn = inAndOutService.findAllIn(user_session.getMails());
 //        查询该用户的开支
-            String allOut = inAndOutService.findAllOut(user_session.getName());
+            String allOut = inAndOutService.findAllOut(user_session.getMails());
             map.put("收入",allIn);
             map.put("开支",allOut);
 
         }else if (flag==1){
-            List<InAndOut> allOut = inAndOutService.getAllOut(user_session.getName());
+            List<InAndOut> allOut = inAndOutService.getAllOut(user_session.getMails());
             for (InAndOut inAndOut:allOut) {
                 map.put(inAndOut.getK_name(),inAndOut.getCharge());
             }
         }else {
-            List<InAndOut> allIn = inAndOutService.getAllIn(user_session.getName());
+            List<InAndOut> allIn = inAndOutService.getAllIn(user_session.getMails());
         }
 //
         return map;
@@ -93,7 +93,7 @@ public class InAndOutController {
         User user_session = (User) request.getSession().getAttribute("user_session");
 
         InAndOut inAndOut = new InAndOut();
-        inAndOut.setU_name(user_session.getName());
+        inAndOut.setU_name(user_session.getMails());
         inAndOut.setK_name(kindName);
         inAndOut.setFlag(0);
         inAndOut.setDesc(outDesc);
@@ -122,7 +122,7 @@ public class InAndOutController {
         User user_session = (User) request.getSession().getAttribute("user_session");
 
         InAndOut inAndOut = new InAndOut();
-        inAndOut.setU_name(user_session.getName());
+        inAndOut.setU_name(user_session.getMails());
         inAndOut.setK_name(kindName);
         inAndOut.setFlag(1);
         inAndOut.setDesc(inDesc);
@@ -151,7 +151,7 @@ public class InAndOutController {
         User user_session = (User) request.getSession().getAttribute("user_session");
 
         InAndOut inAndOut = new InAndOut();
-        inAndOut.setU_name(user_session.getName());
+        inAndOut.setU_name(user_session.getMails());
         inAndOut.setK_name(kindName);
         inAndOut.setFlag(3);
         inAndOut.setDesc(preoutDesc);
@@ -192,7 +192,7 @@ public class InAndOutController {
 //
 //        InAndOut inAndOut = new InAndOut();
 //        inAndOut.setId(id);
-//        inAndOut.setU_name(user_session.getName());
+//        inAndOut.setU_name(user_session.getMails());
 //        inAndOut.setK_name(kindName);
 //        inAndOut.setFlag(flag);
 //        inAndOut.setDesc(desc);
