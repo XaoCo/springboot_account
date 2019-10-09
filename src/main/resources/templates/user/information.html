@@ -29,7 +29,7 @@
 <div class="container">
     <div class="col-md-4 col-md-offset-4">
         <!--<div class="col-md-4 " align="center">-->
-        <div style="width: 30vw;height: 70vh;background-color: white;padding: 20px 40px 30px 40px;border-radius: 10px ">
+        <div style="width: 30vw;height: 65vh;background-color: white;padding: 20px 40px 30px 40px;border-radius: 10px ">
             <!--<div>-->
             <!--<a style="cursor: pointer;text-decoration: none;font-size:1.2vw;padding-top: 1vw "-->
             <!--href="/login/loginHtml">-->
@@ -39,24 +39,24 @@
                 <p style="font-size: 2vw;font-weight: bold;text-shadow:1vh 1vh 1vh #33bbdd ">
                     完&nbsp;&nbsp;善&nbsp;&nbsp;信&nbsp;&nbsp;息&nbsp;&nbsp;</p>
             </div>
-            <form enctype="multipart/form-data" method="post" id="registerForm">
+            <form enctype="multipart/form-data" method="post" id="informationForm">
                 <div class="form-group has-feedback">
-                    <label for="mails"></label>
+                    <label for="username"></label>
                     <div class="input-group">
                                 <span class="input-group-addon"><span
                                         class="glyphicon glyphicon-user"></span></span>
-                        <input id="mails" name="mails" class="form-control"
-                               placeholder="请取一个昵称"
-                               type="text" onchange="checkEmailAddress()">
+                        <input id="username" name="username" class="form-control"
+                               placeholder="请取一个漂亮的昵称"
+                               type="text" onchange="checkName()">
                     </div>
 
                 </div>
 
                 <div class="form-group has-feedback" align="center">
-                    <!--<label for="goalTotal"></label>-->
+                    <label for="userstatus"></label>
                     <div class="input-group" >
-                        <span class="input-group-addon"><span>地位</span></span>
-                        <select class="form-control" id="userposition" name="userposition" >
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-tower"></span></span>
+                        <select class="form-control" id="userstatus" name="userstatus" >
 
                         </select>
                     </div>
@@ -68,20 +68,29 @@
                 <!--<div id="drag" style="margin-bottom: 2vw;margin-left: 1vw"></div>-->
                 <!--</div>-->
 
-                <div class="form-group has-feedback">
-                    <label for="password"></label>
-                    <div class="input-group">
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                        <input id="password" name="password" class="form-control" placeholder="请输入密码"
-                               maxlength="20"
-                               type="password">
-                    </div>
-                </div>
+                <!--<div class="form-group has-feedback">-->
+                    <!--<label for="password"></label>-->
+                    <!--<div class="input-group">-->
+                        <!--<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>-->
+                        <!--<input id="password" name="password" class="form-control" placeholder="请输入密码"-->
+                               <!--maxlength="20"-->
+                               <!--type="password">-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="form-group has-feedback">-->
+                    <!--<label for="passwordconfirm"></label>-->
+                    <!--<div class="input-group">-->
+                        <!--<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>-->
+                        <!--<input id="passwordconfirm" name="passwordconfirm" class="form-control" placeholder="请确认密码"-->
+                               <!--maxlength="20"-->
+                               <!--type="password">-->
+                    <!--</div>-->
+                <!--</div>-->
                 <div class="form-group">
                     <label for="submit"></label>
                     <input class="form-control btn btn-info" id="submit"
-                           value="立&nbsp;&nbsp;即&nbsp;&nbsp;注&nbsp;&nbsp;册"
-                           type="button" onclick="register()">
+                           value="确&nbsp;&nbsp;&nbsp;&nbsp;定"
+                           type="button" onclick="confirmok()">
                 </div>
 
             </form>
@@ -89,7 +98,7 @@
     </div>
 </div>
 <script src="../../js/bootbox.js"></script>
-<script src="../../js/register.js"></script>
+<script src="../../js/information.js"></script>
 <script type="text/javascript">
     $('#drag').drag();
 </script>

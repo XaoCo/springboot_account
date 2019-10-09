@@ -37,6 +37,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User selectByNameOrEmail(User user) {
+        return userMapper.selectByNameOrEmail(user);
+    }
+
+    @Override
     public int addUser(User user) {
         return userMapper.addUser(user);
     }
@@ -64,6 +69,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public int modifyInformation(User user) {
         return userMapper.modifyInformation(user);
+    }
+
+    @Override
+    public User findUserName(User user) {
+        return userMapper.findUserName(user);
     }
 
 

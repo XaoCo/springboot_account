@@ -20,9 +20,12 @@ public interface UserMapper {
     //    用户查询
 
     User selectByName(User user);
- //    用户查询
+    //    用户查询
 
     User selectByEmail(User user);
+ //    用户查询
+
+    User selectByNameOrEmail(User user);
 
     //     用户注册
     int addUser(User user);
@@ -41,5 +44,8 @@ public interface UserMapper {
 
     //    修改信息
     int modifyInformation(User user);
+
+    //    找回用户名
+    User findUserName(User user);
 
 }

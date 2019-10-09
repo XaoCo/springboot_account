@@ -29,7 +29,7 @@
 <div class="container">
     <div class="col-md-4 col-md-offset-4">
         <!--<div class="col-md-4 " align="center">-->
-        <div style="width: 30vw;height: 70vh;background-color: white;padding: 20px 40px 30px 40px;border-radius: 10px ">
+        <div style="width: 30vw;height: 85vh;background-color: white;padding: 20px 40px 30px 40px;border-radius: 10px ">
             <div>
                 <a style="cursor: pointer;text-decoration: none;font-size:1.2vw;padding-top: 1vw "
                    href="/login/loginHtml">
@@ -72,9 +72,28 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <label for="drag"></label>
-                    <div id="drag" style="margin-bottom: 2vw;margin-left: 1vw"></div>
+                <!--<div class="row">-->
+                    <!--<label for="drag"></label>-->
+                    <!--<div id="drag" style="margin-bottom: 2vw;margin-left: 1vw"></div>-->
+                <!--</div>-->
+
+                <div class="form-group has-feedback">
+                    <label for="password"></label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                        <input id="password" name="password" class="form-control" placeholder="请输入密码"
+                               maxlength="20"
+                               type="password">
+                    </div>
+                </div>
+                <div class="form-group has-feedback">
+                    <label for="passwordconfirm"></label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                        <input id="passwordconfirm" name="passwordconfirm" class="form-control" placeholder="请确认密码"
+                               maxlength="20"
+                               type="password">
+                    </div>
                 </div>
 
                 <div class="form-group">

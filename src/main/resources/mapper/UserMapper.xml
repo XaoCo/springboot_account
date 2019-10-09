@@ -18,7 +18,7 @@
 
     <!--登录验证-->
     <select id="login" parameterType="com.abc.account.pojo.User" resultMap="userRestMap">
-        SELECT * FROM A_USER WHERE U_NAME = #{name} AND U_PASSWORD = #{password}
+        SELECT * FROM A_USER WHERE ( U_NAME = #{name,jdbcType=VARCHAR} OR U_EMAIL = #{mails,jdbcType=VARCHAR} )AND U_PASSWORD = #{password,jdbcType=VARCHAR}
     </select>
 
     <!--获取所有position-->
@@ -28,11 +28,15 @@
 
     <!--查询用户-->
     <select id="selectByName" parameterType="com.abc.account.pojo.User" resultMap="userRestMap">
-        SELECT * FROM A_USER WHERE U_NAME = #{name}
+        SELECT * FROM A_USER WHERE U_NAME = #{name,jdbcType=VARCHAR}
     </select>
     <!--查询用户-->
     <select id="selectByEmail" parameterType="com.abc.account.pojo.User" resultMap="userRestMap">
-        SELECT * FROM A_USER WHERE U_EMAIL = #{mails}
+        SELECT * FROM A_USER WHERE U_EMAIL = #{mails,jdbcType=VARCHAR}
+    </select>
+<!--查询用户-->
+    <select id="selectByNameOrEmail" parameterType="com.abc.account.pojo.User" resultMap="userRestMap">
+        SELECT * FROM A_USER WHERE U_NAME = #{name ,jdbcType=VARCHAR} or U_EMAIL = #{mails,jdbcType=VARCHAR}
     </select>
 
     <!--注册用户-->
@@ -47,23 +51,29 @@
     </insert>
 
     <!--修改密码-->
-    <update id="updPassword">
-        UPDATE A_USER  SET U_PASSWORD = #{password}
-         WHERE U_NAME = #{name}
+    <update id="updPassword" parameterType="com.abc.account.pojo.User">
+        UPDATE A_USER  SET U_PASSWORD = #{password, jdbcType=VARCHAR}
+         WHERE U_NAME = #{name,jdbcType=VARCHAR} or U_EMAIL = #{mails ,jdbcType=VARCHAR}
     </update>
     <!--修改个人信息-->
-    <update id="modifyInformation">
-        UPDATE A_USER  SET U_JOB = #{job}
-         WHERE U_NAME = #{name}
+    <update id="modifyInformation" parameterType="com.abc.account.pojo.User">
+        UPDATE A_USER  SET U_NAME = #{name},U_POSITION = #{position}
+         WHERE U_EMAIL = #{mails,jdbcType=VARCHAR}
     </update>
+
 
     <!--删除用户-->
     <delete id="delUser">
-        DELETE FROM A_USER WHERE U_NAME = #{name}
+        DELETE FROM A_USER WHERE U_NAME = #{name,jdbcType=VARCHAR}
     </delete>
 
     <!--获取所有用户-->
     <select id="getAllUser" resultMap="userRestMap">
         SELECT * FROM A_USER
+    </select>
+
+    <!--找回用户名-->
+    <select id="findUserName" resultMap="userRestMap" parameterType="com.abc.account.pojo.User">
+        SELECT * FROM A_USER WHERE U_EMAIL = #{mails ,jdbcType=VARCHAR}
     </select>
 </mapper>
