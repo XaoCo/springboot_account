@@ -10,7 +10,7 @@ import java.util.Date;
  * introduce: TODO
  */
 public class Goal implements Serializable {
-    private int goalId;
+    private int id;
 //    目标名称
     private String goalName;
 //    目标简述
@@ -26,8 +26,11 @@ public class Goal implements Serializable {
 //    定目标人
     private String userName;
 
-    public Goal(int goalId, String goalName, String goalDesc, String goalTotal, String goalPercent, String endDate, String process, String userName) {
-        this.goalId = goalId;
+    public Goal() {
+    }
+
+    public Goal(int id, String goalName, String goalDesc, String goalTotal, String goalPercent, String endDate, String process, String userName) {
+        this.id = id;
         this.goalName = goalName;
         this.goalDesc = goalDesc;
         this.goalTotal = goalTotal;
@@ -37,31 +40,12 @@ public class Goal implements Serializable {
         this.userName = userName;
     }
 
-    @Override
-    public String toString() {
-        return "Goal{" +
-                "goalId=" + goalId +
-                ", goalName='" + goalName + '\'' +
-                ", goalDesc='" + goalDesc + '\'' +
-                ", goalTotal='" + goalTotal + '\'' +
-                ", goalPercent='" + goalPercent + '\'' +
-                ", endDate='" + endDate + '\'' +
-                ", process='" + process + '\'' +
-                ", userName='" + userName + '\'' +
-                '}';
+    public int getId() {
+        return id;
     }
 
-
-
-    public Goal() {
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getGoalName() {
@@ -112,4 +96,25 @@ public class Goal implements Serializable {
         this.process = process;
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    @Override
+    public String toString() {
+        return "Goal{" +
+                "id=" + id +
+                ", goalName='" + goalName + '\'' +
+                ", goalDesc='" + goalDesc + '\'' +
+                ", goalTotal='" + goalTotal + '\'' +
+                ", goalPercent='" + goalPercent + '\'' +
+                ", endDate='" + endDate + '\'' +
+                ", process='" + process + '\'' +
+                ", userName='" + userName + '\'' +
+                '}';
+    }
 }

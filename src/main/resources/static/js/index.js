@@ -499,6 +499,26 @@ function informationmodify() {
     })
 };
 
+//检验修改的昵称
+function checkname() {
+    $.ajax({
+        url: "/login/findByName",
+        data: $("#personalmsgform").serialize(),
+        success: function (data) {
+            if (data == -1) {
+                bootbox.alert({
+                    message: '该昵称已经注册，请更换新的昵称！',
+                    size: 'small',
+                    callback: function () {
+                        $("input[name='username']").val("").focus();
+                    },
+                });
+            }
+        }
+    })
+}
+
+
 //okr确认
 function okrconfirm() {
     $("#okr1").attr("readonly", "readonly");
@@ -509,33 +529,38 @@ function okrconfirm() {
 
 //个人信息确认
 function informationconfirm() {
-    $("#username").attr("readonly", "readonly");
-    $.ajax({
-        url: "/user/confirmInformation",
-        data: $("#personalmsgform").serialize(),
-        success: function (data) {
-            if (data == 1) {
-                bootbox.alert({
-                    message: '个人信息更新成功！',
-                    size: 'small',
-                    callback: function () {
-                        window.location.href = '/user/indexPage';
-                    },
-                });
-            }else {
-                bootbox.alert({
-                    message: '个人信息更新失败！',
-                    size: 'small',
-                    callback: function () {
-                        window.location.href = '/user/indexPage';
-                    },
-                });
-            }
-        }
-    })
-    $("#personalmsgpage").modal("hide");
 
-};
+    $("#personalmsgform").bootstrapValidator('validate');//提交验证
+    if ($("#personalmsgform").data('bootstrapValidator').isValid()) {//获取验证结果，如果成功，执行下面代码
+        $("#username").attr("readonly", "readonly");
+        $.ajax({
+            url: "/user/confirmInformation",
+            data: $("#personalmsgform").serialize(),
+            success: function (data) {
+                if (data == 1) {
+                    bootbox.alert({
+                        message: '个人信息更新成功！',
+                        size: 'small',
+                        callback: function () {
+                            window.location.href = '/user/indexPage';
+                        },
+                    });
+                } else {
+                    bootbox.alert({
+                        message: '个人信息更新失败！',
+                        size: 'small',
+                        callback: function () {
+                            window.location.href = '/user/indexPage';
+                        },
+                    });
+                }
+            }
+        })
+        $("#personalmsgpage").modal("hide");
+
+    }
+
+}
 
 //okr取消
 
@@ -564,6 +589,7 @@ window.onload = function () {
     historygoal();
     findAllCount();
     getAllOut();
+    showInformation();
     // getAllOutKind();
     // getAllInKind();
     // getAllPreKind();
@@ -650,8 +676,8 @@ function newin() {
 }
 
 $(function () {
-    $('#endDate,#datetimepickerout,#datetimepickerpreout,#datetimepickerin').datetimepicker({
-        format: 'YYYY-MM-DD',
+    $('#endDate,#datetimepickerout,#datetimepickerpreout,#datetimepickerin,#datetimepickermodifygoal').datetimepicker({
+        format: 'YYYYMMDD',
         locale: moment.locale('zh-cn')
     });
     // $('#datetimepicker2').datetimepicker({
@@ -1297,6 +1323,57 @@ function changepwdformValidator() {
     });
 }
 
+// function personalmsgformValidator() {
+//新增支出表单验证
+$("#personalmsgform").bootstrapValidator({
+    live: 'enabled',//验证时机，enabled是内容有变化就验证（默认），disabled和submitted是提交再验证
+
+    excluded: [':disabled', ':hidden', ':not(:visible)'],//排除无需验证的控件，比如被禁用的或者被隐藏的
+
+    // submitButtons: '#btn-test',//指定提交按钮，如果验证失败则变成disabled，但我没试成功，反而加了这句话非submit按钮也会提交到action指定页面
+
+    message: '通用的验证失败消息',//好像从来没出现过
+
+    feedbackIcons: {//根据验证结果显示的各种图标
+
+        valid: 'glyphicon glyphicon-ok',
+
+        invalid: 'glyphicon glyphicon-remove',
+
+        validating: 'glyphicon glyphicon-refresh'
+
+    },
+    fields: {
+
+        username: {
+
+            validators: {
+
+                notEmpty: {//检测非空,radio也可用
+
+                    message: '昵称不能为空'
+
+                },
+                stringLength: {//检测长度
+
+                    min: 2,
+
+                    max: 20,
+
+                    message: '昵称长度必须在2-20之间'
+
+                },
+
+            }
+
+        },
+    }
+
+});
+
+
+// };
+
 //获取开支种类
 // function getAllOutKind() {
 //     $.ajax({
@@ -1412,6 +1489,7 @@ function showInformation() {
 
             console.log("基本信息=" + data);
             $("#mdfpwdsername").attr("value", data.name);
+            $("#userFlag").text(data.name);
 
         }
 
@@ -1424,30 +1502,150 @@ function historygoal() {
     $("#preouthisdiv").attr("style", "display:none;");//隐藏div
     $("#inhisdiv").attr("style", "display:none;");//隐藏div
     $("#goalhisdiv").attr("style", "display:block;");//显示div
+    // $.ajax({
+    //     url: "/goal/findAllGoals",
+    //     success: function (data) {
+    //         console.log(data);
+    //         $("#goalhistbody").find("tr").remove();
+    //         for (var i = 0; i < data.length; i++) {
+    //
+    //             var tr = $("<tr></tr>");
+    //             tr.html("<td>" + data[i].goalName + "</td>" +
+    //                 "<td>" + data[i].goalPercent + "</td>" +
+    //                 "<td>" + data[i].goalTotal + "</td>" +
+    //                 "<td>" + data[i].process + "</td>" +
+    //                 "<td>" + data[i].endDate + "</td>" +
+    //                 "<td><button type=\"button\" class=\"btn \" id=\"hisgoalmof\" onclick=\"hisgoalmof()\">\n" +
+    //                 "                            <span class=\"glyphicon glyphicon-edit\" " +
+    //                 "style=\"padding-right: 0.3vw\"></span>修改\n" +
+    //                 "                        </button>&nbsp;&nbsp;<button type=\"button\" class=\"btn \" id=\"okrcancel\" onclick=\"okrcancel()\">\n" +
+    //                 "                            <span class=\"glyphicon glyphicon-remove\" style=\"padding-right: 0.3vw\"></span>删除\n" +
+    //                 "                        </button>&nbsp;&nbsp;" +
+    //                 "</td>");
+    //
+    //             $("#goalhistbody").append(tr);
+    //         }
+    //
+    //     }
+    // })
+    $('#goalhistab').bootstrapTable('destroy');   //动态加载表格之前，先销毁表格
+    $('#goalhistab').bootstrapTable({
+        method: 'get',
+        url: "/goal/findAllGoals",//请求路径
+        striped: true, //是否显示行间隔色
+        pageNumber: 1, //初始化加载第一页
+        pagination: true,//是否分页
+        cache: false,   //不缓存
+        sidePagination: 'client',//server:服务器端分页|client：前端分页
+        pageSize: 4,//单页记录数
+        pageList: [5, 10, 20, 30],//可选择单页记录数
+        // showRefresh: true,//刷新按钮
+        // queryParams: function (params) {//上传服务器的参数
+        //     var temp = {//如果是在服务器端实现分页，limit、offset这两个参数是必须的
+        //         limit: params.limit, // 每页显示数量
+        //         offset: params.offset, // SQL语句起始索引
+        //         //page : (params.offset / params.limit) + 1, //当前页码
+        //
+        //         Name: $('#search_name').val(),
+        //         Tel: $('#search_tel').val()
+        //     };
+        //     return temp;
+        // },
+
+        columns: [
+            [
+                {
+                    title: '历史目标',
+                    halign: "center",
+                    align: "center",
+                    colspan: 6
+                },
+            ],
+
+            [{
+                title: '名称',
+                field: 'goalName',
+                align: "center",
+                // sortable: true
+            }, {
+                title: '当前完成量',
+                field: 'goalPercent',
+                align: "center",
+                sortable: true
+            }, {
+                title: '总量',
+                field: 'goalTotal',
+                align: "center",
+                sortable: true
+            }, {
+                title: '进度',
+                field: 'process',
+                align: "center",
+                sortable: true
+            }, {
+                title: '截止日期',
+                field: 'endDate',
+                align: "center",
+                sortable: true
+            }, {
+                title: '操作',
+                field: 'id',
+                align: "center",
+                formatter: operation1,//对资源进行操作
+            }]
+        ]
+    })
+}
+
+//删除、编辑操作
+function operation1(value, row, index) {
+    debugger;
+    // var row1 = row;
+    console.log("value=" + value)
+    console.log("row=" + row)
+    console.log("index=" + index)
+    var htm = "<button type='button' class='btn btn-warning' id='modifygoalbutton' data-target='#modifygoalpage' data-toggle='modal' "
+    htm += "onclick=\"modifygoalpage('"+row.id +"','"+row.goalName+"','"+row.goalTotal+"','"+row.endDate+"')\">"
+    htm += "<span class='glyphicon glyphicon-edit' style='padding-right: 0.3vw'></span>修改</button>"
+    htm += "&nbsp;&nbsp;<button type='button' class='btn btn-danger' id='okrmodify' onclick='okrmodify()'>"
+    htm += "<span class='glyphicon glyphicon-edit' style='padding-right: 0.3vw'></span>删除</button>"
+    return htm;
+}
+
+//row.id,row.goalName,row.goalTotal,row.endDate
+function modifygoalpage(id, name, total, enddate) {
+    debugger;
+    $("#modifygoalName").val(name);
+    $("#modifygoalTotal").val(total);
+    $("#modifygoalendDate").val(enddate);
+    $("#modifygoalId").val(id);
+
+}
+function modifygoalconfirm() {
+
     $.ajax({
-        url: "/goal/findAllGoals",
-        success: function (data) {
-            console.log(data);
-            $("#goalhistbody").find("tr").remove();
-            for (var i = 0; i < data.length; i++) {
 
-                var tr = $("<tr></tr>");
-                tr.html("<td>" + data[i].goalName + "</td>" +
-                    "<td>" + data[i].goalPercent + "</td>" +
-                    "<td>" + data[i].goalTotal + "</td>" +
-                    "<td>" + data[i].process + "</td>" +
-                    "<td>" + data[i].endDate + "</td>" +
-                    "<td><button type=\"button\" class=\"btn \" id=\"hisgoalmof\" onclick=\"hisgoalmof()\">\n" +
-                    "                            <span class=\"glyphicon glyphicon-edit\" " +
-                    "style=\"padding-right: 0.3vw\"></span>修改\n" +
-                    "                        </button>&nbsp;&nbsp;<button type=\"button\" class=\"btn \" id=\"okrcancel\" onclick=\"okrcancel()\">\n" +
-                    "                            <span class=\"glyphicon glyphicon-remove\" style=\"padding-right: 0.3vw\"></span>删除\n" +
-                    "                        </button>&nbsp;&nbsp;" +
-                    "</td>");
+        url:'/goal/modifygoal',
+        data:$("#modifygoalform").serialize(),
+        success:function (data) {
 
-                $("#goalhistbody").append(tr);
+            if (data == 0) {
+                bootbox.alert({
+                    message: '目标修改成功！',
+                    size: 'small',
+                    // callback: function () {
+                    //     window.location.href = '/login/fullinformationpage';
+                    // },
+                });
+            }else {
+                bootbox.alert({
+                    message: '目标修改失败！',
+                    size: 'small',
+                    // callback: function () {
+                    //     window.location.href = '/login/fullinformationpage';
+                    // },
+                });
             }
-
         }
     })
 }
@@ -1458,30 +1656,92 @@ function historyout() {
     $("#preouthisdiv").attr("style", "display:none;");//隐藏div
     $("#inhisdiv").attr("style", "display:none;");//隐藏div
     $("#outhisdiv").attr("style", "display:block;");//显示div
-    $.ajax({
-        url: "/record/selRecord?flag=0",
-        success: function (data) {
-            console.log(data);
-            $("#outhistbody").find("tr").remove();
-            for (var i = 0; i < data.length; i++) {
+    // $.ajax({
+    //     url: "/record/selRecord?flag=0",
+    //     success: function (data) {
+    //         console.log(data);
+    //         $("#outhistbody").find("tr").remove();
+    //         for (var i = 0; i < data.length; i++) {
+    //
+    //             var tr = $("<tr></tr>");
+    //             tr.html("<td>" + data[i].k_name + "</td>" +
+    //                 "<td>" + data[i].charge + "</td>" +
+    //                 "<td>" + data[i].desc + "</td>" +
+    //                 "<td>" + data[i].date + "</td>" +
+    //                 "<td><button type=\"button\" class=\"btn \" id=\"okrmodify\" onclick=\"#\">\n" +
+    //                 "                            <span class=\"glyphicon glyphicon-edit\" " +
+    //                 "style=\"padding-right: 0.3vw\"></span>修改\n" +
+    //                 "                        </button>&nbsp;&nbsp;<button type=\"button\" class=\"btn \" id=\"okrcancel\" onclick=\"#\">\n" +
+    //                 "                            <span class=\"glyphicon glyphicon-remove\" style=\"padding-right: 0.3vw\"></span>删除\n" +
+    //                 "                        </button>&nbsp;&nbsp;" +
+    //                 "</td>");
+    //
+    //             $("#outhistbody").append(tr);
+    //         }
+    //
+    //     }
+    // })
 
-                var tr = $("<tr></tr>");
-                tr.html("<td>" + data[i].k_name + "</td>" +
-                    "<td>" + data[i].charge + "</td>" +
-                    "<td>" + data[i].desc + "</td>" +
-                    "<td>" + data[i].date + "</td>" +
-                    "<td><button type=\"button\" class=\"btn \" id=\"okrmodify\" onclick=\"#\">\n" +
-                    "                            <span class=\"glyphicon glyphicon-edit\" " +
-                    "style=\"padding-right: 0.3vw\"></span>修改\n" +
-                    "                        </button>&nbsp;&nbsp;<button type=\"button\" class=\"btn \" id=\"okrcancel\" onclick=\"#\">\n" +
-                    "                            <span class=\"glyphicon glyphicon-remove\" style=\"padding-right: 0.3vw\"></span>删除\n" +
-                    "                        </button>&nbsp;&nbsp;" +
-                    "</td>");
+    $('#outhistab').bootstrapTable('destroy');   //动态加载表格之前，先销毁表格
+    $('#outhistab').bootstrapTable({
+        method: 'get',
+        url: "/record/selRecord?flag=0",//请求路径
+        striped: true, //是否显示行间隔色
+        pageNumber: 1, //初始化加载第一页
+        pagination: true,//是否分页
+        cache: false,   //不缓存
+        sidePagination: 'client',//server:服务器端分页|client：前端分页
+        pageSize: 4,//单页记录数
+        pageList: [5, 10, 20, 30],//可选择单页记录数
+        // showRefresh: true,//刷新按钮
+        // queryParams: function (params) {//上传服务器的参数
+        //     var temp = {//如果是在服务器端实现分页，limit、offset这两个参数是必须的
+        //         limit: params.limit, // 每页显示数量
+        //         offset: params.offset, // SQL语句起始索引
+        //         //page : (params.offset / params.limit) + 1, //当前页码
+        //
+        //         Name: $('#search_name').val(),
+        //         Tel: $('#search_tel').val()
+        //     };
+        //     return temp;
+        // },
 
-                $("#outhistbody").append(tr);
-            }
+        columns: [
+            [
+                {
+                    title: '历史支出',
+                    halign: "center",
+                    align: "center",
+                    colspan: 5
+                },
+            ],
 
-        }
+            [{
+                title: '开支种类',
+                field: 'k_name',
+                align: "center",
+                // sortable: true
+            }, {
+                title: '开支金额',
+                field: 'charge',
+                align: "center",
+                sortable: true
+            }, {
+                title: '开支描述',
+                field: 'desc',
+                align: "center",
+            }, {
+                title: '开支日期',
+                field: 'date',
+                align: "center",
+                sortable: true
+            }, {
+                title: '操作',
+                field: 'id',
+                align: "center",
+                formatter: operation,//对资源进行操作
+            }]
+        ]
     })
 }
 
@@ -1491,30 +1751,92 @@ function hispreout() {
     $("#outhisdiv").attr("style", "display:none;");//隐藏div
     $("#inhisdiv").attr("style", "display:none;");//隐藏div
     $("#preouthisdiv").attr("style", "display:block;");//显示div
-    $.ajax({
-        url: "/record/selRecord?flag=3",
-        success: function (data) {
-            console.log(data);
-            $("#preouthistbody").find("tr").remove();
-            for (var i = 0; i < data.length; i++) {
+    // $.ajax({
+    //     url: "/record/selRecord?flag=3",
+    //     success: function (data) {
+    //         console.log(data);
+    //         $("#preouthistbody").find("tr").remove();
+    //         for (var i = 0; i < data.length; i++) {
+    //
+    //             var tr = $("<tr></tr>");
+    //             tr.html("<td>" + data[i].k_name + "</td>" +
+    //                 "<td>" + data[i].charge + "</td>" +
+    //                 "<td>" + data[i].desc + "</td>" +
+    //                 "<td>" + data[i].date + "</td>" +
+    //                 "<td><button type=\"button\" class=\"btn \" id=\"okrmodify\" onclick=\"#\">\n" +
+    //                 "                            <span class=\"glyphicon glyphicon-edit\" " +
+    //                 "style=\"padding-right: 0.3vw\"></span>修改\n" +
+    //                 "                        </button>&nbsp;&nbsp;<button type=\"button\" class=\"btn \" id=\"okrcancel\" onclick=\"#\">\n" +
+    //                 "                            <span class=\"glyphicon glyphicon-remove\" style=\"padding-right: 0.3vw\"></span>删除\n" +
+    //                 "                        </button>&nbsp;&nbsp;" +
+    //                 "</td>");
+    //
+    //             $("#preouthistbody").append(tr);
+    //         }
+    //
+    //     }
+    // })
 
-                var tr = $("<tr></tr>");
-                tr.html("<td>" + data[i].k_name + "</td>" +
-                    "<td>" + data[i].charge + "</td>" +
-                    "<td>" + data[i].desc + "</td>" +
-                    "<td>" + data[i].date + "</td>" +
-                    "<td><button type=\"button\" class=\"btn \" id=\"okrmodify\" onclick=\"#\">\n" +
-                    "                            <span class=\"glyphicon glyphicon-edit\" " +
-                    "style=\"padding-right: 0.3vw\"></span>修改\n" +
-                    "                        </button>&nbsp;&nbsp;<button type=\"button\" class=\"btn \" id=\"okrcancel\" onclick=\"#\">\n" +
-                    "                            <span class=\"glyphicon glyphicon-remove\" style=\"padding-right: 0.3vw\"></span>删除\n" +
-                    "                        </button>&nbsp;&nbsp;" +
-                    "</td>");
+    $('#preouthistab').bootstrapTable('destroy');   //动态加载表格之前，先销毁表格
+    $('#preouthistab').bootstrapTable({
+        method: 'get',
+        url: "/record/selRecord?flag=3",//请求路径
+        striped: true, //是否显示行间隔色
+        pageNumber: 1, //初始化加载第一页
+        pagination: true,//是否分页
+        cache: false,   //不缓存
+        sidePagination: 'client',//server:服务器端分页|client：前端分页
+        pageSize: 4,//单页记录数
+        pageList: [5, 10, 20, 30],//可选择单页记录数
+        // showRefresh: true,//刷新按钮
+        // queryParams: function (params) {//上传服务器的参数
+        //     var temp = {//如果是在服务器端实现分页，limit、offset这两个参数是必须的
+        //         limit: params.limit, // 每页显示数量
+        //         offset: params.offset, // SQL语句起始索引
+        //         //page : (params.offset / params.limit) + 1, //当前页码
+        //
+        //         Name: $('#search_name').val(),
+        //         Tel: $('#search_tel').val()
+        //     };
+        //     return temp;
+        // },
 
-                $("#preouthistbody").append(tr);
-            }
+        columns: [
+            [
+                {
+                    title: '历史预留',
+                    halign: "center",
+                    align: "center",
+                    colspan: 5
+                },
+            ],
 
-        }
+            [{
+                title: '预留开支种类',
+                field: 'k_name',
+                align: "center",
+                // sortable: true
+            }, {
+                title: '预留开支金额',
+                field: 'charge',
+                align: "center",
+                sortable: true
+            }, {
+                title: '预留开支描述',
+                field: 'desc',
+                align: "center",
+            }, {
+                title: '预留开支日期',
+                field: 'date',
+                align: "center",
+                sortable: true
+            }, {
+                title: '操作',
+                field: 'id',
+                align: "center",
+                formatter: operation,//对资源进行操作
+            }]
+        ]
     })
 }
 
@@ -1524,30 +1846,92 @@ function historyin() {
     $("#outhisdiv").attr("style", "display:none;");//隐藏div
     $("#preouthisdiv").attr("style", "display:none;");//隐藏div
     $("#inhisdiv").attr("style", "display:block;");//显示div
-    $.ajax({
-        url: "/record/selRecord?flag=1",
-        success: function (data) {
-            console.log(data);
-            $("#inhistbody").find("tr").remove();
-            for (var i = 0; i < data.length; i++) {
+    // $.ajax({
+    //     url: "/record/selRecord?flag=1",
+    //     success: function (data) {
+    //         console.log(data);
+    //         $("#inhistbody").find("tr").remove();
+    //         for (var i = 0; i < data.length; i++) {
+    //
+    //             var tr = $("<tr></tr>");
+    //             tr.html("<td>" + data[i].k_name + "</td>" +
+    //                 "<td>" + data[i].charge + "</td>" +
+    //                 "<td>" + data[i].desc + "</td>" +
+    //                 "<td>" + data[i].date + "</td>" +
+    //                 "<td><button type=\"button\" class=\"btn \" id=\"okrmodify\" onclick=\"#\">\n" +
+    //                 "                            <span class=\"glyphicon glyphicon-edit\" " +
+    //                 "style=\"padding-right: 0.3vw\"></span>修改\n" +
+    //                 "                        </button>&nbsp;&nbsp;<button type=\"button\" class=\"btn \" id=\"okrcancel\" onclick=\"#\">\n" +
+    //                 "                            <span class=\"glyphicon glyphicon-remove\" style=\"padding-right: 0.3vw\"></span>删除\n" +
+    //                 "                        </button>&nbsp;&nbsp;" +
+    //                 "</td>");
+    //
+    //             $("#inhistbody").append(tr);
+    //         }
+    //
+    //     }
+    // })
 
-                var tr = $("<tr></tr>");
-                tr.html("<td>" + data[i].k_name + "</td>" +
-                    "<td>" + data[i].charge + "</td>" +
-                    "<td>" + data[i].desc + "</td>" +
-                    "<td>" + data[i].date + "</td>" +
-                    "<td><button type=\"button\" class=\"btn \" id=\"okrmodify\" onclick=\"#\">\n" +
-                    "                            <span class=\"glyphicon glyphicon-edit\" " +
-                    "style=\"padding-right: 0.3vw\"></span>修改\n" +
-                    "                        </button>&nbsp;&nbsp;<button type=\"button\" class=\"btn \" id=\"okrcancel\" onclick=\"#\">\n" +
-                    "                            <span class=\"glyphicon glyphicon-remove\" style=\"padding-right: 0.3vw\"></span>删除\n" +
-                    "                        </button>&nbsp;&nbsp;" +
-                    "</td>");
+    $('#inhistab').bootstrapTable('destroy');   //动态加载表格之前，先销毁表格
+    $('#inhistab').bootstrapTable({
+        method: 'get',
+        url: "/record/selRecord?flag=1",//请求路径
+        striped: true, //是否显示行间隔色
+        pageNumber: 1, //初始化加载第一页
+        pagination: true,//是否分页
+        cache: false,   //不缓存
+        sidePagination: 'client',//server:服务器端分页|client：前端分页
+        pageSize: 4,//单页记录数
+        pageList: [5, 10, 20, 30],//可选择单页记录数
+        // showRefresh: true,//刷新按钮
+        // queryParams: function (params) {//上传服务器的参数
+        //     var temp = {//如果是在服务器端实现分页，limit、offset这两个参数是必须的
+        //         limit: params.limit, // 每页显示数量
+        //         offset: params.offset, // SQL语句起始索引
+        //         //page : (params.offset / params.limit) + 1, //当前页码
+        //
+        //         Name: $('#search_name').val(),
+        //         Tel: $('#search_tel').val()
+        //     };
+        //     return temp;
+        // },
 
-                $("#inhistbody").append(tr);
-            }
+        columns: [
+            [
+                {
+                    title: '历史收入',
+                    halign: "center",
+                    align: "center",
+                    colspan: 5
+                },
+            ],
 
-        }
+            [{
+                title: '收入来源',
+                field: 'k_name',
+                align: "center",
+                // sortable: true
+            }, {
+                title: '收入金额',
+                field: 'charge',
+                align: "center",
+                sortable: true
+            }, {
+                title: '收入描述',
+                field: 'desc',
+                align: "center",
+            }, {
+                title: '收入日期',
+                field: 'date',
+                align: "center",
+                sortable: true
+            }, {
+                title: '操作',
+                field: 'id',
+                align: "center",
+                formatter: operation,//对资源进行操作
+            }]
+        ]
     })
 }
 
