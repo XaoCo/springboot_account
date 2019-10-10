@@ -4,6 +4,7 @@ import com.abc.account.pojo.Goal;
 import com.abc.account.pojo.User;
 import com.abc.account.service.GoalService;
 import com.abc.account.service.UserService;
+import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,6 +69,7 @@ public class GoalController {
         return flag;
     }
 
+    //历史目标
     @RequestMapping("/findAllGoals")
     @ResponseBody
     public List<Goal> findAllGoals(
@@ -78,11 +80,38 @@ public class GoalController {
         List<Goal> allGoals = new ArrayList<>();
         List<Goal> allGoal = goalService.getAllGoal(user_session.getMails());
 
-        for (Goal goal:allGoal) {
+        for (Goal goal : allGoal) {
 
         }
 
         return allGoal;
+    }
+
+
+    //修改目标
+    @RequestMapping("/modifygoal")
+    @ResponseBody
+    public int modifygoal(
+            @Param("modifygoalName") String modifygoalName,
+            @Param("modifygoalTotal") String modifygoalTotal,
+            @Param("modifygoalendDate") String modifygoalendDate,
+            @Param("modifygoalId") String modifygoalId,
+            HttpServletRequest request
+    ) {
+
+        Goal goal = new Goal();
+        goal.setGoalName(modifygoalName);
+        goal.setGoalTotal(modifygoalTotal);
+        goal.setEndDate(modifygoalendDate);
+        goal.setId(Integer.valueOf(modifygoalId));
+        int flag = 0;
+        int i = goalService.updateGoal(goal);
+
+        if (i < 1) {
+            flag = -1;
+        }
+
+        return flag;
     }
 
 

@@ -3,17 +3,21 @@
 <head>
     <meta charset="utf-8">
     <title>首页</title>
-    <script src="https://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <!--<script src="https://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>-->
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href="https://cdn.bootcss.com/bootstrap-validator/0.5.3/css/bootstrapValidator.css" rel="stylesheet">
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
+
+
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap-validator/0.5.3/js/bootstrapValidator.js"></script>
     <script src="../../js/bootbox.js"></script>
     <link href="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css"
           rel="stylesheet">
 
-
+    <link href="https://cdn.bootcss.com/bootstrap-table/1.15.4/bootstrap-table.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/bootstrap-table/1.15.4/bootstrap-table.min.js"></script>
+    <script src="https://cdn.staticfile.org/bootstrap-table/1.13.5/locale/bootstrap-table-zh-CN.min.js"></script>
     <!--<script src="../../js/jquery-3.4.1.min.js"></script>-->
     <!--<script src="http://code.jquery.com/jquery-latest.js"></script>-->
     <!--<script src="../../js/bootstrap.min.js"></script>-->
@@ -34,6 +38,13 @@
             font-size: 2vw;
             padding: 0.5vw 0px;
             margin: 0.8vw 0px;
+        }
+
+        .logo8 {
+            font-weight: bold;
+            font-size: 1.5vw;
+            padding: 0.5vw 0px;
+            margin: 0.8vw;
         }
 
         .logo1 {
@@ -114,13 +125,15 @@
             <div class="col-md-2">
                 <p class="logo">我们的小屋</p>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-5">
 
             </div>
-            <div class="col-md-1">
-                <button type="button" class="btn btn-info logo1">
-                    <span class="glyphicon glyphicon-cog" style="padding-right: 0.3vw"></span>设置
-                </button>
+            <div class="col-md-2">
+                <!--<button type="button" class="btn btn-info logo1">-->
+                <!--<span class="glyphicon glyphicon-cog" style="padding-right: 0.3vw"></span>设置-->
+                <!--</button>-->
+                <p class="logo8">Welcome&nbsp;&nbsp;<a id="userFlag" onclick="findInformation()"
+                                                       data-target="#personalmsgpage" data-toggle="modal" style="text-decoration: none;cursor: pointer"></a></p>
             </div>
 
             <div class="col-md-1">
@@ -155,7 +168,7 @@
         </div>
     </div>
     <!--主体-->
-    <div class="col-md-8" >
+    <div class="col-md-8">
         <div style="background-color: #FFFFFF;padding: 0.8vw 0.3vw 0.3vw 0.3vw;margin-top: 0.5vw">
             <div class="col-md-3 logo7">
 
@@ -269,7 +282,7 @@
 
                     <thead align="center">
                     <tr>
-                        <td colspan="6" class="logo7">历史目标</td>
+                        <td colspan="6" class="logo7">历史收入</td>
                     </tr>
                     <tr>
                         <td class="col-md-2">收入来源</td>
@@ -661,26 +674,16 @@
                             <div class="input-group" style="width: 50%">
                                 <span class="input-group-addon"><span>姓名</span></span>
                                 <input id="username" name="username" class="form-control"
-                                       maxlength="20" type="text" value="张三" >
+                                       maxlength="20" type="text" value="张三" onchange="checkname()">
 
                             </div>
 
-
                         </div>
-                        <!--<div class="form-group has-feedback" align="center">-->
-                            <!--<div class="input-group" style="width: 50%">-->
-                                <!--<span class="input-group-addon"><span>工作</span></span>-->
-                                <!--<input id="userjob" name="userjob" class="form-control"-->
-                                       <!--maxlength="20" type="text" value="UI">-->
-                            <!--</div>-->
-
-
-                        <!--</div>-->
                         <div class="form-group has-feedback" align="center">
                             <label for="goalTotal"></label>
                             <div class="input-group" style="width: 50%">
                                 <span class="input-group-addon"><span>地位</span></span>
-                                <select class="form-control" id="userposition" name="userposition" >
+                                <select class="form-control" id="userposition" name="userposition">
 
                                 </select>
                             </div>
@@ -780,19 +783,96 @@
         </div>
         <!-- /.modal -->
     </div>
-<!--右边echarts-->
-<div class="col-md-4">
-    <div style="background-color: #FFFFFF;padding: 0.8vw 0.3vw 0.5vw 0.3vw;margin-top: 0.5vw" class="style1">
-        <div class="col-md-12 style1" id="demo1"></div>
+
+    <!--修改目标页面-->
+    <div class="modal fade" id="modifygoalpage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="modifygoaltitle" align="center">
+                        修改目标
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form id="modifygoalform">
+
+                        <div class="form-group has-feedback" align="center" hidden>
+                            <label for="modifygoalId"></label>
+                            <div class="input-group" style="width: 50%">
+                                <span class="input-group-addon"><span
+                                        class="glyphicon glyphicon-hand-right"></span></span>
+                                <input id="modifygoalId" name="modifygoalId" class="form-control"
+                                       maxlength="20" type="text" >
+                            </div>
+
+
+                        </div>
+                        <div class="form-group has-feedback" align="center">
+                            <label for="modifygoalName"></label>
+                            <div class="input-group" style="width: 50%">
+                                <span class="input-group-addon"><span
+                                        class="glyphicon glyphicon-hand-right"></span></span>
+                                <input id="modifygoalName" name="modifygoalName" class="form-control" placeholder="目标名称"
+                                       maxlength="20" type="text">
+                            </div>
+
+
+                        </div>
+                        <div class="form-group has-feedback" align="center">
+                            <div class="input-group" style="width: 50%">
+                                <span class="input-group-addon"><span
+                                        class="glyphicon glyphicon-hand-right"></span></span>
+                                <input id="modifygoalTotal" name="modifygoalTotal" class="form-control" placeholder="目标总量"
+                                       maxlength="20" type="text" aria-valuemax="20">
+                            </div>
+
+
+                        </div>
+                        <div class="form-group has-feedback" align="center">
+                            <div class="input-group" style="width: 50%" id='datetimepickermodifygoal'>
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                                <input type='text' class="form-control" placeholder="目标截止日期"
+                                       id="modifygoalendDate" name="modifygoalendDate" required/>
+
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-info" onclick="modifygoalconfirm()" id="">
+                                <span class="glyphicon glyphicon-saved" style="padding-right: 0.3vw"></span>提交
+                            </button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">
+                                <span class="glyphicon glyphicon-remove" style="padding-right: 0.3vw"></span>关闭
+                            </button>
+
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal -->
     </div>
-    <div class="col-md-12 style1" id="demo2" style="display: none"></div>
-    <div class="col-md-12 style1" id="demo3" style="display: none"></div>
-    <div class="col-md-12 style1" id="demo4" style="display: none"></div>
-    <div class="col-md-12 style1" id="demo5" style="display: none"></div>
-    <div style="background-color: #FFFFFF;padding: 0.8vw 0.3vw 0.5vw 0.3vw;margin-top: 0.5vw" class="style1">
-        <div class="col-md-12 style1" id="demo6"></div>
+    <!--右边echarts-->
+    <div class="col-md-4">
+        <div style="background-color: #FFFFFF;padding: 0.8vw 0.3vw 0.5vw 0.3vw;margin-top: 0.5vw" class="style1">
+            <div class="col-md-12 style1" id="demo1"></div>
+        </div>
+        <div class="col-md-12 style1" id="demo2" style="display: none"></div>
+        <div class="col-md-12 style1" id="demo3" style="display: none"></div>
+        <div class="col-md-12 style1" id="demo4" style="display: none"></div>
+        <div class="col-md-12 style1" id="demo5" style="display: none"></div>
+        <div style="background-color: #FFFFFF;padding: 0.8vw 0.3vw 0.5vw 0.3vw;margin-top: 0.5vw" class="style1">
+            <div class="col-md-12 style1" id="demo6"></div>
+        </div>
     </div>
-</div>
 
 </div>
 <script src="../../js/index.js"></script>
