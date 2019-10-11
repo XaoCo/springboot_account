@@ -31,7 +31,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             response.sendRedirect("/login/loginHtml");     //没有user信息的话进行路由重定向
             return false;
         } else {
-            logger.error("我是拦截器，session存在，放行！");
+            logger.info("我是拦截器，session存在，放行！");
             return true;        //有的话就继续操作
         }
     }

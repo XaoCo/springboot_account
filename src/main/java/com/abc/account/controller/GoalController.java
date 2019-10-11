@@ -115,4 +115,25 @@ public class GoalController {
     }
 
 
+    //删除目标
+    @RequestMapping("/delgoal")
+    @ResponseBody
+    public int delgoal(
+            @Param("delgoalId") String delgoalId,
+            HttpServletRequest request
+    ) {
+
+        Goal goal = new Goal();
+        goal.setId(Integer.valueOf(delgoalId));
+        int flag = 0;
+        int i = goalService.delGoal(goal);
+
+        if (i < 1) {
+            flag = -1;
+        }
+
+        return flag;
+    }
+
+
 }

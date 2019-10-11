@@ -33,12 +33,12 @@
     <update id="updRecord" parameterType="com.abc.account.pojo.InAndOut">
 
         UPDATE A_INOUT_ALL SET
-        A_K_NAME = #{k_name},
-        A_FLAG = #{flag},
-        A_DESC = #{desc},
-        A_CHARGE = #{charge},
-        A_DATE = #{date}
-        WHERE A_ID = #{id}
+        A_K_NAME = #{k_name,jdbcType=VARCHAR},
+        A_FLAG = #{flag,jdbcType=INTEGER},
+        A_DESC = #{desc,jdbcType=VARCHAR},
+        A_CHARGE = #{charge,jdbcType=VARCHAR},
+        A_DATE = #{date,jdbcType=VARCHAR}
+        WHERE A_ID = #{id,jdbcType=INTEGER}
     </update>
 
     <!--新增记录-->
