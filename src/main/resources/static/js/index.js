@@ -65,7 +65,7 @@ var option1 = {
             inside: false, // 是否朝内
             rotate: 0, // 旋转角度
             margin: 5, // 刻度标签与轴线之间的距离
-            color: 'black', // 默认取轴线的颜色
+            color: 'black' // 默认取轴线的颜色
 
         },
         data: []
@@ -115,7 +115,7 @@ var option1 = {
             inside: false,  // 是否朝内
             rotate: 0,     // 旋转角度
             margin: 8,     // 刻度标签与轴线之间的距离
-            color: 'black',  // 默认轴线的颜色
+            color: 'black'  // 默认轴线的颜色
         },
         splitLine: {    // gird 区域中的分割线
             show: true,   // 是否显示
@@ -148,7 +148,7 @@ var option1 = {
             // barBorderRadius: [18, 18, 0 ,0]
         },
         barWidth: 40,  // 柱形的宽度
-        barCategoryGap: '5%',  // 柱形的间距
+        barCategoryGap: '5%'  // 柱形的间距
     }]
 };
 myChart1.setOption(option1);
@@ -221,8 +221,7 @@ var option4 = {
             inside: false, // 是否朝内
             rotate: 0, // 旋转角度
             margin: 5, // 刻度标签与轴线之间的距离
-            color: 'black', // 默认取轴线的颜色
-
+            color: 'black' // 默认取轴线的颜色
         },
         data: ['收入', '支出']
     },
@@ -269,7 +268,7 @@ var option4 = {
             inside: false,  // 是否朝内
             rotate: 0,     // 旋转角度
             margin: 8,     // 刻度标签与轴线之间的距离
-            color: 'black',  // 默认轴线的颜色
+            color: 'black'  // 默认轴线的颜色
         },
         splitLine: {    // gird 区域中的分割线
             show: true,   // 是否显示
@@ -299,7 +298,7 @@ var option4 = {
             // barBorderRadius: [18, 18, 0 ,0]
         },
         barWidth: 40,  // 柱形的宽度
-        barCategoryGap: '5%',  // 柱形的间距
+        barCategoryGap: '5%'  // 柱形的间距
     }]
 };
 myChart4.setOption(option4);
@@ -332,7 +331,7 @@ var option2 = {
             data: [
                 {value: 335, name: '工资'},
                 {value: 310, name: '外快'},
-                {value: 234, name: '私活'},
+                {value: 234, name: '私活'}
             ],
             itemStyle: {
                 emphasis: {
@@ -418,7 +417,7 @@ var option5 = {
             data: [
                 {value: 335, name: '工资'},
                 {value: 310, name: '外快'},
-                {value: 234, name: '私活'},
+                {value: 234, name: '私活'}
             ],
             itemStyle: {
                 emphasis: {
@@ -478,16 +477,16 @@ myChart6.setOption(option6);
 
 //okr编辑
 function okrmodify() {
-    $("#okr1").removeAttr("readonly")
-    $("#okr2").removeAttr("readonly")
-    $("#okr3").removeAttr("readonly")
-    $("#okr4").removeAttr("readonly")
-};
+    $("#okr1").removeAttr("readonly");
+    $("#okr2").removeAttr("readonly");
+    $("#okr3").removeAttr("readonly");
+    $("#okr4").removeAttr("readonly");
+}
 
 //个人信息编辑
 function informationmodify() {
     $("#username").removeAttr("readonly");
-    $("#userposition").removeAttr("readonly")
+    $("#userposition").removeAttr("readonly");
     $.ajax({
         url: "/login/findAllPosition",
         success: function (data) {
@@ -497,7 +496,7 @@ function informationmodify() {
             }
         }
     })
-};
+}
 
 //检验修改的昵称
 function checkname() {
@@ -511,7 +510,7 @@ function checkname() {
                     size: 'small',
                     callback: function () {
                         $("input[name='username']").val("").focus();
-                    },
+                    }
                 });
             }
         }
@@ -525,7 +524,7 @@ function okrconfirm() {
     $("#okr2").attr("readonly", "readonly");
     $("#okr3").attr("readonly", "readonly");
     $("#okr4").attr("readonly", "readonly");
-};
+}
 
 //个人信息确认
 function informationconfirm() {
@@ -542,7 +541,8 @@ function informationconfirm() {
                         message: '个人信息更新成功！',
                         size: 'small',
                         callback: function () {
-                            window.location.href = '/user/indexPage';
+                            // window.location.href = '/user/indexPage';
+                            showInformation();
                         },
                     });
                 } else {
@@ -550,8 +550,10 @@ function informationconfirm() {
                         message: '个人信息更新失败！',
                         size: 'small',
                         callback: function () {
-                            window.location.href = '/user/indexPage';
+                            // window.location.href = '/user/indexPage';
+                            showInformation();
                         },
+
                     });
                 }
             }
@@ -586,6 +588,7 @@ window.onload = function () {
     preformValidator();
     newinformValidator();
     changepwdformValidator();
+    modifyaccountformValidator();
     historygoal();
     findAllCount();
     getAllOut();
@@ -605,7 +608,7 @@ function newgoal() {
         $("#newgoalform").data('bootstrapValidator').destroy();
         $('#newgoalform').data('bootstrapValidator', null);
         goalformValidator();
-    });
+    })
 }
 
 //新支出表单清空
@@ -617,7 +620,7 @@ function newout() {
         $("#newOutform").data('bootstrapValidator').destroy();
         $('#newOutform').data('bootstrapValidator', null);
         outformValidator()
-    });
+    })
     $.ajax({
         url: "/kind/findAlloutKind",
         success: function (data) {
@@ -627,7 +630,7 @@ function newout() {
             }
         }
     })
-};
+}
 
 //新预留支出表单清空
 function preout() {
@@ -639,7 +642,7 @@ function preout() {
         $("#preOutform").data('bootstrapValidator').destroy();
         $('#preOutform').data('bootstrapValidator', null);
         preformValidator();
-    });
+    })
     $.ajax({
         url: "/kind/findAllpreKind",
         success: function (data) {
@@ -662,7 +665,7 @@ function newin() {
         $("#newinform").data('bootstrapValidator').destroy();
         $('#newinform').data('bootstrapValidator', null);
         newinformValidator();
-    });
+    })
     $.ajax({
         url: "/kind/findAllinKind",
         success: function (data) {
@@ -676,15 +679,15 @@ function newin() {
 }
 
 $(function () {
-    $('#endDate,#datetimepickerout,#datetimepickerpreout,#datetimepickerin,#datetimepickermodifygoal').datetimepicker({
+    $('#endDate,#datetimepickerout,#datetimepickerpreout,#datetimepickerin,#datetimepickermodifygoal,#datetimepickermodifyaccount').datetimepicker({
         format: 'YYYYMMDD',
         locale: moment.locale('zh-cn')
-    });
+    })
     // $('#datetimepicker2').datetimepicker({
     //     format: 'YYYY-MM-DD hh:mm',
     //     locale: moment.locale('zh-cn')
     // });
-});
+})
 
 //新增目标提交按钮
 function addgoal() {
@@ -734,19 +737,17 @@ function addnewout() {
                     bootbox.alert({
                         message: '新增开支成功!',
                         size: 'small',
-                        callback: function () {
-                            historyout();
-                        }
+
                     });
                 } else {
                     bootbox.alert({
                         message: '新增开支失败,请检查!',
                         size: 'small',
-                        callback: function () {
-                            window.location.href = '/user/indexPage';
-                        },
                     });
                 }
+                historyout();
+                findAllCount();
+                getAllOut();
                 $("#newoutpage").modal("hide");
 
             }
@@ -767,19 +768,19 @@ function addpreout() {
                     bootbox.alert({
                         message: '新增预留开支成功!',
                         size: 'small',
-                        callback: function () {
-                            hispreout();
-                        }
+
                     });
                 } else {
                     bootbox.alert({
                         message: '新增预留开支失败,请检查!',
                         size: 'small',
-                        callback: function () {
-                            window.location.href = '/user/indexPage';
-                        },
+
                     });
                 }
+
+                hispreout();
+                findAllCount();
+                getAllOut();
                 $("#resoutpage").modal("hide");
 
             }
@@ -800,19 +801,16 @@ function addnewin() {
                     bootbox.alert({
                         message: '新增收入成功!',
                         size: 'small',
-                        callback: function () {
-                            historyin();
-                        }
                     });
                 } else {
                     bootbox.alert({
                         message: '新增收入失败,请检查!',
                         size: 'small',
-                        callback: function () {
-                            window.location.href = '/user/indexPage';
-                        },
                     });
                 }
+                historyin();
+                findAllCount();
+                getAllOut();
                 $("#newinpage").modal("hide");
 
             }
@@ -850,9 +848,9 @@ function modifyPassword() {
     }
 };
 
-
-function goalformValidator() {
 //新增goal表单验证
+function goalformValidator() {
+
     $("#newgoalform").bootstrapValidator({
         live: 'enabled',//验证时机，enabled是内容有变化就验证（默认），disabled和submitted是提交再验证
 
@@ -955,8 +953,9 @@ function goalformValidator() {
     });
 }
 
-function outformValidator() {
 //新增支出表单验证
+function outformValidator() {
+
     $("#newOutform").bootstrapValidator({
         live: 'enabled',//验证时机，enabled是内容有变化就验证（默认），disabled和submitted是提交再验证
 
@@ -1051,8 +1050,9 @@ function outformValidator() {
 
 };
 
-function preformValidator() {
 //新增预留支出表单验证
+function preformValidator() {
+
     $("#preOutform").bootstrapValidator({
         live: 'enabled',//验证时机，enabled是内容有变化就验证（默认），disabled和submitted是提交再验证
 
@@ -1147,8 +1147,9 @@ function preformValidator() {
 
 }
 
-function newinformValidator() {
 //新增预留支出表单验证
+function newinformValidator() {
+
     $("#newinform").bootstrapValidator({
         live: 'enabled',//验证时机，enabled是内容有变化就验证（默认），disabled和submitted是提交再验证
 
@@ -1243,8 +1244,9 @@ function newinformValidator() {
 
 }
 
-function changepwdformValidator() {
 //修改密码表单验证
+function changepwdformValidator() {
+
     $("#mdfpwdform").bootstrapValidator({
         live: 'disabled',//验证时机，enabled是内容有变化就验证（默认），disabled和submitted是提交再验证
 
@@ -1374,58 +1376,194 @@ $("#personalmsgform").bootstrapValidator({
 
 // };
 
-//获取开支种类
-// function getAllOutKind() {
-//     $.ajax({
-//         url:"/kind/findAlloutKind",
-//         success:function (data) {
-//
-//             console.log("AllOutKind=" + data);
-//             for (var i = 0; i < data.length; i++) {
-//                 $("#outName").append($("<option value=\"" + data[i] + "\">" + data[i] + "</option>"));
-//             }
-//         }
-//     })
-// }
-// //获取收入种类
-// function getAllInKind() {
-//     $.ajax({
-//         url:"/kind/findAllinKind",
-//         success:function (data) {
-//
-//             console.log("AllinKind="+data);
-//             for (var i = 0; i < data.length; i++) {
-//                 $("#inName").append($("<option value=\"" + data[i] + "\">" + data[i] + "</option>"));
-//             }
-//         }
-//     })
-// }
-//获取预留种类
-// function getAllPreKind() {
-//     $.ajax({
-//         url:"/kind/findAllpreKind",
-//         success:function (data) {
-//
-//             console.log("AllpreKind="+data);
-//             for (var i = 0; i < data.length; i++) {
-//                 $("#preOutName").append($("<option value=\"" + data[i] + "\">" + data[i] + "</option>"));
-//             }
-//         }
-//     })
-// }
-//获取预留种类
-// function getAllPreKind() {
-//     $.ajax({
-//         url:"/kind/findAllpreKind",
-//         success:function (data) {
-//
-//             console.log("AllpreKind="+data);
-//             for (var i = 0; i < data.length; i++) {
-//                 $("#preOutName").append($("<option value=\"" + data[i] + "\">" + data[i] + "</option>"));
-//             }
-//         }
-//     })
-// }
+
+//修改目标表单验证
+$("#modifygoalform").bootstrapValidator({
+    live: 'enabled',//验证时机，enabled是内容有变化就验证（默认），disabled和submitted是提交再验证
+
+    excluded: [':disabled', ':hidden', ':not(:visible)'],//排除无需验证的控件，比如被禁用的或者被隐藏的
+
+    // submitButtons: '#btn-test',//指定提交按钮，如果验证失败则变成disabled，但我没试成功，反而加了这句话非submit按钮也会提交到action指定页面
+
+    message: '通用的验证失败消息',//好像从来没出现过
+
+    feedbackIcons: {//根据验证结果显示的各种图标
+
+        valid: 'glyphicon glyphicon-ok',
+
+        invalid: 'glyphicon glyphicon-remove',
+
+        validating: 'glyphicon glyphicon-refresh'
+
+    },
+    fields: {
+
+        modifygoalName: {
+
+            validators: {
+
+                notEmpty: {//检测非空,radio也可用
+
+                    message: '目标名称不能为空'
+
+                },
+                stringLength: {//检测长度
+
+                    min: 2,
+
+                    max: 20,
+
+                    message: '目标名称长度必须在2-20之间'
+
+                }
+
+            }
+
+        },
+
+        modifygoalTotal: {
+
+            validators: {
+
+                notEmpty: {//检测非空,radio也可用
+
+                    message: '目标总量不能为空'
+
+                },
+                stringLength: {//检测长度
+
+                    min: 1,
+
+                    max: 20,
+
+                    message: '目标总量长度必须在2-20之间'
+
+                }
+
+            }
+
+        },
+
+        modifygoalendDate: {
+
+            validators: {
+
+                notEmpty: {//检测非空,radio也可用
+
+                    message: '目标最终日期不能为空'
+
+                },
+                stringLength: {//检测长度
+
+                    min: 8,
+
+                    max: 8,
+
+                    message: '日期格式不正确'
+
+                }
+
+            }
+
+        }
+    }
+
+});
+
+//修改收支记录表单验证
+function modifyaccountformValidator() {
+    $("#modifyaccountform").bootstrapValidator({
+        live: 'disabled',//验证时机，enabled是内容有变化就验证（默认），disabled和submitted是提交再验证
+
+        excluded: [':disabled', ':hidden', ':not(:visible)'],//排除无需验证的控件，比如被禁用的或者被隐藏的
+
+        // submitButtons: '#btn-test',//指定提交按钮，如果验证失败则变成disabled，但我没试成功，反而加了这句话非submit按钮也会提交到action指定页面
+
+        message: '通用的验证失败消息',//好像从来没出现过
+
+        feedbackIcons: {//根据验证结果显示的各种图标
+
+            valid: 'glyphicon glyphicon-ok',
+
+            invalid: 'glyphicon glyphicon-remove',
+
+            validating: 'glyphicon glyphicon-refresh'
+
+        },
+        fields: {
+
+            modifycharge: {
+
+                validators: {
+
+                    notEmpty: {//检测非空,radio也可用
+
+                        message: '金额不能为空'
+
+                    },
+                    stringLength: {//检测长度
+
+                        min: 1,
+
+                        max: 20,
+
+                        message: '金额长度必须在1-20之间'
+
+                    }
+
+                }
+
+            },
+
+            modifydesc: {
+
+                validators: {
+
+                    notEmpty: {//检测非空,radio也可用
+
+                        message: '描述信息不能为空'
+
+                    },
+                    stringLength: {//检测长度
+
+                        min: 1,
+
+                        max: 20,
+
+                        message: '描述信息长度必须在2-20之间'
+
+                    }
+
+                }
+
+            },
+
+            modifyaccountDate: {
+
+                validators: {
+
+                    notEmpty: {//检测非空,radio也可用
+
+                        message: '日期不能为空'
+
+                    },
+                    stringLength: {//检测长度
+
+                        min: 8,
+
+                        max: 8,
+
+                        message: '日期格式不正确'
+
+                    }
+
+                }
+
+            }
+        }
+
+    });
+}
 
 //获取个人信息
 function findInformation() {
@@ -1496,7 +1634,7 @@ function showInformation() {
     })
 }
 
-//历史目标查询
+//历史目标分页查询
 function historygoal() {
     $("#outhisdiv").attr("style", "display:none;");//隐藏div
     $("#preouthisdiv").attr("style", "display:none;");//隐藏div
@@ -1597,7 +1735,7 @@ function historygoal() {
     })
 }
 
-//删除、编辑操作
+//目标删除、编辑操作
 function operation1(value, row, index) {
     debugger;
     // var row1 = row;
@@ -1605,14 +1743,33 @@ function operation1(value, row, index) {
     console.log("row=" + row)
     console.log("index=" + index)
     var htm = "<button type='button' class='btn btn-warning' id='modifygoalbutton' data-target='#modifygoalpage' data-toggle='modal' "
-    htm += "onclick=\"modifygoalpage('"+row.id +"','"+row.goalName+"','"+row.goalTotal+"','"+row.endDate+"')\">"
-    htm += "<span class='glyphicon glyphicon-edit' style='padding-right: 0.3vw'></span>修改</button>"
-    htm += "&nbsp;&nbsp;<button type='button' class='btn btn-danger' id='okrmodify' onclick='okrmodify()'>"
-    htm += "<span class='glyphicon glyphicon-edit' style='padding-right: 0.3vw'></span>删除</button>"
+    htm += "onclick=\"modifygoalpage('" + row.id + "','" + row.goalName + "','" + row.goalTotal + "','" + row.endDate + "')\">"
+    htm += "<span class='glyphicon glyphicon-edit' style='padding-right: 0.3vw'></span>修改</button>&nbsp;&nbsp;"
+    htm += "<button type='button' class='btn btn-danger' id='delgoalbutton' data-target='#delgoalpage' data-toggle='modal' "
+    htm += "onclick=\"delgoalpage('" + row.id + "')\">"
+    htm += "<span class='glyphicon glyphicon-trash' style='padding-right: 0.3vw'></span>删除</button>"
     return htm;
 }
 
-//row.id,row.goalName,row.goalTotal,row.endDate
+
+//收支删除、编辑操作
+function operation(value, row, index) {
+    debugger;
+    // var row1 = row;
+    console.log("value=" + value)
+    console.log("row=" + row)
+    console.log("index=" + index)
+    var htm = "<button type='button' class='btn btn-warning'  data-target='#modifyaccountpage' data-toggle='modal' "
+    htm += "onclick=\"changeaccountpage('" + row.id + "','" + row.k_name + "','" + row.flag + "','" + row.desc + "','" + row.date + "','" + row.charge + "')\">"
+    htm += "<span class='glyphicon glyphicon-edit' style='padding-right: 0.3vw'></span>修改</button>&nbsp;&nbsp;"
+    htm += "<button type='button' class='btn btn-danger'  data-target='#delaccountpage' data-toggle='modal' "
+    htm += "onclick=\"delaccountpage('" + row.id + "','" + row.flag+ "')\">"
+    htm += "<span class='glyphicon glyphicon-trash' style='padding-right: 0.3vw'></span>删除</button>"
+    return htm;
+}
+
+
+//给修改目标页面回显信息
 function modifygoalpage(id, name, total, enddate) {
     debugger;
     $("#modifygoalName").val(name);
@@ -1621,67 +1778,257 @@ function modifygoalpage(id, name, total, enddate) {
     $("#modifygoalId").val(id);
 
 }
+
+//给修改收支页面回显信息
+function changeaccountpage(id, name, flag, desc, date, charge) {
+    debugger;
+
+    document.getElementById("modifyaccountform").reset();
+    document.getElementById("modifyaccountName").options.length = 0;
+    // $("#modifyaccountform").data('bootstrapValidator').destroy();
+    // $('#modifyaccountform').data('bootstrapValidator', null);
+    $('#modifyaccountpage').on('hidden.bs.modal', function () {
+        $("#modifyaccountform").data('bootstrapValidator').destroy();
+        $('#modifyaccountform').data('bootstrapValidator', null);
+        modifyaccountformValidator();
+    });
+    $("#modifycharge").val(charge);
+    $("#modifydesc").val(desc);
+    $("#modifyaccountDate").val(date);
+    $("#modifyaccountlId").val(id);
+    $("#modifyaccountflag").val(flag);
+
+    if (flag == 0) {
+
+        $.ajax({
+            url: "/kind/findAlloutKind",
+            success: function (data) {
+                console.log("AllOutKind=" + data);
+                for (var i = 0; i < data.length; i++) {
+                    if (data[i] == name) {
+                        $("#modifyaccountName").append($("<option value=\"" + data[i] + "\" selected>" + data[i] + "</option>"));
+                    } else {
+                        $("#modifyaccountName").append($("<option value=\"" + data[i] + "\">" + data[i] + "</option>"));
+                    }
+                }
+            }
+        })
+
+
+    } else if (flag == 3) {
+
+        $.ajax({
+            url: "/kind/findAllpreKind",
+            success: function (data) {
+
+                console.log("AllpreKind=" + data);
+                for (var i = 0; i < data.length; i++) {
+                    if (data[i] == name) {
+                        $("#modifyaccountName").append($("<option value=\"" + data[i] + "\" selected>" + data[i] + "</option>"));
+                    } else {
+                        $("#modifyaccountName").append($("<option value=\"" + data[i] + "\">" + data[i] + "</option>"));
+                    }
+                }
+            }
+        })
+
+    } else {
+        $.ajax({
+            url: "/kind/findAllinKind",
+            success: function (data) {
+
+                console.log("AllinKind=" + data);
+                for (var i = 0; i < data.length; i++) {
+                    if (data[i] == name) {
+                        $("#modifyaccountName").append($("<option value=\"" + data[i] + "\" selected>" + data[i] + "</option>"));
+                    } else {
+                        $("#modifyaccountName").append($("<option value=\"" + data[i] + "\">" + data[i] + "</option>"));
+                    }
+                }
+            }
+        })
+    }
+
+    // $("#modifyaccountName").append($("<option value=\"" + name + "\" selected>" + name + "</option>"));
+    // $("#modifyaccountName").append("<option value='name'>新增option</option>"); // 1.为Select追加一个Option(下拉项)
+}
+
+//确认修改收支
+function modifyaccountconfirm() {
+    $("#modifyaccountform").bootstrapValidator('validate');//提交验证
+    if ($("#modifyaccountform").data('bootstrapValidator').isValid()) {//获取验证结果，如果成功，执行下面代码
+        debugger;
+        var flag = $("#modifyaccountflag").val();
+        $.ajax({
+
+            url: '/record/updRecord',
+            data: $("#modifyaccountform").serialize(),
+            success: function (data) {
+                debugger;
+                if (data == 0) {
+                    bootbox.alert({
+                        message: '记录修改成功！',
+                        size: 'small',
+                        // callback: function () {
+                        //     historygoal();
+                        // },
+                    });
+                } else {
+                    bootbox.alert({
+                        message: '记录修改失败！',
+                        size: 'small',
+                        // callback: function () {
+                        //     window.location.href = '/login/fullinformationpage';
+                        // },
+                    });
+                }
+                if (flag == 0) {
+                    historyout();
+                } else if (flag == 3) {
+                    hispreout();
+                } else {
+                    historyin();
+                }
+                // historygoal();
+                findAllCount();
+                getAllOut();
+                $("#modifyaccountpage").modal("hide");
+
+            }
+        })
+    }
+}
+
+
+//删除目标页面
+function delgoalpage(id) {
+    debugger;
+    $("#delgoalId").val(id);
+
+}
+//删除收支记录页面
+function delaccountpage(id,flag) {
+    debugger;
+    $("#delaccountId").val(id);
+    $("#delaccountflag").val(flag);
+
+}
+
+//确认修改目标
 function modifygoalconfirm() {
+    $("#modifygoalform").bootstrapValidator('validate');//提交验证
+    if ($("#modifygoalform").data('bootstrapValidator').isValid()) {//获取验证结果，如果成功，执行下面代码
+        $.ajax({
+
+            url: '/goal/modifygoal',
+            data: $("#modifygoalform").serialize(),
+            success: function (data) {
+
+                if (data == 0) {
+                    bootbox.alert({
+                        message: '目标修改成功！',
+                        size: 'small',
+                        // callback: function () {
+                        //     historygoal();
+                        // },
+                    });
+                } else {
+                    bootbox.alert({
+                        message: '目标修改失败！',
+                        size: 'small',
+                        // callback: function () {
+                        //     window.location.href = '/login/fullinformationpage';
+                        // },
+                    });
+                }
+                historygoal();
+                $("#modifygoalpage").modal("hide");
+
+            }
+        })
+    }
+}
+
+//确认删除目标
+function delgoalconfirm() {
 
     $.ajax({
 
-        url:'/goal/modifygoal',
-        data:$("#modifygoalform").serialize(),
-        success:function (data) {
+        url: '/goal/delgoal',
+        data: $("#delgoalform").serialize(),
+        success: function (data) {
 
             if (data == 0) {
                 bootbox.alert({
-                    message: '目标修改成功！',
+                    message: '目标修删除成功！',
                     size: 'small',
                     // callback: function () {
-                    //     window.location.href = '/login/fullinformationpage';
+                    //     historygoal();
                     // },
                 });
-            }else {
+            } else {
                 bootbox.alert({
-                    message: '目标修改失败！',
+                    message: '目标删除失败！',
                     size: 'small',
                     // callback: function () {
                     //     window.location.href = '/login/fullinformationpage';
                     // },
                 });
             }
+            historygoal();
+            $("#delgoalpage").modal("hide");
+
         }
     })
 }
 
-//历史开支查询
+//确认删除记录
+function delaccountconfirm() {
+    var flag = $("#delaccountflag").val();
+    $.ajax({
+
+        url: '/record/delRecord',
+        data: $("#delaccountform").serialize(),
+        success: function (data) {
+
+            if (data == 0) {
+                bootbox.alert({
+                    message: '目标修删除成功！',
+                    size: 'small',
+                    // callback: function () {
+                    //     historygoal();
+                    // },
+                });
+            } else {
+                bootbox.alert({
+                    message: '目标删除失败！',
+                    size: 'small',
+                    // callback: function () {
+                    //     window.location.href = '/login/fullinformationpage';
+                    // },
+                });
+            }
+            if (flag == 0) {
+                historyout();
+            } else if (flag == 3) {
+                hispreout();
+            } else {
+                historyin();
+            }
+            findAllCount();
+            getAllOut();
+            $("#delaccountpage").modal("hide");
+
+        }
+    })
+}
+
+//历史开支分页查询
 function historyout() {
     $("#goalhisdiv").attr("style", "display:none;");//隐藏div
     $("#preouthisdiv").attr("style", "display:none;");//隐藏div
     $("#inhisdiv").attr("style", "display:none;");//隐藏div
     $("#outhisdiv").attr("style", "display:block;");//显示div
-    // $.ajax({
-    //     url: "/record/selRecord?flag=0",
-    //     success: function (data) {
-    //         console.log(data);
-    //         $("#outhistbody").find("tr").remove();
-    //         for (var i = 0; i < data.length; i++) {
-    //
-    //             var tr = $("<tr></tr>");
-    //             tr.html("<td>" + data[i].k_name + "</td>" +
-    //                 "<td>" + data[i].charge + "</td>" +
-    //                 "<td>" + data[i].desc + "</td>" +
-    //                 "<td>" + data[i].date + "</td>" +
-    //                 "<td><button type=\"button\" class=\"btn \" id=\"okrmodify\" onclick=\"#\">\n" +
-    //                 "                            <span class=\"glyphicon glyphicon-edit\" " +
-    //                 "style=\"padding-right: 0.3vw\"></span>修改\n" +
-    //                 "                        </button>&nbsp;&nbsp;<button type=\"button\" class=\"btn \" id=\"okrcancel\" onclick=\"#\">\n" +
-    //                 "                            <span class=\"glyphicon glyphicon-remove\" style=\"padding-right: 0.3vw\"></span>删除\n" +
-    //                 "                        </button>&nbsp;&nbsp;" +
-    //                 "</td>");
-    //
-    //             $("#outhistbody").append(tr);
-    //         }
-    //
-    //     }
-    // })
-
     $('#outhistab').bootstrapTable('destroy');   //动态加载表格之前，先销毁表格
     $('#outhistab').bootstrapTable({
         method: 'get',
@@ -1745,38 +2092,12 @@ function historyout() {
     })
 }
 
-//历史预留开支查询
+//历史预留开支分页查询
 function hispreout() {
     $("#goalhisdiv").attr("style", "display:none;");//隐藏div
     $("#outhisdiv").attr("style", "display:none;");//隐藏div
     $("#inhisdiv").attr("style", "display:none;");//隐藏div
     $("#preouthisdiv").attr("style", "display:block;");//显示div
-    // $.ajax({
-    //     url: "/record/selRecord?flag=3",
-    //     success: function (data) {
-    //         console.log(data);
-    //         $("#preouthistbody").find("tr").remove();
-    //         for (var i = 0; i < data.length; i++) {
-    //
-    //             var tr = $("<tr></tr>");
-    //             tr.html("<td>" + data[i].k_name + "</td>" +
-    //                 "<td>" + data[i].charge + "</td>" +
-    //                 "<td>" + data[i].desc + "</td>" +
-    //                 "<td>" + data[i].date + "</td>" +
-    //                 "<td><button type=\"button\" class=\"btn \" id=\"okrmodify\" onclick=\"#\">\n" +
-    //                 "                            <span class=\"glyphicon glyphicon-edit\" " +
-    //                 "style=\"padding-right: 0.3vw\"></span>修改\n" +
-    //                 "                        </button>&nbsp;&nbsp;<button type=\"button\" class=\"btn \" id=\"okrcancel\" onclick=\"#\">\n" +
-    //                 "                            <span class=\"glyphicon glyphicon-remove\" style=\"padding-right: 0.3vw\"></span>删除\n" +
-    //                 "                        </button>&nbsp;&nbsp;" +
-    //                 "</td>");
-    //
-    //             $("#preouthistbody").append(tr);
-    //         }
-    //
-    //     }
-    // })
-
     $('#preouthistab').bootstrapTable('destroy');   //动态加载表格之前，先销毁表格
     $('#preouthistab').bootstrapTable({
         method: 'get',
@@ -1846,31 +2167,6 @@ function historyin() {
     $("#outhisdiv").attr("style", "display:none;");//隐藏div
     $("#preouthisdiv").attr("style", "display:none;");//隐藏div
     $("#inhisdiv").attr("style", "display:block;");//显示div
-    // $.ajax({
-    //     url: "/record/selRecord?flag=1",
-    //     success: function (data) {
-    //         console.log(data);
-    //         $("#inhistbody").find("tr").remove();
-    //         for (var i = 0; i < data.length; i++) {
-    //
-    //             var tr = $("<tr></tr>");
-    //             tr.html("<td>" + data[i].k_name + "</td>" +
-    //                 "<td>" + data[i].charge + "</td>" +
-    //                 "<td>" + data[i].desc + "</td>" +
-    //                 "<td>" + data[i].date + "</td>" +
-    //                 "<td><button type=\"button\" class=\"btn \" id=\"okrmodify\" onclick=\"#\">\n" +
-    //                 "                            <span class=\"glyphicon glyphicon-edit\" " +
-    //                 "style=\"padding-right: 0.3vw\"></span>修改\n" +
-    //                 "                        </button>&nbsp;&nbsp;<button type=\"button\" class=\"btn \" id=\"okrcancel\" onclick=\"#\">\n" +
-    //                 "                            <span class=\"glyphicon glyphicon-remove\" style=\"padding-right: 0.3vw\"></span>删除\n" +
-    //                 "                        </button>&nbsp;&nbsp;" +
-    //                 "</td>");
-    //
-    //             $("#inhistbody").append(tr);
-    //         }
-    //
-    //     }
-    // })
 
     $('#inhistab').bootstrapTable('destroy');   //动态加载表格之前，先销毁表格
     $('#inhistab').bootstrapTable({

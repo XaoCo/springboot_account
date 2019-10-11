@@ -8,6 +8,7 @@ import com.abc.account.pojo.Kind;
 import com.abc.account.pojo.User;
 import com.abc.account.service.UserService;
 import com.abc.account.util.MailUtil;
+import com.abc.account.util.Md5;
 import org.apache.commons.lang.StringUtils;
 import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
@@ -27,6 +28,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static javafx.scene.input.KeyCode.M;
+
 @Controller
 @RequestMapping("/login")
 public class LoginController {
@@ -35,6 +38,7 @@ public class LoginController {
 
     //    实例化日志
     Logger logger = LoggerFactory.getLogger(this.getClass());
+    Md5 md5 = new Md5();
 
     //      进入登录页面
     @RequestMapping("/loginHtml")
@@ -50,18 +54,18 @@ public class LoginController {
             @RequestParam("password") String password,
             HttpServletRequest request) {
         int flag = 0;
-        if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
-            flag = -1;
-
-            logger.error(this.getClass() + "用户名或者密码为空，登录失败！");
-            return flag;
-
-        }
+//        if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
+//            flag = -1;
+//
+//            logger.error(this.getClass() + "用户名或者密码为空，登录失败！");
+//            return flag;
+//
+//        }
 
         User user1 = new User();
         user1.setName(username);
         user1.setMails(username);
-        user1.setPassword(password);
+        user1.setPassword(md5.md5(password));
 
         User user = userService.login(user1);
 
@@ -104,7 +108,8 @@ public class LoginController {
         User user = new User();
         int flag = 0;
         user.setMails(mails);
-        user.setPassword(password);
+
+        user.setPassword(md5.md5(password));
 //        user.setName("");
 //        user.setPosition("");
 //        user.setPassword("");

@@ -15,7 +15,7 @@
     <script src="../../js/drag.js"></script>
 
 </head>
-<body class="bg">
+<body class="bg" onkeydown="keyLogin()">
 
 <script src="../../js/bootbox.js"></script>
 
@@ -33,7 +33,7 @@
                     登&nbsp;&nbsp;&nbsp;&nbsp;录</p>
             </div>
             <form enctype="multipart/form-data" method="post" id="loginForm"
-                  οnkeydοwn="if(event.keyCode==13) return login();">
+                  >
 
                 <div class="form-group has-feedback">
                     <label for="username"></label>

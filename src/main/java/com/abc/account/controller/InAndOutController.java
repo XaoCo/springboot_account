@@ -3,6 +3,7 @@ package com.abc.account.controller;
 import com.abc.account.pojo.InAndOut;
 import com.abc.account.pojo.User;
 import com.abc.account.service.InAndOutService;
+import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,7 @@ public class InAndOutController {
         InAndOut inAndOut = new InAndOut();
         User user_session = (User) request.getSession().getAttribute("user_session");
 //        int flag = 0;
-        logger.info("flag="+flag);
+        logger.info("flag=" + flag);
         inAndOut.setFlag(flag);
         inAndOut.setU_name(user_session.getMails());
 
@@ -49,29 +50,29 @@ public class InAndOutController {
         return inAndOuts;
     }
 
-//        查询所有用户的收支记录(饼图)
+    //        查询所有用户的收支记录(饼图)
     @RequestMapping("/findAllCount")
     @ResponseBody
-    public Map<String,String> findAllCount(
+    public Map<String, String> findAllCount(
             HttpServletRequest request,
             int flag) {
         User user_session = (User) request.getSession().getAttribute("user_session");
-        Map<String,String> map = new HashMap<String, String>() ;
+        Map<String, String> map = new HashMap<String, String>();
 
-        if(flag==0){//0 代表查询柱状图,1代表支出饼状图,2代表收入饼图
+        if (flag == 0) {//0 代表查询柱状图,1代表支出饼状图,2代表收入饼图
 //            查询该用户的收入
-            String  allIn = inAndOutService.findAllIn(user_session.getMails());
+            String allIn = inAndOutService.findAllIn(user_session.getMails());
 //        查询该用户的开支
             String allOut = inAndOutService.findAllOut(user_session.getMails());
-            map.put("收入",allIn);
-            map.put("开支",allOut);
+            map.put("收入", allIn);
+            map.put("开支", allOut);
 
-        }else if (flag==1){
+        } else if (flag == 1) {
             List<InAndOut> allOut = inAndOutService.getAllOut(user_session.getMails());
-            for (InAndOut inAndOut:allOut) {
-                map.put(inAndOut.getK_name(),inAndOut.getCharge());
+            for (InAndOut inAndOut : allOut) {
+                map.put(inAndOut.getK_name(), inAndOut.getCharge());
             }
-        }else {
+        } else {
             List<InAndOut> allIn = inAndOutService.getAllIn(user_session.getMails());
         }
 //
@@ -108,7 +109,8 @@ public class InAndOutController {
         }
         return flag;
     }
-//     增添一条收入记录
+
+    //     增添一条收入记录
     @RequestMapping("/addinRecord")
     @ResponseBody
     public int addInRecord(
@@ -137,7 +139,8 @@ public class InAndOutController {
         }
         return flag;
     }
-//     增添一条预留支出记录
+
+    //     增添一条预留支出记录
     @RequestMapping("/addpreoutRecord")
     @ResponseBody
     public int addPreOutRecord(
@@ -166,56 +169,45 @@ public class InAndOutController {
         }
         return flag;
     }
+    //    修改一条记录
+    @RequestMapping("/updRecord")
+    @ResponseBody
+    public int updRecord(
+            @RequestParam("modifyaccountlId") String modifyaccountlId,
+            @RequestParam("modifyaccountflag") String modifyaccountflag,
+            @RequestParam("modifyaccountName") String modifyaccountName,
+            @RequestParam("modifycharge") String modifycharge,
+            @RequestParam("modifydesc") String modifydesc,
+            @RequestParam("modifyaccountDate") String modifyaccountDate,
+            HttpServletRequest request) {
 
-//    //    修改一条记录的页面
-//    @RequestMapping("/updRecordPage")
-//    public String updRecordPage() {
-//        return "account/updrecordpage";
-//    }
-//
-//    //    修改一条记录
-//    @RequestMapping("/updRecord")
-//    public String updRecord(
-//            @RequestParam("id") int id,
-//            @RequestParam("kindName") String kindName,
-//            @RequestParam("flag") int flag,
-//            @RequestParam("charge") BigDecimal charge,
-//            @RequestParam("date") String date,
-//            String desc,
-//            HttpServletRequest request) {
-//
-//        if (StringUtils.isBlank("kindName")) {
-//            return "消费类别不能为空";
-//        }
-////        获取session
-//        User user_session = (User) request.getSession().getAttribute("user_session");
-//
-//        InAndOut inAndOut = new InAndOut();
-//        inAndOut.setId(id);
-//        inAndOut.setU_name(user_session.getMails());
-//        inAndOut.setK_name(kindName);
-//        inAndOut.setFlag(flag);
-//        inAndOut.setDesc(desc);
-//        inAndOut.setCharge(charge);
-//        inAndOut.setDate(date);
-//
-//        int i = inAndOutService.updRecord(inAndOut);
-//        if (i <= 0) {
-//            return "修改记录失败！";
-//        } else {
-//            return "account/allrecordspage";
-//        }
-//    }
-//
-//    //    删除一条记录
-//    @RequestMapping("/delRecord")
-//    public String delRecord(int id,
-//                            HttpServletRequest request) {
-//        int i = inAndOutService.delRecord(id);
-//        if (i <= 0) {
-//            return "删除记录失败！";
-//        } else {
-//            return "account/allrecordspage";
-//        }
-//    }
+
+        int flag = 0;
+        InAndOut inAndOut = new InAndOut();
+        inAndOut.setId(Integer.valueOf(modifyaccountlId));
+        inAndOut.setK_name(modifyaccountName);
+        inAndOut.setFlag(Integer.valueOf(modifyaccountflag));
+        inAndOut.setDesc(modifydesc);
+        inAndOut.setCharge(modifycharge);
+        inAndOut.setDate(modifyaccountDate);
+
+        int i = inAndOutService.updRecord(inAndOut);
+        if (i <= 0) {
+            flag = -1;
+        }
+        return flag;
+    }
+    //    删除一条记录
+    @RequestMapping("/delRecord")
+    @ResponseBody
+    public int delRecord(@Param("delaccountId") String delaccountId,
+                            HttpServletRequest request) {
+        int flag = 0;
+        int i = inAndOutService.delRecord(Integer.valueOf(delaccountId));
+        if (i <= 0) {
+            flag = -1;
+        }
+        return flag;
+    }
+
 }

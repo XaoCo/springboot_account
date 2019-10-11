@@ -40,10 +40,10 @@
          WHERE GOALID = #{id,jdbcType=INTEGER}
     </update>
 
-    <!--&lt;!&ndash;删除用户&ndash;&gt;-->
-    <!--<delete id="delUser">-->
-        <!--DELETE FROM A_USER WHERE U_NAME = #{name}-->
-    <!--</delete>-->
+    <!--删除目标-->
+    <delete id="delGoal">
+        DELETE FROM A_GOAL  WHERE GOALID = #{id,jdbcType=INTEGER}
+    </delete>
 
     <!--&lt;!&ndash;获取所有用户&ndash;&gt;-->
     <!--<select id="getAllUser" resultMap="userRestMap">-->

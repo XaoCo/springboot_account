@@ -370,7 +370,7 @@
                         <div class="form-group has-feedback" align="center">
                             <div class="input-group" style="width: 50%">
                                 <span class="input-group-addon"><span
-                                        class="glyphicon glyphicon-hand-right"></span></span>
+                                        class="glyphicon glyphicon-pencil"></span></span>
                                 <input id="goalDesc" name="goalDesc" class="form-control" placeholder="目标简述"
                                        maxlength="20" type="text">
                             </div>
@@ -448,7 +448,7 @@
                         <div class="form-group has-feedback" align="center">
                             <div class="input-group" style="width: 50%">
                                 <span class="input-group-addon"><span
-                                        class="glyphicon glyphicon-hand-right"></span></span>
+                                        class="glyphicon glyphicon-pencil"></span></span>
                                 <input id="outDesc" name="outDesc" class="form-control" placeholder="支出简述"
                                        maxlength="20" type="text" required>
                             </div>
@@ -458,7 +458,7 @@
                         <div class="form-group has-feedback" align="center">
                             <div class="input-group" style="width: 50%">
                                 <span class="input-group-addon"><span
-                                        class="glyphicon glyphicon-hand-right"></span></span>
+                                        class="glyphicon glyphicon-usd"></span></span>
                                 <input id="outAccount" name="outAccount" class="form-control" placeholder="支出金额"
                                        maxlength="20" type="text" required>
                             </div>
@@ -523,7 +523,7 @@
                         <div class="form-group has-feedback" align="center">
                             <div class="input-group" style="width: 50%">
                                 <span class="input-group-addon"><span
-                                        class="glyphicon glyphicon-hand-right"></span></span>
+                                        class="glyphicon glyphicon-pencil"></span></span>
                                 <input id="preoutDesc" name="preoutDesc" class="form-control" placeholder="预留支出简述"
                                        maxlength="20" type="text">
                             </div>
@@ -533,7 +533,7 @@
                         <div class="form-group has-feedback" align="center">
                             <div class="input-group" style="width: 50%">
                                 <span class="input-group-addon"><span
-                                        class="glyphicon glyphicon-hand-right"></span></span>
+                                        class="glyphicon glyphicon-usd"></span></span>
                                 <input id="preoutAccount" name="preoutAccount" class="form-control"
                                        placeholder="预留支出金额"
                                        maxlength="20" type="text">
@@ -600,7 +600,7 @@
                         <div class="form-group has-feedback" align="center">
                             <div class="input-group" style="width: 50%">
                                 <span class="input-group-addon"><span
-                                        class="glyphicon glyphicon-hand-right"></span></span>
+                                        class="glyphicon glyphicon-pencil"></span></span>
                                 <input id="inDesc" name="inDesc" class="form-control" placeholder="收入简述"
                                        maxlength="20" type="text">
                             </div>
@@ -610,7 +610,7 @@
                         <div class="form-group has-feedback" align="center">
                             <div class="input-group" style="width: 50%">
                                 <span class="input-group-addon"><span
-                                        class="glyphicon glyphicon-hand-right"></span></span>
+                                        class="glyphicon glyphicon-usd"></span></span>
                                 <input id="inAccount" name="inAccount" class="form-control" placeholder="收入金额"
                                        maxlength="20" type="text">
                             </div>
@@ -860,6 +860,214 @@
         </div>
         <!-- /.modal -->
     </div>
+
+    <!--修改收支页面-->
+    <div class="modal fade" id="modifyaccountpage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="modifyaccounttitle" align="center">
+                        修改收支
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form id="modifyaccountform">
+
+                        <div class="form-group has-feedback" align="center" hidden>
+                            <label for="modifygoalId"></label>
+                            <div class="input-group" style="width: 50%">
+                                <span class="input-group-addon"><span
+                                        class="glyphicon glyphicon-hand-right"></span></span>
+                                <input id="modifyaccountlId" name="modifyaccountlId" class="form-control"
+                                       maxlength="20" type="text" >
+                            </div>
+
+
+                        </div>
+
+                        <div class="form-group has-feedback" align="center" hidden>
+                            <label for="modifygoalId"></label>
+                            <div class="input-group" style="width: 50%">
+                                <span class="input-group-addon"><span
+                                        class="glyphicon glyphicon-hand-right"></span></span>
+                                <input id="modifyaccountflag" name="modifyaccountflag" class="form-control"
+                                       maxlength="20" type="text" >
+                            </div>
+
+
+                        </div>
+                        <div class="form-group has-feedback" align="center">
+                            <label for="modifygoalName"></label>
+                            <div class="input-group" style="width: 50%">
+                                <span class="input-group-addon"><span
+                                        class="glyphicon glyphicon-hand-right"></span></span>
+                                <select class="form-control" id="modifyaccountName" name="modifyaccountName">
+                                    <!--<option value="11">11</option>-->
+                                </select>
+                                <!--<input id="modifyaccountName" name="modifyaccountName" class="form-control" placeholder="收支种类"-->
+                                       <!--maxlength="20" type="text">-->
+                            </div>
+
+
+                        </div>
+                        <div class="form-group has-feedback" align="center">
+                            <div class="input-group" style="width: 50%">
+                                <span class="input-group-addon"><span
+                                        class="glyphicon glyphicon-usd"></span></span>
+                                <input id="modifycharge" name="modifycharge" class="form-control" placeholder="收支金额"
+                                       maxlength="20" type="text" aria-valuemax="20">
+                            </div>
+
+
+                        </div>
+
+                        <div class="form-group has-feedback" align="center">
+                            <div class="input-group" style="width: 50%">
+                                <span class="input-group-addon"><span
+                                        class="glyphicon glyphicon-pencil"></span></span>
+                                <input id="modifydesc" name="modifydesc" class="form-control" placeholder="收支描述"
+                                       type="text" >
+                            </div>
+
+
+                        </div>
+                        <div class="form-group has-feedback" align="center">
+                            <div class="input-group" style="width: 50%" id='datetimepickermodifyaccount'>
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                                <input type='text' class="form-control" placeholder="收支日期"
+                                       id="modifyaccountDate" name="modifyaccountDate" required/>
+
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-info" onclick="modifyaccountconfirm()" >
+                                <span class="glyphicon glyphicon-saved" style="padding-right: 0.3vw"></span>提交
+                            </button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">
+                                <span class="glyphicon glyphicon-remove" style="padding-right: 0.3vw"></span>关闭
+                            </button>
+
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal -->
+    </div>
+ <!--删除目标页面-->
+    <div class="modal fade" id="delgoalpage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="delgoaltitle" align="center">
+                        删除目标
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form id="delgoalform">
+                        <div class="form-group has-feedback" align="center" hidden>
+                            <label for="modifygoalId"></label>
+                            <div class="input-group" style="width: 50%">
+                                <span class="input-group-addon"><span
+                                        class="glyphicon glyphicon-hand-right"></span></span>
+                                <input id="delgoalId" name="delgoalId" class="form-control"
+                                       maxlength="20" type="text" >
+                            </div>
+
+
+                        </div>
+                        <div class="modal-body">
+                            <!-- 隐藏需要删除的id -->
+
+                            <p>您确认要删除该条信息吗？</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default"
+                                    data-dismiss="modal">取消</button>
+                            <button type="button" class="btn btn-primary"
+                                     onclick="delgoalconfirm()">确认</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal -->
+    </div>
+
+<!--删除收支记录页面-->
+    <div class="modal fade" id="delaccountpage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="delaccounttitle" align="center">
+                        删除记录
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form id="delaccountform">
+                        <div class="form-group has-feedback" align="center" hidden>
+                            <label for="modifygoalId"></label>
+                            <div class="input-group" style="width: 50%">
+                                <span class="input-group-addon"><span
+                                        class="glyphicon glyphicon-hand-right"></span></span>
+                                <input id="delaccountId" name="delaccountId" class="form-control"
+                                        type="text" >
+                            </div>
+
+
+                        </div>
+                        <div class="form-group has-feedback" align="center" hidden>
+                            <label for="modifygoalId"></label>
+                            <div class="input-group" style="width: 50%">
+                                <span class="input-group-addon"><span
+                                        class="glyphicon glyphicon-hand-right"></span></span>
+                                <input id="delaccountflag" name="delaccountflag" class="form-control"
+                                        type="text" >
+                            </div>
+
+
+                        </div>
+                        <div class="modal-body">
+                            <!-- 隐藏需要删除的id -->
+
+                            <p>您确认要删除该条记录吗？</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default"
+                                    data-dismiss="modal">取消</button>
+                            <button type="button" class="btn btn-primary"
+                                     onclick="delaccountconfirm()">确认</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal -->
+    </div>
+
+
+
     <!--右边echarts-->
     <div class="col-md-4">
         <div style="background-color: #FFFFFF;padding: 0.8vw 0.3vw 0.5vw 0.3vw;margin-top: 0.5vw" class="style1">
