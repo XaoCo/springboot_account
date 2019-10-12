@@ -133,7 +133,8 @@
                 <!--<span class="glyphicon glyphicon-cog" style="padding-right: 0.3vw"></span>设置-->
                 <!--</button>-->
                 <p class="logo8">Welcome&nbsp;&nbsp;<a id="userFlag" onclick="findInformation()"
-                                                       data-target="#personalmsgpage" data-toggle="modal" style="text-decoration: none;cursor: pointer"></a></p>
+                                                       data-target="#personalmsgpage" data-toggle="modal"
+                                                       style="text-decoration: none;cursor: pointer"></a></p>
             </div>
 
             <div class="col-md-1">
@@ -172,41 +173,41 @@
         <div style="background-color: #FFFFFF;padding: 0.8vw 0.3vw 0.3vw 0.3vw;margin-top: 0.5vw">
             <div class="col-md-3 logo7">
 
-                <button type="button" class="btn btn-info logo2 " id="newgoal" data-target="#newgoalpage"
+                <button type="button" class="btn btn-default logo2 " id="newgoal" data-target="#newgoalpage"
                         data-toggle="modal" onclick="newgoal()">
                     <span class="glyphicon glyphicon-plus" style="padding-right: 0.3vw"></span>设定目标
                 </button>
-                <button type="button" class="btn btn-info logo2" id="hisgoal" data-target="#hisgoalpage"
+                <button type="button" class="btn btn-default logo2 " id="hisgoal" data-target="#hisgoalpage"
                         data-toggle="modal" onclick="historygoal()">
                     <span class="glyphicon glyphicon-search" style="padding-right: 0.3vw"></span>历史目标
                 </button>
             </div>
             <div class="col-md-3 logo7">
-                <button type="button" class="btn btn-info logo2" id="newout" data-target="#newoutpage"
+                <button type="button" class="btn btn-default logo2" id="newout" data-target="#newoutpage"
                         data-toggle="modal" onclick="newout()">
                     <span class="glyphicon glyphicon-plus" style="padding-right: 0.3vw"></span>新增支出
                 </button>
-                <button type="button" class="btn btn-info logo2" id="hisout" data-target="#hisoutpage"
+                <button type="button" class="btn btn-default logo2" id="hisout" data-target="#hisoutpage"
                         data-toggle="modal" onclick="historyout()">
                     <span class="glyphicon glyphicon-search" style="padding-right: 0.3vw"></span>历史支出
                 </button>
             </div>
             <div class="col-md-3 logo7">
-                <button type="button" class="btn btn-info logo2" id="resout" data-target="#resoutpage"
+                <button type="button" class="btn btn-default logo2" id="resout" data-target="#resoutpage"
                         data-toggle="modal" onclick="preout()">
                     <span class="glyphicon glyphicon-plus" style="padding-right: 0.3vw"></span>预留支出
                 </button>
-                <button type="button" class="btn btn-info logo2" id="hisresout" data-target="#hisresoutpage"
+                <button type="button" class="btn btn-default logo2" id="hisresout" data-target="#hisresoutpage"
                         data-toggle="modal" onclick="hispreout()">
                     <span class="glyphicon glyphicon-search" style="padding-right: 0.3vw"></span>历史预留
                 </button>
             </div>
             <div class="col-md-3 logo7">
-                <button type="button" class="btn btn-info logo2" id="newin" data-target="#newinpage"
+                <button type="button" class="btn btn-default logo2" id="newin" data-target="#newinpage"
                         data-toggle="modal" onclick="newin()">
                     <span class="glyphicon glyphicon-plus" style="padding-right: 0.3vw"></span>新增收入
                 </button>
-                <button type="button" class="btn btn-info logo2" id="hisin" data-target="#hisinpage"
+                <button type="button" class="btn btn-default logo2" id="hisin" data-target="#hisinpage"
                         data-toggle="modal" onclick="historyin()">
                     <span class="glyphicon glyphicon-search" style="padding-right: 0.3vw"></span>历史收入
                 </button>
@@ -214,22 +215,6 @@
             <!--历史目标div-->
             <div style="padding: 0px 0.5vw 0.3vw 0.5vw" id="goalhisdiv">
                 <table class="table table-bordered  table-hover" id="goalhistab">
-
-                    <thead align="center">
-                    <tr>
-                        <td colspan="6" class="logo7">历史目标</td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-2">名称</td>
-                        <td class="col-md-2">当前完成量</td>
-                        <td class="col-md-2">总量</td>
-                        <td class="col-md-1">进度</td>
-                        <td class="col-md-2">截止日期</td>
-                        <td class="col-md-3">操作</td>
-                    </tr>
-                    </thead>
-                    <tbody class="tab-body-bordered" id="goalhistbody" align="center">
-                    </tbody>
                 </table>
             </div>
 
@@ -237,20 +222,6 @@
             <div style="padding: 0px 0.5vw 0.3vw 0.5vw;display: none" id="outhisdiv">
                 <table class="table table-bordered  table-hover" id="outhistab">
 
-                    <thead align="center">
-                    <tr>
-                        <td colspan="6" class="logo7">历史支出</td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-2">开支种类</td>
-                        <td class="col-md-2">开支金额</td>
-                        <td class="col-md-3">开支描述</td>
-                        <td class="col-md-2">开支日期</td>
-                        <td class="col-md-3">操作</td>
-                    </tr>
-                    </thead>
-                    <tbody class="tab-body-bordered" id="outhistbody" align="center">
-                    </tbody>
                 </table>
             </div>
 
@@ -258,20 +229,6 @@
             <div style="padding: 0px 0.5vw 0.3vw 0.5vw;display: none" id="preouthisdiv">
                 <table class="table table-bordered  table-hover" id="preouthistab">
 
-                    <thead align="center">
-                    <tr>
-                        <td colspan="6" class="logo7">历史预留</td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-2">预留开支种类</td>
-                        <td class="col-md-2">预留开支金额</td>
-                        <td class="col-md-3">预留开支描述</td>
-                        <td class="col-md-2">预留开支日期</td>
-                        <td class="col-md-3">操作</td>
-                    </tr>
-                    </thead>
-                    <tbody class="tab-body-bordered" id="preouthistbody" align="center">
-                    </tbody>
                 </table>
             </div>
 
@@ -280,20 +237,6 @@
             <div style="padding: 0px 0.5vw 0.3vw 0.5vw;display: none" id="inhisdiv">
                 <table class="table table-bordered  table-hover" id="inhistab">
 
-                    <thead align="center">
-                    <tr>
-                        <td colspan="6" class="logo7">历史收入</td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-2">收入来源</td>
-                        <td class="col-md-2">收入金额</td>
-                        <td class="col-md-3">收入描述</td>
-                        <td class="col-md-2">收入日期</td>
-                        <td class="col-md-3">操作</td>
-                    </tr>
-                    </thead>
-                    <tbody class="tab-body-bordered" id="inhistbody" align="center">
-                    </tbody>
                 </table>
             </div>
         </div>
@@ -806,7 +749,7 @@
                                 <span class="input-group-addon"><span
                                         class="glyphicon glyphicon-hand-right"></span></span>
                                 <input id="modifygoalId" name="modifygoalId" class="form-control"
-                                       maxlength="20" type="text" >
+                                       maxlength="20" type="text">
                             </div>
 
 
@@ -826,7 +769,8 @@
                             <div class="input-group" style="width: 50%">
                                 <span class="input-group-addon"><span
                                         class="glyphicon glyphicon-hand-right"></span></span>
-                                <input id="modifygoalTotal" name="modifygoalTotal" class="form-control" placeholder="目标总量"
+                                <input id="modifygoalTotal" name="modifygoalTotal" class="form-control"
+                                       placeholder="目标总量"
                                        maxlength="20" type="text" aria-valuemax="20">
                             </div>
 
@@ -883,7 +827,7 @@
                                 <span class="input-group-addon"><span
                                         class="glyphicon glyphicon-hand-right"></span></span>
                                 <input id="modifyaccountlId" name="modifyaccountlId" class="form-control"
-                                       maxlength="20" type="text" >
+                                       maxlength="20" type="text">
                             </div>
 
 
@@ -895,7 +839,7 @@
                                 <span class="input-group-addon"><span
                                         class="glyphicon glyphicon-hand-right"></span></span>
                                 <input id="modifyaccountflag" name="modifyaccountflag" class="form-control"
-                                       maxlength="20" type="text" >
+                                       maxlength="20" type="text">
                             </div>
 
 
@@ -909,7 +853,7 @@
                                     <!--<option value="11">11</option>-->
                                 </select>
                                 <!--<input id="modifyaccountName" name="modifyaccountName" class="form-control" placeholder="收支种类"-->
-                                       <!--maxlength="20" type="text">-->
+                                <!--maxlength="20" type="text">-->
                             </div>
 
 
@@ -930,7 +874,7 @@
                                 <span class="input-group-addon"><span
                                         class="glyphicon glyphicon-pencil"></span></span>
                                 <input id="modifydesc" name="modifydesc" class="form-control" placeholder="收支描述"
-                                       type="text" >
+                                       type="text">
                             </div>
 
 
@@ -947,7 +891,7 @@
                         </div>
 
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-info" onclick="modifyaccountconfirm()" >
+                            <button type="button" class="btn btn-info" onclick="modifyaccountconfirm()">
                                 <span class="glyphicon glyphicon-saved" style="padding-right: 0.3vw"></span>提交
                             </button>
                             <button type="button" class="btn btn-danger" data-dismiss="modal">
@@ -963,7 +907,7 @@
         </div>
         <!-- /.modal -->
     </div>
- <!--删除目标页面-->
+    <!--删除目标页面-->
     <div class="modal fade" id="delgoalpage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
          aria-hidden="true">
         <div class="modal-dialog">
@@ -984,7 +928,7 @@
                                 <span class="input-group-addon"><span
                                         class="glyphicon glyphicon-hand-right"></span></span>
                                 <input id="delgoalId" name="delgoalId" class="form-control"
-                                       maxlength="20" type="text" >
+                                       maxlength="20" type="text">
                             </div>
 
 
@@ -996,9 +940,11 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default"
-                                    data-dismiss="modal">取消</button>
+                                    data-dismiss="modal">取消
+                            </button>
                             <button type="button" class="btn btn-primary"
-                                     onclick="delgoalconfirm()">确认</button>
+                                    onclick="delgoalconfirm()">确认
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -1009,7 +955,7 @@
         <!-- /.modal -->
     </div>
 
-<!--删除收支记录页面-->
+    <!--删除收支记录页面-->
     <div class="modal fade" id="delaccountpage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
          aria-hidden="true">
         <div class="modal-dialog">
@@ -1030,7 +976,7 @@
                                 <span class="input-group-addon"><span
                                         class="glyphicon glyphicon-hand-right"></span></span>
                                 <input id="delaccountId" name="delaccountId" class="form-control"
-                                        type="text" >
+                                       type="text">
                             </div>
 
 
@@ -1041,7 +987,7 @@
                                 <span class="input-group-addon"><span
                                         class="glyphicon glyphicon-hand-right"></span></span>
                                 <input id="delaccountflag" name="delaccountflag" class="form-control"
-                                        type="text" >
+                                       type="text">
                             </div>
 
 
@@ -1053,9 +999,11 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default"
-                                    data-dismiss="modal">取消</button>
+                                    data-dismiss="modal">取消
+                            </button>
                             <button type="button" class="btn btn-primary"
-                                     onclick="delaccountconfirm()">确认</button>
+                                    onclick="delaccountconfirm()">确认
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -1067,19 +1015,51 @@
     </div>
 
 
-
     <!--右边echarts-->
     <div class="col-md-4">
+        <!--显示收支柱状图-->
         <div style="background-color: #FFFFFF;padding: 0.8vw 0.3vw 0.5vw 0.3vw;margin-top: 0.5vw" class="style1">
             <div class="col-md-12 style1" id="demo1"></div>
         </div>
-        <div class="col-md-12 style1" id="demo2" style="display: none"></div>
-        <div class="col-md-12 style1" id="demo3" style="display: none"></div>
-        <div class="col-md-12 style1" id="demo4" style="display: none"></div>
-        <div class="col-md-12 style1" id="demo5" style="display: none"></div>
+
+        <!--收支详细信息饼图-->
+
         <div style="background-color: #FFFFFF;padding: 0.8vw 0.3vw 0.5vw 0.3vw;margin-top: 0.5vw" class="style1">
-            <div class="col-md-12 style1" id="demo6"></div>
+            <ul class="nav nav-tabs">
+                <li class="col-md-4 active" style="padding: 0px"><a data-toggle="tab" href="#menu1"
+                                                                    onclick="getAllOut()">开支明细</a></li>
+                <li class="col-md-4" style="padding: 0px"><a data-toggle="tab" href="#menu2" onclick="getAllPreOut()">预留开支明细</a>
+                </li>
+                <li class="col-md-4" style="padding: 0px"><a data-toggle="tab" href="#menu3"
+                                                             onclick="getAllIn()">收入明细</a></li>
+            </ul>
+
+            <div class="tab-content">
+                <div id="menu1" class="tab-pane fade in active">
+                    <div style="background-color: #FFFFFF;padding: 0.8vw 0.3vw 0.5vw 0.3vw;margin-top: 0.5vw"
+                         class="style1">
+                        <div class="col-md-12 style1" id="demo2"></div>
+                    </div>
+                </div>
+                <div id="menu2" class="tab-pane fade">
+                    <div style="background-color: #FFFFFF;padding: 0.8vw 0.3vw 0.5vw 0.3vw;margin-top: 0.5vw"
+                         class="style1">
+                        <div class="col-md-12 style1" id="demo3"></div>
+                    </div>
+                </div>
+                <div id="menu3" class="tab-pane fade">
+                    <div style="background-color: #FFFFFF;padding: 0.8vw 0.3vw 0.5vw 0.3vw;margin-top: 0.5vw"
+                         class="style1">
+                        <div class="col-md-12 style1" id="demo4"></div>
+                    </div>
+                </div>
+
+            </div>
         </div>
+
+        <!--<div style="background-color: #FFFFFF;padding: 0.8vw 0.3vw 0.5vw 0.3vw;margin-top: 0.5vw" class="style1">-->
+        <!--<div class="col-md-12 style1" id="demo6"></div>-->
+        <!--</div>-->
     </div>
 
 </div>

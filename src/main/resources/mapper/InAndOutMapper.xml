@@ -12,7 +12,7 @@
         <result column="A_CHARGE" property="charge"/>
         <result column="A_DATE" property="date"/>
     </resultMap>
-<resultMap id="getAllOutRestMap" type="com.abc.account.pojo.InAndOut">
+    <resultMap id="getAllOutRestMap" type="com.abc.account.pojo.InAndOut">
         <result column="A_K_NAME" property="k_name"/>
         <result column="CHARGE" property="charge"/>
     </resultMap>
@@ -71,14 +71,21 @@
     <select id="findAllOut" resultType="String">
        select  SUM (A_CHARGE) FROM A_INOUT_ALL WHERE A_FLAG IN (0,3) and A_U_NAME = #{userName}
     </select>
- <!--查询所有收入明细-->
+    <!--查询所有收入明细-->
     <select id="getAllIn" resultMap="InAndOutRestMap">
        select  * FROM A_INOUT_ALL WHERE A_FLAG = 1 and A_U_NAME = #{userName}
     </select>
-    <!--查询所有开支明细-->
+
+    <!--查询所有支出明细-->
     <select id="getAllOut" resultMap="getAllOutRestMap">
        select  A_K_NAME,sum(A_CHARGE) AS CHARGE from A_INOUT_ALL
-       where A_FLAG IN (0,3) and A_U_NAME = #{userName} group by A_K_NAME
+       where A_FLAG  = 0 and A_U_NAME = #{userName} group by A_K_NAME
+    </select>
+
+    <!--查询所有预留支出明细-->
+    <select id="getAllPreout" resultMap="getAllOutRestMap">
+       select  A_K_NAME,sum(A_CHARGE) AS CHARGE from A_INOUT_ALL
+       where A_FLAG = 3 and A_U_NAME = #{userName} group by A_K_NAME
     </select>
 
 </mapper>

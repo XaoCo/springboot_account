@@ -32,8 +32,11 @@ public interface InAndOutService {
     //    总开支
     String findAllOut(String username);
 
-    //    开支明细
+    //    支出明细
     List<InAndOut> getAllOut(String username);
+
+    //    预留支出明细
+    List<InAndOut> getAllPreout(String username);
 
     //    收入明细
     List<InAndOut> getAllIn(String username);

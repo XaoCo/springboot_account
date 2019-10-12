@@ -33,7 +33,7 @@
                     登&nbsp;&nbsp;&nbsp;&nbsp;录</p>
             </div>
             <form enctype="multipart/form-data" method="post" id="loginForm"
-                  >
+            >
 
                 <div class="form-group has-feedback">
                     <label for="username"></label>
@@ -46,10 +46,10 @@
                     <div class="col-xs-5 col-md-offset-8" style="padding: 0.3vh 0px 0.3vh 2vw ">
                         <a style="cursor: pointer;text-decoration: none;font-size: 15px ;color: cornflowerblue"
                            data-target="#findUserNamepage" data-toggle="modal"
-                           title="忘记用户名,通过邮箱找回" >忘记用户名？</a>
+                           title="忘记用户名,通过邮箱找回">忘记用户名？</a>
                         <!--<button type="button" class="btn btn-info logo2 " id="newgoal" data-target="#newgoalpage"-->
-                                <!--data-toggle="modal" onclick="newgoal()">-->
-                            <!--<span class="glyphicon glyphicon-plus" style="padding-right: 0.3vw"></span>设定目标-->
+                        <!--data-toggle="modal" onclick="newgoal()">-->
+                        <!--<span class="glyphicon glyphicon-plus" style="padding-right: 0.3vw"></span>设定目标-->
                         <!--</button>-->
                     </div>
                 </div>
@@ -64,10 +64,10 @@
                     </div>
                     <div class="col-xs-5 col-md-offset-8" style="padding: 0.3vh 0px 0.3vh 2vw ">
                         <a style="cursor: pointer;text-decoration: none;font-size: 15px ;color: cornflowerblue"
-                             title="忘记密码?"  data-toggle="modal" data-target="#findPwdPage">忘记密码？</a>
+                           title="忘记密码?" data-toggle="modal" data-target="#findPwdPage">忘记密码？</a>
                         <!--<button type="button" class="btn btn-info logo2 " id="newgoal1" data-target="#newgoalpage"-->
-                                <!--data-toggle="modal" onclick="newgoal()">-->
-                            <!--<span class="glyphicon glyphicon-plus" style="padding-right: 0.3vw"></span>设定目标-->
+                        <!--data-toggle="modal" onclick="newgoal()">-->
+                        <!--<span class="glyphicon glyphicon-plus" style="padding-right: 0.3vw"></span>设定目标-->
                         <!--</button>-->
                     </div>
                 </div>
@@ -92,7 +92,7 @@
     <div class="modal fade" id="findUserNamepage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
          aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content" >
+            <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                         &times;
@@ -101,8 +101,8 @@
                         找&nbsp;&nbsp;回&nbsp;&nbsp;用&nbsp;&nbsp;户&nbsp;&nbsp;名
                     </h4>
                 </div>
-                <div class="modal-body" >
-                    <form id="findUserNameform" >
+                <div class="modal-body">
+                    <form id="findUserNameform">
 
                         <div class="form-group has-feedback" align="center">
                             <label for="email"></label>
@@ -110,7 +110,7 @@
                                 <span class="input-group-addon"><span
                                         class="glyphicon glyphicon-envelope"></span></span>
                                 <input id="email" name="email" class="form-control" placeholder="请输入注册邮箱"
-                                        type="text">
+                                       type="text">
                             </div>
                             <label for="email"></label>
                             <p style="font-weight: bolder;font-style: italic">(请登录邮箱查看找回的登录名)</p>
@@ -138,11 +138,11 @@
     </div>
 
 
-<!--找回密码遮罩层-->
+    <!--找回密码遮罩层-->
     <div class="modal fade" id="findPwdPage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
          aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content" >
+            <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                         &times;
@@ -151,8 +151,8 @@
                         找&nbsp;&nbsp;回&nbsp;&nbsp;密&nbsp;&nbsp;码
                     </h4>
                 </div>
-                <div class="modal-body" >
-                    <form id="findPwdform" >
+                <div class="modal-body">
+                    <form id="findPwdform">
 
                         <div class="form-group has-feedback" align="center">
                             <label for="email1"></label>
@@ -176,7 +176,8 @@
                             <label for="passwordconfirm"></label>
                             <div class="input-group" style="width: 50%">
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                                <input id="passwordconfirm" name="passwordconfirm" class="form-control" placeholder="请确认密码"
+                                <input id="passwordconfirm" name="passwordconfirm" class="form-control"
+                                       placeholder="请确认密码"
                                        maxlength="20"
                                        type="password">
                             </div>
@@ -184,20 +185,20 @@
                         </div>
 
                     </form>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-info" onclick="findPassword()">
-                                <span class="glyphicon glyphicon-saved" style="padding-right: 0.3vw"></span>确定
-                            </button>
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">
-                                <span class="glyphicon glyphicon-remove" style="padding-right: 0.3vw"></span>关闭
-                            </button>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-info" onclick="findPassword()">
+                            <span class="glyphicon glyphicon-saved" style="padding-right: 0.3vw"></span>确定
+                        </button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">
+                            <span class="glyphicon glyphicon-remove" style="padding-right: 0.3vw"></span>关闭
+                        </button>
 
-                        </div>
+                    </div>
 
-                        <!--<div class="modal-footer">-->
+                    <!--<div class="modal-footer">-->
 
 
-                        <!--</div>-->
+                    <!--</div>-->
                     </form>
                 </div>
 

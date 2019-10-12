@@ -7,6 +7,9 @@ import com.abc.account.pojo.FamilyPosition;
 import com.abc.account.pojo.Kind;
 import com.abc.account.pojo.User;
 import com.abc.account.service.UserService;
+import com.abc.account.util.Md5;
+import org.apache.commons.lang.StringUtils;
+import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +34,7 @@ public class UserController {
 
     //    实例化日志
     Logger logger = LoggerFactory.getLogger(this.getClass());
-
+    Md5 md5 = new Md5();
 
     //    用户修改密码页面
     @RequestMapping("/updpasswordpage")
@@ -50,7 +53,7 @@ public class UserController {
             HttpServletRequest request) {
         User user_session = (User) request.getSession().getAttribute("user_session");
         User user = new User();
-        user.setPassword(passwordNew);
+        user.setPassword(md5.md5(passwordNew));
         user.setName(user_session.getName());
         //  判断该客户是否存在
         User user1 = userService.selectByName(user);
@@ -160,6 +163,24 @@ public class UserController {
         User user1 = userService.selectByEmail(user);
 //        logger.info("基本信息:" + user1.toString());
         return user1;
+    }
+
+    //检测密码
+    @RequestMapping("/checkpwd")
+    @ResponseBody
+    public int checkpwd(@Param("prepwd") String prepwd, HttpServletRequest request) {
+        User user = new User();
+        User user_session = (User) request.getSession().getAttribute("user_session");
+        user.setMails(user_session.getMails());
+        User user1 = userService.selectByEmail(user);
+        int flag = 0;
+        String pwd1 = md5.md5(user1.getPassword());
+        String pwd2 = md5.md5(prepwd);
+        if(StringUtils.equals(pwd1,pwd2)){
+            flag = 1;
+        }
+//        logger.info("基本信息:" + user1.toString());
+        return flag;
     }
 
     private static Pattern NUMBER_PATTERN = Pattern.compile("-?[0-9]+(\\.[0-9]+)?");

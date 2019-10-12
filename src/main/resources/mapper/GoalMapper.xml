@@ -31,7 +31,7 @@
 
     <!--查询目标-->
     <select id="getAllGoal" resultMap="goalRestMap">
-        SELECT * FROM A_GOAL WHERE USERNAME = #{name} OR USERNAME = 'admin'
+        SELECT * FROM A_GOAL WHERE USERNAME = #{name}
     </select>
 
     <!--修改目标-->

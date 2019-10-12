@@ -246,7 +246,7 @@ public class LoginController {
         if (null == user1) {
             flag = -2;
         } else {
-            user.setPassword(password1);
+            user.setPassword(md5.md5(password1));
             int i = userService.updPassword(user);
             if (i <= 0) {
                 flag = -1;

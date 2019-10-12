@@ -36,6 +36,9 @@ public interface InAndOutMapper {
     //    开支明细
     List<InAndOut> getAllOut(@Param("userName") String username);
 
+    //    预留开支明细
+    List<InAndOut> getAllPreout(@Param("userName") String username);
+
     //    收入明细
     List<InAndOut> getAllIn(@Param("userName") String username);
 }
