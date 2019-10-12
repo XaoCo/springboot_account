@@ -247,213 +247,214 @@ window.onload = function () {
 //登录验证
 // function loginformValidator() {
 
-    $("#loginForm").bootstrapValidator({
-        live: 'enabled',//验证时机，enabled是内容有变化就验证（默认），disabled和submitted是提交再验证
+$("#loginForm").bootstrapValidator({
+    live: 'enabled',//验证时机，enabled是内容有变化就验证（默认），disabled和submitted是提交再验证
 
-        excluded: [':disabled', ':hidden', ':not(:visible)'],//排除无需验证的控件，比如被禁用的或者被隐藏的
+    excluded: [':disabled', ':hidden', ':not(:visible)'],//排除无需验证的控件，比如被禁用的或者被隐藏的
 
-        // submitButtons: '#btn-test',//指定提交按钮，如果验证失败则变成disabled，但我没试成功，反而加了这句话非submit按钮也会提交到action指定页面
+    // submitButtons: '#btn-test',//指定提交按钮，如果验证失败则变成disabled，但我没试成功，反而加了这句话非submit按钮也会提交到action指定页面
 
-        message: '通用的验证失败消息',//好像从来没出现过
+    message: '通用的验证失败消息',//好像从来没出现过
 
-        feedbackIcons: {//根据验证结果显示的各种图标
+    feedbackIcons: {//根据验证结果显示的各种图标
 
-            valid: 'glyphicon glyphicon-ok',
+        valid: 'glyphicon glyphicon-ok',
 
-            invalid: 'glyphicon glyphicon-remove',
+        invalid: 'glyphicon glyphicon-remove',
 
-            validating: 'glyphicon glyphicon-refresh'
+        validating: 'glyphicon glyphicon-refresh'
+
+    },
+    fields: {
+
+        username: {
+
+            validators: {
+
+                notEmpty: {//检测非空,radio也可用
+
+                    message: '用户名必须输入'
+
+                },
+                stringLength: {//检测长度
+
+                    min: 2,
+
+                    max: 20,
+
+                    message: '用户名长度必须在2-20之间'
+
+                },
+            }
 
         },
-        fields: {
+        password: {
 
-            username: {
+            validators: {
 
-                validators: {
+                notEmpty: {//检测非空,radio也可用
 
-                    notEmpty: {//检测非空,radio也可用
+                    message: '密码必须输入'
 
-                        message: '用户名必须输入'
+                },
+                stringLength: {//检测长度
 
-                    },
-                    stringLength: {//检测长度
+                    min: 6,
 
-                        min: 2,
+                    max: 10,
 
-                        max: 20,
+                    message: '密码长度必须在6-10之间'
 
-                        message: '用户名长度必须在2-20之间'
+                },
 
-                    },
-                }
+            }
 
-            },
-            password: {
+        },
 
-                validators: {
+    }
 
-                    notEmpty: {//检测非空,radio也可用
-
-                        message: '密码必须输入'
-
-                    },
-                    stringLength: {//检测长度
-
-                        min: 6,
-
-                        max: 10,
-
-                        message: '密码长度必须在6-10之间'
-
-                    },
-
-                }
-
-            },
-
-        }
-
-    });
+});
 // }
 
 
 //找回密码弹出框验证
 // function findPwdformValidator() {
 
-    $("#findPwdform").bootstrapValidator({
-        live: 'enabled',//验证时机，enabled是内容有变化就验证（默认），disabled和submitted是提交再验证
+$("#findPwdform").bootstrapValidator({
+    live: 'enabled',//验证时机，enabled是内容有变化就验证（默认），disabled和submitted是提交再验证
 
-        excluded: [':disabled', ':hidden', ':not(:visible)'],//排除无需验证的控件，比如被禁用的或者被隐藏的
+    excluded: [':disabled', ':hidden', ':not(:visible)'],//排除无需验证的控件，比如被禁用的或者被隐藏的
 
-        // submitButtons: '#btn-test',//指定提交按钮，如果验证失败则变成disabled，但我没试成功，反而加了这句话非submit按钮也会提交到action指定页面
+    // submitButtons: '#btn-test',//指定提交按钮，如果验证失败则变成disabled，但我没试成功，反而加了这句话非submit按钮也会提交到action指定页面
 
-        message: '通用的验证失败消息',//好像从来没出现过
+    message: '通用的验证失败消息',//好像从来没出现过
 
-        feedbackIcons: {//根据验证结果显示的各种图标
+    feedbackIcons: {//根据验证结果显示的各种图标
 
-            valid: 'glyphicon glyphicon-ok',
+        valid: 'glyphicon glyphicon-ok',
 
-            invalid: 'glyphicon glyphicon-remove',
+        invalid: 'glyphicon glyphicon-remove',
 
-            validating: 'glyphicon glyphicon-refresh'
+        validating: 'glyphicon glyphicon-refresh'
+
+    },
+    fields: {
+
+        email1: {
+
+            validators: {
+
+                notEmpty: {//检测非空,radio也可用
+
+                    message: '邮箱/用户名必须输入'
+
+                },
+                // stringLength: {//检测长度
+                //
+                //     min: 2,
+                //
+                //     max: 10,
+                //
+                //     message: '用户名长度必须在2-10之间'
+                //
+                // },
+            }
 
         },
-        fields: {
+        password1: {
 
-            email1: {
+            validators: {
 
-                validators: {
+                notEmpty: {//检测非空,radio也可用
 
-                    notEmpty: {//检测非空,radio也可用
+                    message: '密码必须输入'
 
-                        message: '邮箱/用户名必须输入'
+                },
+                stringLength: {//检测长度
 
-                    },
-                    // stringLength: {//检测长度
-                    //
-                    //     min: 2,
-                    //
-                    //     max: 10,
-                    //
-                    //     message: '用户名长度必须在2-10之间'
-                    //
-                    // },
-                }
+                    min: 6,
 
-            },
-            password1: {
+                    max: 10,
 
-                validators: {
+                    message: '密码长度必须在6-10之间'
 
-                    notEmpty: {//检测非空,radio也可用
+                },
 
-                        message: '密码必须输入'
+            }
 
-                    },
-                    stringLength: {//检测长度
+        },
 
-                        min: 6,
+        passwordconfirm: {
 
-                        max: 10,
+            validators: {
 
-                        message: '密码长度必须在6-10之间'
+                notEmpty: {//检测非空,radio也可用
 
-                    },
+                    message: '确认密码不能为空'
 
-                }
+                },
+                identical: {//与指定文本框比较内容相同
 
-            },
+                    field: 'password1',
 
-            passwordconfirm: {
+                    message: '两次密码输入不一样'
 
-                validators: {
+                },
+                stringLength: {//检测长度
 
-                    notEmpty: {//检测非空,radio也可用
+                    min: 6,
 
-                        message: '确认密码不能为空'
+                    max: 10,
 
-                    },
-                    identical: {//与指定文本框比较内容相同
+                    message: '密码长度必须在6-10之间'
 
-                        field: 'password1',
+                },
+                // identical: {
+                //     field: 'code1',
+                //     message: 'The password and its confirm are not the same'
+                // },
+            }
 
-                        message: '两次密码输入不一样'
-
-                    },
-                    stringLength: {//检测长度
-
-                        min: 6,
-
-                        max: 10,
-
-                        message: '密码长度必须在6-10之间'
-
-                    },
-                    // identical: {
-                    //     field: 'code1',
-                    //     message: 'The password and its confirm are not the same'
-                    // },
-                }
-
-            },
-            // idcode: {
-            //
-            //     validators: {
-            //
-            //         notEmpty: {//检测非空,radio也可用
-            //
-            //             message: '验证码必须输入'
-            //
-            //         },
-            //         different: {//与指定文本框比较内容相同
-            //
-            //                 field: 'idcode1',
-            //
-            //                 message: '验证码输入有误'
-            //
-            //             },
-            //     }
-            //
-            // },
-            //
-            // endDate: {
-            //
-            //     validators: {
-            //
-            //         notEmpty: {//检测非空,radio也可用
-            //
-            //             message: '目标最终期限必须输入'
-            //
-            //         }
-            //
-            //     }
-            //
-            // },
-        }
-
-    });
-// }
-    function keyLogin(){
-        if (event.keyCode==13)  //回车键的键值为13
-            document.getElementById("tijiao").click(); //调用登录按钮的登录事件
+        },
+        // idcode: {
+        //
+        //     validators: {
+        //
+        //         notEmpty: {//检测非空,radio也可用
+        //
+        //             message: '验证码必须输入'
+        //
+        //         },
+        //         different: {//与指定文本框比较内容相同
+        //
+        //                 field: 'idcode1',
+        //
+        //                 message: '验证码输入有误'
+        //
+        //             },
+        //     }
+        //
+        // },
+        //
+        // endDate: {
+        //
+        //     validators: {
+        //
+        //         notEmpty: {//检测非空,radio也可用
+        //
+        //             message: '目标最终期限必须输入'
+        //
+        //         }
+        //
+        //     }
+        //
+        // },
     }
+
+});
+
+// }
+function keyLogin() {
+    if (event.keyCode == 13)  //回车键的键值为13
+        document.getElementById("tijiao").click(); //调用登录按钮的登录事件
+}

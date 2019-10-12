@@ -59,7 +59,7 @@ public class InAndOutController {
         User user_session = (User) request.getSession().getAttribute("user_session");
         Map<String, String> map = new HashMap<String, String>();
 
-        if (flag == 0) {//0 代表查询柱状图,1代表支出饼状图,2代表收入饼图
+        if (flag == 2) {//2 代表查询柱状图,0代表支出饼状图,3代表预留支出饼图,1代表收入饼图
 //            查询该用户的收入
             String allIn = inAndOutService.findAllIn(user_session.getMails());
 //        查询该用户的开支
@@ -67,13 +67,21 @@ public class InAndOutController {
             map.put("收入", allIn);
             map.put("开支", allOut);
 
-        } else if (flag == 1) {
+        } else if (flag == 0) {
             List<InAndOut> allOut = inAndOutService.getAllOut(user_session.getMails());
             for (InAndOut inAndOut : allOut) {
                 map.put(inAndOut.getK_name(), inAndOut.getCharge());
             }
-        } else {
+        } else if (flag == 1) {
             List<InAndOut> allIn = inAndOutService.getAllIn(user_session.getMails());
+            for (InAndOut inAndOut : allIn) {
+                map.put(inAndOut.getK_name(), inAndOut.getCharge());
+            }
+        } else if (flag == 3) {
+            List<InAndOut> allPreOut = inAndOutService.getAllPreout(user_session.getMails());
+            for (InAndOut inAndOut : allPreOut) {
+                map.put(inAndOut.getK_name(), inAndOut.getCharge());
+            }
         }
 //
         return map;
@@ -169,6 +177,7 @@ public class InAndOutController {
         }
         return flag;
     }
+
     //    修改一条记录
     @RequestMapping("/updRecord")
     @ResponseBody
@@ -197,11 +206,12 @@ public class InAndOutController {
         }
         return flag;
     }
+
     //    删除一条记录
     @RequestMapping("/delRecord")
     @ResponseBody
     public int delRecord(@Param("delaccountId") String delaccountId,
-                            HttpServletRequest request) {
+                         HttpServletRequest request) {
         int flag = 0;
         int i = inAndOutService.delRecord(Integer.valueOf(delaccountId));
         if (i <= 0) {

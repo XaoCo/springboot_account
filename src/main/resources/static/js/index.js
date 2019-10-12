@@ -153,164 +153,14 @@ var option1 = {
 };
 myChart1.setOption(option1);
 
-
-//together收支柱状图
-var myChart4 = echarts.init(document.getElementById('demo4'));
-
-var option4 = {
-    // ----  标题 -----
-    title: {
-        text: '收支概览',
-        x: 'center'
-    },
-
-    tooltip: {
-        show: true,   // 是否显示提示框，默认为true
-        trigger: 'item', // 数据项图形触发
-        axisPointer: {   // 指示样式
-            type: 'shadow',
-            axis: 'auto'
-        },
-        padding: 5,
-        textStyle: {   // 提示框内容的样式
-            color: '#fff'
-        }
-    },
-    gird: {
-        show: false,    // 是否显示直角坐标系网格
-        top: 80,  // 相对位置 top\bottom\left\right
-        containLabel: false, // gird 区域是否包含坐标轴的刻度标签
-        tooltip: {
-            show: true,
-            trigger: 'item',   // 触发类型
-            textStyle: {
-                color: '#666'
-            }
-        }
-    },
-
-    xAxis: {
-        position: 'bottom',  // x轴的位置
-        offset: 0, // x轴相对于默认位置的偏移
-        type: 'category',
-        // width:200,
-        axisLine: {       // 坐标轴 轴线
-            show: true,  // 是否显示
-            symbol: ['none', 'arrow'],  // 是否显示轴线箭头
-            symbolSize: [5, 8], // 箭头大小
-            symbolOffset: [0, 5],  // 箭头位置
-            // ------   线 ---------
-            lineStyle: {
-                color: 'black',
-                width: 1,
-                type: 'solid'
-            }
-        },
-        axisTick: {    // 坐标轴 刻度
-            show: true,  // 是否显示
-            inside: true,  // 是否朝内
-            length: 3,     // 长度
-            lineStyle: {   // 默认取轴线的样式
-                color: 'black',
-                width: 1,
-                type: 'solid'
-            }
-        },
-        axisLabel: {    // 坐标轴标签
-            show: true,  // 是否显示
-            inside: false, // 是否朝内
-            rotate: 0, // 旋转角度
-            margin: 5, // 刻度标签与轴线之间的距离
-            color: 'black' // 默认取轴线的颜色
-        },
-        data: ['收入', '支出']
-    },
-    yAxis: {
-        show: true,  // 是否显示
-        position: 'left', // y轴位置
-        offset: 0, // y轴相对于默认位置的偏移
-        type: 'value',  // 轴类型，默认为 ‘category’
-        name: '金额',   // 轴名称
-        nameLocation: 'end', // 轴名称相对位置value
-        nameTextStyle: {    // 坐标轴名称样式
-            color: 'black',
-            padding: [5, 0, 0, 5]  // 坐标轴名称相对位置
-        },
-        nameGap: 15, // 坐标轴名称与轴线之间的距离
-        nameRotate: 360,  // 坐标轴名字旋转
-
-        axisLine: {    // 坐标轴 轴线
-            show: true,  // 是否显示
-            //  -----   箭头 -----
-            symbol: ['none', 'arrow'],  // 是否显示轴线箭头
-            symbolSize: [5, 8],  // 箭头大小
-            symbolOffset: [0, 7], // 箭头位置
-
-            // ----- 线 -------
-            lineStyle: {
-                color: 'black',
-                width: 1,
-                type: 'solid'
-            }
-        },
-        axisTick: {      // 坐标轴的刻度
-            show: true,    // 是否显示
-            inside: true,  // 是否朝内
-            length: 3,      // 长度
-            lineStyle: {
-                color: 'black',  // 默认取轴线的颜色
-                width: 1,
-                type: 'solid'
-            }
-        },
-        axisLabel: {      // 坐标轴的标签
-            show: true,    // 是否显示
-            inside: false,  // 是否朝内
-            rotate: 0,     // 旋转角度
-            margin: 8,     // 刻度标签与轴线之间的距离
-            color: 'black'  // 默认轴线的颜色
-        },
-        splitLine: {    // gird 区域中的分割线
-            show: true,   // 是否显示
-            lineStyle: {
-                color: '#666',
-                width: 1,
-                type: 'dashed'
-            }
-        },
-        splitArea: {     // 网格区域
-            show: false   // 是否显示，默认为false
-        }
-    },
-    series: [{
-        data: [120, 200],
-        name: '销量',      // 序列名称
-        type: 'bar',      // 类型
-        legendHoverLink: true,  // 是否启用图列 hover 时的联动高亮
-        label: {   // 图形上的文本标签
-            show: false,
-            position: 'insideTop', // 相对位置
-            rotate: 0,  // 旋转角度
-            color: '#eee'
-        },
-        itemStyle: {    // 图形的形状
-            // color: 'red',
-            // barBorderRadius: [18, 18, 0 ,0]
-        },
-        barWidth: 40,  // 柱形的宽度
-        barCategoryGap: '5%'  // 柱形的间距
-    }]
-};
-myChart4.setOption(option4);
-
-//个人收入饼图
+//支出饼图
 
 var myChart2 = echarts.init(document.getElementById('demo2'));
 
 var option2 = {
     title: {
-        text: '收入明细',
-        subtext: 'Personal',
+        text: '开支明细',
+        // subtext: 'Family',
         x: 'center'
     },
     tooltip: {
@@ -320,19 +170,15 @@ var option2 = {
     legend: {
         orient: 'vertical',
         left: 'left',
-        data: ['工资', '外快', '私活']
+        data: []
     },
     series: [
         {
-            name: '收入明细',
+            name: '开支明细',
             type: 'pie',
             radius: '55%',
             center: ['50%', '60%'],
-            data: [
-                {value: 335, name: '工资'},
-                {value: 310, name: '外快'},
-                {value: 234, name: '私活'}
-            ],
+            data: [],
             itemStyle: {
                 emphasis: {
                     shadowBlur: 10,
@@ -345,14 +191,14 @@ var option2 = {
 };
 myChart2.setOption(option2);
 
-//个人支出饼图
+//预留支出饼图
 
 var myChart3 = echarts.init(document.getElementById('demo3'));
 
 var option3 = {
     title: {
-        text: '开支明细',
-        subtext: 'Personal',
+        text: '预留开支明细',
+        // subtext: 'Family',
         x: 'center'
     },
     tooltip: {
@@ -362,21 +208,15 @@ var option3 = {
     legend: {
         orient: 'vertical',
         left: 'left',
-        data: ['日常用品', '人情+礼物', '下馆子', '买菜', '公交打车']
+        data: []
     },
     series: [
         {
-            name: '开支明细',
+            name: '预留开支明细',
             type: 'pie',
             radius: '55%',
             center: ['50%', '60%'],
-            data: [
-                {value: 335, name: '日常用品'},
-                {value: 310, name: '人情+礼物'},
-                {value: 234, name: '下馆子'},
-                {value: 135, name: '买菜'},
-                {value: 1548, name: '公交打车'}
-            ],
+            data: [],
             itemStyle: {
                 emphasis: {
                     shadowBlur: 10,
@@ -389,14 +229,15 @@ var option3 = {
 };
 myChart3.setOption(option3);
 
-//together收入饼图
 
-var myChart5 = echarts.init(document.getElementById('demo5'));
+//收入饼图
 
-var option5 = {
+var myChart4 = echarts.init(document.getElementById('demo4'));
+
+var option4 = {
     title: {
         text: '收入明细',
-        subtext: 'Family',
+        // subtext: 'Family',
         x: 'center'
     },
     tooltip: {
@@ -406,7 +247,7 @@ var option5 = {
     legend: {
         orient: 'vertical',
         left: 'left',
-        data: ['工资', '外快', '私活']
+        data: []
     },
     series: [
         {
@@ -414,11 +255,7 @@ var option5 = {
             type: 'pie',
             radius: '55%',
             center: ['50%', '60%'],
-            data: [
-                {value: 335, name: '工资'},
-                {value: 310, name: '外快'},
-                {value: 234, name: '私活'}
-            ],
+            data: [],
             itemStyle: {
                 emphasis: {
                     shadowBlur: 10,
@@ -429,52 +266,7 @@ var option5 = {
         }
     ]
 };
-myChart5.setOption(option5);
-
-//together支出饼图
-
-var myChart6 = echarts.init(document.getElementById('demo6'));
-
-var option6 = {
-    title: {
-        text: '开支明细',
-        subtext: 'Family',
-        x: 'center'
-    },
-    tooltip: {
-        trigger: 'item',
-        formatter: "{a} <br/>{b} : {c} ({d}%)"
-    },
-    legend: {
-        orient: 'vertical',
-        left: 'left',
-        data: ['日常用品', '人情+礼物', '下馆子', '买菜', '公交打车']
-    },
-    series: [
-        {
-            name: '开支明细',
-            type: 'pie',
-            radius: '55%',
-            center: ['50%', '60%'],
-            data: [
-                {value: 335, name: '日常用品'},
-                {value: 310, name: '人情+礼物'},
-                {value: 234, name: '下馆子'},
-                {value: 135, name: '买菜'},
-                {value: 1548, name: '公交打车'}
-            ],
-            itemStyle: {
-                emphasis: {
-                    shadowBlur: 10,
-                    shadowOffsetX: 0,
-                    shadowColor: 'rgba(0, 0, 0, 0.5)'
-                }
-            }
-        }
-    ]
-};
-myChart6.setOption(option6);
-
+myChart4.setOption(option4);
 //okr编辑
 function okrmodify() {
     $("#okr1").removeAttr("readonly");
@@ -780,7 +572,7 @@ function addpreout() {
 
                 hispreout();
                 findAllCount();
-                getAllOut();
+                getAllPreOut();
                 $("#resoutpage").modal("hide");
 
             }
@@ -810,7 +602,7 @@ function addnewin() {
                 }
                 historyin();
                 findAllCount();
-                getAllOut();
+                getAllIn();
                 $("#newinpage").modal("hide");
 
             }
@@ -1594,13 +1386,14 @@ function findInformation() {
 //修改密码原密码输入正确与否反馈
 function checkPrePwd() {
     $.ajax({
-        url: "/user/findInformation",
+        url: "/user/checkpwd",
+        data:$("#mdfpwdform").serialize(),
         success: function (data) {
 
             console.log("基本信息=" + data);
             // $("#mdfpwdsername").attr("value",data.name);
-            var pwd = $("#prepwd").val();
-            if (data.password != pwd) {
+            // var pwd = $("#prepwd").val();
+            if (data ==0) {
                 bootbox.alert({
                     message: '原始密码输入错误！',
                     size: 'small',
@@ -1849,8 +1642,6 @@ function changeaccountpage(id, name, flag, desc, date, charge) {
         })
     }
 
-    // $("#modifyaccountName").append($("<option value=\"" + name + "\" selected>" + name + "</option>"));
-    // $("#modifyaccountName").append("<option value='name'>新增option</option>"); // 1.为Select追加一个Option(下拉项)
 }
 
 //确认修改收支
@@ -1877,21 +1668,19 @@ function modifyaccountconfirm() {
                     bootbox.alert({
                         message: '记录修改失败！',
                         size: 'small',
-                        // callback: function () {
-                        //     window.location.href = '/login/fullinformationpage';
-                        // },
                     });
                 }
                 if (flag == 0) {
                     historyout();
+                    getAllOut();
                 } else if (flag == 3) {
                     hispreout();
+                    getAllPreOut();
                 } else {
                     historyin();
+                    getAllIn();
                 }
-                // historygoal();
                 findAllCount();
-                getAllOut();
                 $("#modifyaccountpage").modal("hide");
 
             }
@@ -1936,9 +1725,6 @@ function modifygoalconfirm() {
                     bootbox.alert({
                         message: '目标修改失败！',
                         size: 'small',
-                        // callback: function () {
-                        //     window.location.href = '/login/fullinformationpage';
-                        // },
                     });
                 }
                 historygoal();
@@ -1962,17 +1748,11 @@ function delgoalconfirm() {
                 bootbox.alert({
                     message: '目标修删除成功！',
                     size: 'small',
-                    // callback: function () {
-                    //     historygoal();
-                    // },
                 });
             } else {
                 bootbox.alert({
                     message: '目标删除失败！',
                     size: 'small',
-                    // callback: function () {
-                    //     window.location.href = '/login/fullinformationpage';
-                    // },
                 });
             }
             historygoal();
@@ -1995,28 +1775,24 @@ function delaccountconfirm() {
                 bootbox.alert({
                     message: '目标修删除成功！',
                     size: 'small',
-                    // callback: function () {
-                    //     historygoal();
-                    // },
                 });
             } else {
                 bootbox.alert({
                     message: '目标删除失败！',
                     size: 'small',
-                    // callback: function () {
-                    //     window.location.href = '/login/fullinformationpage';
-                    // },
                 });
             }
             if (flag == 0) {
                 historyout();
+                getAllOut();
             } else if (flag == 3) {
                 hispreout();
+                getAllPreOut();
             } else {
                 historyin();
+                getAllIn();
             }
             findAllCount();
-            getAllOut();
             $("#delaccountpage").modal("hide");
 
         }
@@ -2231,10 +2007,23 @@ function historyin() {
     })
 }
 
+//解决tab切换不显示问题 在加载窗口后重新渲染。
+var charts = [];
+charts.push(myChart2);
+charts.push(myChart3);
+charts.push(myChart4);
+$('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
+    for(var i = 0; i < charts.length; i++) {
+        charts[i].resize();
+    }
+});
+
+
+//给柱状图填充数据
 function findAllCount() {
 
     $.ajax({
-        url: "/record/findAllCount?flag=0",
+        url: "/record/findAllCount?flag=2",
         success: function (data) {
             console.log("data:" + data);
             var names = [];    //（实际用来盛放X轴坐标值）
@@ -2261,7 +2050,89 @@ function findAllCount() {
 
 }
 
+//查询开支明细
 function getAllOut() {
+
+    $.ajax({
+        url: "/record/findAllCount?flag=0",
+        success: function (data) {
+            console.log("data:" + data);
+            var names = [];    //（实际用来盛放X轴坐标值）
+            var nums = [];    //（实际用来盛放Y坐标值）
+            for (var key in data) {
+                console.log("key=" + key)
+                var obj = new Object();
+                console.log("value=" + data[key]);
+                names.push(key);
+                obj.name = key;
+                obj.value = data[key]
+                nums.push(obj);
+            }
+            myChart2.setOption({        //加载数据图表
+                legend: {
+                    orient: 'vertical',
+                    left: 'left',
+                    data: names
+                },
+
+                series:
+                    {
+                        name: '开支明细',
+                        type: 'pie',
+                        radius: '55%',
+                        center: ['50%', '60%'],
+                        data: nums
+
+                    }
+            });
+
+        }
+    })
+
+}
+
+//查询预留开支明细
+function getAllPreOut() {
+
+    $.ajax({
+        url: "/record/findAllCount?flag=3",
+        success: function (data) {
+            console.log("data:" + data);
+            var names = [];    //（实际用来盛放X轴坐标值）
+            var nums = [];    //（实际用来盛放Y坐标值）
+            for (var key in data) {
+                console.log("key=" + key)
+                var obj = new Object();
+                console.log("value=" + data[key]);
+                names.push(key);
+                obj.name = key;
+                obj.value = data[key]
+                nums.push(obj);
+            }
+            myChart3.setOption({        //加载数据图表
+                legend: {
+                    orient: 'vertical',
+                    left: 'left',
+                    data: names
+                },
+
+                series:
+                    {
+                        name: '预留开支明细',
+                        type: 'pie',
+                        radius: '55%',
+                        center: ['50%', '60%'],
+                        data: nums
+
+                    }
+            });
+
+        }
+    })
+
+}
+//查询收入明细
+function getAllIn() {
 
     $.ajax({
         url: "/record/findAllCount?flag=1",
@@ -2278,7 +2149,7 @@ function getAllOut() {
                 obj.value = data[key]
                 nums.push(obj);
             }
-            myChart6.setOption({        //加载数据图表
+            myChart4.setOption({        //加载数据图表
                 legend: {
                     orient: 'vertical',
                     left: 'left',
@@ -2287,7 +2158,7 @@ function getAllOut() {
 
                 series:
                     {
-                        name: '开支明细',
+                        name: '收入明细',
                         type: 'pie',
                         radius: '55%',
                         center: ['50%', '60%'],

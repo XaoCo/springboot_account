@@ -61,6 +61,11 @@ public class InAndOutServiceImpl implements InAndOutService {
     }
 
     @Override
+    public List<InAndOut> getAllPreout(String username) {
+        return inAndOutMapper.getAllPreout(username);
+    }
+
+    @Override
     public List<InAndOut> getAllIn(String username) {
         return inAndOutMapper.getAllIn(username);
     }
