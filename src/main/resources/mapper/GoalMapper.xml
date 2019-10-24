@@ -16,9 +16,10 @@
     </resultMap>
 
     <!--新增目标-->
-    <insert id="addGoal" parameterType="com.abc.account.pojo.Goal">
-        INSERT INTO A_GOAL VALUES (
-            GOAL_SEQ.nextval,
+    <insert id="addGoal" parameterType="com.abc.account.pojo.Goal" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO A_GOAL
+        (GOALNAME,GOALDESC,GOALTOTAL,GOALPERCENT,ENDDATE,PROCESS,USERNAME)
+        VALUES (
             #{goalName},
             #{goalDesc},
             #{goalTotal},
@@ -47,6 +48,6 @@
 
     <!--&lt;!&ndash;获取所有用户&ndash;&gt;-->
     <!--<select id="getAllUser" resultMap="userRestMap">-->
-        <!--SELECT * FROM A_USER-->
+    <!--SELECT * FROM A_USER-->
     <!--</select>-->
 </mapper>

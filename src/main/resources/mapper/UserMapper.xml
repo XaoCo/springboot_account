@@ -34,15 +34,17 @@
     <select id="selectByEmail" parameterType="com.abc.account.pojo.User" resultMap="userRestMap">
         SELECT * FROM A_USER WHERE U_EMAIL = #{mails,jdbcType=VARCHAR}
     </select>
-<!--查询用户-->
+    <!--查询用户-->
     <select id="selectByNameOrEmail" parameterType="com.abc.account.pojo.User" resultMap="userRestMap">
         SELECT * FROM A_USER WHERE U_NAME = #{name ,jdbcType=VARCHAR} or U_EMAIL = #{mails,jdbcType=VARCHAR}
     </select>
 
     <!--注册用户-->
-    <insert id="addUser" parameterType="com.abc.account.pojo.User">
-        INSERT INTO A_USER VALUES (
-            USER_SEQ.nextval,
+    <insert id="addUser" parameterType="com.abc.account.pojo.User" useGeneratedKeys="true" keyProperty="id">
+
+        INSERT INTO A_USER
+        (U_NAME,U_PASSWORD,U_POSITION,U_EMAIL)
+        VALUES (
             #{name,jdbcType=VARCHAR},
             #{password,jdbcType=VARCHAR},
             #{position,jdbcType=VARCHAR},

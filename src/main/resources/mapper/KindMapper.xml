@@ -15,11 +15,11 @@
     </select>
     <!--&lt;!&ndash;查询所有收入类别&ndash;&gt;-->
     <!--<select id="findAllinKind" resultMap="kindRestMap">-->
-        <!--SELECT * FROM A_KIND where K_FLAG = #{flag}-->
+    <!--SELECT * FROM A_KIND where K_FLAG = #{flag}-->
     <!--</select>-->
- <!--&lt;!&ndash;查询所有预留开支类别&ndash;&gt;-->
+    <!--&lt;!&ndash;查询所有预留开支类别&ndash;&gt;-->
     <!--<select id="findAllPreKind" resultMap="kindRestMap">-->
-        <!--SELECT * FROM A_KIND where K_FLAG = #{flag}-->
+    <!--SELECT * FROM A_KIND where K_FLAG = #{flag}-->
     <!--</select>-->
 
     <!--修改类别-->
@@ -30,10 +30,12 @@
 
     <!--新增类别-->
 
-    <insert id="addKind">
-        INSERT INTO A_KIND VALUES (
-        KIND_SEQ.nextval,
-        #{name}
+    <insert id="addKind" parameterType="com.abc.account.pojo.Kind" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO A_KIND
+        (K_NAME,K_FLAG)
+        VALUES (
+
+        #{name},#{flag}
         )
     </insert>
 

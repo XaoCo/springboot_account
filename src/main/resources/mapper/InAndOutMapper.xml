@@ -43,10 +43,9 @@
 
     <!--新增记录-->
 
-    <insert id="addRecord" parameterType="com.abc.account.pojo.InAndOut">
+    <insert id="addRecord" parameterType="com.abc.account.pojo.InAndOut" useGeneratedKeys="true" keyProperty="id">
 
-        INSERT INTO A_INOUT_ALL VALUES (
-        RECORD_SEQ.nextval,
+        INSERT INTO A_INOUT_ALL (A_U_NAME,A_K_NAME,A_FLAG,A_DESC,A_CHARGE,A_DATE) VALUES (
         #{u_name},
         #{k_name},
         #{flag},
@@ -65,11 +64,11 @@
 
     <!--查询所有收入总量-->
     <select id="findAllIn" resultType="String">
-       select  SUM (A_CHARGE) FROM A_INOUT_ALL WHERE A_FLAG = 1 and A_U_NAME = #{userName}
+       select  SUM(A_CHARGE) FROM A_INOUT_ALL WHERE A_FLAG = 1 and A_U_NAME = #{userName}
     </select>
     <!--查询所有开支总量-->
     <select id="findAllOut" resultType="String">
-       select  SUM (A_CHARGE) FROM A_INOUT_ALL WHERE A_FLAG IN (0,3) and A_U_NAME = #{userName}
+       select  SUM(A_CHARGE) FROM A_INOUT_ALL WHERE A_FLAG IN (0,3) and A_U_NAME = #{userName}
     </select>
     <!--查询所有收入明细-->
     <select id="getAllIn" resultMap="InAndOutRestMap">
