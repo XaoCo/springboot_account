@@ -109,7 +109,7 @@ public class UserController {
     //    展示首页
     @RequestMapping("/indexPage")
     public String indexPage() {
-        return "/main/index.html";
+        return "main/index.html";
     }
 
 

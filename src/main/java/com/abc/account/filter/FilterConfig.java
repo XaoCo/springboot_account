@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.Collection;
 
-@Configuration
+//@Configuration
 public class FilterConfig  {
     Logger logger = LoggerFactory.getLogger(this.getClass());
     @Bean
