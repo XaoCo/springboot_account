@@ -244,6 +244,8 @@
     </dependencies>
 
     <build>
+
+
         <plugins>
             <plugin>
                 <groupId>org.asciidoctor</groupId>
@@ -304,6 +306,10 @@
                     <target>${java.version}</target>
 
                     <encoding>${project.build.sourceEncoding}</encoding>
+                    <excludes>
+                        <exclude>target</exclude>
+                        <exclude>sql</exclude>
+                    </excludes>
 
                 </configuration>
 

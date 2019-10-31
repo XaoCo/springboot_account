@@ -7,7 +7,6 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.Random;
-
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +15,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class CodeController {
@@ -112,9 +110,10 @@ public class CodeController {
 
     public static void main(String[] args) {
         String a = "你好啊";
-        System.out.println(byteSub(a,8));
+        System.out.println(byteSub(a, 8));
     }
-    public static String  byteSub(String str, int length) {
+
+    public static String byteSub(String str, int length) {
         try {
             int length1;
             length1 = str.getBytes("UTF-8").length;

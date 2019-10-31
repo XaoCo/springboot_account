@@ -3,8 +3,6 @@ package com.abc.account.controller;
  * 登录controller
  */
 
-import com.abc.account.pojo.FamilyPosition;
-import com.abc.account.pojo.Kind;
 import com.abc.account.pojo.User;
 import com.abc.account.service.UserService;
 import com.abc.account.util.Md5;
@@ -21,7 +19,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -176,7 +173,7 @@ public class UserController {
         int flag = 0;
         String pwd1 = md5.md5(user1.getPassword());
         String pwd2 = md5.md5(prepwd);
-        if(StringUtils.equals(pwd1,pwd2)){
+        if (StringUtils.equals(pwd1, pwd2)) {
             flag = 1;
         }
 //        logger.info("基本信息:" + user1.toString());

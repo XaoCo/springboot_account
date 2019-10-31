@@ -4,7 +4,6 @@ package com.abc.account.controller;
  */
 
 import com.abc.account.pojo.FamilyPosition;
-import com.abc.account.pojo.Kind;
 import com.abc.account.pojo.User;
 import com.abc.account.service.UserService;
 import com.abc.account.util.MailUtil;
@@ -15,20 +14,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.math.BigDecimal;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static javafx.scene.input.KeyCode.M;
 
 @Controller
 @RequestMapping("/login")
@@ -54,13 +48,6 @@ public class LoginController {
             @RequestParam("password") String password,
             HttpServletRequest request) {
         int flag = 0;
-//        if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
-//            flag = -1;
-//
-//            logger.error(this.getClass() + "用户名或者密码为空，登录失败！");
-//            return flag;
-//
-//        }
 
         User user1 = new User();
         user1.setName(username);
@@ -110,10 +97,6 @@ public class LoginController {
         user.setMails(mails);
 
         user.setPassword(md5.md5(password));
-//        user.setName("");
-//        user.setPosition("");
-//        user.setPassword("");
-//        User user1 = userService.login1(user);
 
         int i = userService.addUser(user);
         if (i == 1) {
@@ -146,10 +129,6 @@ public class LoginController {
             user.setMails(email_session);
             user.setPosition(userstatus);
             user.setName(username);
-//        user.setName("");
-//        user.setPosition("");
-//        user.setPassword("");
-//        User user1 = userService.login1(user);
 
             int i = userService.modifyInformation(user);
             if (i == 1) {
