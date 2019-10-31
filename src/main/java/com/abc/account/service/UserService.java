@@ -17,9 +17,11 @@ public interface UserService {
 
     //    用户通过name查询
     User selectByName(User user);
-//    用户通过email查询
+
+    //    用户通过email查询
     User selectByEmail(User user);
-//    用户通过email查询
+
+    //    用户通过email查询
     User selectByNameOrEmail(User user);
 
     //    用户注册
@@ -34,13 +36,13 @@ public interface UserService {
     //    获取用户列表
     List<User> getAllUser();
 
-//    获取家庭地位
+    //    获取家庭地位
     List<FamilyPosition> findAllPosition();
 
-//    修改信息
+    //    修改信息
     int modifyInformation(User user);
 
-//    找回用户名
+    //    找回用户名
     User findUserName(User user);
 
 

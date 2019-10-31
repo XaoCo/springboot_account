@@ -20,10 +20,10 @@ public class DateUtils {
         System.out.println("===================================================");
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
-        System.out.println("年："+calendar.get(Calendar.DAY_OF_YEAR));
-        System.out.println("月："+calendar.get(Calendar.DAY_OF_MONTH));
-        System.out.println("周："+calendar.get(Calendar.DAY_OF_WEEK));
-        System.out.println("时间："+calendar.get(Calendar.DATE));
+        System.out.println("年：" + calendar.get(Calendar.DAY_OF_YEAR));
+        System.out.println("月：" + calendar.get(Calendar.DAY_OF_MONTH));
+        System.out.println("周：" + calendar.get(Calendar.DAY_OF_WEEK));
+        System.out.println("时间：" + calendar.get(Calendar.DATE));
 
 
     }

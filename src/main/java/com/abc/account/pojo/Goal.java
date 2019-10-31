@@ -11,19 +11,19 @@ import java.util.Date;
  */
 public class Goal implements Serializable {
     private int id;
-//    目标名称
+    //    目标名称
     private String goalName;
-//    目标简述
+    //    目标简述
     private String goalDesc;
-//    目标总任务
+    //    目标总任务
     private String goalTotal;
-//    目标现完成
+    //    目标现完成
     private String goalPercent;
-//    最终完成期限
-    private String  endDate;
-//    现在进度
+    //    最终完成期限
+    private String endDate;
+    //    现在进度
     private String process;
-//    定目标人
+    //    定目标人
     private String userName;
 
     public Goal() {

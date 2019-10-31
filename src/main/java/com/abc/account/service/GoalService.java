@@ -13,10 +13,13 @@ import java.util.List;
 public interface GoalService {
     //    新增目标
     int addGoal(Goal goal);
+
     //    删除目标
     int delGoal(Goal goal);
+
     //    修改目标
     int updateGoal(Goal goal);
+
     //    查询目标
     List<Goal> getAllGoal(String name);
 }

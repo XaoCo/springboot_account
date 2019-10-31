@@ -24,7 +24,7 @@ public class DelLine {
         String s = simpleDateFormat.format(date);
         System.out.println("现在的时间为：" + s);
         filenamePath1 = "E:\\ceshi\\hello.doc";
-        filenamePath2 = "E:\\ceshi\\"+s+"hello.doc";
+        filenamePath2 = "E:\\ceshi\\" + s + "hello.doc";
 //        filenamePath2 = "E:\\abc\\hello.doc";
         delLine(filenamePath1, filenamePath2);
 

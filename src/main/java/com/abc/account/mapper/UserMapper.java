@@ -23,7 +23,7 @@ public interface UserMapper {
     //    用户查询
 
     User selectByEmail(User user);
- //    用户查询
+    //    用户查询
 
     User selectByNameOrEmail(User user);
 

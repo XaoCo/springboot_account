@@ -24,15 +24,6 @@ public class KindServiceImpl implements KindService {
         return kindMapper.findAllKind(string);
     }
 
-//    @Override
-//    public List<Kind> findAllinKind(String string) {
-//        return kindMapper.findAllinKind(string);
-//    }
-//
-//    @Override
-//    public List<Kind> findAllPreKind(String str) {
-//        return kindMapper.findAllPreKind(str);
-//    }
 
     @Override
     public Kind findByName(String name) {

@@ -16,13 +16,13 @@ public class Md5 {
 //       md5(s);
 //    }
 
-    public String md5(String s){
-        String s1 =null;
+    public String md5(String s) {
+        String s1 = null;
         try {
             MessageDigest md5 = MessageDigest.getInstance("MD5");
             md5.update(s.getBytes());
             s1 = new BigInteger(1, md5.digest()).toString(16);
-            System.out.println("s1="+s1);
+            System.out.println("s1=" + s1);
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }

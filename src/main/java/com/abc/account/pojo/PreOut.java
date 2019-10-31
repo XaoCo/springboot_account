@@ -11,13 +11,13 @@ import java.util.Date;
  * introduce: 预留支出
  */
 public class PreOut implements Serializable {
-//    预留支出名称
+    //    预留支出名称
     private String preOutName;
-//    预留支出简述
+    //    预留支出简述
     private String preOutDesc;
-//    预留支出金额
+    //    预留支出金额
     private BigDecimal charge;
-//    预留支出时间
+    //    预留支出时间
     private Date date;
 
     public PreOut(String preOutName, String preOutDesc, BigDecimal charge, Date date) {

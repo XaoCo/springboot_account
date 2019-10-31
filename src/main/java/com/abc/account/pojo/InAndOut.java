@@ -12,17 +12,17 @@ import java.util.Date;
  */
 public class InAndOut implements Serializable {
     private int id;
-//    用户名
+    //    用户名
     private String u_name;
-//    消费类别
+    //    消费类别
     private String k_name;
-//    收支标志
+    //    收支标志
     private int flag;
-//    收支简述
+    //    收支简述
     private String desc;
-//    收支金额
+    //    收支金额
     private String charge;
-//    收支时间
+    //    收支时间
     private String date;
 
     public String getDate() {

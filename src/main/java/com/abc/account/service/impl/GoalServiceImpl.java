@@ -18,6 +18,7 @@ import java.util.List;
 public class GoalServiceImpl implements GoalService {
     @Autowired
     private GoalMapper goalMapper;
+
     @Override
     public int addGoal(Goal goal) {
         return goalMapper.addGoal(goal);

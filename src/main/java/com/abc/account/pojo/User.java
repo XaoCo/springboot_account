@@ -11,7 +11,6 @@ import java.io.Serializable;
 public class User implements Serializable {
     private int id;
     private String name;
-    //    private int age;
     private String mails;
     private String password;
     private String position;
