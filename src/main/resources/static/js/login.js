@@ -95,7 +95,6 @@ $('#reset').click(function () {
 });
 
 function checkName1() {
-    console.log("我进来了！！！");
     $.ajax({
         url: "/login/findByNameOrEmail",
         data: $("#loginForm").serialize(),
@@ -209,6 +208,7 @@ function login() {
                     bootbox.alert({
                         message: '登录成功！',
                         size: 'small',
+                        closeButton: 'false',
                         callback: function () {
                             window.location.href = '/user/indexPage';
                         },
