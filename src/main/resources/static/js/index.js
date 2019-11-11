@@ -1360,6 +1360,7 @@ function modifyaccountformValidator() {
 //获取个人信息
 function findInformation() {
     document.getElementById("personalmsgform").reset();
+    document.getElementById("userposition").options.length = 0;
     // $("#userjob").attr("readonly", "readonly");
     $("#username").removeAttr("readonly");
     // document.getElementById("personalmsgform").reset();
